@@ -42,7 +42,7 @@ public class Identificador {
      * @param incremento Entero en el que incrementar el valor del identificador
      */
     public void incrementar(int incremento) {
-        valor = aCadena(aDecimal() + incremento);
+        valor = aCadena(aDecimal() + incremento);               // Incrementa el valor decimal equivalente al identificador y lo reconvierte
     }
 
     /**
