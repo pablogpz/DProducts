@@ -7,7 +7,11 @@
 
 public class GeneradorIdentificador {
 
-    private GeneradorIdentificador instanciaActual;
+    private static final int VALOR_BASE_GENERADOR_IDENTIFICADOR = 2085497;
+    private static final int INCREMENTO_GENERADOR_IDENTIFICADOR = 1;
+
+    private static final GeneradorIdentificador instanciaActual =
+            new GeneradorIdentificador(VALOR_BASE_GENERADOR_IDENTIFICADOR, INCREMENTO_GENERADOR_IDENTIFICADOR);
     private Identificador valorBase;
     private Identificador valorActual;
     private int incremento;
@@ -19,7 +23,9 @@ public class GeneradorIdentificador {
      * @param incremento Entero que será el incremento constante que generará los distintos valores de la secuencia
      */
     private GeneradorIdentificador(int valorBase, int incremento) {
-        // TODO - implement GeneradorIdentificador.GeneradorIdentificador
+        this.valorBase = new Identificador(valorBase);                          // Genera el identificador base
+        this.incremento = incremento;
+        valorActual = this.valorBase;                                           // Inicializa la secuencia al valor base
     }
 
     /**
