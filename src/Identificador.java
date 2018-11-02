@@ -53,7 +53,7 @@ public class Identificador {
      */
     private String aCadena(int numero) {
         Stack<Character> digitosInvertidos = new Stack<>();               // Pila para invertir los dígitos calculados
-        String identificadorConvertido = "";                              // Cadena resultante de la conversión
+        StringBuilder identificadorConvertido = new StringBuilder();      // Cadena resultante de la conversión
 
         while (numero >= BASE_IDENTIFICADOR) {
             digitosInvertidos.add(pesos[numero % BASE_IDENTIFICADOR]);    // Almacena los restos de cada división (nuevo dígito en base BASE_IDENTIFICADOR)
@@ -63,9 +63,9 @@ public class Identificador {
 
         // Invierte los dígitos calculados y forma la cadena resultado
         while (!digitosInvertidos.empty()) {
-            identificadorConvertido += (digitosInvertidos.pop());         // Concatena cada dígito de la base de los identificadores a la cadena resultado
+            identificadorConvertido.append(digitosInvertidos.pop());      // Concatena cada dígito de la base de los identificadores a la cadena resultado
         }
 
-        return identificadorConvertido;
+        return identificadorConvertido.toString();
     }
 }
