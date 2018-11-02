@@ -34,8 +34,7 @@ public class GeneradorIdentificador {
      * @return Identificador que representa el valor actual de la secuencia
      */
     public Identificador consultarIdentificador() {
-        // TODO - implement GeneradorIdentificador.consultarIdentificador
-        return null;
+        return valorActual;
     }
 
     /**
