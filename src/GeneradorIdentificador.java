@@ -3,6 +3,8 @@
  * únicos en el ámbito de ejecución del programa. Para garantizar la unicidad de los identificadores se ha implementado
  * según el patrón de diseño Singleton para que solo exista una única instancia generando identificadores.
  *
+ * Por ejemplo, para un identificador de longitud 5, existen 36^5 = 60.466.176 identificadores distintos
+ *
  * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
  * @grupo : Wild True
  */
