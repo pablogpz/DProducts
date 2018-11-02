@@ -1,3 +1,10 @@
+/**
+ * TODO DESCRIPCION
+ *
+ * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
+ * @grupo : Wild True
+ */
+
 public class Identificador {
 
     // Vector de los valores asociado a cada peso del sistema de numeración en base 36
