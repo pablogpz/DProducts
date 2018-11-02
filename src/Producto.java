@@ -54,7 +54,7 @@ public class Producto {
      * @return Nombre del producto
      */
     public String getNombre() {
-        return this.nombre;
+        return nombre;
     }
 
     /**
@@ -63,7 +63,7 @@ public class Producto {
      * @return Identificador del producto
      */
     public Identificador getIdentificador() {
-        return this.identificador;
+        return identificador;
     }
 
     /**
@@ -72,7 +72,7 @@ public class Producto {
      * @return Cantidad actual en stock del producto
      */
     public int getCantidad() {
-        return this.cantidad;
+        return cantidad;
     }
 
     /**
@@ -81,7 +81,7 @@ public class Producto {
      * @return Cantidad en stock mínima del producto
      */
     public int getStockMinimo() {
-        return this.stockMinimo;
+        return stockMinimo;
     }
 
     /**
@@ -90,8 +90,7 @@ public class Producto {
      * @return Factor de prioridad con el que debe restablecerse el stock del producto
      */
     public PRIORIDAD_PRODUCTO getPrioridad() {
-        // TODO - implement Producto.getPrioridad
-        return null;
+        return prioridad;
     }
 
     /**
@@ -99,9 +98,8 @@ public class Producto {
      *
      * @return Fabricante del producto
      */
-    public String getFrabricante() {
-        // TODO - implement Producto.getFrabricante
-        return null;
+    public FABRICANTES getFrabricante() {
+        return fabricante;
     }
 
     /**
@@ -110,7 +108,7 @@ public class Producto {
      * @return Objeto Calendar que representa la fecha de lanzamiento del producto
      */
     public Calendar getFechaLanzamiento() {
-        return this.fechaLanzamiento;
+        return fechaLanzamiento;
     }
 
     /**
@@ -119,7 +117,7 @@ public class Producto {
      * @return Booleano que representa si el producto es de segunda mano o no
      */
     public boolean getEsReacondicionado() {
-        return this.esReacondicionado;
+        return esReacondicionado;
     }
 
     /**
