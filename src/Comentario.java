@@ -56,6 +56,7 @@ public class Comentario {
      */
     public String comentarioCompleto() {
         // TODO - implement Comentario.comentarioCompleto
+        return null;
     }
 
 }

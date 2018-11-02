@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -79,6 +78,7 @@ public class Producto {
      */
     public PRIORIDAD_PRODUCTO getPrioridad() {
         // TODO - implement Producto.getPrioridad
+        return null;
     }
 
     /**
@@ -88,6 +88,7 @@ public class Producto {
      */
     public String getFrabricante() {
         // TODO - implement Producto.getFrabricante
+        return null;
     }
 
     /**
@@ -98,7 +99,7 @@ public class Producto {
     public Calendar getFechaLanzamiento() {
         return this.fechaLanzamiento;
     }
--
+
     /**
      * Método accesor del atributo 'esReacondicionado'
      *
@@ -116,6 +117,7 @@ public class Producto {
      */
     public boolean pedir(int cantidad) {
         // TODO - implement Producto.pedir
+        return false;
     }
 
     /**
@@ -126,6 +128,7 @@ public class Producto {
      */
     private boolean reponerStock() {
         // TODO - implement Producto.reponerStock
+        return false;
     }
 
     /**
@@ -136,6 +139,7 @@ public class Producto {
      */
     public boolean comentar(Comentario comentario) {
         // TODO - implement Producto.comentar
+        return false;
     }
 
     /**
@@ -146,6 +150,7 @@ public class Producto {
      */
     public String detalles() {
         // TODO - implement Producto.detalles
+        return null;
     }
 
     /**
@@ -155,6 +160,7 @@ public class Producto {
      */
     public String detallesCompletos() {
         // TODO - implement Producto.detallesCompletos
+        return null;
     }
 
 }

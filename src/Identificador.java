@@ -32,6 +32,7 @@ public class Identificador {
      */
     public String valorDe() {
         // TODO - implement Identificador.valorDe
+        return null;
     }
 
     /**
@@ -41,6 +42,7 @@ public class Identificador {
      */
     public int aDecimal() {
         // TODO - implement Identificador.aDecimal
+        return 0;
     }
 
     /**

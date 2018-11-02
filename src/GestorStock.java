@@ -1,4 +1,5 @@
-import java.util.HashMap;
+import com.sun.istack.internal.Nullable;
+
 import java.util.Map;
 
 /**
@@ -28,6 +29,7 @@ public class GestorStock {
      */
     public boolean agregarProducto(Producto producto) {
         // TODO - implement GestorStock.agregarProducto
+        return false;
     }
 
     /**
@@ -38,6 +40,7 @@ public class GestorStock {
      */
     public boolean eliminarProducto(Producto producto) {
         // TODO - implement GestorStock.eliminarProducto
+        return false;
     }
 
     /**
@@ -49,6 +52,7 @@ public class GestorStock {
      */
     public boolean venderProducto(int cantidad, Producto producto) {
         // TODO - implement GestorStock.venderProducto
+        return false;
     }
 
     /**
@@ -60,6 +64,7 @@ public class GestorStock {
      */
     public boolean comentarProducto(Producto producto, Comentario comentario) {
         // TODO - implement GestorStock.comentarProducto
+        return false;
     }
 
     /**
@@ -68,8 +73,10 @@ public class GestorStock {
      * @param identificador Cadena que identifica de forma única un producto
      * @return Producto buscado. En caso de no encontrarlo devuelve el valor null
      */
+    @Nullable
     private Producto recuperarProducto(String identificador) {
         // TODO - implement GestorStock.recuperarProducto
+        return null;
     }
 
     /**
@@ -79,6 +86,7 @@ public class GestorStock {
      */
     public GestorStock recuperarInstancia() {
         // TODO - implement GestorStock.recuperarInstancia
+        return null;
     }
 
     /**

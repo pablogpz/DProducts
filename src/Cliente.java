@@ -1,4 +1,5 @@
-import java.util.HashMap;
+import com.sun.istack.internal.Nullable;
+
 import java.util.Map;
 
 /**
@@ -61,6 +62,7 @@ public class Cliente {
      */
     public String getLocalidad() {
         // TODO - implement Cliente.getLocalidad
+        return null;
     }
 
     /**
@@ -72,6 +74,7 @@ public class Cliente {
      */
     public boolean agregarFavorito(Producto producto, String alias) {
         // TODO - implement Cliente.agregarFavorito
+        return false;
     }
 
     /**
@@ -83,6 +86,7 @@ public class Cliente {
      */
     public boolean agregarFavorito(String identificador, String alias) {
         // TODO - implement Cliente.agregarFavorito
+        return false;
     }
 
     /**
@@ -93,6 +97,7 @@ public class Cliente {
      */
     public boolean eliminarFavorito(String alias) {
         // TODO - implement Cliente.eliminarFavorito
+        return false;
     }
 
     /**
@@ -103,6 +108,7 @@ public class Cliente {
      */
     public boolean pedirProducto(String alias) {
         // TODO - implement Cliente.pedirProducto
+        return false;
     }
 
     /**
@@ -112,6 +118,7 @@ public class Cliente {
      */
     public boolean pedirUnidadFavoritos() {
         // TODO - implement Cliente.pedirUnidadFavoritos
+        return false;
     }
 
     /**
@@ -122,6 +129,7 @@ public class Cliente {
      */
     public boolean comentarProducto(String alias) {
         // TODO - implement Cliente.comentarProducto
+        return false;
     }
 
     /**
@@ -130,8 +138,10 @@ public class Cliente {
      * @param alias Alias con el que se guardó el producto en la colección de favoritos
      * @return Producto favorito asociado al alias. Devuelve el valor null si el producto no pertenece a la colección de productos favoritos
      */
+    @Nullable
     private Producto recuperarFavorito(String alias) {
         // TODO - implement Cliente.recuperarFavorito
+        return null;
     }
 
     /**

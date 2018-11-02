@@ -29,6 +29,7 @@ public class GeneradorIdentificador {
      */
     public Identificador consultarIdentificador() {
         // TODO - implement GeneradorIdentificador.consultarIdentificador
+        return null;
     }
 
     /**
@@ -38,6 +39,7 @@ public class GeneradorIdentificador {
      */
     public GeneradorIdentificador recuperarInstancia() {
         // TODO - implement GeneradorIdentificador.recuperarInstancia
+        return null;
     }
 
     /**
@@ -48,6 +50,7 @@ public class GeneradorIdentificador {
      */
     public Identificador generarIdentificador() {
         // TODO - implement GeneradorIdentificador.generarIdentificador
+        return null;
     }
 
 }
