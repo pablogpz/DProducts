@@ -23,7 +23,7 @@ public class Identificador {
      * @param valor Entero a convertir en identificador
      */
     public Identificador(int valor) {
-        this.valor = aCadena(valor);
+        this.valor = aCadena(valor);                                    // Calcula la cadena de identificador asociada al decimal
     }
 
     /**
