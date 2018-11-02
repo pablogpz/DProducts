@@ -31,8 +31,7 @@ public class Identificador {
      * @return Cadena de texto representando una secuencia de identificador
      */
     public String valorDe() {
-        // TODO - implement Identificador.valorDe
-        return null;
+        return valor;
     }
 
     /**
@@ -54,14 +53,13 @@ public class Identificador {
      */
     private String aCadena(int numero) {
         Stack<Character> digitosInvertidos = new Stack<>();               // Pila para invertir los dígitos calculados
-        int cociente = numero / BASE_IDENTIFICADOR;                       // Indicador de fin del bucle while
         String identificadorConvertido = "";                              // Cadena resultante de la conversión
 
-        while (cociente >= BASE_IDENTIFICADOR) {
+        while (numero >= BASE_IDENTIFICADOR) {
             digitosInvertidos.add(pesos[numero % BASE_IDENTIFICADOR]);    // Almacena los restos de cada división (nuevo dígito en base BASE_IDENTIFICADOR)
-            cociente = numero / BASE_IDENTIFICADOR;
+            numero /= BASE_IDENTIFICADOR;
         }
-        digitosInvertidos.add(pesos[cociente]);                           // Almacena el último cociente
+        digitosInvertidos.add(pesos[numero]);                             // Almacena el último cociente
 
         // Invierte los dígitos calculados y forma la cadena resultado
         while (!digitosInvertidos.empty()) {
