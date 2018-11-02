@@ -37,11 +37,20 @@ public class Identificador {
     }
 
     /**
+     * Incrementa el valor del identificador en una cantidad
+     *
+     * @param incremento Entero en el que incrementar el valor del identificador
+     */
+    public void incrementar(int incremento) {
+        valor = aCadena(aDecimal() + incremento);
+    }
+
+    /**
      * Convierte la cadena de identificador a su correspondiente entero que la generó
      *
      * @return Entero decimal del que se generó el identificador
      */
-    public int aDecimal() {
+    private int aDecimal() {
         char[] arrValor = valor.toCharArray();                          // Vector de caracteres que representa al identificador
         // Conversión del vector de pesos a cadena para poder hallar el valor numérico de base asociado a cada caracter
         String cadenaPesos = Arrays.toString(pesos).replaceAll(",\\s", "").substring(1, BASE_IDENTIFICADOR + 1);
