@@ -53,8 +53,10 @@ public class GeneradorIdentificador {
      * @return Identificador actual de la secuencia
      */
     public Identificador generarIdentificador() {
-        // TODO - implement GeneradorIdentificador.generarIdentificador
-        return null;
+        Identificador identificadorAux = valorActual;                           // Identificador actual de la secuencia
+        valorActual.incrementar(incremento);                                    // Nuevo identificador de la secuencia
+
+        return identificadorAux;
     }
 
 }
