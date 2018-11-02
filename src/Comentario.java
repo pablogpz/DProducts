@@ -1,5 +1,6 @@
 /**
- * TODO DESCRIPCION
+ * Clase que da soporte a comentarios sobre productos. Los comentarios contienen el nombre completo de su autor,
+ * una breve reseña sobre el producto y una calificiación en el rango [1,5]
  *
  * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
  * @grupo : Wild True
@@ -12,7 +13,8 @@ public class Comentario {
     private int puntuacion;                                                 // Calificación que le dio el usuario. Es un valor en el rango [1,5]
 
     /**
-     * Constructor parametrizado de la clase. Genera un comentario a partir de un autor, un cuerpo del comentario y una puntuación. La puntuación debe estar entre 1 y 5 (ambos inclusive)
+     * Constructor parametrizado de la clase. Genera un comentario a partir de un autor, un cuerpo del comentario y una puntuación.
+     * La puntuación debe estar entre 1 y 5 (ambos inclusive)
      *
      * @param autor      Nombre completo del cliente que publica el comentario
      * @param texto      Cuerpo del comentario
