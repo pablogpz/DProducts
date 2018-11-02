@@ -127,8 +127,16 @@ public class Producto {
      * @return Booleano indicando si se ha permitido o no el decremento del stock del producto
      */
     public boolean pedir(int cantidad) {
-        // TODO - implement Producto.pedir
-        return false;
+        // Comprueba que la cantidad sea positiva mayor que 0 y que el pedido no supere el stock actual
+        if (cantidad <= 0 || this.cantidad - cantidad < 0) {
+            this.cantidad -= cantidad;
+            if (cantidad < stockMinimo)                                 // Comprueba si hay que reponer el stock
+                reponerStock();
+        } else {
+            return false;                                               // No se pudo servir el pedido
+        }
+
+        return true;
     }
 
     /**
