@@ -10,15 +10,15 @@ import java.util.List;
 
 public class Producto {
 
-    private String nombre;
-    private Identificador identificador;
-    private int cantidad;
-    private int stockMinimo;
-    private PRIORIDAD_PRODUCTO prioridad;
-    private FABRICANTES fabricante;
-    private Calendar fechaLanzamiento;
-    private boolean esReacondicionado;
-    private List<Comentario> comentarios;
+    private String nombre;                                              // Nombre comercial del producto
+    private Identificador identificador;                                // Identificador único del producto
+    private int cantidad;                                               // Cantidad actual en stock del producto
+    private int stockMinimo;                                            // Cantidad mínima que siempre debe existir en stock
+    private PRIORIDAD_PRODUCTO prioridad;                               // Valor directamente relacionado con la cantidad con la que se reabastece el producto
+    private FABRICANTES fabricante;                                     // Fabricante del producto
+    private Calendar fechaLanzamiento;                                  // Fecha de lanzamiento al mercado del producto
+    private boolean esReacondicionado;                                  // Estado del producto. Si es verdadero significa que es de segunda mano, sino es nuevo
+    private List<Comentario> comentarios;                               // Colección de comentarios que los clientes han publicado sobre el producto
 
     /**
      * Constructor parametrizado de la clase. Genera un producto a partir de su nombre, fabricante, prioridad de reabastecimiento,
