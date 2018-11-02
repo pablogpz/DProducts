@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Stack;
 
 /**
@@ -40,8 +41,19 @@ public class Identificador {
      * @return Entero decimal del que se generó el identificador
      */
     public int aDecimal() {
-        // TODO - implement Identificador.aDecimal
-        return 0;
+        char[] arrValor = valor.toCharArray();                          // Vector de caracteres que representa al identificador
+        // Conversión del vector de pesos a cadena para poder hallar el valor numérico de base asociado a cada caracter
+        String cadenaPesos = Arrays.toString(pesos).replaceAll(",\\s", "").substring(1, BASE_IDENTIFICADOR + 1);
+        int contadorPeso = 0;                                           // Contador del exponente de la base, peso de cada dígito en base BASE_IDENTIFICADOR
+        int resultado = 0;                                              // Resultado de la conversión
+
+        // Realiza la conversión de identificador a su decimal asociado empezando por el dígito de menor peso
+        for (int i = arrValor.length - 1; i >= 0; i--) {
+            resultado += cadenaPesos.indexOf(arrValor[i]) * Math.pow(BASE_IDENTIFICADOR, contadorPeso);
+            contadorPeso++;
+        }
+
+        return resultado;
     }
 
     /**
