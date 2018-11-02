@@ -1,7 +1,9 @@
 public class Identificador {
 
-    private Character[] pesos;
-    private String valor;
+    // Vector de los valores asociado a cada peso del sistema de numeración en base 36
+    private static final Character[] pesos = {'X','E','L','7','B','F','1','K','5','Y','9','C','3','R',
+            '6','Z','Q','A','S','J','U','G','W','N','T','P','0','V','2','M','4','I','O','D','8','H'};
+    private String valor;                                               // Valor envuelto en la clase
 
     /**
      * Constructor parametrizado de la clase. Genera un identificador a partir de un entero decimal
