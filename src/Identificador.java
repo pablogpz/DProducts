@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 /**
  * TODO DESCRIPCION
  *
@@ -7,9 +9,11 @@
 
 public class Identificador {
 
-    // Vector de los valores asociado a cada peso del sistema de numeración en base 36
-    private static final Character[] pesos = {'X','E','L','7','B','F','1','K','5','Y','9','C','3','R',
-            '6','Z','Q','A','S','J','U','G','W','N','T','P','0','V','2','M','4','I','O','D','8','H'};
+    private static final int BASE_IDENTIFICADOR = 36;                   // Base del sistema de numeración de identificadores
+
+    // Vector de los valores asociado a cada peso del sistema de numeración en base BASE_IDENTIFICADOR
+    private static final Character[] pesos = {'X', 'E', 'L', '7', 'B', 'F', '1', 'K', '5', 'Y', '9', 'C', '3', 'R',
+            '6', 'Z', 'Q', 'A', 'S', 'J', 'U', 'G', 'W', 'N', 'T', 'P', '0', 'V', '2', 'M', '4', 'I', 'O', 'D', '8', 'H'};
     private String valor;                                               // Valor envuelto en la clase
 
     /**
@@ -18,7 +22,7 @@ public class Identificador {
      * @param valor Entero a convertir en identificador
      */
     public Identificador(int valor) {
-        // TODO - implement Identificador.Identificador
+        this.valor = aCadena(valor);
     }
 
     /**
@@ -40,12 +44,28 @@ public class Identificador {
     }
 
     /**
-     * Convierte un entero decimal a su equivalente valor alfanumérico en base 36 que representa un identificador
+     * Convierte un entero decimal a su equivalente valor alfanumérico en base BASE_IDENTIFICADOR,
+     * que representa un identificador
      *
      * @param numero Entero decimal a convertir
      * @return Cadena representando el identificador
      */
     private String aCadena(int numero) {
-        // TODO - implement Identificador.aCadena
+        Stack<Character> digitosInvertidos = new Stack<>();               // Pila para invertir los dígitos calculados
+        int cociente = numero / BASE_IDENTIFICADOR;                       // Indicador de fin del bucle while
+        String identificadorConvertido = "";                              // Cadena resultante de la conversión
+
+        while (cociente >= BASE_IDENTIFICADOR) {
+            digitosInvertidos.add(pesos[numero % BASE_IDENTIFICADOR]);    // Almacena los restos de cada división (nuevo dígito en base BASE_IDENTIFICADOR)
+            cociente = numero / BASE_IDENTIFICADOR;
+        }
+        digitosInvertidos.add(pesos[cociente]);                           // Almacena el último cociente
+
+        // Invierte los dígitos calculados y forma la cadena resultado
+        while (!digitosInvertidos.empty()) {
+            identificadorConvertido += (digitosInvertidos.pop());         // Concatena cada dígito de la base de los identificadores a la cadena resultado
+        }
+
+        return identificadorConvertido;
     }
 }
