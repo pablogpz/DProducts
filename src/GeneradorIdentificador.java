@@ -1,5 +1,7 @@
 /**
- * TODO DESCRIPCION
+ * Clase que modeliza un generador de identificadores en secuencia consecutiva. Permite la generación de identificadores
+ * únicos en el ámbito de ejecución del programa. Para garantizar la unicidad de los identificadores se ha implementado
+ * según el patrón de diseño Singleton para que solo exista una única instancia generando identificadores.
  *
  * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
  * @grupo : Wild True
@@ -7,14 +9,15 @@
 
 public class GeneradorIdentificador {
 
-    private static final int VALOR_BASE_GENERADOR_IDENTIFICADOR = 2085497;
-    private static final int INCREMENTO_GENERADOR_IDENTIFICADOR = 1;
+    private static final int VALOR_BASE_GENERADOR_IDENTIFICADOR = 2085497;      // Valor base estándar
+    private static final int INCREMENTO_GENERADOR_IDENTIFICADOR = 1;            // Incremento estándar
 
+    // Inicialización de la instancia Singleton
     private static final GeneradorIdentificador instanciaActual =
             new GeneradorIdentificador(VALOR_BASE_GENERADOR_IDENTIFICADOR, INCREMENTO_GENERADOR_IDENTIFICADOR);
-    private Identificador valorBase;
-    private Identificador valorActual;
-    private int incremento;
+    private Identificador valorBase;                                            // Identificador inicial de la secuencia
+    private Identificador valorActual;                                          // Identificador actual de la secuancia sin utilizar
+    private int incremento;                                                     // Incremento constante para generar el siguiente identificador
 
     /**
      * Constructor parametrizado de la clase. Sigue el patrón de diseño Singleton
