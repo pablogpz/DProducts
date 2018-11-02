@@ -165,11 +165,9 @@ public class Producto {
      * Añade un comentario al producto. Solo se permite un comentario por cliente y con una calificación entre 1 y 5 (ambos inclusive)
      *
      * @param comentario Objeto de la clase Comentario que representa el comentario a añadir a la colección de comentarios
-     * @return Booleano indicando si el comentario fue publicado. Devuelve falso en caso de que no sea válido y no se publicará
      */
-    public boolean comentar(Comentario comentario) {
-        // TODO - implement Producto.comentar
-        return false;
+    public void comentar(Comentario comentario) {
+        comentarios.add(comentario);
     }
 
     /**
