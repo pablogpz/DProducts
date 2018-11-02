@@ -45,7 +45,7 @@ public class GeneradorIdentificador {
      *
      * @return Única instancia de la clase GeneradorIdentificador
      */
-    public GeneradorIdentificador recuperarInstancia() {
+    public static GeneradorIdentificador recuperarInstancia() {
         return instanciaActual;
     }
 
