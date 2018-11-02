@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -25,14 +26,26 @@ public class Producto {
      * fecha de lanzamiento y estado actual
      *
      * @param nombre            Nombre del producto
+     * @param cantidad          Cantidad en stock del producto
+     * @param stockMinimo       Cantidad mínima en stock que siempre debe existir del producto
      * @param fabricante        Valor del tipo enumerado de FABRICANTES
      * @param prioridad         Valor del tipo enumerado PRIORIDAD_PRODUCTO. Representa la demanda del producto
      *                          y se tiene en cuenta al reabastecerlo
      * @param fechaLanzamiento  Fecha de lanzamiento reprensentada por el tipo Calendar asociado
      * @param esReacondicionado Estado actual del producto. Representa si es de segunda mano o nuevo
      */
-    public Producto(String nombre, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad, Calendar fechaLanzamiento, boolean esReacondicionado) {
-        // TODO - implement Producto.Producto
+    public Producto(String nombre, int cantidad, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad,
+                    Calendar fechaLanzamiento, boolean esReacondicionado) {
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+        this.stockMinimo = stockMinimo;
+        this.fabricante = fabricante;
+        this.prioridad = prioridad;
+        this.fechaLanzamiento = fechaLanzamiento;
+        this.esReacondicionado = esReacondicionado;
+
+        identificador = GeneradorIdentificador.recuperarInstancia().generarIdentificador();
+        comentarios = new ArrayList<>();
     }
 
     /**
