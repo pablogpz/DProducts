@@ -11,6 +11,11 @@ import java.util.List;
 
 public class Producto {
 
+    // Valores de reabasteciemiento de productos según su prioridad
+    private static final int REABASTECIMIENTO_PRIORIDAD_BAJA = 25;
+    private static final int REABASTECIMIENTO_PRIORIDAD_MEDIA = 75;
+    private static final int REABASTECIMIENTO_PRIORIDAD_ALTA = 150;
+
     private String nombre;                                              // Nombre comercial del producto
     private Identificador identificador;                                // Identificador único del producto
     private int cantidad;                                               // Cantidad actual en stock del producto
@@ -142,12 +147,18 @@ public class Producto {
     /**
      * Repone la cantidad en stock del producto actual según su prioridad de reabastecimiento. Solo se permite el reabastecimiento
      * si su cantidad en stock actual está estrictamente por debajo del la cantidad en stock mínima
-     *
-     * @return Booleano indicando si se ha permitido o no el reabastecimiento de stock del producto
      */
-    private boolean reponerStock() {
-        // TODO - implement Producto.reponerStock
-        return false;
+    private void reponerStock() {
+        switch (prioridad) {
+            case BAJA:
+                cantidad += REABASTECIMIENTO_PRIORIDAD_BAJA;
+                break;
+            case MEDIA:
+                cantidad += REABASTECIMIENTO_PRIORIDAD_MEDIA;
+                break;
+            case ALTA:
+                cantidad += REABASTECIMIENTO_PRIORIDAD_ALTA;
+        }
     }
 
     /**
