@@ -32,7 +32,7 @@ public class Identificador {
      *
      * @param identificador Objeto Identificador a clonar
      */
-    private Identificador(Identificador identificador) {
+    public Identificador(Identificador identificador) {
         valor = identificador.valorDe();
     }
 
