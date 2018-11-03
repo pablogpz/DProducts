@@ -170,9 +170,12 @@ public class Cliente {
             }
         }
 
-        if (faltaProducto)
+        if (faltaProducto)                                              // Comprueba si se pudo servir el pedido
             informarUsuario("ERROR al procesar el pedido de todos los productos favoritos. " +
                     "No hay stock de alguno de los productos que desea", null);
+        else
+            informarUsuario("Se ha procesado correctamente el pedido. " +
+                    "Contenido : 1 ud. de cada producto favorito", null);
 
         return false;
     }
