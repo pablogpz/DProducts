@@ -120,8 +120,7 @@ public class GestorStock {
      * @return Única instancia de GestorStock existente
      */
     public GestorStock recuperarInstancia() {
-        // TODO - implement GestorStock.recuperarInstancia
-        return null;
+        return instanciaActual;
     }
 
     /**
