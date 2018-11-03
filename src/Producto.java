@@ -5,7 +5,8 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * TODO DESCRIPCION
+ * Clase que modela el comportamiento de un producto. Permite consultar sus detalles, añadir comentarios y hacer un pedido
+ * del un producto en particular.
  *
  * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
  * @grupo : Wild True
