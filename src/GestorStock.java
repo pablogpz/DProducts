@@ -61,9 +61,9 @@ public class GestorStock {
      */
     public boolean venderProducto(int cantidad, Producto producto) {
         if (existeProducto(producto))                                           // Comprueba que el producto exista en inventario
-            return producto.pedir(cantidad);                                    // Realiza el pedido
+            return producto.pedir(cantidad);                                    // Intenta realiza el pedido
         else
-            return false;                                                       // EL producto no estaba catalogado
+            return false;                                                       // El producto no estaba catalogado
     }
 
     /**
@@ -74,8 +74,10 @@ public class GestorStock {
      * @return Booleano indicando si se ha podido añadir el comentario, bien porque el producto no existía o porque el comentario no es válido
      */
     public boolean comentarProducto(Producto producto, Comentario comentario) {
-        // TODO - implement GestorStock.comentarProducto
-        return false;
+        if (existeProducto(producto))                                           // Comprueba que el producto exista en inventario
+            return producto.comentar(comentario);                               // Intenta publicar el comentario
+        else
+            return false;                                                       // El producto no estaba catalogado
     }
 
     /**
