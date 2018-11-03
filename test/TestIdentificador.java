@@ -1,11 +1,12 @@
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
 
 /**
  * CLASE DE TESTEO de la clase Identificador.
- *
+ * <p>
  * Realiza las pruebas de todos los métodos públicos de la clase para todas
  * sus posibles entradas y estados
  *
@@ -41,6 +42,7 @@ public class TestIdentificador {
      */
     @Test
     void valorDe() {
+        assertEquals("XE", identificador.valorDe());
     }
 
     /**
@@ -48,5 +50,7 @@ public class TestIdentificador {
      */
     @Test
     void incrementar() {
+        identificador.incrementar(1);
+        assertEquals("XX", identificador.valorDe());
     }
 }
