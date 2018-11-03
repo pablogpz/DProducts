@@ -84,7 +84,7 @@ public class Cliente {
      */
     public boolean agregarFavorito(Producto producto, String alias) {
         if (agregarFavorito(producto.getIdentificador().valorDe(), alias)) {
-            informarUsuario("Se ha añadido el producto a su lista de favoritos", producto);
+            informarUsuario("El producto fue añadido a favortios con alias \"" + alias, producto);
             return true;
         } else {
             return false;
@@ -124,6 +124,8 @@ public class Cliente {
     public boolean eliminarFavorito(String alias) {
         if (existeFavorito(alias)) {
             productosFavoritos.remove(alias);
+            informarUsuario("El producto con alias \"" + alias +
+                    "\" fue eliminado correctamente de la colección de productos favoritos", null);
             return true;
         } else {
             informarUsuario("ERROR al eliminar un producto favorito. El alias \"" + alias + "\" no existe", null);
