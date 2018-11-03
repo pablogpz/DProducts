@@ -164,7 +164,7 @@ public class Cliente {
      *
      * @param alias Alias con el que se guardó el producto en la colección de favoritos
      * @return Producto favorito asociado al alias. Devuelve el valor null si el producto no pertenece a la colección
-     *      de productos favoritos
+     * de productos favoritos
      */
     @Nullable
     private Producto recuperarFavorito(String alias) {
@@ -184,7 +184,10 @@ public class Cliente {
      * @param productoRelacionado Producto relacionado con el mensaje
      */
     private void informarUsuario(String mensaje, Producto productoRelacionado) {
-        // TODO - implement Cliente.informarUsuario
+        String mensajeProducto = productoRelacionado == null ? "" : "\nProducto : \n\t" +
+                productoRelacionado.detalles();
+
+        System.out.println((mensaje + productoRelacionado));
     }
 
 }

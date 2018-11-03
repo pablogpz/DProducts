@@ -157,6 +157,7 @@ public class GestorStock {
     private void reportarError(String error, Producto productoRelacionado) {
         String productoErroneo = productoRelacionado == null ? "" : "\nProducto : \n\t" +
                 productoRelacionado.detalles();
+
         mostrarMensaje(error + productoErroneo);
     }
 
