@@ -150,19 +150,6 @@ public class Cliente {
     }
 
     /**
-     * Recupera un producto favorito de la colección de productos favoritos
-     *
-     * @param alias Alias con el que se guardó el producto en la colección de favoritos
-     * @return Producto favorito asociado al alias. Devuelve el valor null si el producto no pertenece a la colección
-     * de productos favoritos
-     */
-    @Nullable
-    private Producto recuperarFavorito(String alias) {
-        // TODO - implement Cliente.recuperarFavorito
-        return null;
-    }
-
-    /**
      * Comprueba si existe un determinado alias, y por tanto un producto favorito, en la colección de productos favoritos
      *
      * @param alias Alias con el que se guardó el producto favorito
@@ -170,6 +157,24 @@ public class Cliente {
      */
     private boolean existeFavorito(String alias) {
         return productosFavoritos.containsKey(alias);
+    }
+
+    /**
+     * Recupera un producto favorito de la colección de productos favoritos
+     *
+     * @param alias Alias con el que se guardó el producto en la colección de favoritos
+     * @return Producto favorito asociado al alias. Devuelve el valor null si el producto no pertenece a la colección
+     *      de productos favoritos
+     */
+    @Nullable
+    private Producto recuperarFavorito(String alias) {
+        if (existeFavorito(alias)) {                                    // Comprueba si el alias está asociado a algún producto
+            return productosFavoritos.get(alias);                       // Devuelve el producto favorito
+        } else {
+            informarUsuario("ERROR al recuperar un producto favorito. " +
+                    "El alias " + alias + " no está asociado a ningún producto favorito", null);
+            return null;                                                // No existe ningún producto para el alias dado
+        }
     }
 
     /**
