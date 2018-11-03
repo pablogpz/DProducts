@@ -11,8 +11,8 @@ import java.util.Map;
 
 public class GestorStock {
 
-    private GestorStock instanciaActual;
-    private Map<String, Producto> stock;
+    private GestorStock instanciaActual = new GestorStock();                    // Inicialización de la instancia Singleton
+    private Map<String, Producto> stock;                                        // Colección de productos en el inventario
 
     /**
      * Constructor por defecto de la clase. Sigue el patrón de diseño Singleton
