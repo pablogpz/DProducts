@@ -1,6 +1,3 @@
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -56,7 +53,6 @@ public class Cliente {
      *
      * @return Identificador del cliente
      */
-    @NotNull
     public Identificador getIdentificador() {
         return identificador;
     }
@@ -239,7 +235,6 @@ public class Cliente {
      * @return Producto favorito asociado al alias. Devuelve el valor null si el producto no pertenece a la colección
      *      de productos favoritos
      */
-    @Nullable
     private Producto recuperarFavorito(String alias) {
         if (existeFavorito(alias)) {                                    // Comprueba si el alias está asociado a algún producto
             return productosFavoritos.get(alias);                       // Devuelve el producto favorito

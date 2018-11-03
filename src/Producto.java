@@ -1,5 +1,3 @@
-import com.sun.istack.internal.NotNull;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -74,7 +72,6 @@ public class Producto {
      *
      * @return Identificador del producto
      */
-    @NotNull
     public Identificador getIdentificador() {
         return identificador;
     }
