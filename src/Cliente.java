@@ -163,6 +163,16 @@ public class Cliente {
     }
 
     /**
+     * Comprueba si existe un determinado alias, y por tanto un producto favorito, en la colección de productos favoritos
+     *
+     * @param alias Alias con el que se guardó el producto favorito
+     * @return Booleano indicando si el alias pertenece a algún producto favorito
+     */
+    private boolean existeFavorito(String alias) {
+        return productosFavoritos.containsKey(alias);
+    }
+
+    /**
      * Informa por consola al usuario sobre el resultado de una determinada acción
      *
      * @param mensaje             Cadena formateada al mostrar al usuario por consola

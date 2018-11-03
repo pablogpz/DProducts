@@ -103,6 +103,20 @@ public class GestorStock {
     }
 
     /**
+     * Recupera un producto de la colección de productos del inventario
+     *
+     * @param identificador Cadena que identifica de forma única un producto
+     * @return Producto buscado. En caso de no encontrarlo devuelve el valor null
+     */
+    @Nullable
+    public Producto recuperarProducto(String identificador) {
+        if (existeProducto(identificador))                                      // Comprueba que el producto exista en inventaio
+            return stock.get(identificador);                                    // Devuelve el producto buscado
+        else
+            return null;                                                        // El producto no está catalogado
+    }
+
+    /**
      * Comprueba si existe un determinado producto catalogado en el inventario
      *
      * @param producto Producto a comprobar su existencia
@@ -120,20 +134,6 @@ public class GestorStock {
      */
     private boolean existeProducto(String identificador) {
         return stock.containsKey(identificador);
-    }
-
-    /**
-     * Recupera un producto de la colección de productos del inventario
-     *
-     * @param identificador Cadena que identifica de forma única un producto
-     * @return Producto buscado. En caso de no encontrarlo devuelve el valor null
-     */
-    @Nullable
-    public Producto recuperarProducto(String identificador) {
-        if (existeProducto(identificador))                                      // Comprueba que el producto exista en inventaio
-            return stock.get(identificador);                                    // Devuelve el producto buscado
-        else
-            return null;                                                        // El producto no está catalogado
     }
 
     /**
