@@ -139,11 +139,11 @@ public class Cliente {
      * @param alias    Alias con el que se guardó el producto favorito
      * @param cantidad Unidades que contiene el pedido del producto dado
      * @return Booleano indicando si se pudo hacer el pedido. Devuelve falso si no se encontró el producto en la colección
-     * de favoritos, o si no hay suficiente cantidad en stock del producto para satisfacer el pedido (en cuyo caso no realiza el pedido)
+     *      de favoritos, o si no hay suficiente cantidad en stock del producto para satisfacer el pedido (en cuyo caso no realiza el pedido)
      */
     public boolean pedirProducto(String alias, int cantidad) {
         if (existeFavorito(alias)) {                                    // Comprueba si existe el producto favorito
-            Producto producto = empresaAsociada.recuperarProducto(recuperarFavorito(alias).getIdentificador().valorDe());
+            Producto producto = recuperarFavorito(alias);
             if (empresaAsociada.venderProducto(cantidad, producto)) {   // Intenta despachar el pedido
                 informarUsuario("Su pedido ha sido procesado. Cantidad : " + cantidad, producto);
                 return true;                                            // Pedido despachado
@@ -160,7 +160,7 @@ public class Cliente {
      * Realiza el pedido de una unidad de todos los productos favoritos
      *
      * @return Booleano indicando si se pudo realizar el pedido. Devuelve falso si alguno de los productos no se encuentra
-     * en stock y no se realiza el pedido de ningún producto
+     *      en stock y no se realiza el pedido de ningún producto
      */
     public boolean pedirUnidadFavoritos() {
         Iterator<Producto> it = productosFavoritos.values().iterator();
@@ -190,11 +190,28 @@ public class Cliente {
      * @param texto      Cuerpo del comentario. No puede ser vacío
      * @param puntuacion Calificación del producto. Debe estar en el rango [1,5]
      * @return Booleano indicando si se pudo publicar el comentario. Devuelve falso si el cuerpo está vacío o si la
-     * puntuación no es válida
+     *      puntuación no es válida
      */
     public boolean comentarProducto(String alias, String texto, int puntuacion) {
-        // TODO - implement Cliente.comentarProducto
-        return false;
+        if (existeFavorito(alias)) {                                    // Comprueba si existe el producto favorito
+            if (texto.length() > 0 && (puntuacion > 0 && puntuacion < 6)) {
+                Producto producto = recuperarFavorito(alias);
+                if (empresaAsociada.comentarProducto(producto, new Comentario(getNombre(), texto, puntuacion))) {
+                    informarUsuario("Se ha publicado un comentario", producto);
+                    return true;                                        // El comentario es válido y fue publicado
+                } else {
+                    return false;                                       // El comentario no fue publicado
+                }
+            } else {
+                informarUsuario("ERROR al publicar un comentario. " +
+                        "Compruebe que el cuerpo del comentario contenga texto " +
+                        "y que la puntuación esté en el rango [1,5]", null);
+                return false;                                           // El comentario no es válido
+            }
+        } else {
+            informarUsuario("ERROR al comentar un producto favorito. El alias \"" + alias + "\" no existe", null);
+            return false;                                               // No existe el producto favorito
+        }
     }
 
     /**
@@ -212,7 +229,7 @@ public class Cliente {
      *
      * @param alias Alias con el que se guardó el producto en la colección de favoritos
      * @return Producto favorito asociado al alias. Devuelve el valor null si el producto no pertenece a la colección
-     * de productos favoritos
+     *      de productos favoritos
      */
     @Nullable
     private Producto recuperarFavorito(String alias) {
