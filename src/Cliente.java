@@ -1,5 +1,6 @@
 import com.sun.istack.internal.Nullable;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -14,6 +15,7 @@ public class Cliente {
     private String nombre;                                              // Nombre completo del cliente
     private Identificador identificador;                                // Identificador único del cliente
     private int edad;                                                   // Edad actual del cliente
+    private String localidad;                                           // Localidad de residencia del cliente
     private GestorStock empresaAsociada;                                // Empresa a la que el cliente compra sus productos
     private Map<String, Producto> productosFavoritos;                   // Colección de productos favoritos del cliente
 
@@ -25,7 +27,13 @@ public class Cliente {
      * @param localidad Nombre de la localidad de residencia del cliente
      */
     public Cliente(String nombre, int edad, String localidad) {
-        // TODO - implement Cliente.Cliente
+        this.nombre = nombre;
+        this.edad = edad;
+        this.localidad = localidad;
+
+        identificador = GeneradorIdentificador.recuperarInstancia().generarIdentificador();
+        empresaAsociada = GestorStock.recuperarInstancia();
+        productosFavoritos = new HashMap<>();
     }
 
     /**
@@ -34,7 +42,7 @@ public class Cliente {
      * @return Nombre del cliente
      */
     public String getNombre() {
-        return this.nombre;
+        return nombre;
     }
 
     /**
@@ -43,7 +51,7 @@ public class Cliente {
      * @return Identificador del cliente
      */
     public Identificador getIdentificador() {
-        return this.identificador;
+        return identificador;
     }
 
     /**
@@ -52,7 +60,7 @@ public class Cliente {
      * @return Edad del cliente
      */
     public int getEdad() {
-        return this.edad;
+        return edad;
     }
 
     /**
@@ -61,8 +69,7 @@ public class Cliente {
      * @return Localidad del cliente
      */
     public String getLocalidad() {
-        // TODO - implement Cliente.getLocalidad
-        return null;
+        return localidad;
     }
 
     /**
