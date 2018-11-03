@@ -108,7 +108,7 @@ public class Cliente {
      */
     public boolean agregarFavorito(String identificador, String alias) {
         if (existeFavorito(alias)) {                                    // Comprueba si el alias ya está en uso
-            informarUsuario("ERROR al añadir un producto favorito. El alias \"" + alias + "\" ya está en uso", null);
+            informarUsuario("ERROR al añadir un producto favorito. El alias \"" + alias + "\" ya está en uso");
             return false;                                               // El alias está en uso
         } else {
             Producto producto = empresaAsociada.recuperarProducto(identificador);
@@ -131,10 +131,10 @@ public class Cliente {
         if (existeFavorito(alias)) {
             productosFavoritos.remove(alias);
             informarUsuario("El producto con alias \"" + alias +
-                    "\" fue eliminado correctamente de la colección de productos favoritos", null);
+                    "\" fue eliminado correctamente de la colección de productos favoritos");
             return true;
         } else {
-            informarUsuario("ERROR al eliminar un producto favorito. El alias \"" + alias + "\" no existe", null);
+            informarUsuario("ERROR al eliminar un producto favorito. El alias \"" + alias + "\" no existe");
             return false;
         }
     }
@@ -157,7 +157,7 @@ public class Cliente {
                 return false;                                           // No se pudo despachar el pedido
             }
         } else {
-            informarUsuario("ERROR al eliminar un producto favorito. El alias \"" + alias + "\" no existe", null);
+            informarUsuario("ERROR al eliminar un producto favorito. El alias \"" + alias + "\" no existe");
             return false;                                               // No existe el producto favorito
         }
     }
@@ -180,11 +180,11 @@ public class Cliente {
 
         if (faltaProducto) {                                              // Comprueba si se pudo servir el pedido
             informarUsuario("ERROR al procesar el pedido de todos los productos favoritos. " +
-                    "No hay stock de alguno de los productos que desea", null);
+                    "No hay stock de alguno de los productos que desea");
             return false;
         } else {
             informarUsuario("Se ha procesado correctamente el pedido. " +
-                    "Contenido : 1 ud. de cada producto favorito", null);
+                    "Contenido : 1 ud. de cada producto favorito");
             return true;
         }
     }
@@ -212,11 +212,11 @@ public class Cliente {
             } else {
                 informarUsuario("ERROR al publicar un comentario. " +
                         "Compruebe que el cuerpo del comentario contenga texto " +
-                        "y que la puntuación esté en el rango [1,5]", null);
+                        "y que la puntuación esté en el rango [1,5]");
                 return false;                                           // El comentario no es válido
             }
         } else {
-            informarUsuario("ERROR al comentar un producto favorito. El alias \"" + alias + "\" no existe", null);
+            informarUsuario("ERROR al comentar un producto favorito. El alias \"" + alias + "\" no existe");
             return false;                                               // No existe el producto favorito
         }
     }
@@ -244,7 +244,7 @@ public class Cliente {
             return productosFavoritos.get(alias);                       // Devuelve el producto favorito
         } else {
             informarUsuario("ERROR al recuperar un producto favorito. " +
-                    "El alias \"" + alias + "\" no está asociado a ningún producto favorito", null);
+                    "El alias \"" + alias + "\" no está asociado a ningún producto favorito");
             return null;                                                // No existe ningún producto para el alias dado
         }
     }
@@ -259,7 +259,16 @@ public class Cliente {
         String mensajeProducto = productoRelacionado == null ? "" : "\nProducto : \n\t" +
                 productoRelacionado.detalles();
 
-        System.out.println(mensaje + mensajeProducto);
+        informarUsuario(mensaje + mensajeProducto);
+    }
+
+    /**
+     * Informa por consola al usuario sobre el resultado de una determinada acción
+     *
+     * @param mensaje Cadena formateada al mostrar al usuario por consola
+     */
+    private void informarUsuario(String mensaje) {
+        System.out.println(mensaje);
     }
 
 }
