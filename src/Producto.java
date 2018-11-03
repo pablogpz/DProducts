@@ -1,5 +1,6 @@
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -15,6 +16,7 @@ public class Producto {
     private static final int REABASTECIMIENTO_PRIORIDAD_BAJA = 25;
     private static final int REABASTECIMIENTO_PRIORIDAD_MEDIA = 75;
     private static final int REABASTECIMIENTO_PRIORIDAD_ALTA = 150;
+    private static final String FORMATO_FECHA = "YYYY/MM/dd";           // Formato en el que mostrar las fechas de lanzamiento
 
     private String nombre;                                              // Nombre comercial del producto
     private Identificador identificador;                                // Identificador único del producto
@@ -22,7 +24,7 @@ public class Producto {
     private int stockMinimo;                                            // Cantidad mínima que siempre debe existir en stock
     private PRIORIDAD_PRODUCTO prioridad;                               // Valor directamente relacionado con la cantidad con la que se reabastece el producto
     private FABRICANTES fabricante;                                     // Fabricante del producto
-    private Calendar fechaLanzamiento;                                  // Fecha de lanzamiento al mercado del producto
+    private GregorianCalendar fechaLanzamiento;                         // Fecha de lanzamiento al mercado del producto
     private boolean esReacondicionado;                                  // Estado del producto. Si es verdadero significa que es de segunda mano, sino es nuevo
     private List<Comentario> comentarios;                               // Colección de comentarios que los clientes han publicado sobre el producto
 
@@ -36,11 +38,11 @@ public class Producto {
      * @param fabricante        Valor del tipo enumerado de FABRICANTES
      * @param prioridad         Valor del tipo enumerado PRIORIDAD_PRODUCTO. Representa la demanda del producto
      *                          y se tiene en cuenta al reabastecerlo
-     * @param fechaLanzamiento  Fecha de lanzamiento reprensentada por el tipo Calendar asociado
+     * @param fechaLanzamiento  Fecha de lanzamiento reprensentada por el tipo GregorianCalendar asociado
      * @param esReacondicionado Estado actual del producto. Representa si es de segunda mano o nuevo
      */
     public Producto(String nombre, int cantidad, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad,
-                    Calendar fechaLanzamiento, boolean esReacondicionado) {
+                    GregorianCalendar fechaLanzamiento, boolean esReacondicionado) {
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.stockMinimo = stockMinimo;
@@ -112,7 +114,7 @@ public class Producto {
      *
      * @return Objeto Calendar que representa la fecha de lanzamiento del producto
      */
-    public Calendar getFechaLanzamiento() {
+    public GregorianCalendar getFechaLanzamiento() {
         return fechaLanzamiento;
     }
 
@@ -176,14 +178,18 @@ public class Producto {
      * @return Cadena formatrada de información del producto
      */
     public String detalles() {
-        String estado = esReacondicionado ? "Nuevo" : "Reacondicionado";
-        String detalles = "PRODUCTO " + nombre + "-" + fabricante.toString() + " : " +
-                "\tIdentificador : " + identificador.valorDe() + "\n\tCantidad en stock : " + cantidad +
-                "\n\tCantidad en stock mínima : " + stockMinimo + "\n\tPrioridad de reabastecimiento : " + prioridad.toString() +
-                "\n\tFecha de lanzamiento : " + fechaLanzamiento.toString() + "\n\tEstado : " + estado + "\n\tComentarios : \n";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMATO_FECHA);
+        String estado = esReacondicionado ? "Reacondicionado" : "Nuevo";
 
+        String detalles = "PRODUCTO\t" + nombre + "-" + fabricante.toString() +
+                "\n\tIdentificador : " + identificador.valorDe() + "\n\tCantidad en stock : " + cantidad +
+                "\n\tCantidad en stock mínima : " + stockMinimo + "\n\tPrioridad de reabastecimiento : " + prioridad.toString() +
+                "\n\tFecha de lanzamiento : " + simpleDateFormat.format(fechaLanzamiento.getTime()) + "\n\tEstado : " +
+                estado + "\n\tComentarios : \n";
+
+        // Adjunta los detalles de todos los comentarios publicados sobre el producto
         for (Comentario comentario : comentarios) {
-            detalles += "===============================================================================";
+            detalles += "\n===============================================================================\n";
             detalles += comentario.comentarioCompleto();
         }
 
