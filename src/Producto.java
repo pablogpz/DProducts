@@ -6,7 +6,8 @@ import java.util.List;
 
 /**
  * Clase que modela el comportamiento de un producto. Permite consultar sus detalles, añadir comentarios y hacer un pedido
- * del un producto en particular.
+ * del un producto en particular. Cada producto es asignado con una clave única en el ciclo de vida del programa que establece
+ * una relación biunívoca entre su identididad y su identificador
  *
  * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
  * @grupo : Wild True
