@@ -134,10 +134,11 @@ public class Cliente {
      * Realiza el pedido de una cantidad arbitraria de un producto favorito
      *
      * @param alias Alias con el que se guardó el producto favorito
+     * @param cantidad Unidades que contiene el pedido del producto dado
      * @return Booleano indicando si se pudo hacer el pedido. Devuelve falso si no se encontró el producto en la colección
      * de favoritos, o si no hay suficiente cantidad en stock del producto para satisfacer el pedido (en cuyo caso no realiza el pedido)
      */
-    public boolean pedirProducto(String alias) {
+    public boolean pedirProducto(String alias, int cantidad) {
         // TODO - implement Cliente.pedirProducto
         return false;
     }
