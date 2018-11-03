@@ -1,8 +1,8 @@
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotSame;
 
 /**
  * CLASE DE TESTEO de la clase Identificador.
@@ -14,18 +14,18 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
  * @grupo : Wild True
  */
 
-public class TestIdentificador {
+public class IdentificadorTest {
 
     // Fixture de objetos Identificador de prueba
     private static Identificador identificador;
 
     /**
-     * Constructor privado. No hace falta instanciar la clase
+     * Constructor por defecto
      */
-    private TestIdentificador() {}
+    public IdentificadorTest() {}
 
-    @BeforeAll
-    static void setUp() {
+    @BeforeClass
+    public static void setUp() {
         identificador = new Identificador(36);
     }
 
@@ -33,7 +33,7 @@ public class TestIdentificador {
      * Testeo del constructor por copia
      */
     @Test
-    void Identificador() {
+    public void Identificador() {
         assertNotSame(identificador, new Identificador(identificador));
     }
 
@@ -41,7 +41,7 @@ public class TestIdentificador {
      * Testeo del método accesor del atributo 'valor'
      */
     @Test
-    void valorDe() {
+    public void valorDe() {
         assertEquals("XE", identificador.valorDe());
     }
 
@@ -49,7 +49,7 @@ public class TestIdentificador {
      * Testeo del método mutador 'incrementar()'
      */
     @Test
-    void incrementar() {
+    public void incrementar() {
         identificador.incrementar(1);
         assertEquals("XX", identificador.valorDe());
     }

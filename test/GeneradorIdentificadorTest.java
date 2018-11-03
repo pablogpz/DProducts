@@ -1,8 +1,9 @@
-import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Test;
+import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
+import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.Assert.assertEquals;
 
 /**
  * CLASE DE TESTEO de la clase GeneradorIdentificador.
@@ -14,17 +15,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * @grupo : Wild True
  */
 
-public class TestGeneradorIdentificador {
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class GeneradorIdentificadorTest {
     // Instancia Singleton de la clase GeneradorIdentificador
-    static GeneradorIdentificador generadorIdentificador;
+    private static GeneradorIdentificador generadorIdentificador;
 
     /**
-     * Constructor privado. No hace falta instanciar la clase
+     * Constructor por defecto
      */
-    private TestGeneradorIdentificador() {}
+    public GeneradorIdentificadorTest() {}
 
-    @BeforeAll
-    static void setUp() {
+    @BeforeClass
+    public static void setUp() {
         generadorIdentificador = GeneradorIdentificador.recuperarInstancia();
     }
 
@@ -32,16 +34,16 @@ public class TestGeneradorIdentificador {
      * Testeo del método accesor 'consultarIdentificador()'
      */
     @Test
-    void consultarIdentificador() {
-        assertEquals("X5P1J", generadorIdentificador.consultarIdentificador().valorDe());
-        assertEquals("X5P1J", generadorIdentificador.consultarIdentificador().valorDe());
+    public void consultarIdentificador() {
+        assertEquals("X5P1A", generadorIdentificador.consultarIdentificador().valorDe());
+        assertEquals("X5P1A", generadorIdentificador.consultarIdentificador().valorDe());
     }
 
     /**
      * Testeo del método 'generarIdentificador()'
      */
     @Test
-    void generadorIdentificador() {
+    public void generadorIdentificador() {
         assertEquals("X5P1A", generadorIdentificador.generarIdentificador().valorDe());
         assertEquals("X5P1S", generadorIdentificador.generarIdentificador().valorDe());
     }
