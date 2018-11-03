@@ -16,6 +16,9 @@ public class TestIdentificador {
     // Fixture de objetos Identificador de prueba
     private Identificador identificador;
 
+    /**
+     * Constructor privado. No hace falta instanciar la clase
+     */
     private TestIdentificador() {}
 
     @BeforeAll
