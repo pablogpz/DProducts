@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+
 /**
  * CLASE DE TESTEO de la clase Identificador.
  *
@@ -14,7 +16,7 @@ import org.junit.jupiter.api.Test;
 public class TestIdentificador {
 
     // Fixture de objetos Identificador de prueba
-    private Identificador identificador;
+    private static Identificador identificador;
 
     /**
      * Constructor privado. No hace falta instanciar la clase
@@ -22,7 +24,8 @@ public class TestIdentificador {
     private TestIdentificador() {}
 
     @BeforeAll
-    void setUp() {
+    static void setUp() {
+        identificador = new Identificador(36);
     }
 
     /**
@@ -30,6 +33,7 @@ public class TestIdentificador {
      */
     @Test
     void Identificador() {
+        assertNotSame(identificador, new Identificador(identificador));
     }
 
     /**
