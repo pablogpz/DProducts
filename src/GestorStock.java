@@ -114,7 +114,7 @@ public class GestorStock {
             return stock.get(identificador);                                    // Devuelve el producto buscado
         } else {
             reportarError("ERROR al recuperar un producto. " +
-                    "El identificador " + identificador + " no está asociado a ningún producto", null);
+                    "El identificador \"" + identificador + "\" no está asociado a ningún producto", null);
             return null;                                                        // El producto no está catalogado
         }
     }

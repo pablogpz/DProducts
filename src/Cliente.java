@@ -82,8 +82,7 @@ public class Cliente {
      * @return Booleano indicando si se ha realizado correctamente la operación.
      */
     public boolean agregarFavorito(Producto producto, String alias) {
-        // TODO - implement Cliente.agregarFavorito
-        return false;
+        return agregarFavorito(producto.getIdentificador().valorDe(), alias);
     }
 
     /**
@@ -93,11 +92,21 @@ public class Cliente {
      *
      * @param identificador Identificador del producto a añadir a la colección de favoritos
      * @param alias         Nombre con el que recordar el producto favorito
-     * @return Booleano indicando si se ha realizado correctamente la operación.
+     * @return Booleano indicando si se ha realizado correctamente la operación
      */
     public boolean agregarFavorito(String identificador, String alias) {
-        // TODO - implement Cliente.agregarFavorito
-        return false;
+        if (existeFavorito(alias)) {                                    // Comprueba si el alias ya está en uso
+            informarUsuario("ERROR al añadir un producto favorito. El alias \"" + alias + "\" ya está en uso", null);
+            return false;                                               // El alias está en uso
+        } else {
+            Producto producto = empresaAsociada.recuperarProducto(identificador);
+            if (producto != null) {                                     // Comprueba que el producto a añadir a favoritos exista en la empresa
+                productosFavoritos.put(alias, producto);
+                return true;                                            // Existe en el inventario de la empresa asociada
+            } else {
+                return false;                                           // No existe en el inventario de la empresa asociada
+            }
+        }
     }
 
     /**
@@ -172,7 +181,7 @@ public class Cliente {
             return productosFavoritos.get(alias);                       // Devuelve el producto favorito
         } else {
             informarUsuario("ERROR al recuperar un producto favorito. " +
-                    "El alias " + alias + " no está asociado a ningún producto favorito", null);
+                    "El alias \"" + alias + "\" no está asociado a ningún producto favorito", null);
             return null;                                                // No existe ningún producto para el alias dado
         }
     }
