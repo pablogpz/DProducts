@@ -4,7 +4,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * TODO DESCRIPCION
+ * Clase que representa a la empresa de compra/venta de productos. Para esta entrega solo se tiene en consideración
+ * la existencia de una única empresa, por lo que se ha implementado siguiendo el patrón de diseño Singleton. Es
+ * fácilmente escalable y refactorizable para incorporarle una identidad propia en un futuro
  *
  * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
  * @grupo : Wild True
@@ -26,7 +28,8 @@ public class GestorStock {
      * Añade un producto al inventario
      *
      * @param producto Producto que va a ser añadido al inventario.
-     * @return Booleano indicando si se ha permitido la inserción del producto al inventario. Devuelve falso si se intentan insertar productos repetidos
+     * @return Booleano indicando si se ha permitido la inserción del producto al inventario.
+     *      Devuelve falso si se intentan insertar productos repetidos
      */
     public boolean agregarProducto(Producto producto) {
         boolean existeProducto = existeProducto(producto);
@@ -82,7 +85,8 @@ public class GestorStock {
      *
      * @param producto   Producto al que añadir un comentario
      * @param comentario Objeto de la clase Comentario que añadir al producto indicado
-     * @return Booleano indicando si se ha podido añadir el comentario, bien porque el producto no existía o porque el comentario no es válido
+     * @return Booleano indicando si se ha podido añadir el comentario, bien porque el producto no existía o
+     *      porque el comentario no es válido
      */
     public boolean comentarProducto(Producto producto, Comentario comentario) {
         if (existeProducto(producto)) {                                         // Comprueba que el producto exista en inventario
