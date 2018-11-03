@@ -184,7 +184,7 @@ public class Cliente {
             return false;
         } else {
             for (String alias : productosFavoritos.keySet()) {
-                pedirProducto(alias, 1);
+                pedirProducto(alias, 1);                        // Realiza el pedido de todos los productos favoritos
             }
             return true;
         }
