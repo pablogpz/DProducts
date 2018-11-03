@@ -1,6 +1,7 @@
 import com.sun.istack.internal.Nullable;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -160,7 +161,19 @@ public class Cliente {
      * en stock y no se realiza el pedido de ningún producto
      */
     public boolean pedirUnidadFavoritos() {
-        // TODO - implement Cliente.pedirUnidadFavoritos
+        Iterator<Producto> it = productosFavoritos.values().iterator();
+        boolean faltaProducto = false;                                  // Bandera para indicar si servir el pedido
+
+        while (it.hasNext() && !faltaProducto) {
+            if (!it.next().pedir(1)) {                          // Pide una unidad de cada producto favorito
+                faltaProducto = true;                                   // Existe suficiente stock de cada producto
+            }
+        }
+
+        if (faltaProducto)
+            informarUsuario("ERROR al procesar el pedido de todos los productos favoritos. " +
+                    "No hay stock de alguno de los productos que desea", null);
+
         return false;
     }
 
