@@ -50,6 +50,8 @@ public class GestorStock {
 
         if (existeProducto)                                                     // Comprueba si el producto está catalogado
             stock.remove(producto.getIdentificador().valorDe());                // Elimina el producto del inventario
+        else
+            reportarError("ERROR al eliminar producto. No existe en el inventario", producto);
 
         return existeProducto;
     }
@@ -62,10 +64,17 @@ public class GestorStock {
      * @return Booleano indicando si se ha podido enviar el pedido, bien sea por falta de stock o porque el producto no se ha encontrado
      */
     public boolean venderProducto(int cantidad, Producto producto) {
-        if (existeProducto(producto))                                           // Comprueba que el producto exista en inventario
-            return producto.pedir(cantidad);                                    // Intenta realiza el pedido
-        else
+        if (existeProducto(producto)) {                                         // Comprueba que el producto exista en inventario
+            if (producto.pedir(cantidad)) {                                     // Intenta realiza el pedido
+                return true;                                                    // Venta completada
+            } else {
+                reportarError("ERROR al vender producto. Cantidad errónea o no hay stock suficiente", producto);
+                return false;                                                   // Error en la venta
+            }
+        } else {
+            reportarError("ERROR al vender producto. No existe en el inventario", producto);
             return false;                                                       // El producto no está catalogado
+        }
     }
 
     /**
@@ -76,10 +85,17 @@ public class GestorStock {
      * @return Booleano indicando si se ha podido añadir el comentario, bien porque el producto no existía o porque el comentario no es válido
      */
     public boolean comentarProducto(Producto producto, Comentario comentario) {
-        if (existeProducto(producto))                                           // Comprueba que el producto exista en inventario
-            return producto.comentar(comentario);                               // Intenta publicar el comentario
-        else
+        if (existeProducto(producto)) {                                         // Comprueba que el producto exista en inventario
+            if (producto.comentar(comentario)) {                                // Intenta publicar el comentario
+                return true;                                                    // El comentario fue publicado
+            } else {
+                reportarError("ERROR al publicar comentario. El autor ya ha publicado un comentario", producto);
+                return false;                                                   // Error en la publicación
+            }
+        } else {
+            reportarError("ERROR al publicar comentario. El producto no existe en el inventario", producto);
             return false;                                                       // El producto no está catalogado
+        }
     }
 
     /**
@@ -132,10 +148,18 @@ public class GestorStock {
      * @param productoRelacionado Instancia de la clase Producto que generó el error
      */
     private void reportarError(String error, Producto productoRelacionado) {
-        // TODO Realizar las llamadas
         String productoErroneo = productoRelacionado == null ? "" : "\nProducto : \n\t" +
                 productoRelacionado.detalles();
         mostrarMensaje(error + productoErroneo);
+    }
+
+    /**
+     * Muestra por terminal una cadena de texto
+     *
+     * @param texto Texto a mostrar
+     */
+    private void mostrarMensaje(String texto) {
+        System.out.println(texto);
     }
 
     /**
@@ -150,15 +174,6 @@ public class GestorStock {
             mostrarMensaje(producto.detalles());
             mostrarMensaje(decorador);
         }
-    }
-
-    /**
-     * Muestra por terminal una cadena de texto
-     *
-     * @param texto Texto a mostrar
-     */
-    private void mostrarMensaje(String texto) {
-        System.out.println(texto);
     }
 
 }
