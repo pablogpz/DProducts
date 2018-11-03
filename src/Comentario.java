@@ -59,9 +59,9 @@ public class Comentario {
      * @return Cadena con el contenido del comentario formateado
      */
     public String comentarioCompleto() {
-        return "Autor : " + autor + "\n" +
-                "Comentario :\n" + texto +
-                "\nCalificación : " + "*****".substring(0, puntuacion);
+        return "Autor : " + autor +
+                "\nCalificación " + "*****".substring(0, puntuacion) +
+                "\n\tReseña :\n" + texto;
     }
 
 }
