@@ -29,8 +29,12 @@ public class GestorStock {
      * @return Booleano indicando si se ha permitido la inserción del producto al inventario. Devuelve falso si se intentan insertar productos repetidos
      */
     public boolean agregarProducto(Producto producto) {
-        // TODO - implement GestorStock.agregarProducto
-        return false;
+        boolean existeProducto = existeProducto(producto);
+
+        if (!existeProducto)                                                    // Comprueba que no exista ya el producto
+            stock.put(producto.getIdentificador().valorDe(), producto);
+
+        return !existeProducto;
     }
 
     /**
@@ -66,6 +70,16 @@ public class GestorStock {
     public boolean comentarProducto(Producto producto, Comentario comentario) {
         // TODO - implement GestorStock.comentarProducto
         return false;
+    }
+
+    /**
+     * Comprueba si existe un determinado producto catalogado en el inventario
+     *
+     * @param producto Producto a comprobar su existencia
+     * @return Booleano indicando si existía o no el producto en el inventario
+     */
+    private boolean existeProducto(Producto producto) {
+        return stock.containsKey(producto.getIdentificador().valorDe());
     }
 
     /**
