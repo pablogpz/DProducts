@@ -5,7 +5,11 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * TODO DESCRIPCION
+ * Clase que modela el comportamiento de clientes de empresas de compra/venta de productos. Los clientes se
+ * identifican por un identificador único en el ciclo de vida del programa. Pueden realizar una serie de operaciones
+ * sobre sus productos favoritos: añadir y eliminar productos a su colección de favoritos, realizar un pedido de cualquier
+ * número de unidades de un producto favorito, realizar un pedido de una unidad de cada producto favorito y publicar un
+ * comentario (solo uno) sobre sus productos favoritos
  *
  * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
  * @grupo : Wild True

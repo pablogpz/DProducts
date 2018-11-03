@@ -8,6 +8,8 @@ import java.util.Map;
  * la existencia de una única empresa, por lo que se ha implementado siguiendo el patrón de diseño Singleton. Es
  * fácilmente escalable y refactorizable para incorporarle una identidad propia en un futuro
  *
+ * El perfil de la empresa es de venta de componentes de ordenador y periféricos
+ *
  * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
  * @grupo : Wild True
  */
