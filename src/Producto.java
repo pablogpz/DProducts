@@ -137,7 +137,7 @@ public class Producto {
      */
     public boolean pedir(int cantidad) {
         // Comprueba que la cantidad sea positiva mayor que 0 y que el pedido no supere el stock actual
-        if (cantidad <= 0 || this.cantidad - cantidad < 0) {
+        if (cantidad > 0 || this.cantidad - cantidad > 0) {
             this.cantidad -= cantidad;
             if (cantidad < stockMinimo)                                 // Comprueba si hay que reponer el stock
                 reponerStock();
@@ -193,13 +193,13 @@ public class Producto {
      */
     public String detalles() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMATO_FECHA);
-        String estado = esReacondicionado ? "Reacondicionado" : "Nuevo";
+        String estado = getEsReacondicionado() ? "Reacondicionado" : "Nuevo";
 
-        String detalles = "PRODUCTO\t" + nombre + "-" + fabricante.toString() +
-                "\n\tIdentificador : " + identificador.valorDe() + "\n\tCantidad en stock : " + cantidad +
-                "\n\tCantidad en stock mínima : " + stockMinimo + "\n\tPrioridad de reabastecimiento : " + prioridad.toString() +
-                "\n\tFecha de lanzamiento : " + simpleDateFormat.format(fechaLanzamiento.getTime()) + "\n\tEstado : " +
-                estado + "\n\tComentarios : \n";
+        String detalles = "PRODUCTO\t" + getNombre() + "-" + getFrabricante().toString() +
+                "\n\tIdentificador : " + getIdentificador().valorDe() + "\n\tCantidad en stock : " + getCantidad() +
+                "\n\tCantidad en stock mínima : " + getStockMinimo() + "\n\tPrioridad de reabastecimiento : " +
+                getPrioridad().toString() + "\n\tFecha de lanzamiento : " + simpleDateFormat.format(getFechaLanzamiento().getTime()) +
+                "\n\tEstado : " + estado + "\n\tComentarios : \n";
 
         // Adjunta los detalles de todos los comentarios publicados sobre el producto
         for (Comentario comentario : comentarios) {
