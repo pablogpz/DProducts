@@ -204,7 +204,7 @@ public class Producto {
 
         // Adjunta los detalles de todos los comentarios publicados sobre el producto
         for (Comentario comentario : comentarios) {
-            detalles += "\n===============================================================================\n";
+            detalles += "\n===============================================================\n";
             detalles += comentario.comentarioCompleto();
         }
 
