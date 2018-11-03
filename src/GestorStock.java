@@ -87,7 +87,17 @@ public class GestorStock {
      * @return Booleano indicando si existía o no el producto en el inventario
      */
     private boolean existeProducto(Producto producto) {
-        return stock.containsKey(producto.getIdentificador().valorDe());
+        return existeProducto(producto.getIdentificador().valorDe());
+    }
+
+    /**
+     * Comprueba si existe un determinado producto catalogado en el inventario
+     *
+     * @param identificador Cadena identificadora del producto a comprobar su existencia
+     * @return Booleano indicando si existía o no el producto en el inventario
+     */
+    private boolean existeProducto(String identificador) {
+        return stock.containsKey(identificador);
     }
 
     /**
@@ -97,8 +107,7 @@ public class GestorStock {
      * @return Producto buscado. En caso de no encontrarlo devuelve el valor null
      */
     @Nullable
-    private Producto recuperarProducto(String identificador) {
-        // TODO - implement GestorStock.recuperarProducto
+    public Producto recuperarProducto(String identificador) {
         return null;
     }
 
@@ -120,6 +129,7 @@ public class GestorStock {
      */
     private void reportarError(String error, Producto productoRelacionado) {
         // TODO - implement GestorStock.reportarError
+        // TODO Realizar las llamadas
     }
 
     /**
