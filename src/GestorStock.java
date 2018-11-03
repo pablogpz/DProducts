@@ -1,5 +1,6 @@
 import com.sun.istack.internal.Nullable;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -18,7 +19,7 @@ public class GestorStock {
      * Constructor por defecto de la clase. Sigue el patrón de diseño Singleton
      */
     private GestorStock() {
-        // TODO - implement GestorStock.GestorStock
+        stock = new HashMap<>();
     }
 
     /**
