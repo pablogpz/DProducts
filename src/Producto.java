@@ -141,9 +141,9 @@ public class Producto {
      */
     public boolean pedir(int cantidad) {
         // Comprueba que la cantidad sea positiva mayor que 0 y que el pedido no supere el stock actual
-        if (cantidad > 0 && this.cantidad - cantidad > 0) {
+        if (cantidad > 0 && (this.cantidad - cantidad) > 0) {
             this.cantidad -= cantidad;
-            if (cantidad < stockMinimo)                                 // Comprueba si hay que reponer el stock
+            if (this.cantidad < stockMinimo)                            // Comprueba si hay que reponer el stock
                 reponerStock();
         } else {
             return false;                                               // No se pudo servir el pedido

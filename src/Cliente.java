@@ -90,7 +90,7 @@ public class Cliente {
      */
     public boolean agregarFavorito(Producto producto, String alias) {
         if (agregarFavorito(producto.getIdentificador().valorDe(), alias)) {
-            informarUsuario("El producto fue añadido a favortios con alias \"" + alias, producto);
+            informarUsuario("El producto fue añadido a favortios con alias \"" + alias + "\"", producto);
             return true;
         } else {
             return false;
@@ -151,7 +151,7 @@ public class Cliente {
         if (existeFavorito(alias)) {                                    // Comprueba si existe el producto favorito
             Producto producto = recuperarFavorito(alias);
             if (empresaAsociada.venderProducto(cantidad, producto)) {   // Intenta despachar el pedido
-                informarUsuario("Su pedido ha sido procesado. Cantidad : " + cantidad, producto);
+                informarUsuario("Su pedido ha sido procesado. Cantidad : " + cantidad + " ud(s).", producto);
                 return true;                                            // Pedido despachado
             } else {
                 return false;                                           // No se pudo despachar el pedido
