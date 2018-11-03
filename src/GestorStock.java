@@ -29,7 +29,7 @@ public class GestorStock {
      *
      * @param producto Producto que va a ser añadido al inventario.
      * @return Booleano indicando si se ha permitido la inserción del producto al inventario.
-     *      Devuelve falso si se intentan insertar productos repetidos
+     * Devuelve falso si se intentan insertar productos repetidos
      */
     public boolean agregarProducto(Producto producto) {
         boolean existeProducto = existeProducto(producto);
@@ -86,7 +86,7 @@ public class GestorStock {
      * @param producto   Producto al que añadir un comentario
      * @param comentario Objeto de la clase Comentario que añadir al producto indicado
      * @return Booleano indicando si se ha podido añadir el comentario, bien porque el producto no existía o
-     *      porque el comentario no es válido
+     * porque el comentario no es válido
      */
     public boolean comentarProducto(Producto producto, Comentario comentario) {
         if (existeProducto(producto)) {                                         // Comprueba que el producto exista en inventario
@@ -110,10 +110,13 @@ public class GestorStock {
      */
     @Nullable
     public Producto recuperarProducto(String identificador) {
-        if (existeProducto(identificador))                                      // Comprueba que el producto exista en inventaio
+        if (existeProducto(identificador)) {                                    // Comprueba que el producto exista en inventaio
             return stock.get(identificador);                                    // Devuelve el producto buscado
-        else
+        } else {
+            reportarError("ERROR al recuperar un producto. " +
+                    "El identificador " + identificador + " no está asociado a ningún producto", null);
             return null;                                                        // El producto no está catalogado
+        }
     }
 
     /**
