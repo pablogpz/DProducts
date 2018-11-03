@@ -121,8 +121,13 @@ public class Cliente {
      * @return Booleano si se ha podido eliminar el producto o no. Devuelve false si el producto no existe en la colección de favoritos
      */
     public boolean eliminarFavorito(String alias) {
-        // TODO - implement Cliente.eliminarFavorito
-        return false;
+        if (existeFavorito(alias)) {
+            productosFavoritos.remove(alias);
+            return true;
+        } else {
+            informarUsuario("ERROR al eliminar un producto favorito. El alias \"" + alias + "\" no existe", null);
+            return false;
+        }
     }
 
     /**
