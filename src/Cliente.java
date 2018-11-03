@@ -73,7 +73,9 @@ public class Cliente {
     }
 
     /**
-     * Añade un producto a la colección de productos favoritos del cliente. No se puede añadir el mismo producto más de una vez y el nombre con el que se guarda no puede estar repetido. El producto también debe estar en el inventario de la empresa asociada al GestorStock
+     * Añade un producto a la colección de productos favoritos del cliente. No se puede añadir el mismo producto más de una vez
+     * y el nombre con el que se guarda no puede estar repetido. El producto también debe estar en el inventario de la
+     * empresa asociada al GestorStock
      *
      * @param producto Producto a añadir a la colección de favoritos
      * @param alias    Nombre con el que recordar el producto favorito
@@ -85,7 +87,9 @@ public class Cliente {
     }
 
     /**
-     * Añade un producto a la colección de productos favoritos del cliente. No se puede añadir el mismo producto más de una vez y el nombre con el que se guarda no puede estar repetido. El producto también debe estar en el inventario de la empresa asociada al GestorStock
+     * Añade un producto a la colección de productos favoritos del cliente. No se puede añadir el mismo producto más de una vez
+     * y el nombre con el que se guarda no puede estar repetido. El producto también debe estar en el inventario de la empresa
+     * asociada al GestorStock
      *
      * @param identificador Identificador del producto a añadir a la colección de favoritos
      * @param alias         Nombre con el que recordar el producto favorito
@@ -111,7 +115,8 @@ public class Cliente {
      * Realiza el pedido de una cantidad arbitraria de un producto favorito
      *
      * @param alias Alias con el que se guardó el producto favorito
-     * @return Booleano indicando si se pudo hacer el pedido. Devuelve falso si no se encontró el producto en la colección de favoritos, o si no hay suficiente cantidad en stock del producto para satisfacer el pedido (en cuyo caso no realiza el pedido)
+     * @return Booleano indicando si se pudo hacer el pedido. Devuelve falso si no se encontró el producto en la colección
+     *      de favoritos, o si no hay suficiente cantidad en stock del producto para satisfacer el pedido (en cuyo caso no realiza el pedido)
      */
     public boolean pedirProducto(String alias) {
         // TODO - implement Cliente.pedirProducto
@@ -121,7 +126,8 @@ public class Cliente {
     /**
      * Realiza el pedido de una unidad de todos los productos favoritos
      *
-     * @return Booleano indicando si se pudo realizar el pedido. Devuelve falso si alguno de los productos no se encuentra en stock y no se realiza el pedido de ningún producto
+     * @return Booleano indicando si se pudo realizar el pedido. Devuelve falso si alguno de los productos no se encuentra
+     *      en stock y no se realiza el pedido de ningún producto
      */
     public boolean pedirUnidadFavoritos() {
         // TODO - implement Cliente.pedirUnidadFavoritos
@@ -129,12 +135,16 @@ public class Cliente {
     }
 
     /**
-     * Publica un comentario sobre un producto. El producto debe estar entre los productos favoritos y un cliente solo puede publicar un comentario sobre un producto
+     * Publica un comentario sobre un producto. El producto debe estar entre los productos favoritos y un cliente solo puede
+     * publicar un comentario sobre un producto
      *
      * @param alias Alias con el que se guardó el producto en la colección de favoritos
-     * @return Booleano indicando si se pudo publicar el comentario
+     * @param texto Cuerpo del comentario. No puede ser vacío
+     * @param puntuacion Calificación del producto. Debe estar en el rango [1,5]
+     * @return Booleano indicando si se pudo publicar el comentario. Devuelve falso si el cuerpo está vacío o si la
+     *      puntuación no es válida
      */
-    public boolean comentarProducto(String alias) {
+    public boolean comentarProducto(String alias, String texto, int puntuacion) {
         // TODO - implement Cliente.comentarProducto
         return false;
     }
@@ -143,7 +153,8 @@ public class Cliente {
      * Recupera un producto favorito de la colección de productos favoritos
      *
      * @param alias Alias con el que se guardó el producto en la colección de favoritos
-     * @return Producto favorito asociado al alias. Devuelve el valor null si el producto no pertenece a la colección de productos favoritos
+     * @return Producto favorito asociado al alias. Devuelve el valor null si el producto no pertenece a la colección
+     *      de productos favoritos
      */
     @Nullable
     private Producto recuperarFavorito(String alias) {
