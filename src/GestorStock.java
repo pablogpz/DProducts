@@ -32,7 +32,7 @@ public class GestorStock {
         boolean existeProducto = existeProducto(producto);
 
         if (!existeProducto)                                                    // Comprueba que no exista ya el producto
-            stock.put(producto.getIdentificador().valorDe(), producto);
+            stock.put(producto.getIdentificador().valorDe(), producto);         // Agrega el prodcuto al inventario
 
         return !existeProducto;
     }
@@ -44,8 +44,12 @@ public class GestorStock {
      * @return Booleano indicando si se ha encontrado el producto a borrar
      */
     public boolean eliminarProducto(Producto producto) {
-        // TODO - implement GestorStock.eliminarProducto
-        return false;
+        boolean existeProducto = existeProducto(producto);
+
+        if (existeProducto)                                                     // Comprueba si el producto está catalogado
+            stock.remove(producto.getIdentificador().valorDe());                // Elimina el producto del inventario
+
+        return existeProducto;
     }
 
     /**
