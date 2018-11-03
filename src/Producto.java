@@ -1,6 +1,7 @@
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -167,9 +168,21 @@ public class Producto {
      * Añade un comentario al producto. Solo se permite un comentario por cliente y con una calificación entre 1 y 5 (ambos inclusive)
      *
      * @param comentario Objeto de la clase Comentario que representa el comentario a añadir a la colección de comentarios
+     * @return Booleano indicando si se ha podido publicar el comentario. Devuelve falso si el autor ya ha publicado un comentario
      */
-    public void comentar(Comentario comentario) {
-        comentarios.add(comentario);
+    public boolean comentar(Comentario comentario) {
+        boolean autorRepetido = false;                                  // Bandera para comprobar la duplicidad de autores en comentarios
+
+        Iterator<Comentario> it = comentarios.iterator();
+        while (it.hasNext() && !autorRepetido) {
+            if (it.next().getAutor().equals(comentario.getAutor()))     // Comprueba que no exista ya un comentario con el mismo autor
+                autorRepetido = true;
+        }
+
+        if (!autorRepetido)                                             // Si no ha habido coincidencia se publica el comentario
+            comentarios.add(comentario);
+
+        return !autorRepetido;
     }
 
     /**
