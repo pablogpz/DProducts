@@ -1,3 +1,4 @@
+import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
 
 import java.util.HashMap;
@@ -55,6 +56,7 @@ public class Cliente {
      *
      * @return Identificador del cliente
      */
+    @NotNull
     public Identificador getIdentificador() {
         return identificador;
     }
@@ -176,14 +178,15 @@ public class Cliente {
             }
         }
 
-        if (faltaProducto)                                              // Comprueba si se pudo servir el pedido
+        if (faltaProducto) {                                              // Comprueba si se pudo servir el pedido
             informarUsuario("ERROR al procesar el pedido de todos los productos favoritos. " +
                     "No hay stock de alguno de los productos que desea", null);
-        else
+            return false;
+        } else {
             informarUsuario("Se ha procesado correctamente el pedido. " +
                     "Contenido : 1 ud. de cada producto favorito", null);
-
-        return false;
+            return true;
+        }
     }
 
     /**
@@ -198,7 +201,7 @@ public class Cliente {
      */
     public boolean comentarProducto(String alias, String texto, int puntuacion) {
         if (existeFavorito(alias)) {                                    // Comprueba si existe el producto favorito
-            if (texto.length() > 0 && (puntuacion > 0 && puntuacion < 6)) {
+            if (texto.replaceAll("\\s+","").length() > 0 && (puntuacion > 0 && puntuacion < 6)) {
                 Producto producto = recuperarFavorito(alias);
                 if (empresaAsociada.comentarProducto(producto, new Comentario(getNombre(), texto, puntuacion))) {
                     informarUsuario("Se ha publicado un comentario", producto);
