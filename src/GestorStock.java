@@ -33,6 +33,8 @@ public class GestorStock {
 
         if (!existeProducto)                                                    // Comprueba que no exista ya el producto
             stock.put(producto.getIdentificador().valorDe(), producto);         // Agrega el prodcuto al inventario
+        else
+            reportarError("ERROR al agregar el producto. Ya existe en inventario", producto);
 
         return !existeProducto;
     }
@@ -130,8 +132,10 @@ public class GestorStock {
      * @param productoRelacionado Instancia de la clase Producto que generó el error
      */
     private void reportarError(String error, Producto productoRelacionado) {
-        // TODO - implement GestorStock.reportarError
         // TODO Realizar las llamadas
+        String productoErroneo = productoRelacionado == null ? "" : "\nProducto : \n\t" +
+                productoRelacionado.detalles();
+        mostrarMensaje(error + productoErroneo);
     }
 
     /**
