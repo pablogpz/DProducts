@@ -63,7 +63,7 @@ public class GestorStock {
         if (existeProducto(producto))                                           // Comprueba que el producto exista en inventario
             return producto.pedir(cantidad);                                    // Intenta realiza el pedido
         else
-            return false;                                                       // El producto no estaba catalogado
+            return false;                                                       // El producto no está catalogado
     }
 
     /**
@@ -77,7 +77,7 @@ public class GestorStock {
         if (existeProducto(producto))                                           // Comprueba que el producto exista en inventario
             return producto.comentar(comentario);                               // Intenta publicar el comentario
         else
-            return false;                                                       // El producto no estaba catalogado
+            return false;                                                       // El producto no está catalogado
     }
 
     /**
@@ -108,7 +108,10 @@ public class GestorStock {
      */
     @Nullable
     public Producto recuperarProducto(String identificador) {
-        return null;
+        if (existeProducto(identificador))                                      // Comprueba que el producto exista en inventaio
+            return stock.get(identificador);                                    // Devuelve el producto buscado
+        else
+            return null;                                                        // El producto no está catalogado
     }
 
     /**
