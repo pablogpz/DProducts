@@ -107,12 +107,4 @@ public class GestorStock {
         // TODO - implement GestorStock.mostrarDetallesStock
     }
 
-    /**
-     * Muestra por consola una lista con todos los detalles de cada producto del inventario
-     * (los básicos junto a su stock mínimo y su prioridad de reabastecimiento)
-     */
-    public void mostrarDetallesCompletosStock() {
-        // TODO - implement GestorStock.mostrarDetallesCompletosStock
-    }
-
 }
