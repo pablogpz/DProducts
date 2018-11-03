@@ -14,6 +14,8 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 public class TestGeneradorIdentificador {
+    // Instancia Singleton de la clase GeneradorIdentificador
+    static GeneradorIdentificador generadorIdentificador;
 
     /**
      * Constructor privado. No hace falta instanciar la clase
@@ -22,7 +24,25 @@ public class TestGeneradorIdentificador {
 
     @BeforeAll
     static void setUp() {
+        generadorIdentificador = GeneradorIdentificador.recuperarInstancia();
+    }
 
+    /**
+     * Testeo del método accesor 'consultarIdentificador()'
+     */
+    @Test
+    void consultarIdentificador() {
+        assertEquals("X5P1J", generadorIdentificador.consultarIdentificador().valorDe());
+        assertEquals("X5P1J", generadorIdentificador.consultarIdentificador().valorDe());
+    }
+
+    /**
+     * Testeo del método 'generarIdentificador()'
+     */
+    @Test
+    void generadorIdentificador() {
+        assertEquals("X5P1A", generadorIdentificador.generarIdentificador().valorDe());
+        assertEquals("X5P1S", generadorIdentificador.generarIdentificador().valorDe());
     }
 
 }
