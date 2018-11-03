@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class GestorStock {
 
-    private GestorStock instanciaActual = new GestorStock();                    // Inicialización de la instancia Singleton
+    private static final GestorStock instanciaActual = new GestorStock();       // Inicialización de la instancia Singleton
     private Map<String, Producto> stock;                                        // Colección de productos en el inventario
 
     /**
@@ -119,7 +119,7 @@ public class GestorStock {
      *
      * @return Única instancia de GestorStock existente
      */
-    public GestorStock recuperarInstancia() {
+    public static GestorStock recuperarInstancia() {
         return instanciaActual;
     }
 
@@ -135,11 +135,26 @@ public class GestorStock {
     }
 
     /**
-     * Muestra por terminal una lista con los detalles básicos de cada producto del inventario
-     * (nombre, identificador, cantidad, fabricante, fecha de lanzamiento, estado y la lista de comentarios)
+     * Muestra por terminal una lista con todos los detalles de cada producto del inventario
      */
     public void mostrarDetallesStock() {
-        // TODO - implement GestorStock.mostrarDetallesStock
+        String decorador = "***************************************************************";
+
+        mostrarMensaje("INVENTARIO");
+        mostrarMensaje(decorador);
+        for (Producto producto : stock.values()) {                              // Muestra los detalles de cada producto
+            mostrarMensaje(producto.detalles());
+            mostrarMensaje(decorador);
+        }
+    }
+
+    /**
+     * Muestra por terminal una cadena de texto
+     *
+     * @param texto Texto a mostrar
+     */
+    private void mostrarMensaje(String texto) {
+        System.out.println(texto);
     }
 
 }
