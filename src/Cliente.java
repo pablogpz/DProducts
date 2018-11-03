@@ -11,11 +11,11 @@ import java.util.Map;
 
 public class Cliente {
 
-    private String nombre;
-    private Identificador identificador;
-    private int edad;
-    private GestorStock empresaAsociada;
-    private Map<String, Producto> productosFavoritos;
+    private String nombre;                                              // Nombre completo del cliente
+    private Identificador identificador;                                // Identificador único del cliente
+    private int edad;                                                   // Edad actual del cliente
+    private GestorStock empresaAsociada;                                // Empresa a la que el cliente compra sus productos
+    private Map<String, Producto> productosFavoritos;                   // Colección de productos favoritos del cliente
 
     /**
      * Constructor parametrizado de la clase. Genera un cliente a partir de un nombre, una edad y una localidad de residencia
