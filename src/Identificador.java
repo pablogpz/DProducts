@@ -28,6 +28,15 @@ public class Identificador {
     }
 
     /**
+     * Constructor por copia de la clase. Genera un nuevo objeto Identificador a partir del valor de otro
+     *
+     * @param identificador Objeto Identificador a clonar
+     */
+    public Identificador(Identificador identificador) {
+        valor = identificador.valorDe();
+    }
+
+    /**
      * Consulta el valor del identificador
      *
      * @return Cadena de texto representando una secuencia de identificador

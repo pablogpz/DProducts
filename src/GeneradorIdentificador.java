@@ -58,10 +58,10 @@ public class GeneradorIdentificador {
      * @return Identificador actual de la secuencia
      */
     public Identificador generarIdentificador() {
-        Identificador identificadorAux = valorActual;                           // Identificador actual de la secuencia
+        Identificador sigIdentifiacor = new Identificador(valorActual);         // Identificador actual de la secuencia
         valorActual.incrementar(incremento);                                    // Nuevo identificador de la secuencia
 
-        return identificadorAux;
+        return sigIdentifiacor;
     }
 
 }
