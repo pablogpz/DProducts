@@ -187,7 +187,7 @@ public class Cliente {
         String mensajeProducto = productoRelacionado == null ? "" : "\nProducto : \n\t" +
                 productoRelacionado.detalles();
 
-        System.out.println((mensaje + productoRelacionado));
+        System.out.println((mensaje + mensajeProducto));
     }
 
 }
