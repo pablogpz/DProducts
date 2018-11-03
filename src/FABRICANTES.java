@@ -1,5 +1,6 @@
 /**
- * TODO DESCRIPCION
+ * Tipo enumerado que contiene valores estandarizados de los principales fabricantes
+ * de componentes de ordenadores y periféricos.
  *
  * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
  * @grupo : Wild True
