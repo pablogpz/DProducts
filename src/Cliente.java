@@ -150,14 +150,14 @@ public class Cliente {
     public boolean pedirProducto(String alias, int cantidad) {
         if (existeFavorito(alias)) {                                    // Comprueba si existe el producto favorito
             Producto producto = recuperarFavorito(alias);
-            if (tienda.venderProducto(cantidad, producto)) {   // Intenta despachar el pedido
+            if (tienda.venderProducto(cantidad, producto)) {            // Intenta despachar el pedido
                 informarUsuario("Su pedido ha sido procesado. Cantidad : " + cantidad + " ud(s).", producto);
                 return true;                                            // Pedido despachado
             } else {
                 return false;                                           // No se pudo despachar el pedido
             }
         } else {
-            informarUsuario("ERROR al eliminar un producto favorito. El alias \"" + alias + "\" no existe");
+            informarUsuario("ERROR al pedir un producto favorito. El alias \"" + alias + "\" no existe");
             return false;                                               // No existe el producto favorito
         }
     }
@@ -173,7 +173,7 @@ public class Cliente {
         boolean faltaProducto = false;                                  // Bandera para indicar si servir el pedido
 
         while (it.hasNext() && !faltaProducto) {
-            if (!it.next().pedir(1)) {                          // Pide una unidad de cada producto favorito
+            if (!it.next().haySuficienteStock(1)){              // Comprueba si ha en stock una unidad de cada producto
                 faltaProducto = true;                                   // Existe suficiente stock de cada producto
             }
         }
@@ -183,8 +183,9 @@ public class Cliente {
                     "No hay stock de alguno de los productos que desea");
             return false;
         } else {
-            informarUsuario("Se ha procesado correctamente el pedido. " +
-                    "Contenido : 1 ud. de cada producto favorito");
+            for (String alias : productosFavoritos.keySet()) {
+                pedirProducto(alias, 1);
+            }
             return true;
         }
     }
