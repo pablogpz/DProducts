@@ -82,7 +82,12 @@ public class Cliente {
      * @return Booleano indicando si se ha realizado correctamente la operación.
      */
     public boolean agregarFavorito(Producto producto, String alias) {
-        return agregarFavorito(producto.getIdentificador().valorDe(), alias);
+        if (agregarFavorito(producto.getIdentificador().valorDe(), alias)) {
+            informarUsuario("Se ha añadido el producto a su lista de favoritos", producto);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
