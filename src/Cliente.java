@@ -22,7 +22,7 @@ public class Cliente {
     private Identificador identificador;                                // Identificador único del cliente
     private int edad;                                                   // Edad actual del cliente
     private String localidad;                                           // Localidad de residencia del cliente
-    private GestorStock empresaAsociada;                                // Empresa a la que el cliente compra sus productos
+    private GestorStock tienda;                                         // Empresa a la que el cliente compra sus productos
     private Map<String, Producto> productosFavoritos;                   // Colección de productos favoritos del cliente
 
     /**
@@ -38,7 +38,7 @@ public class Cliente {
         this.localidad = localidad;
 
         identificador = GeneradorIdentificador.recuperarInstancia().generarIdentificador();
-        empresaAsociada = GestorStock.recuperarInstancia();
+        tienda = GestorStock.recuperarInstancia();
         productosFavoritos = new HashMap<>();
     }
 
@@ -111,7 +111,7 @@ public class Cliente {
             informarUsuario("ERROR al añadir un producto favorito. El alias \"" + alias + "\" ya está en uso");
             return false;                                               // El alias está en uso
         } else {
-            Producto producto = empresaAsociada.recuperarProducto(identificador);
+            Producto producto = tienda.recuperarProducto(identificador);
             if (producto != null) {                                     // Comprueba que el producto a añadir a favoritos exista en la empresa
                 productosFavoritos.put(alias, producto);
                 return true;                                            // Existe en el inventario de la empresa asociada
@@ -150,7 +150,7 @@ public class Cliente {
     public boolean pedirProducto(String alias, int cantidad) {
         if (existeFavorito(alias)) {                                    // Comprueba si existe el producto favorito
             Producto producto = recuperarFavorito(alias);
-            if (empresaAsociada.venderProducto(cantidad, producto)) {   // Intenta despachar el pedido
+            if (tienda.venderProducto(cantidad, producto)) {   // Intenta despachar el pedido
                 informarUsuario("Su pedido ha sido procesado. Cantidad : " + cantidad + " ud(s).", producto);
                 return true;                                            // Pedido despachado
             } else {
@@ -178,7 +178,7 @@ public class Cliente {
             }
         }
 
-        if (faltaProducto) {                                              // Comprueba si se pudo servir el pedido
+        if (faltaProducto) {                                            // Comprueba si se pudo servir el pedido
             informarUsuario("ERROR al procesar el pedido de todos los productos favoritos. " +
                     "No hay stock de alguno de los productos que desea");
             return false;
@@ -203,7 +203,7 @@ public class Cliente {
         if (existeFavorito(alias)) {                                    // Comprueba si existe el producto favorito
             if (texto.replaceAll("\\s+","").length() > 0 && (puntuacion > 0 && puntuacion < 6)) {
                 Producto producto = recuperarFavorito(alias);
-                if (empresaAsociada.comentarProducto(producto, new Comentario(getNombre(), texto, puntuacion))) {
+                if (tienda.comentarProducto(producto, new Comentario(getNombre(), texto, puntuacion))) {
                     informarUsuario("Se ha publicado un comentario", producto);
                     return true;                                        // El comentario es válido y fue publicado
                 } else {
