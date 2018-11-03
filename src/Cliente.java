@@ -203,7 +203,7 @@ public class Cliente {
         if (existeFavorito(alias)) {                                    // Comprueba si existe el producto favorito
             if (texto.replaceAll("\\s+","").length() > 0 && (puntuacion > 0 && puntuacion < 6)) {
                 Producto producto = recuperarFavorito(alias);
-                if (tienda.comentarProducto(producto, new Comentario(getNombre(), texto, puntuacion))) {
+                if (tienda.comentarProducto(producto, new Comentario(this, texto, puntuacion))) {
                     informarUsuario("Se ha publicado un comentario", producto);
                     return true;                                        // El comentario es válido y fue publicado
                 } else {

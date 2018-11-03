@@ -8,7 +8,7 @@
 
 public class Comentario {
 
-    private String autor;                                                   // Nombre completo del cliente que publicó el comentario
+    private Cliente autor;                                                  // Cliente que publica el comentario
     private String texto;                                                   // Cuerpo del comentario
     private int puntuacion;                                                 // Calificación que le dio el usuario. Es un valor en el rango [1,5]
 
@@ -20,7 +20,7 @@ public class Comentario {
      * @param texto      Cuerpo del comentario
      * @param puntuacion Calificación del producto. Es un valor en el rango [1,5]
      */
-    public Comentario(String autor, String texto, int puntuacion) {
+    public Comentario(Cliente autor, String texto, int puntuacion) {
         this.autor = autor;
         this.texto = texto;
         this.puntuacion = puntuacion;
@@ -31,7 +31,7 @@ public class Comentario {
      *
      * @return Autor del comentario
      */
-    public String getAutor() {
+    public Cliente getAutor() {
         return autor;
     }
 
@@ -59,7 +59,7 @@ public class Comentario {
      * @return Cadena con el contenido del comentario formateado
      */
     public String comentarioCompleto() {
-        return "Autor : " + getAutor() +
+        return "Autor : " + getAutor().getNombre() +
                 "\nCalificación " + "*****".substring(0, getPuntuacion()) +
                 "\n\tReseña :\n" + getTexto();
     }
