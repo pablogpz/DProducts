@@ -27,8 +27,8 @@ public class Producto {
     private List<Comentario> comentarios;                               // Colección de comentarios que los clientes han publicado sobre el producto
 
     /**
-     * Constructor parametrizado de la clase. Genera un producto a partir de su nombre, fabricante, prioridad de reabastecimiento,
-     * fecha de lanzamiento y estado actual
+     * Constructor parametrizado de la clase. Genera un producto a partir de su nombre, camtidad en stock, cantidad mínima en stock,
+     * fabricante, prioridad de reabastecimiento, fecha de lanzamiento y estado actual
      *
      * @param nombre            Nombre del producto
      * @param cantidad          Cantidad en stock del producto
@@ -171,24 +171,23 @@ public class Producto {
     }
 
     /**
-     * Devuelve una cadena formateada con los detalles más relevantes del producto (nombre, identificador, cantidad, fabricante,
-     * fecha de lanzamiento, estado y la lista de comentarios)
+     * Devuelve una cadena formateada con todos los detalles del producto
      *
      * @return Cadena formatrada de información del producto
      */
     public String detalles() {
-        // TODO - implement Producto.detalles
-        return null;
-    }
+        String estado = esReacondicionado ? "Nuevo" : "Reacondicionado";
+        String detalles = "PRODUCTO " + nombre + "-" + fabricante.toString() + " : " +
+                "\tIdentificador : " + identificador.valorDe() + "\n\tCantidad en stock : " + cantidad +
+                "\n\tCantidad en stock mínima : " + stockMinimo + "\n\tPrioridad de reabastecimiento : " + prioridad.toString() +
+                "\n\tFecha de lanzamiento : " + fechaLanzamiento.toString() + "\n\tEstado : " + estado + "\n\tComentarios : \n";
 
-    /**
-     * Devuelve todos los detalles del producto (los detalles básicos junto al stock mínimo y su prioridad de reabastecimiento
-     *
-     * @return Cadena con todos los detalles del producto
-     */
-    public String detallesCompletos() {
-        // TODO - implement Producto.detallesCompletos
-        return null;
+        for (Comentario comentario : comentarios) {
+            detalles += "===============================================================================";
+            detalles += comentario.comentarioCompleto();
+        }
+
+        return detalles;
     }
 
 }
