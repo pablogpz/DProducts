@@ -60,8 +60,10 @@ public class GestorStock {
      * @return Booleano indicando si se ha podido enviar el pedido, bien sea por falta de stock o porque el producto no se ha encontrado
      */
     public boolean venderProducto(int cantidad, Producto producto) {
-        // TODO - implement GestorStock.venderProducto
-        return false;
+        if (existeProducto(producto))                                           // Comprueba que el producto exista en inventario
+            return producto.pedir(cantidad);                                    // Realiza el pedido
+        else
+            return false;                                                       // EL producto no estaba catalogado
     }
 
     /**
