@@ -93,6 +93,7 @@ public class GestorStockTest {
     public void dRecuperarProducto() {
         assertEquals(producto, gestorStock.recuperarProducto(producto.getIdentificador()));
         assertNotEquals(productoNoInventario, gestorStock.recuperarProducto(productoNoInventario.getIdentificador()));
+        assertNull(gestorStock.recuperarProducto(null));
     }
 
     /**
