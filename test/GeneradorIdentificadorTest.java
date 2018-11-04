@@ -18,6 +18,7 @@ import static org.junit.Assert.assertEquals;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class GeneradorIdentificadorTest {
+
     // Instancia Singleton de la clase GeneradorIdentificador
     private static GeneradorIdentificador generadorIdentificador;
 
