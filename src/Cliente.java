@@ -81,7 +81,7 @@ public class Cliente {
     /**
      * Añade un producto a la colección de productos favoritos del cliente. No se puede añadir el mismo producto más de una vez
      * y el nombre con el que se guarda no puede estar repetido. El producto también debe estar en el inventario de la
-     * empresa asociada al GestorStock
+     * empresa asociada al GestorStock y no se puede añadir un producto a favoritos más de una vez
      *
      * @param producto Producto a añadir a la colección de favoritos
      * @param alias    Nombre con el que recordar el producto favorito
