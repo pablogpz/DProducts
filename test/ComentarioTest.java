@@ -12,6 +12,8 @@ import static org.junit.Assert.assertSame;
  *
  * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
  * @grupo : Wild True
+ * Entrega : EC1
+ * Curso : 2º GIIIS (Grupo A)
  */
 
 public class ComentarioTest {
