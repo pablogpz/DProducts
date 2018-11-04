@@ -32,8 +32,8 @@ public class GeneradorIdentificadorTest {
      */
     @Test
     public void consultarIdentificador() {
-        assertEquals("X5P1A", generadorIdentificador.consultarIdentificador().valorDe());
-        assertEquals("X5P1A", generadorIdentificador.consultarIdentificador().valorDe());
+        assertEquals("X5P1N", generadorIdentificador.consultarIdentificador().valorDe());
+        assertEquals("X5P1N", generadorIdentificador.consultarIdentificador().valorDe());
     }
 
     /**
@@ -41,8 +41,8 @@ public class GeneradorIdentificadorTest {
      */
     @Test
     public void generadorIdentificador() {
-        assertEquals("X5P1A", generadorIdentificador.generarIdentificador().valorDe());
-        assertEquals("X5P1S", generadorIdentificador.generarIdentificador().valorDe());
+        assertEquals("X5P1N", generadorIdentificador.generarIdentificador().valorDe());
+        assertEquals("X5P1T", generadorIdentificador.generarIdentificador().valorDe());
     }
 
 }
