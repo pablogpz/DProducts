@@ -13,6 +13,9 @@ import org.junit.Test;
 
 public class ComentarioTest {
 
+    // Fixture de objetos Comentario de prueba
+    private static Comentario comentario;
+
     @Before
     public void setUp() {
     }
