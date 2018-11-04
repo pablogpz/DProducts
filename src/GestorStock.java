@@ -7,7 +7,7 @@ import java.util.Map;
  * Clase que representa a la empresa de compra/venta de productos. Para esta entrega solo se tiene en consideración
  * la existencia de una única empresa, por lo que se ha implementado siguiendo el patrón de diseño Singleton. Es
  * fácilmente escalable y refactorizable para incorporarle una identidad propia en un futuro
- *
+ * <p>
  * El perfil de la empresa es de venta de componentes de ordenador y periféricos
  *
  * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
@@ -31,10 +31,15 @@ public class GestorStock {
      *
      * @param producto Producto que va a ser añadido al inventario.
      * @return Booleano indicando si se ha permitido la inserción del producto al inventario.
-     *      Devuelve falso si se intentan insertar productos repetidos
+     * Devuelve falso si se intentan insertar productos repetidos
      */
     public boolean agregarProducto(Producto producto) {
-        boolean existeProducto = existeProducto(producto);
+        boolean existeProducto = false;
+        try {
+            existeProducto = existeProducto(producto);
+        } catch (NullPointerException e) {
+            reportarError(e.getMessage(), null);
+        }
 
         if (!existeProducto)                                                    // Comprueba que no exista ya el producto
             stock.put(producto.getIdentificador().valorDe(), producto);         // Agrega el prodcuto al inventario
@@ -51,7 +56,12 @@ public class GestorStock {
      * @return Booleano indicando si se ha encontrado el producto a borrar
      */
     public boolean eliminarProducto(Producto producto) {
-        boolean existeProducto = existeProducto(producto);
+        boolean existeProducto = false;
+        try {
+            existeProducto = existeProducto(producto);
+        } catch (NullPointerException e) {
+            reportarError(e.getMessage(), null);
+        }
 
         if (existeProducto)                                                     // Comprueba si el producto está catalogado
             stock.remove(producto.getIdentificador().valorDe());                // Elimina el producto del inventario
@@ -69,16 +79,21 @@ public class GestorStock {
      * @return Booleano indicando si se ha podido enviar el pedido, bien sea por falta de stock o porque el producto no se ha encontrado
      */
     public boolean venderProducto(int cantidad, Producto producto) {
-        if (existeProducto(producto)) {                                         // Comprueba que el producto exista en inventario
-            if (producto.pedir(cantidad)) {                                     // Intenta realiza el pedido
-                return true;                                                    // Venta completada
+        try {
+            if (existeProducto(producto)) {                                     // Comprueba que el producto exista en inventario
+                if (producto.pedir(cantidad)) {                                 // Intenta realiza el pedido
+                    return true;                                                // Venta completada
+                } else {
+                    reportarError("ERROR al vender producto. Cantidad errónea o no hay stock suficiente", producto);
+                    return false;                                               // Error en la venta
+                }
             } else {
-                reportarError("ERROR al vender producto. Cantidad errónea o no hay stock suficiente", producto);
-                return false;                                                   // Error en la venta
+                reportarError("ERROR al vender producto. No existe en el inventario", producto);
+                return false;                                                   // El producto no está catalogado
             }
-        } else {
-            reportarError("ERROR al vender producto. No existe en el inventario", producto);
-            return false;                                                       // El producto no está catalogado
+        } catch (NullPointerException e) {
+            reportarError(e.getMessage(), null);
+            return false;
         }
     }
 
@@ -88,15 +103,20 @@ public class GestorStock {
      * @param producto   Producto al que añadir un comentario
      * @param comentario Objeto de la clase Comentario que añadir al producto indicado
      * @return Booleano indicando si se ha podido añadir el comentario, bien porque el producto no existía o
-     *      porque el comentario no es válido
+     * porque el comentario no es válido
      */
     public boolean comentarProducto(Producto producto, Comentario comentario) {
         if (existeProducto(producto)) {                                         // Comprueba que el producto exista en inventario
-            if (producto.comentar(comentario)) {                                // Intenta publicar el comentario
-                return true;                                                    // El comentario fue publicado
-            } else {
-                reportarError("ERROR al publicar comentario. El autor ya ha publicado un comentario", producto);
-                return false;                                                   // Error en la publicación
+            try {
+                if (producto.comentar(comentario)) {                            // Intenta publicar el comentario
+                    return true;                                                // El comentario fue publicado
+                } else {
+                    reportarError("ERROR al publicar comentario. El autor ya ha publicado un comentario", producto);
+                    return false;                                               // Error en la publicación
+                }
+            } catch (NullPointerException e) {
+                reportarError(e.getMessage(), null);
+                return false;
             }
         } else {
             reportarError("ERROR al publicar comentario. El producto no existe en el inventario", producto);
@@ -109,8 +129,11 @@ public class GestorStock {
      *
      * @param producto Producto a comprobar su existencia
      * @return Booleano indicando si existía o no el producto en el inventario
+     * @throws NullPointerException Si el producto es nulo
      */
-    private boolean existeProducto(Producto producto) {
+    private boolean existeProducto(Producto producto) throws NullPointerException {
+        if (producto == null) throw new NullPointerException("Producto nulo");
+
         return existeProducto(producto.getIdentificador());
     }
 
@@ -119,8 +142,11 @@ public class GestorStock {
      *
      * @param identificador Identificador del producto a comprobar su existencia
      * @return Booleano indicando si existía o no el producto en el inventario
+     * @throws NullPointerException Si el identificador es nulo
      */
-    private boolean existeProducto(Identificador identificador) {
+    private boolean existeProducto(Identificador identificador) throws NullPointerException {
+        if (identificador == null) throw new NullPointerException("Identificador nulo");
+
         return stock.containsKey(identificador.valorDe());
     }
 
@@ -131,12 +157,17 @@ public class GestorStock {
      * @return Producto buscado. En caso de no encontrarlo devuelve el valor null
      */
     public Producto recuperarProducto(Identificador identificador) {
-        if (existeProducto(identificador)) {                                    // Comprueba que el producto exista en inventaio
-            return stock.get(identificador.valorDe());                          // Devuelve el producto buscado
-        } else {
-            reportarError("ERROR al recuperar un producto. " +
-                    "El identificador \"" + identificador + "\" no está asociado a ningún producto", null);
-            return null;                                                        // El producto no está catalogado
+        try {
+            if (existeProducto(identificador)) {                                    // Comprueba que el producto exista en inventaio
+                return stock.get(identificador.valorDe());                          // Devuelve el producto buscado
+            } else {
+                reportarError("ERROR al recuperar un producto. " +
+                        "El identificador \"" + identificador + "\" no está asociado a ningún producto", null);
+                return null;                                                        // El producto no está catalogado
+            }
+        } catch (NullPointerException e) {
+            reportarError(e.getMessage(), null);
+            return null;
         }
     }
 

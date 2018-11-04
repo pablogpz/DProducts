@@ -31,12 +31,32 @@ public class Identificador {
     }
 
     /**
+     * Constructor parametrizado de la clase. Genera un identificador a partir de una cadena identificadora existente
+     *
+     * @param cadena Cadena identificadora
+     */
+    private Identificador(String cadena) {
+        valor = cadena;
+    }
+
+    /**
      * Constructor por copia de la clase. Genera un nuevo objeto Identificador a partir del valor de otro
      *
      * @param identificador Objeto Identificador a clonar
      */
     public Identificador(Identificador identificador) {
         valor = identificador.valorDe();
+    }
+
+    /**
+     * Genera una nueva instancia de la clase que representa el identificador equivalente a la cadena identificadora
+     * pasada por parámetro. Útil para recuperar productos almacenados en el inventario de forma anónima
+     *
+     * @param cadena Cadena identificadora que representa el valor de un identificador
+     * @return Identificador equivalente
+     */
+    public static Identificador identificadorEquivalente(String cadena) {
+        return new Identificador(cadena);
     }
 
     /**
