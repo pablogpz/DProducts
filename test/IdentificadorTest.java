@@ -1,3 +1,4 @@
+import Identificadores.Identificador;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -40,12 +41,4 @@ public class IdentificadorTest {
         assertEquals("XE", identificador.valorDe());
     }
 
-    /**
-     * Testeo del método mutador 'incrementar()'
-     */
-    @Test
-    public void incrementar() {
-        identificador.incrementar(1);
-        assertEquals("XX", identificador.valorDe());
-    }
 }

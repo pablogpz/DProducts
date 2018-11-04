@@ -1,3 +1,4 @@
+import Identificadores.GeneradorIdentificador;
 import org.junit.BeforeClass;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
