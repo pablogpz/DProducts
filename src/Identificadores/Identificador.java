@@ -1,4 +1,7 @@
+package Identificadores;
+
 import java.util.Arrays;
+import java.util.Objects;
 import java.util.Stack;
 
 /**
@@ -50,7 +53,7 @@ public class Identificador {
      *
      * @param incremento Entero en el que incrementar el valor del identificador
      */
-    public void incrementar(int incremento) {
+    void incrementar(int incremento) {
         valor = aCadena(aDecimal() + incremento);               // Incrementa el valor decimal equivalente al identificador y lo reconvierte
     }
 
@@ -98,5 +101,19 @@ public class Identificador {
         }
 
         return identificadorConvertido.toString();
+    }
+
+    @Override
+    public boolean equals(Object identificador) {
+        Identificador identificadorCasteado = (Identificador) identificador;
+
+        if (this == identificador) return true;
+        if (identificador == null || getClass() != identificador.getClass()) return false;
+        return valor.equals(identificadorCasteado.valorDe());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(valor);
     }
 }

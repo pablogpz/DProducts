@@ -1,3 +1,5 @@
+package Identificadores;
+
 /**
  * Clase que modeliza un generador de identificadores en secuencia consecutiva. Permite la generación de identificadores
  * únicos en el ámbito de ejecución del programa. Para garantizar la unicidad de los identificadores se ha implementado

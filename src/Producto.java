@@ -1,3 +1,6 @@
+import Identificadores.GeneradorIdentificador;
+import Identificadores.Identificador;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -177,7 +180,8 @@ public class Producto {
 
         Iterator<Comentario> it = comentarios.iterator();
         while (it.hasNext() && !autorRepetido) {
-            if (it.next().getAutor().equals(comentario.getAutor()))     // Comprueba que no exista ya un comentario con el mismo autor
+            if (it.next().getAutor().getIdentificador().equals(
+                    comentario.getAutor().getIdentificador()))          // Comprueba que no exista ya un comentario con el mismo autor
                 autorRepetido = true;
         }
 
