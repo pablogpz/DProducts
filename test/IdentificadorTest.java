@@ -34,6 +34,16 @@ public class IdentificadorTest {
     }
 
     /**
+     * Testeo del método 'identificadorEquivalente()'. Comprueba que se generen instancias distintas, pero con
+     * cadenas identificadores equivalentes
+     */
+    @Test
+    public void identificadorEquivalente() {
+        assertNotSame(identificador, Identificador.identificadorEquivalente("XE"));
+        assertEquals(identificador, Identificador.identificadorEquivalente("XE"));
+    }
+
+    /**
      * Testeo del método accesor del atributo 'valor'
      */
     @Test
