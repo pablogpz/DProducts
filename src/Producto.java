@@ -1,3 +1,6 @@
+import Identificadores.GeneradorIdentificador;
+import Identificadores.Identificador;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
@@ -177,7 +180,8 @@ public class Producto {
 
         Iterator<Comentario> it = comentarios.iterator();
         while (it.hasNext() && !autorRepetido) {
-            if (it.next().getAutor().equals(comentario.getAutor()))     // Comprueba que no exista ya un comentario con el mismo autor
+            if (it.next().getAutor().getIdentificador().equals(
+                    comentario.getAutor().getIdentificador()))          // Comprueba que no exista ya un comentario con el mismo autor
                 autorRepetido = true;
         }
 
@@ -212,13 +216,23 @@ public class Producto {
                 getPrioridad().toString() + "\n\tFecha de lanzamiento : " + simpleDateFormat.format(getFechaLanzamiento().getTime()) +
                 "\n\tEstado : " + estado + "\n\tComentarios : \n";
 
-        // Adjunta los detalles de todos los comentarios publicados sobre el producto
-        for (Comentario comentario : comentarios) {
-            detalles += "\n===============================================================\n";
-            detalles += comentario.comentarioCompleto();
-        }
+        return detalles + recuperarComentarios();
+    }
 
-        return detalles;
+    /**
+     * Devuelve los comentarios publicados sobre el producto
+     *
+     * @return Cadena formateada con todos los comentarios sobre el producto
+     */
+    private String recuperarComentarios() {
+        String decorador = "\n===============================================================\n";
+        String comentarios = "";
+
+        // Adjunta los detalles de todos los comentarios publicados sobre el producto
+        for (Comentario comentario : this.comentarios)
+            comentarios += decorador + comentario.comentarioCompleto();
+
+        return comentarios;
     }
 
 }

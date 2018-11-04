@@ -1,3 +1,5 @@
+package Identificadores;
+
 /**
  * Clase que modeliza un generador de identificadores en secuencia consecutiva. Permite la generación de identificadores
  * únicos en el ámbito de ejecución del programa. Para garantizar la unicidad de los identificadores se ha implementado
@@ -58,10 +60,10 @@ public class GeneradorIdentificador {
      * @return Identificador actual de la secuencia
      */
     public Identificador generarIdentificador() {
-        Identificador sigIdentifiacor = new Identificador(valorActual);         // Identificador actual de la secuencia
+        Identificador sigIdentificador = new Identificador(valorActual);        // Identificador actual de la secuencia
         valorActual.incrementar(incremento);                                    // Nuevo identificador de la secuencia
 
-        return sigIdentifiacor;
+        return sigIdentificador;
     }
 
 }
