@@ -27,6 +27,20 @@ public class ProductoTest {
     }
 
     /**
+     * Testea que se produzcan las excepciones de argumentos ilegales al intentar instancias productos con valores
+     * negativos
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void comprobarArgumentos() {
+        producto = new Producto("Nombre", 0, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
+                new GregorianCalendar(2011, 3, 26), true);
+        producto = new Producto("Nombre", -1, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
+                new GregorianCalendar(2011, 3, 26), true);
+        producto = new Producto("Nombre", 1, -1, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
+                new GregorianCalendar(2011, 3, 26), true);
+    }
+
+    /**
      * Testeo del método accesor del atribtuo 'nombre'
      */
     @Test
@@ -93,16 +107,16 @@ public class ProductoTest {
     /**
      * Testeo del método 'pedir()'. Comprueba que solo se puedan pedir cantidades positivas distintas de 0
      * y que haya stock suficiente para cubrirlo. También comprueba que se reponga el stock si su cantidad actual
-     * es menor que el stock mínimo
+     * es menor o igual que el stock mínimo
      */
     @Test
     public void pedir() {
         assertFalse(producto.pedir(-1));
         assertFalse(producto.pedir(9999));
-        assertTrue(producto.pedir(5));
-        assertEquals(25, producto.getCantidad());
+        assertTrue(producto.pedir(4));
+        assertEquals(26, producto.getCantidad());
         assertTrue(producto.pedir(1));
-        assertEquals(99, producto.getCantidad());
+        assertEquals(100, producto.getCantidad());
     }
 
     /**
@@ -134,7 +148,7 @@ public class ProductoTest {
     @Test
     public void detalles() {
         assertEquals("PRODUCTO\tNombre-ACER\n" +
-                "\tIdentificador : X5PK7\n" +
+                "\tIdentificador : X5PKB\n" +
                 "\tCantidad en stock : 30\n" +
                 "\tCantidad en stock mínima : 25\n" +
                 "\tPrioridad de reabastecimiento : MEDIA\n" +

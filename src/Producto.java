@@ -48,7 +48,11 @@ public class Producto {
      * @param esReacondicionado Estado actual del producto. Representa si es de segunda mano o nuevo
      */
     public Producto(String nombre, int cantidad, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad,
-                    GregorianCalendar fechaLanzamiento, boolean esReacondicionado) {
+                    GregorianCalendar fechaLanzamiento, boolean esReacondicionado) throws IllegalArgumentException {
+        if (cantidad <= 0 || stockMinimo < 0) throw new
+                IllegalArgumentException("Parámetros inválidos. Compruebe que 'cantidad' y 'stockMinimo' sean valores positivos" +
+                " y mayores que 0 (stockMinimo sí puede ser 0)");
+
         this.nombre = nombre;
         this.cantidad = cantidad;
         this.stockMinimo = stockMinimo;
@@ -143,7 +147,7 @@ public class Producto {
         // Comprueba que la cantidad sea positiva mayor que 0 y que el pedido no supere el stock actual
         if (haySuficienteStock(cantidad)) {
             this.cantidad -= cantidad;
-            if (this.cantidad < stockMinimo)                            // Comprueba si hay que reponer el stock
+            if (this.cantidad <= stockMinimo)                           // Comprueba si hay que reponer el stock
                 reponerStock();
         } else {
             return false;                                               // No se pudo servir el pedido
@@ -201,7 +205,7 @@ public class Producto {
      * @return Booleano indicando si hay suficiente stock
      */
     public boolean haySuficienteStock(int cantidad) {
-        return cantidad > 0 && this.cantidad - cantidad > 0;
+        return cantidad > 0 && this.cantidad - cantidad >= 0;
     }
 
     /**
