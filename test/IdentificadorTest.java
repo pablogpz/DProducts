@@ -19,11 +19,6 @@ public class IdentificadorTest {
     // Fixture de objetos Identificador de prueba
     private static Identificador identificador;
 
-    /**
-     * Constructor por defecto
-     */
-    public IdentificadorTest() {}
-
     @BeforeClass
     public static void setUp() {
         identificador = new Identificador(36);

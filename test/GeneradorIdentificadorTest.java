@@ -20,11 +20,6 @@ public class GeneradorIdentificadorTest {
     // Instancia Singleton de la clase GeneradorIdentificador
     private static GeneradorIdentificador generadorIdentificador;
 
-    /**
-     * Constructor por defecto
-     */
-    public GeneradorIdentificadorTest() {}
-
     @BeforeClass
     public static void setUp() {
         generadorIdentificador = GeneradorIdentificador.recuperarInstancia();
