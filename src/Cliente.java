@@ -88,11 +88,17 @@ public class Cliente {
      * @return Booleano indicando si se ha realizado correctamente la operación.
      */
     public boolean agregarFavorito(Producto producto, String alias) {
-        if (agregarFavorito(producto.getIdentificador(), alias)) {
-            informarUsuario("El producto fue añadido a favortios con alias \"" + alias + "\"", producto);
-            return true;
+        if (!existeProductoFavorito(producto)) {                        // Comprueba si el producto ya estaba agregado a favoritos
+            if (agregarFavorito(producto.getIdentificador(), alias)) {
+                informarUsuario("El producto fue añadido a favortios con alias \"" + alias + "\"", producto);
+                return true;
+            } else {
+                return false;
+            }
         } else {
-            return false;
+            informarUsuario("ERROR al añadio un producto a favoritos. El producto ya está en su colección de favoritos",
+                    producto);
+            return false;                                               // El producto ya estaba en favoritos
         }
     }
 
@@ -106,7 +112,7 @@ public class Cliente {
      * @return Booleano indicando si se ha realizado correctamente la operación
      */
     public boolean agregarFavorito(Identificador identificador, String alias) {
-        if (existeFavorito(alias)) {                                    // Comprueba si el alias ya está en uso
+        if (existeAliasFavorito(alias)) {                               // Comprueba si el alias ya está en uso
             informarUsuario("ERROR al añadir un producto favorito. El alias \"" + alias + "\" ya está en uso");
             return false;                                               // El alias está en uso
         } else {
@@ -127,7 +133,7 @@ public class Cliente {
      * @return Booleano si se ha podido eliminar el producto o no. Devuelve false si el producto no existe en la colección de favoritos
      */
     public boolean eliminarFavorito(String alias) {
-        if (existeFavorito(alias)) {
+        if (existeAliasFavorito(alias)) {
             productosFavoritos.remove(alias);
             informarUsuario("El producto con alias \"" + alias +
                     "\" fue eliminado correctamente de la colección de productos favoritos");
@@ -147,7 +153,7 @@ public class Cliente {
      *      de favoritos, o si no hay suficiente cantidad en stock del producto para satisfacer el pedido (en cuyo caso no realiza el pedido)
      */
     public boolean pedirProducto(String alias, int cantidad) {
-        if (existeFavorito(alias)) {                                    // Comprueba si existe el producto favorito
+        if (existeAliasFavorito(alias)) {                               // Comprueba si existe el producto favorito
             Producto producto = recuperarFavorito(alias);
             if (tienda.venderProducto(cantidad, producto)) {            // Intenta despachar el pedido
                 informarUsuario("Su pedido ha sido procesado. Cantidad : " + cantidad + " ud(s).", producto);
@@ -200,7 +206,7 @@ public class Cliente {
      *      puntuación no es válida
      */
     public boolean comentarProducto(String alias, String texto, int puntuacion) {
-        if (existeFavorito(alias)) {                                    // Comprueba si existe el producto favorito
+        if (existeAliasFavorito(alias)) {                               // Comprueba si existe el producto favorito
             Producto producto = recuperarFavorito(alias);
             try {
                 if (tienda.comentarProducto(producto, new Comentario(this, texto, puntuacion))) {
@@ -220,13 +226,23 @@ public class Cliente {
     }
 
     /**
-     * Comprueba si existe un determinado alias, y por tanto un producto favorito, en la colección de productos favoritos
+     * Comprueba si existe un determinado alias en la colección de productos favoritos
      *
      * @param alias Alias con el que se guardó el producto favorito
      * @return Booleano indicando si el alias pertenece a algún producto favorito
      */
-    private boolean existeFavorito(String alias) {
+    private boolean existeAliasFavorito(String alias) {
         return productosFavoritos.containsKey(alias);
+    }
+
+    /**
+     * Comprueba si existe un determinado producto en la colección de productos favoritos
+     *
+     * @param producto Producto que consultar si está añadido como favorito
+     * @return Booleano indicando si el producto está en la colección de favoritos
+     */
+    private boolean existeProductoFavorito(Producto producto) {
+        return productosFavoritos.containsValue(producto);
     }
 
     /**
@@ -237,7 +253,7 @@ public class Cliente {
      *      de productos favoritos
      */
     private Producto recuperarFavorito(String alias) {
-        if (existeFavorito(alias)) {                                    // Comprueba si el alias está asociado a algún producto
+        if (existeAliasFavorito(alias)) {                               // Comprueba si el alias está asociado a algún producto
             return productosFavoritos.get(alias);                       // Devuelve el producto favorito
         } else {
             informarUsuario("ERROR al recuperar un producto favorito. " +
