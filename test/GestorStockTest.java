@@ -1,9 +1,11 @@
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import java.util.GregorianCalendar;
 
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 
 /**
  * CLASE DE TESTEO de la clase GestorStock.
@@ -15,39 +17,82 @@ import static org.junit.Assert.assertSame;
  * @grupo : Wild True
  */
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class GestorStockTest {
 
     // Instancia Singleton de la clase GestorStock
     private static GestorStock gestorStock;
 
-    // Fixture de productos de pruebs
+    // Fixture de productos de prueba
     private static Producto producto;
+    private static Producto productoNoInventario;
 
     @BeforeClass
-    public void setUp() {
+    public static void setUp() {
         gestorStock = GestorStock.recuperarInstancia();
         producto = new Producto("Nombre", 30, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
                 new GregorianCalendar(2011, 3, 26), true);
+        productoNoInventario = new Producto("Nombre", 30, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
+                new GregorianCalendar(2011, 3, 26), true);
     }
 
+    /**
+     * Testeo del método 'agregarProducto()'. Comprueba que se pueda agregar un producto (no nulo)
+     * , pero no más de una vez
+     */
     @Test
-    public void agregarProducto() {
+    public void aAgregarProducto() {
+        assertTrue(gestorStock.agregarProducto(producto));
+        assertFalse(gestorStock.agregarProducto(producto));
+        assertFalse(gestorStock.agregarProducto(null));
     }
 
+    /**
+     * Testeo del método 'eliminarProducto()'. Comprueba que solo se pueden eliminar productos (no nulos)
+     * que están en el inventario
+     */
     @Test
-    public void eliminarProducto() {
+    public void eEliminarProducto() {
+        assertTrue(gestorStock.eliminarProducto(producto));
+        assertFalse(gestorStock.eliminarProducto(producto));
+        assertFalse(gestorStock.eliminarProducto(productoNoInventario));
+        assertFalse(gestorStock.eliminarProducto(null));
     }
 
+    /**
+     * Testeo del método 'venderProduto()'. Comprueba que solo se despachen pedidos de productos (no nulos)
+     * en el inventario. No se prueba la validez del pedido, queda delegado a la clase Producto
+     */
     @Test
-    public void venderProducto() {
+    public void bVenderProducto() {
+        assertTrue(gestorStock.venderProducto(producto, 1));
+        assertFalse(gestorStock.venderProducto(productoNoInventario, 1));
+        assertFalse(gestorStock.venderProducto(null, 1));
     }
 
+    /**
+     * Testeo del método 'comentarProducto()'. Comprueba que solo se puedan comentar (comentarios no nulos) productos
+     * (no nulos) del inventario y no más de una vez
+     */
     @Test
-    public void comentarProducto() {
+    public void cComentarProducto() {
+        Comentario comentario = new Comentario(new Cliente(
+                "Nombre", 18, "Localidad"), "Test", 5);
+
+        assertTrue(gestorStock.comentarProducto(producto, comentario));
+        assertFalse(gestorStock.comentarProducto(producto, comentario));
+        assertFalse(gestorStock.comentarProducto(productoNoInventario, comentario));
+        assertFalse(gestorStock.comentarProducto(null, comentario));
+        assertFalse(gestorStock.comentarProducto(null, null));
     }
 
+    /**
+     * Testeo del método 'recuperarProducto()'. Comprueba que solo se puedan recuperar productos del inventario
+     */
     @Test
-    public void recuperarProducto() {
+    public void dRecuperarProducto() {
+        assertEquals(producto, gestorStock.recuperarProducto(producto.getIdentificador()));
+        assertNotEquals(productoNoInventario, gestorStock.recuperarProducto(productoNoInventario.getIdentificador()));
     }
 
     /**
@@ -59,7 +104,12 @@ public class GestorStockTest {
         assertSame(gestorStock, GestorStock.recuperarInstancia());
     }
 
+    /**
+     * Testea el método 'mostrarDetallesStock()'. Se hace una comprobación visual la salida por consola
+     */
     @Test
     public void mostrarDetallesStock() {
+        gestorStock.mostrarDetallesStock();
     }
+
 }

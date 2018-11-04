@@ -142,4 +142,5 @@ public class ProductoTest {
                 "\tEstado : Reacondicionado\n" +
                 "\tComentarios : \n", producto.detalles());
     }
+
 }

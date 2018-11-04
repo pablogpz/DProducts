@@ -34,17 +34,17 @@ public class GestorStock {
      * Devuelve falso si se intentan insertar productos repetidos
      */
     public boolean agregarProducto(Producto producto) {
-        boolean existeProducto = false;
+        boolean existeProducto = true;
         try {
             existeProducto = existeProducto(producto);
+
+            if (!existeProducto)                                                // Comprueba que no exista ya el producto
+                stock.put(producto.getIdentificador().valorDe(), producto);     // Agrega el prodcuto al inventario
+            else
+                reportarError("ERROR al agregar el producto. Ya existe en inventario", producto);
         } catch (NullPointerException e) {
             reportarError(e.getMessage(), null);
         }
-
-        if (!existeProducto)                                                    // Comprueba que no exista ya el producto
-            stock.put(producto.getIdentificador().valorDe(), producto);         // Agrega el prodcuto al inventario
-        else
-            reportarError("ERROR al agregar el producto. Ya existe en inventario", producto);
 
         return !existeProducto;
     }
@@ -59,14 +59,14 @@ public class GestorStock {
         boolean existeProducto = false;
         try {
             existeProducto = existeProducto(producto);
+
+            if (existeProducto)                                                 // Comprueba si el producto está catalogado
+                stock.remove(producto.getIdentificador().valorDe());            // Elimina el producto del inventario
+            else
+                reportarError("ERROR al eliminar producto. No existe en el inventario", producto);
         } catch (NullPointerException e) {
             reportarError(e.getMessage(), null);
         }
-
-        if (existeProducto)                                                     // Comprueba si el producto está catalogado
-            stock.remove(producto.getIdentificador().valorDe());                // Elimina el producto del inventario
-        else
-            reportarError("ERROR al eliminar producto. No existe en el inventario", producto);
 
         return existeProducto;
     }
@@ -78,7 +78,7 @@ public class GestorStock {
      * @param producto Producto del que realizar el pedido
      * @return Booleano indicando si se ha podido enviar el pedido, bien sea por falta de stock o porque el producto no se ha encontrado
      */
-    public boolean venderProducto(int cantidad, Producto producto) {
+    public boolean venderProducto(Producto producto, int cantidad) {
         try {
             if (existeProducto(producto)) {                                     // Comprueba que el producto exista en inventario
                 if (producto.pedir(cantidad)) {                                 // Intenta realiza el pedido
@@ -106,21 +106,21 @@ public class GestorStock {
      * porque el comentario no es válido
      */
     public boolean comentarProducto(Producto producto, Comentario comentario) {
-        if (existeProducto(producto)) {                                         // Comprueba que el producto exista en inventario
-            try {
+        try {
+            if (existeProducto(producto)) {                                         // Comprueba que el producto exista en inventario
                 if (producto.comentar(comentario)) {                            // Intenta publicar el comentario
                     return true;                                                // El comentario fue publicado
                 } else {
                     reportarError("ERROR al publicar comentario. El autor ya ha publicado un comentario", producto);
                     return false;                                               // Error en la publicación
                 }
-            } catch (NullPointerException e) {
-                reportarError(e.getMessage(), null);
-                return false;
+            } else {
+                reportarError("ERROR al publicar comentario. El producto no existe en el inventario", producto);
+                return false;                                                       // El producto no está catalogado
             }
-        } else {
-            reportarError("ERROR al publicar comentario. El producto no existe en el inventario", producto);
-            return false;                                                       // El producto no está catalogado
+        } catch (NullPointerException e) {
+            reportarError(e.getMessage(), null);
+            return false;
         }
     }
 
@@ -162,7 +162,8 @@ public class GestorStock {
                 return stock.get(identificador.valorDe());                          // Devuelve el producto buscado
             } else {
                 reportarError("ERROR al recuperar un producto. " +
-                        "El identificador \"" + identificador + "\" no está asociado a ningún producto", null);
+                        "El identificador \"" + identificador.valorDe() +
+                        "\" no está asociado a ningún producto", null);
                 return null;                                                        // El producto no está catalogado
             }
         } catch (NullPointerException e) {

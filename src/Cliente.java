@@ -155,7 +155,7 @@ public class Cliente {
     public boolean pedirProducto(String alias, int cantidad) {
         if (existeAliasFavorito(alias)) {                               // Comprueba si existe el producto favorito
             Producto producto = recuperarFavorito(alias);
-            if (tienda.venderProducto(cantidad, producto)) {            // Intenta despachar el pedido
+            if (tienda.venderProducto(producto, cantidad)) {            // Intenta despachar el pedido
                 informarUsuario("Su pedido ha sido procesado. Cantidad : " + cantidad + " ud(s).", producto);
                 return true;                                            // Pedido despachado
             } else {
