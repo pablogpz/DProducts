@@ -88,17 +88,23 @@ public class Cliente {
      * @return Booleano indicando si se ha realizado correctamente la operación.
      */
     public boolean agregarFavorito(Producto producto, String alias) {
-        if (!existeProductoFavorito(producto)) {                        // Comprueba si el producto ya estaba agregado a favoritos
-            if (agregarFavorito(producto.getIdentificador(), alias)) {
-                informarUsuario("El producto fue añadido a favortios con alias \"" + alias + "\"", producto);
-                return true;
+        try {
+            // Comprueba si el producto ya estaba agregado a favoritos
+            if (!existeProductoFavorito(producto) && producto != null) {
+                if (agregarFavorito(producto.getIdentificador(), alias)) {
+                    informarUsuario("El producto fue añadido a favortios con alias \"" + alias + "\"", producto);
+                    return true;
+                } else {
+                    return false;
+                }
             } else {
-                return false;
+                informarUsuario("ERROR al añadir un producto a favoritos. El producto ya está en su colección de favoritos",
+                        producto);
+                return false;                                           // El producto ya estaba en favoritos
             }
-        } else {
-            informarUsuario("ERROR al añadio un producto a favoritos. El producto ya está en su colección de favoritos",
-                    producto);
-            return false;                                               // El producto ya estaba en favoritos
+        } catch (IllegalArgumentException e) {
+            informarUsuario(e.getMessage());
+            return false;
         }
     }
 
@@ -110,8 +116,11 @@ public class Cliente {
      * @param identificador Identificador del producto a añadir a la colección de favoritos
      * @param alias         Nombre con el que recordar el producto favorito
      * @return Booleano indicando si se ha realizado correctamente la operación
+     * @throws IllegalArgumentException Si el alias es nulo
      */
-    public boolean agregarFavorito(Identificador identificador, String alias) {
+    public boolean agregarFavorito(Identificador identificador, String alias) throws IllegalArgumentException {
+        if (alias == null) throw new IllegalArgumentException("Alias nulo");
+
         if (existeAliasFavorito(alias)) {                               // Comprueba si el alias ya está en uso
             informarUsuario("ERROR al añadir un producto favorito. El alias \"" + alias + "\" ya está en uso");
             return false;                                               // El alias está en uso
@@ -171,14 +180,19 @@ public class Cliente {
      * Realiza el pedido de una unidad de todos los productos favoritos
      *
      * @return Booleano indicando si se pudo realizar el pedido. Devuelve falso si alguno de los productos no se encuentra
-     * en stock y no se realiza el pedido de ningún producto
+     * en stock y no se realiza el pedido de ningún producto o si no hay ningún producto favorito agregado
      */
     public boolean pedirUnidadFavoritos() {
+        if (estaVacioFavoritos()) {                                     // Comprueba si hay algún producto favorito agregado
+            informarUsuario("ERROR al procesar el pedido de productos favoritos. La colección está vacía");
+            return false;
+        }
+
         Iterator<Producto> it = productosFavoritos.values().iterator();
         boolean faltaProducto = false;                                  // Bandera para indicar si servir el pedido
 
         while (it.hasNext() && !faltaProducto) {
-            if (!it.next().haySuficienteStock(1)) {              // Comprueba si ha en stock una unidad de cada producto
+            if (!it.next().haySuficienteStock(1)) {             // Comprueba si ha en stock una unidad de cada producto
                 faltaProducto = true;                                   // Existe suficiente stock de cada producto
             }
         }
@@ -190,6 +204,7 @@ public class Cliente {
         } else {
             for (String alias : productosFavoritos.keySet()) {
                 pedirProducto(alias, 1);                        // Realiza el pedido de todos los productos favoritos
+                informarUsuario("***********************************************");
             }
             return true;
         }
@@ -243,6 +258,15 @@ public class Cliente {
      */
     private boolean existeProductoFavorito(Producto producto) {
         return productosFavoritos.containsValue(producto);
+    }
+
+    /**
+     * Comprueba si la colección de productos favoritos contiene algún producto
+     *
+     * @return Booleano indicando si hay algún produto favorito agregado
+     */
+    private boolean estaVacioFavoritos() {
+        return productosFavoritos.isEmpty();
     }
 
     /**

@@ -52,7 +52,7 @@ public class GestorStockTest {
      * que están en el inventario
      */
     @Test
-    public void fEliminarProducto() {
+    public void eliminarProducto() {
         assertTrue(gestorStock.eliminarProducto(producto));
         assertFalse(gestorStock.eliminarProducto(producto));
         assertFalse(gestorStock.eliminarProducto(productoNoInventario));
