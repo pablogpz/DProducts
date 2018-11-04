@@ -88,7 +88,7 @@ public class Cliente {
      * @return Booleano indicando si se ha realizado correctamente la operación.
      */
     public boolean agregarFavorito(Producto producto, String alias) {
-        if (agregarFavorito(producto.getIdentificador().valorDe(), alias)) {
+        if (agregarFavorito(producto.getIdentificador(), alias)) {
             informarUsuario("El producto fue añadido a favortios con alias \"" + alias + "\"", producto);
             return true;
         } else {
@@ -105,7 +105,7 @@ public class Cliente {
      * @param alias         Nombre con el que recordar el producto favorito
      * @return Booleano indicando si se ha realizado correctamente la operación
      */
-    public boolean agregarFavorito(String identificador, String alias) {
+    public boolean agregarFavorito(Identificador identificador, String alias) {
         if (existeFavorito(alias)) {                                    // Comprueba si el alias ya está en uso
             informarUsuario("ERROR al añadir un producto favorito. El alias \"" + alias + "\" ya está en uso");
             return false;                                               // El alias está en uso

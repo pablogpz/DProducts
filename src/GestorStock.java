@@ -1,3 +1,5 @@
+import Identificadores.Identificador;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -103,39 +105,39 @@ public class GestorStock {
     }
 
     /**
-     * Recupera un producto de la colección de productos del inventario
-     *
-     * @param identificador Cadena que identifica de forma única un producto
-     * @return Producto buscado. En caso de no encontrarlo devuelve el valor null
-     */
-    public Producto recuperarProducto(String identificador) {
-        if (existeProducto(identificador)) {                                    // Comprueba que el producto exista en inventaio
-            return stock.get(identificador);                                    // Devuelve el producto buscado
-        } else {
-            reportarError("ERROR al recuperar un producto. " +
-                    "El identificador \"" + identificador + "\" no está asociado a ningún producto", null);
-            return null;                                                        // El producto no está catalogado
-        }
-    }
-
-    /**
      * Comprueba si existe un determinado producto catalogado en el inventario
      *
      * @param producto Producto a comprobar su existencia
      * @return Booleano indicando si existía o no el producto en el inventario
      */
     private boolean existeProducto(Producto producto) {
-        return existeProducto(producto.getIdentificador().valorDe());
+        return existeProducto(producto.getIdentificador());
     }
 
     /**
      * Comprueba si existe un determinado producto catalogado en el inventario
      *
-     * @param identificador Cadena identificadora del producto a comprobar su existencia
+     * @param identificador Identificador del producto a comprobar su existencia
      * @return Booleano indicando si existía o no el producto en el inventario
      */
-    private boolean existeProducto(String identificador) {
-        return stock.containsKey(identificador);
+    private boolean existeProducto(Identificador identificador) {
+        return stock.containsKey(identificador.valorDe());
+    }
+
+    /**
+     * Recupera un producto de la colección de productos del inventario
+     *
+     * @param identificador Identificador único del producto
+     * @return Producto buscado. En caso de no encontrarlo devuelve el valor null
+     */
+    public Producto recuperarProducto(Identificador identificador) {
+        if (existeProducto(identificador)) {                                    // Comprueba que el producto exista en inventaio
+            return stock.get(identificador.valorDe());                          // Devuelve el producto buscado
+        } else {
+            reportarError("ERROR al recuperar un producto. " +
+                    "El identificador \"" + identificador + "\" no está asociado a ningún producto", null);
+            return null;                                                        // El producto no está catalogado
+        }
     }
 
     /**
