@@ -36,21 +36,34 @@ public class ComentarioTest {
         comentario = new Comentario(cliente, "", 6);
     }
 
+    /**
+     * Testeo del método accesor del atributo 'autor'
+     */
     @Test
     public void getAutor() {
         assertSame(cliente, comentario.getAutor());
     }
 
+    /**
+     * Testeo del método accesor del atributo 'texto'
+     */
     @Test
     public void getTexto() {
         assertEquals("Test", comentario.getTexto());
     }
 
+    /**
+     * Testeo del método accesor del atributo 'puntuacion'
+     */
     @Test
     public void getPuntuacion() {
         assertEquals(5, comentario.getPuntuacion());
     }
 
+    /**
+     * Testeo del método 'comentarioCompleto()', que devuelve toda la información
+     * del comentario formateado
+     */
     @Test
     public void comentarioCompleto() {
         assertEquals("Autor : Nombre\n" +
