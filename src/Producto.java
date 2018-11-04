@@ -212,13 +212,23 @@ public class Producto {
                 getPrioridad().toString() + "\n\tFecha de lanzamiento : " + simpleDateFormat.format(getFechaLanzamiento().getTime()) +
                 "\n\tEstado : " + estado + "\n\tComentarios : \n";
 
-        // Adjunta los detalles de todos los comentarios publicados sobre el producto
-        for (Comentario comentario : comentarios) {
-            detalles += "\n===============================================================\n";
-            detalles += comentario.comentarioCompleto();
-        }
+        return detalles + recuperarComentarios();
+    }
 
-        return detalles;
+    /**
+     * Devuelve los comentarios publicados sobre el producto
+     *
+     * @return Cadena formateada con todos los comentarios sobre el producto
+     */
+    private String recuperarComentarios() {
+        String decorador = "\n===============================================================\n";
+        String comentarios = "";
+
+        // Adjunta los detalles de todos los comentarios publicados sobre el producto
+        for (Comentario comentario : this.comentarios)
+            comentarios += decorador + comentario.comentarioCompleto();
+
+        return comentarios;
     }
 
 }
