@@ -14,13 +14,19 @@ public class Comentario {
 
     /**
      * Constructor parametrizado de la clase. Genera un comentario a partir de un autor, un cuerpo del comentario y una puntuación.
-     * La puntuación debe estar entre 1 y 5 (ambos inclusive)
+     * La puntuación debe estar entre 1 y 5 (ambos inclusive) y el cuerpo del comentario no puede estar vacío
      *
      * @param autor      Nombre completo del cliente que publica el comentario
      * @param texto      Cuerpo del comentario
      * @param puntuacion Calificación del producto. Es un valor en el rango [1,5]
+     * @throws IllegalArgumentException Si cualquierda de los parámetros son inválidos
      */
-    public Comentario(Cliente autor, String texto, int puntuacion) {
+    public Comentario(Cliente autor, String texto, int puntuacion) throws IllegalArgumentException {
+        if (texto.replaceAll("\\s+", "").length() == 0 || puntuacion < 1 || puntuacion > 5)
+            throw new IllegalArgumentException("ERROR al publicar un comentario." +
+                    " Compruebe que el cuerpo del comentario contenga texto" +
+                    "y que la puntuación esté en el rango [1,5]");
+
         this.autor = autor;
         this.texto = texto;
         this.puntuacion = puntuacion;

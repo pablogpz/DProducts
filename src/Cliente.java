@@ -201,18 +201,16 @@ public class Cliente {
      */
     public boolean comentarProducto(String alias, String texto, int puntuacion) {
         if (existeFavorito(alias)) {                                    // Comprueba si existe el producto favorito
-            if (texto.replaceAll("\\s+","").length() > 0 && (puntuacion > 0 && puntuacion < 6)) {
-                Producto producto = recuperarFavorito(alias);
+            Producto producto = recuperarFavorito(alias);
+            try {
                 if (tienda.comentarProducto(producto, new Comentario(this, texto, puntuacion))) {
                     informarUsuario("Se ha publicado un comentario", producto);
                     return true;                                        // El comentario es válido y fue publicado
                 } else {
                     return false;                                       // El comentario no fue publicado
                 }
-            } else {
-                informarUsuario("ERROR al publicar un comentario. " +
-                        "Compruebe que el cuerpo del comentario contenga texto " +
-                        "y que la puntuación esté en el rango [1,5]");
+            } catch (IllegalArgumentException e){
+                informarUsuario(e.getMessage());
                 return false;                                           // El comentario no es válido
             }
         } else {
