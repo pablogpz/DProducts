@@ -25,7 +25,7 @@ public class Comentario {
         if (texto.replaceAll("\\s+", "").length() == 0 || puntuacion < 1 || puntuacion > 5)
             throw new IllegalArgumentException("ERROR al publicar un comentario." +
                     " Compruebe que el cuerpo del comentario contenga texto" +
-                    "y que la puntuación esté en el rango [1,5]");
+                    " y que la puntuación esté en el rango [1,5]");
 
         this.autor = autor;
         this.texto = texto;
