@@ -76,22 +76,6 @@ public class InventarioTest {
     }
 
     /**
-     * Testeo del método 'comentarProducto()'. Comprueba que solo se puedan comentar (comentarios no nulos) productos
-     * (no nulos) del inventario y no más de una vez
-     */
-    @Test
-    public void cComentarProducto() {
-        Comentario comentario = new Comentario(new Cliente(
-                "Nombre", 18, "Localidad"), "Test", 5);
-
-        assertTrue(inventario.comentarProducto(producto, comentario));
-        assertFalse(inventario.comentarProducto(producto, comentario));
-        assertFalse(inventario.comentarProducto(productoNoInventario, comentario));
-        assertFalse(inventario.comentarProducto(null, comentario));
-        assertFalse(inventario.comentarProducto(null, null));
-    }
-
-    /**
      * Testeo del método 'recuperarProducto()'. Comprueba que solo se puedan recuperar productos del inventario
      */
     @Test

@@ -226,7 +226,7 @@ public class Cliente {
         if (existeAliasFavorito(alias)) {                               // Comprueba si existe el producto favorito
             Producto producto = recuperarFavorito(alias);
             try {
-                if (tienda.comentarProducto(producto, new Comentario(this, texto, puntuacion))) {
+                if (producto.comentar(new Comentario(this, texto, puntuacion))) {
                     informarUsuario("Se ha publicado un comentario", producto);
                     return true;                                        // El comentario es válido y fue publicado
                 } else {

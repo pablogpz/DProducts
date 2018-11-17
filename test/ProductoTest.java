@@ -146,7 +146,7 @@ public class ProductoTest {
     @Test
     public void detalles() {
         assertEquals("PRODUCTO\tNombre-ACER\n" +
-                "\tIdentificador : X5PKB\n" +
+                "\tIdentificador : X5PK7\n" +
                 "\tCantidad en stock : 30\n" +
                 "\tCantidad en stock mínima : 25\n" +
                 "\tPrioridad de reabastecimiento : MEDIA\n" +

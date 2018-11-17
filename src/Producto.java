@@ -176,11 +176,8 @@ public class Producto {
      *
      * @param comentario Objeto de la clase Comentario que representa el comentario a añadir a la colección de comentarios
      * @return Booleano indicando si se ha podido publicar el comentario. Devuelve falso si el autor ya ha publicado un comentario
-     * @throws NullPointerException Si el comentario es nulo
      */
-    public boolean comentar(Comentario comentario) throws NullPointerException {
-        if (comentario == null) throw new NullPointerException("Comentario nulo");
-
+    public boolean comentar(Comentario comentario) {
         boolean autorRepetido = false;                                  // Bandera para comprobar la duplicidad de autores en comentarios
 
         Iterator<Comentario> it = comentarios.iterator();

@@ -101,33 +101,6 @@ public class Inventario {
     }
 
     /**
-     * Publica un comentario sobre un producto
-     *
-     * @param producto   Producto al que añadir un comentario
-     * @param comentario Objeto de la clase Comentario que añadir al producto indicado
-     * @return Booleano indicando si se ha podido añadir el comentario, bien porque el producto no existía o
-     * porque el comentario no es válido
-     */
-    public boolean comentarProducto(Producto producto, Comentario comentario) {
-        try {
-            if (existeProducto(producto)) {                                     // Comprueba que el producto exista en inventario
-                if (producto.comentar(comentario)) {                            // Intenta publicar el comentario
-                    return true;                                                // El comentario fue publicado
-                } else {
-                    reportarError("ERROR al publicar comentario. El autor ya ha publicado un comentario", producto);
-                    return false;                                               // Error en la publicación
-                }
-            } else {
-                reportarError("ERROR al publicar comentario. El producto no existe en el inventario", producto);
-                return false;                                                   // El producto no está catalogado
-            }
-        } catch (NullPointerException e) {
-            reportarError(e.getMessage(), null);
-            return false;
-        }
-    }
-
-    /**
      * Repone la cantidad en stock de un producto según su prioridad de reabastecimiento. Solo se permite el
      * reabastecimiento si su cantidad en stock actual está estrictamente por debajo del la cantidad en stock mínima
      *
