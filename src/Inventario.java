@@ -83,7 +83,7 @@ public class Inventario {
     public boolean venderProducto(Producto producto, int cantidad) {
         try {
             if (existeProducto(producto)) {                                     // Comprueba que el producto exista en inventario
-                if (producto.pedir(cantidad)) {                                 // Intenta realiza el pedido
+                if (producto.entregar(cantidad)) {                              // Intenta realiza el pedido
                     return true;                                                // Venta completada
                 } else {
                     reportarError("ERROR al vender producto. Cantidad errónea o no hay stock suficiente", producto);

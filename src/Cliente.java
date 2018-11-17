@@ -173,7 +173,7 @@ public class Cliente {
                 return false;                                           // No se pudo despachar el pedido
             }
         } else {
-            informarUsuario("ERROR al pedir un producto favorito. El alias \"" + alias + "\" no existe");
+            informarUsuario("ERROR al entregar un producto favorito. El alias \"" + alias + "\" no existe");
             return false;                                               // No existe el producto favorito
         }
     }

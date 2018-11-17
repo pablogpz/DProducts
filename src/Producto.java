@@ -145,7 +145,7 @@ public class Producto {
      * @param cantidad Número en el que decrementar el stock actual del producto. Solo se admiten valores positivos mayores que 0
      * @return Booleano indicando si se ha permitido o no el decremento del stock del producto
      */
-    public boolean pedir(int cantidad) {
+    public boolean entregar(int cantidad) {
         // Comprueba que la cantidad sea positiva mayor que 0 y que el pedido no supere el stock actual
         if (haySuficienteStock(cantidad)) {
             this.cantidad -= cantidad;
