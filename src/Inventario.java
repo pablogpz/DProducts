@@ -84,6 +84,7 @@ public class Inventario {
         try {
             if (existeProducto(producto)) {                                     // Comprueba que el producto exista en inventario
                 if (producto.entregar(cantidad)) {                              // Intenta realiza el pedido
+                    reponerStock(producto);                                     // Comprueba si es necesario reponer el stock
                     return true;                                                // Venta completada
                 } else {
                     reportarError("ERROR al vender producto. Cantidad errónea o no hay stock suficiente", producto);
@@ -125,6 +126,26 @@ public class Inventario {
             return false;
         }
     }
+
+    /**
+     * Repone la cantidad en stock de un producto según su prioridad de reabastecimiento. Solo se permite el
+     * reabastecimiento si su cantidad en stock actual está estrictamente por debajo del la cantidad en stock mínima
+     *
+     * @param producto Producto que reabastecer
+     */
+    private void reponerStock(Producto producto) {
+        switch (producto.getPrioridad()) {
+            case BAJA:
+                producto.incCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_BAJA);
+                break;
+            case MEDIA:
+                producto.incCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_MEDIA);
+                break;
+            case ALTA:
+                producto.incCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_ALTA);
+        }
+    }
+
 
     /**
      * Comprueba si existe un determinado producto catalogado en el inventario

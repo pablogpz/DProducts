@@ -108,17 +108,13 @@ public class ProductoTest {
 
     /**
      * Testeo del método 'entregar()'. Comprueba que solo se puedan entregar cantidades positivas distintas de 0
-     * y que haya stock suficiente para cubrirlo. También comprueba que se reponga el stock si su cantidad actual
-     * es menor o igual que el stock mínimo
+     * y que haya stock suficiente para cubrirlo
      */
     @Test
-    public void pedir() {
+    public void entregar() {
         assertFalse(producto.entregar(-1));
         assertFalse(producto.entregar(9999));
         assertTrue(producto.entregar(4));
-        assertEquals(26, producto.getCantidad());
-        assertTrue(producto.entregar(1));
-        assertEquals(100, producto.getCantidad());
     }
 
     /**

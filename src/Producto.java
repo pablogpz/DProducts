@@ -21,9 +21,9 @@ import java.util.List;
 public class Producto {
 
     // Valores de reabasteciemiento de productos según su prioridad
-    private static final int REABASTECIMIENTO_PRIORIDAD_BAJA = 25;
-    private static final int REABASTECIMIENTO_PRIORIDAD_MEDIA = 75;
-    private static final int REABASTECIMIENTO_PRIORIDAD_ALTA = 150;
+    public static final int REABASTECIMIENTO_PRIORIDAD_BAJA = 25;
+    public static final int REABASTECIMIENTO_PRIORIDAD_MEDIA = 75;
+    public static final int REABASTECIMIENTO_PRIORIDAD_ALTA = 150;
     private static final String FORMATO_FECHA = "YYYY/MM/dd";           // Formato en el que mostrar las fechas de lanzamiento
 
     private String nombre;                                              // Nombre comercial del producto
@@ -147,32 +147,28 @@ public class Producto {
      */
     public boolean entregar(int cantidad) {
         // Comprueba que la cantidad sea positiva mayor que 0 y que el pedido no supere el stock actual
-        if (haySuficienteStock(cantidad)) {
+        if (haySuficienteStock(cantidad))
             this.cantidad -= cantidad;
-            if (this.cantidad <= stockMinimo)                           // Comprueba si hay que reponer el stock
-                reponerStock();
-        } else {
+        else
             return false;                                               // No se pudo servir el pedido
-        }
 
         return true;
     }
 
     /**
-     * Repone la cantidad en stock del producto actual según su prioridad de reabastecimiento. Solo se permite el reabastecimiento
-     * si su cantidad en stock actual está estrictamente por debajo del la cantidad en stock mínima
+     * Método mutador del atributo 'cantidad'. Incrementa la cantidad del producto solo si está por
+     * debajo de su stock mínimo
+     *
+     * @param cantidad Incremento del stock del producto
+     * @return Booleano indicando si la operación se ha realizado
      */
-    private void reponerStock() {
-        switch (prioridad) {
-            case BAJA:
-                cantidad += REABASTECIMIENTO_PRIORIDAD_BAJA;
-                break;
-            case MEDIA:
-                cantidad += REABASTECIMIENTO_PRIORIDAD_MEDIA;
-                break;
-            case ALTA:
-                cantidad += REABASTECIMIENTO_PRIORIDAD_ALTA;
-        }
+    public boolean incCantidad(int cantidad) {
+        if (getCantidad() < getStockMinimo())
+            this.cantidad += cantidad;
+        else
+            return false;
+
+        return true;
     }
 
     /**

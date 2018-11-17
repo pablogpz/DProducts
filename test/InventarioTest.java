@@ -63,11 +63,14 @@ public class InventarioTest {
 
     /**
      * Testeo del método 'venderProduto()'. Comprueba que solo se despachen pedidos de productos (no nulos)
-     * en el inventario. No se prueba la validez del pedido, queda delegado a la clase Producto
+     * en el inventario. Comprueba que se reponga el stock del prduto si es necesario
      */
     @Test
     public void bVenderProducto() {
+        assertTrue(inventario.venderProducto(producto, 5));
+        assertEquals(25, producto.getCantidad());
         assertTrue(inventario.venderProducto(producto, 1));
+        assertEquals(99, producto.getCantidad());
         assertFalse(inventario.venderProducto(productoNoInventario, 1));
         assertFalse(inventario.venderProducto(null, 1));
     }
