@@ -24,7 +24,7 @@ public class Cliente {
     private Identificador identificador;                                // Identificador único del cliente
     private int edad;                                                   // Edad actual del cliente
     private String localidad;                                           // Localidad de residencia del cliente
-    private GestorStock tienda;                                         // Empresa a la que el cliente compra sus productos
+    private Inventario tienda;                                          // Empresa a la que el cliente compra sus productos
     private Map<String, Producto> productosFavoritos;                   // Colección de productos favoritos del cliente
 
     /**
@@ -40,7 +40,7 @@ public class Cliente {
         this.localidad = localidad;
 
         identificador = GeneradorIdentificador.recuperarInstancia().generarIdentificador();
-        tienda = GestorStock.recuperarInstancia();
+        tienda = Inventario.recuperarInstancia();
         productosFavoritos = new HashMap<>();
     }
 
@@ -83,7 +83,7 @@ public class Cliente {
     /**
      * Añade un producto a la colección de productos favoritos del cliente. No se puede añadir el mismo producto más de una vez
      * y el nombre con el que se guarda no puede estar repetido. El producto también debe estar en el inventario de la
-     * empresa asociada al GestorStock y no se puede añadir un producto a favoritos más de una vez
+     * empresa asociada al Inventario y no se puede añadir un producto a favoritos más de una vez
      *
      * @param producto Producto a añadir a la colección de favoritos
      * @param alias    Nombre con el que recordar el producto favorito
@@ -113,7 +113,7 @@ public class Cliente {
     /**
      * Añade un producto a la colección de productos favoritos del cliente. No se puede añadir el mismo producto más de una vez
      * y el nombre con el que se guarda no puede estar repetido. El producto también debe estar en el inventario de la empresa
-     * asociada al GestorStock
+     * asociada al Inventario
      *
      * @param identificador Identificador del producto a añadir a la colección de favoritos
      * @param alias         Nombre con el que recordar el producto favorito

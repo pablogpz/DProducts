@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
 import static org.junit.Assert.*;
 
 /**
- * CLASE DE TESTEO de la clase GestorStock.
+ * CLASE DE TESTEO de la clase Inventario.
  * <p>
  * Realiza las pruebas de todos los métodos públicos de la clase para todas
  * sus posibles entradas y estados
@@ -20,10 +20,10 @@ import static org.junit.Assert.*;
  */
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class GestorStockTest {
+public class InventarioTest {
 
-    // Instancia Singleton de la clase GestorStock
-    private static GestorStock gestorStock;
+    // Instancia Singleton de la clase Inventario
+    private static Inventario inventario;
 
     // Fixture de productos de prueba
     private static Producto producto;
@@ -31,7 +31,7 @@ public class GestorStockTest {
 
     @BeforeClass
     public static void setUp() {
-        gestorStock = GestorStock.recuperarInstancia();
+        inventario = Inventario.recuperarInstancia();
         producto = new Producto("Nombre", 30, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
                 new GregorianCalendar(2011, 3, 26), true);
         productoNoInventario = new Producto("Nombre", 30, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
@@ -44,9 +44,9 @@ public class GestorStockTest {
      */
     @Test
     public void aAgregarProducto() {
-        assertTrue(gestorStock.agregarProducto(producto));
-        assertFalse(gestorStock.agregarProducto(producto));
-        assertFalse(gestorStock.agregarProducto(null));
+        assertTrue(inventario.agregarProducto(producto));
+        assertFalse(inventario.agregarProducto(producto));
+        assertFalse(inventario.agregarProducto(null));
     }
 
     /**
@@ -55,10 +55,10 @@ public class GestorStockTest {
      */
     @Test
     public void eliminarProducto() {
-        assertTrue(gestorStock.eliminarProducto(producto));
-        assertFalse(gestorStock.eliminarProducto(producto));
-        assertFalse(gestorStock.eliminarProducto(productoNoInventario));
-        assertFalse(gestorStock.eliminarProducto(null));
+        assertTrue(inventario.eliminarProducto(producto));
+        assertFalse(inventario.eliminarProducto(producto));
+        assertFalse(inventario.eliminarProducto(productoNoInventario));
+        assertFalse(inventario.eliminarProducto(null));
     }
 
     /**
@@ -67,9 +67,9 @@ public class GestorStockTest {
      */
     @Test
     public void bVenderProducto() {
-        assertTrue(gestorStock.venderProducto(producto, 1));
-        assertFalse(gestorStock.venderProducto(productoNoInventario, 1));
-        assertFalse(gestorStock.venderProducto(null, 1));
+        assertTrue(inventario.venderProducto(producto, 1));
+        assertFalse(inventario.venderProducto(productoNoInventario, 1));
+        assertFalse(inventario.venderProducto(null, 1));
     }
 
     /**
@@ -81,11 +81,11 @@ public class GestorStockTest {
         Comentario comentario = new Comentario(new Cliente(
                 "Nombre", 18, "Localidad"), "Test", 5);
 
-        assertTrue(gestorStock.comentarProducto(producto, comentario));
-        assertFalse(gestorStock.comentarProducto(producto, comentario));
-        assertFalse(gestorStock.comentarProducto(productoNoInventario, comentario));
-        assertFalse(gestorStock.comentarProducto(null, comentario));
-        assertFalse(gestorStock.comentarProducto(null, null));
+        assertTrue(inventario.comentarProducto(producto, comentario));
+        assertFalse(inventario.comentarProducto(producto, comentario));
+        assertFalse(inventario.comentarProducto(productoNoInventario, comentario));
+        assertFalse(inventario.comentarProducto(null, comentario));
+        assertFalse(inventario.comentarProducto(null, null));
     }
 
     /**
@@ -93,9 +93,9 @@ public class GestorStockTest {
      */
     @Test
     public void dRecuperarProducto() {
-        assertEquals(producto, gestorStock.recuperarProducto(producto.getIdentificador()));
-        assertNotEquals(productoNoInventario, gestorStock.recuperarProducto(productoNoInventario.getIdentificador()));
-        assertNull(gestorStock.recuperarProducto(null));
+        assertEquals(producto, inventario.recuperarProducto(producto.getIdentificador()));
+        assertNotEquals(productoNoInventario, inventario.recuperarProducto(productoNoInventario.getIdentificador()));
+        assertNull(inventario.recuperarProducto(null));
     }
 
     /**
@@ -104,7 +104,7 @@ public class GestorStockTest {
      */
     @Test
     public void recuperarInstancia() {
-        assertSame(gestorStock, GestorStock.recuperarInstancia());
+        assertSame(inventario, Inventario.recuperarInstancia());
     }
 
     /**
@@ -112,7 +112,7 @@ public class GestorStockTest {
      */
     @Test
     public void eMostrarDetallesStock() {
-        gestorStock.mostrarDetallesStock();
+        inventario.mostrarDetallesStock();
     }
 
 }

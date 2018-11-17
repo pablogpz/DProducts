@@ -25,8 +25,8 @@ public class ClienteTest {
     // Fixture de objetos Cliente de prueba
     private static Cliente cliente;
 
-    // Instancia Singleton del GestorStock
-    private static GestorStock gestorStock;
+    // Instancia Singleton del Inventario
+    private static Inventario inventario;
 
     // Fixture de produtos de prueba
     private static Producto producto;
@@ -37,7 +37,7 @@ public class ClienteTest {
     @BeforeClass
     public static void setUp() {
         cliente = new Cliente("Nombre", 18, "Localidad");
-        gestorStock = GestorStock.recuperarInstancia();
+        inventario = Inventario.recuperarInstancia();
         producto = new Producto("Nombre", 30, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
                 new GregorianCalendar(2011, 3, 26), true);
         producto1 = new Producto("Nombre", 30, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
@@ -47,9 +47,9 @@ public class ClienteTest {
         productoNoFavorito = new Producto("Nombre", 30, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
                 new GregorianCalendar(2011, 3, 26), true);
 
-        gestorStock.agregarProducto(producto);
-        gestorStock.agregarProducto(producto1);
-        gestorStock.agregarProducto(productoNoFavorito);
+        inventario.agregarProducto(producto);
+        inventario.agregarProducto(producto1);
+        inventario.agregarProducto(productoNoFavorito);
     }
 
     /**

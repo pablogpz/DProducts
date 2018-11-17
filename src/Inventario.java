@@ -16,15 +16,15 @@ import java.util.Map;
  * Curso : 2º GIIIS (Grupo A)
  */
 
-public class GestorStock {
+public class Inventario {
 
-    private static final GestorStock instanciaActual = new GestorStock();       // Inicialización de la instancia Singleton
+    private static final Inventario instanciaActual = null;                     // Instancia Singleton del inventario
     private Map<String, Producto> stock;                                        // Colección de productos en el inventario
 
     /**
      * Constructor por defecto de la clase. Sigue el patrón de diseño Singleton
      */
-    private GestorStock() {
+    private Inventario() {
         stock = new HashMap<>();
     }
 
@@ -109,7 +109,7 @@ public class GestorStock {
      */
     public boolean comentarProducto(Producto producto, Comentario comentario) {
         try {
-            if (existeProducto(producto)) {                                         // Comprueba que el producto exista en inventario
+            if (existeProducto(producto)) {                                     // Comprueba que el producto exista en inventario
                 if (producto.comentar(comentario)) {                            // Intenta publicar el comentario
                     return true;                                                // El comentario fue publicado
                 } else {
@@ -118,7 +118,7 @@ public class GestorStock {
                 }
             } else {
                 reportarError("ERROR al publicar comentario. El producto no existe en el inventario", producto);
-                return false;                                                       // El producto no está catalogado
+                return false;                                                   // El producto no está catalogado
             }
         } catch (NullPointerException e) {
             reportarError(e.getMessage(), null);
@@ -160,13 +160,13 @@ public class GestorStock {
      */
     public Producto recuperarProducto(Identificador identificador) {
         try {
-            if (existeProducto(identificador)) {                                    // Comprueba que el producto exista en inventaio
-                return stock.get(identificador.valorDe());                          // Devuelve el producto buscado
+            if (existeProducto(identificador)) {                                // Comprueba que el producto exista en inventaio
+                return stock.get(identificador.valorDe());                      // Devuelve el producto buscado
             } else {
                 reportarError("ERROR al recuperar un producto. " +
                         "El identificador \"" + identificador.valorDe() +
                         "\" no está asociado a ningún producto", null);
-                return null;                                                        // El producto no está catalogado
+                return null;                                                    // El producto no está catalogado
             }
         } catch (NullPointerException e) {
             reportarError(e.getMessage(), null);
@@ -175,16 +175,16 @@ public class GestorStock {
     }
 
     /**
-     * Devuelve la instancia del GestorStock asociada a todos los clientes. Sigue el patrón de diseño Singleton
+     * Devuelve la instancia del Inventario asociada a todos los clientes. Sigue el patrón de diseño Singleton
      *
-     * @return Única instancia de GestorStock existente
+     * @return Única instancia de Inventario existente
      */
-    public static GestorStock recuperarInstancia() {
+    public static Inventario recuperarInstancia() {
         return instanciaActual;
     }
 
     /**
-     * Reporta un error en alguna operación del GestorStock
+     * Reporta un error en alguna operación del Inventario
      *
      * @param error               Cadena con información en relación al error
      * @param productoRelacionado Instancia de la clase Producto que generó el error
