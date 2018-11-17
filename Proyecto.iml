@@ -5,7 +5,9 @@
     <content url="file://$MODULE_DIR$">
       <sourceFolder url="file://$MODULE_DIR$/src" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/test" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/ec1_wildTrue" />
+      <excludeFolder url="file://$MODULE_DIR$/EC1_WildTrue" />
+      <excludeFolder url="file://$MODULE_DIR$/Proyecto.vpdm" />
+      <excludeFolder url="file://$MODULE_DIR$/vpproject" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
