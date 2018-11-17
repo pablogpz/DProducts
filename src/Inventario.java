@@ -18,7 +18,7 @@ import java.util.Map;
 
 public class Inventario {
 
-    private static final Inventario instanciaActual = null;                     // Instancia Singleton del inventario
+    private static Inventario instanciaActual = null;                           // Instancia Singleton del inventario
     private Map<String, Producto> stock;                                        // Colección de productos en el inventario
 
     /**
@@ -180,6 +180,9 @@ public class Inventario {
      * @return Única instancia de Inventario existente
      */
     public static Inventario recuperarInstancia() {
+        if (instanciaActual == null)
+            instanciaActual = new Inventario();
+
         return instanciaActual;
     }
 

@@ -4,7 +4,7 @@ package Identificadores;
  * Clase que modeliza un generador de identificadores en secuencia consecutiva. Permite la generación de identificadores
  * únicos en el ámbito de ejecución del programa. Para garantizar la unicidad de los identificadores se ha implementado
  * según el patrón de diseño Singleton para que solo exista una única instancia generando identificadores.
- *
+ * <p>
  * Por ejemplo, para un identificador de longitud 5, existen 36^5 = 60.466.176 identificadores distintos
  *
  * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
@@ -18,9 +18,9 @@ public class GeneradorIdentificador {
     private static final int VALOR_BASE_GENERADOR_IDENTIFICADOR = 2085497;      // Valor base estándar
     private static final int INCREMENTO_GENERADOR_IDENTIFICADOR = 1;            // Incremento estándar
 
-    // Inicialización de la instancia Singleton
-    private static final GeneradorIdentificador instanciaActual =
-            new GeneradorIdentificador(VALOR_BASE_GENERADOR_IDENTIFICADOR, INCREMENTO_GENERADOR_IDENTIFICADOR);
+    // Instancia Singleton de la clase
+    private static GeneradorIdentificador instanciaActual = null;
+
     private Identificador valorBase;                                            // Identificador inicial de la secuencia
     private Identificador valorActual;                                          // Identificador actual de la secuancia sin utilizar
     private int incremento;                                                     // Incremento constante para generar el siguiente identificador
@@ -52,6 +52,9 @@ public class GeneradorIdentificador {
      * @return Única instancia de la clase GeneradorIdentificador
      */
     public static GeneradorIdentificador recuperarInstancia() {
+        if (instanciaActual == null)
+            instanciaActual = new GeneradorIdentificador(VALOR_BASE_GENERADOR_IDENTIFICADOR, INCREMENTO_GENERADOR_IDENTIFICADOR);
+
         return instanciaActual;
     }
 
