@@ -90,24 +90,28 @@ public class Cliente {
      * @return Booleano indicando si se ha realizado correctamente la operación.
      */
     public boolean agregarFavorito(Producto producto, String alias) {
-        try {
-            // Comprueba si el producto ya estaba agregado a favoritos
-            if (!existeProductoFavorito(producto) && producto != null) {
-                if (agregarFavorito(producto.getIdentificador(), alias)) {
-                    informarUsuario("El producto fue añadido a favortios con alias \"" + alias + "\"", producto);
-                    return true;
-                } else {
-                    return false;
-                }
-            } else {
-                informarUsuario("ERROR al añadir un producto a favoritos. El producto ya está en su colección de favoritos",
-                        producto);
-                return false;                                           // El producto ya estaba en favoritos
+        boolean fueAgregado = false;
+
+        // Comprueba si el producto ya estaba agregado a favoritos y no sea el producto "nulo" (válido en mapas)
+        if (!existeProductoFavorito(producto) && producto != null) {
+            try {
+                fueAgregado = agregarFavorito(producto.getIdentificador(), alias);
+            } catch (IllegalArgumentException e) {
+                informarUsuario(e.getMessage());
+                return false;
             }
-        } catch (IllegalArgumentException e) {
-            informarUsuario(e.getMessage());
-            return false;
+        } else {
+            informarUsuario("ERROR al añadir un producto a favoritos. El producto ya está en su colección de favoritos",
+                    producto);
+            return false;                                               // El producto ya estaba en favoritos
         }
+
+        if (fueAgregado)
+            informarUsuario("El producto fue añadido a favortios con alias \"" + alias + "\"", producto);
+        else
+            return false;                                               // El producto no era válido
+
+        return true;                                                    // Se añade el produto a favoritos
     }
 
     /**
@@ -125,16 +129,18 @@ public class Cliente {
 
         if (existeAliasFavorito(alias)) {                               // Comprueba si el alias ya está en uso
             informarUsuario("ERROR al añadir un producto favorito. El alias \"" + alias + "\" ya está en uso");
-            return false;                                               // El alias está en uso
         } else {
             Producto producto = tienda.recuperarProducto(identificador);
             if (producto != null) {                                     // Comprueba que el producto a añadir a favoritos exista en la empresa
                 productosFavoritos.put(alias, producto);
-                return true;                                            // Existe en el inventario de la empresa asociada
             } else {
                 return false;                                           // No existe en el inventario de la empresa asociada
             }
+
+            return true;                                                // Existe en el inventario de la empresa asociada
         }
+
+        return false;                                                   // El alias está en uso
     }
 
     /**
@@ -148,11 +154,12 @@ public class Cliente {
             productosFavoritos.remove(alias);
             informarUsuario("El producto con alias \"" + alias +
                     "\" fue eliminado correctamente de la colección de productos favoritos");
-            return true;
         } else {
             informarUsuario("ERROR al eliminar un producto favorito. El alias \"" + alias + "\" no existe");
             return false;
         }
+
+        return true;
     }
 
     /**
@@ -168,7 +175,6 @@ public class Cliente {
             Producto producto = recuperarFavorito(alias);
             if (tienda.venderProducto(producto, cantidad)) {            // Intenta despachar el pedido
                 informarUsuario("Su pedido ha sido procesado. Cantidad : " + cantidad + " ud(s).", producto);
-                return true;                                            // Pedido despachado
             } else {
                 return false;                                           // No se pudo despachar el pedido
             }
@@ -176,6 +182,8 @@ public class Cliente {
             informarUsuario("ERROR al entregar un producto favorito. El alias \"" + alias + "\" no existe");
             return false;                                               // No existe el producto favorito
         }
+
+        return true;                                                    // Pedido despachado
     }
 
     /**
@@ -202,14 +210,16 @@ public class Cliente {
         if (faltaProducto) {                                            // Comprueba si se pudo servir el pedido
             informarUsuario("ERROR al procesar el pedido de todos los productos favoritos. " +
                     "No hay stock de alguno de los productos que desea");
-            return false;
         } else {
             for (String alias : productosFavoritos.keySet()) {
                 pedirProducto(alias, 1);                        // Realiza el pedido de todos los productos favoritos
                 informarUsuario("***********************************************");
             }
-            return true;
+
+            return true;                                                // Se despacha el pedido
         }
+
+        return false;                                                   // No se realiza el pedido
     }
 
     /**
@@ -223,19 +233,24 @@ public class Cliente {
      * puntuación no es válida
      */
     public boolean comentarProducto(String alias, String texto, int puntuacion) {
+        Comentario comentario;
+
         if (existeAliasFavorito(alias)) {                               // Comprueba si existe el producto favorito
-            Producto producto = recuperarFavorito(alias);
-            try {
-                if (producto.comentar(new Comentario(this, texto, puntuacion))) {
-                    informarUsuario("Se ha publicado un comentario", producto);
-                    return true;                                        // El comentario es válido y fue publicado
-                } else {
-                    return false;                                       // El comentario no fue publicado
-                }
+            Producto producto = recuperarFavorito(alias);               // Recupera la instancia del producto favorito
+
+            try {                                                       // Intenta crear el comentario
+                comentario = new Comentario(this, texto, puntuacion);
             } catch (IllegalArgumentException e) {
                 informarUsuario(e.getMessage());
                 return false;                                           // El comentario no es válido
             }
+
+            if (producto.comentar(comentario))                          // Intenta publicar el comentario
+                informarUsuario("Se ha publicado un comentario", producto);
+            else
+                return false;                                           // El comentario no fue publicado
+
+            return true;                                                // El comentario es válido y fue publicado
         } else {
             informarUsuario("ERROR al comentar un producto favorito. El alias \"" + alias + "\" no existe");
             return false;                                               // No existe el producto favorito

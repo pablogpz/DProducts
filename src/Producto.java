@@ -48,6 +48,7 @@ public class Producto {
      *                          y se tiene en cuenta al reabastecerlo
      * @param fechaLanzamiento  Fecha de lanzamiento reprensentada por el tipo GregorianCalendar asociado
      * @param esReacondicionado Estado actual del producto. Representa si es de segunda mano o nuevo
+     * @throws IllegalArgumentException Si la cantidad es un entero negativo o 0 o si el stock mínimo es un entero negativo
      */
     public Producto(String nombre, int cantidad, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad,
                     GregorianCalendar fechaLanzamiento, boolean esReacondicionado) throws IllegalArgumentException {

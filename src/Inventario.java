@@ -37,16 +37,17 @@ public class Inventario {
      */
     public boolean agregarProducto(Producto producto) {
         boolean existeProducto = true;
+
         try {
             existeProducto = existeProducto(producto);
-
-            if (!existeProducto)                                                // Comprueba que no exista ya el producto
-                stock.put(producto.getIdentificador().valorDe(), producto);     // Agrega el prodcuto al inventario
-            else
-                reportarError("ERROR al agregar el producto. Ya existe en inventario", producto);
         } catch (NullPointerException e) {
             reportarError(e.getMessage(), null);
         }
+
+        if (!existeProducto)                                                    // Comprueba que no exista ya el producto
+            stock.put(producto.getIdentificador().valorDe(), producto);         // Agrega el prodcuto al inventario
+        else                                                                    // Error si existía en inventario
+            reportarError("ERROR al agregar el producto. Ya existe en inventario", producto);
 
         return !existeProducto;
     }
@@ -59,16 +60,17 @@ public class Inventario {
      */
     public boolean eliminarProducto(Producto producto) {
         boolean existeProducto = false;
+
         try {
             existeProducto = existeProducto(producto);
-
-            if (existeProducto)                                                 // Comprueba si el producto está catalogado
-                stock.remove(producto.getIdentificador().valorDe());            // Elimina el producto del inventario
-            else
-                reportarError("ERROR al eliminar producto. No existe en el inventario", producto);
         } catch (NullPointerException e) {
             reportarError(e.getMessage(), null);
         }
+
+        if (existeProducto)                                                     // Comprueba si el producto está catalogado
+            stock.remove(producto.getIdentificador().valorDe());                // Elimina el producto del inventario
+        else                                                                    // Error si no existía en inventario
+            reportarError("ERROR al eliminar producto. No existe en el inventario", producto);
 
         return existeProducto;
     }
@@ -81,23 +83,28 @@ public class Inventario {
      * @return Booleano indicando si se ha podido enviar el pedido, bien sea por falta de stock o porque el producto no se ha encontrado
      */
     public boolean venderProducto(Producto producto, int cantidad) {
+        boolean existeProducto = false;
+
         try {
-            if (existeProducto(producto)) {                                     // Comprueba que el producto exista en inventario
-                if (producto.entregar(cantidad)) {                              // Intenta realiza el pedido
-                    reponerStock(producto);                                     // Comprueba si es necesario reponer el stock
-                    return true;                                                // Venta completada
-                } else {
-                    reportarError("ERROR al vender producto. Cantidad errónea o no hay stock suficiente", producto);
-                    return false;                                               // Error en la venta
-                }
-            } else {
-                reportarError("ERROR al vender producto. No existe en el inventario", producto);
-                return false;                                                   // El producto no está catalogado
-            }
+            existeProducto = existeProducto(producto);
         } catch (NullPointerException e) {
             reportarError(e.getMessage(), null);
             return false;
         }
+
+        if (existeProducto) {                                                   // Comprueba que el producto exista en inventario
+            if (producto.entregar(cantidad)) {                                  // Intenta realiza el pedido
+                reponerStock(producto);                                         // Comprueba si es necesario reponer el stock
+            } else {
+                reportarError("ERROR al vender producto. Cantidad errónea o no hay stock suficiente", producto);
+                return false;                                                   // Error en la venta
+            }
+        } else {
+            reportarError("ERROR al vender producto. No existe en el inventario", producto);
+            return false;                                                       // El producto no está catalogado
+        }
+
+        return true;                                                            // Venta completada
     }
 
     /**
@@ -153,18 +160,22 @@ public class Inventario {
      * @return Producto buscado. En caso de no encontrarlo devuelve el valor null
      */
     public Producto recuperarProducto(Identificador identificador) {
+        boolean existeProducto = false;
+
         try {
-            if (existeProducto(identificador)) {                                // Comprueba que el producto exista en inventaio
-                return stock.get(identificador.valorDe());                      // Devuelve el producto buscado
-            } else {
-                reportarError("ERROR al recuperar un producto. " +
-                        "El identificador \"" + identificador.valorDe() +
-                        "\" no está asociado a ningún producto", null);
-                return null;                                                    // El producto no está catalogado
-            }
+            existeProducto = existeProducto(identificador);
         } catch (NullPointerException e) {
             reportarError(e.getMessage(), null);
             return null;
+        }
+
+        if (existeProducto(identificador)) {                                // Comprueba que el producto exista en inventaio
+            return stock.get(identificador.valorDe());                      // Devuelve el producto buscado
+        } else {
+            reportarError("ERROR al recuperar un producto. " +
+                    "El identificador \"" + identificador.valorDe() +
+                    "\" no está asociado a ningún producto", null);
+            return null;                                                    // El producto no está catalogado
         }
     }
 
