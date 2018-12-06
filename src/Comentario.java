@@ -66,7 +66,8 @@ public class Comentario {
      *
      * @return Cadena con el contenido del comentario formateado
      */
-    public String comentarioCompleto() {
+    @Override
+    public String toString() {
         return "Autor : " + getAutor().getNombre() +
                 "\nCalificación " + "*****".substring(0, getPuntuacion()) +
                 "\n\tReseña :\n" + getTexto();

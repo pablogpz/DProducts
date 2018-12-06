@@ -63,7 +63,7 @@ public class ComentarioTest {
     }
 
     /**
-     * Testeo del método 'comentarioCompleto()', que devuelve toda la información
+     * Testeo del método 'toString()', que devuelve toda la información
      * del comentario formateado
      */
     @Test
@@ -71,7 +71,7 @@ public class ComentarioTest {
         assertEquals("Autor : Nombre\n" +
                 "Calificación *****\n" +
                 "\tReseña :\n" +
-                "Test", comentario.comentarioCompleto());
+                "Test", comentario.toString());
     }
 
 }

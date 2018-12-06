@@ -233,7 +233,7 @@ public class Producto {
 
         // Adjunta los detalles de todos los comentarios publicados sobre el producto
         for (Comentario comentario : this.comentarios)
-            comentarios += decorador + comentario.comentarioCompleto();
+            comentarios += decorador + comentario.toString();
 
         return comentarios;
     }
