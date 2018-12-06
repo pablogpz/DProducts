@@ -217,17 +217,21 @@ public class Inventario {
     }
 
     /**
-     * Muestra por terminal una lista con todos los detalles de cada producto del inventario
+     * @return Lista formateada con todos los detalles de cada producto del inventario
      */
-    public void mostrarDetallesStock() {
+    @Override
+    public String toString() {
         String decorador = "***************************************************************";
+        StringBuilder stringBuilder = new StringBuilder(decorador);
 
-        mostrarMensaje("INVENTARIO");
-        mostrarMensaje(decorador);
-        for (Producto producto : stock.values()) {                              // Muestra los detalles de cada producto
-            mostrarMensaje(producto.toString());
-            mostrarMensaje(decorador);
+        stringBuilder.append("INVENTARIO");
+        stringBuilder.append(decorador);
+        for (Producto producto : stock.values()) {                              // Almacena los detalles de cada producto
+            stringBuilder.append(producto.toString());
+            stringBuilder.append(decorador);
         }
+
+        return stringBuilder.toString();
     }
 
 }
