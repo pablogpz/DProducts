@@ -205,6 +205,13 @@ public class Producto {
     }
 
     /**
+     * @return Si es necesario reponer el stock del producto
+     */
+    public boolean enStockMinimo() {
+        return cantidad < stockMinimo;
+    }
+
+    /**
      * Devuelve los comentarios publicados sobre el producto
      *
      * @return Cadena formateada con todos los comentarios sobre el producto

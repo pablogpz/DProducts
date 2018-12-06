@@ -36,7 +36,7 @@ public class Inventario {
      * Devuelve falso si se intentan insertar productos repetidos
      */
     public boolean agregarProducto(Producto producto) {
-        boolean existeProducto = true;
+        boolean existeProducto = true;                                          // Bandera que indica existía ya el producto
 
         try {
             existeProducto = existeProducto(producto);
@@ -59,7 +59,7 @@ public class Inventario {
      * @return Booleano indicando si se ha encontrado el producto a borrar
      */
     public boolean eliminarProducto(Producto producto) {
-        boolean existeProducto = false;
+        boolean existeProducto = false;                                         // Bandera que indica si el producto ya existía
 
         try {
             existeProducto = existeProducto(producto);
@@ -80,10 +80,11 @@ public class Inventario {
      *
      * @param cantidad Número de unidades que debe entregar
      * @param producto Producto del que realizar el pedido
-     * @return Booleano indicando si se ha podido enviar el pedido, bien sea por falta de stock o porque el producto no se ha encontrado
+     * @return Booleano indicando si se ha podido enviar el pedido, bien sea por falta de stock o
+     * porque el producto no se ha encontrado
      */
     public boolean venderProducto(Producto producto, int cantidad) {
-        boolean existeProducto = false;
+        boolean existeProducto = false;                                         // Bandera para indicar si el producto ya existía
 
         try {
             existeProducto = existeProducto(producto);
@@ -114,15 +115,17 @@ public class Inventario {
      * @param producto Producto que reabastecer
      */
     private void reponerStock(Producto producto) {
-        switch (producto.getPrioridad()) {
-            case BAJA:
-                producto.incCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_BAJA);
-                break;
-            case MEDIA:
-                producto.incCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_MEDIA);
-                break;
-            case ALTA:
-                producto.incCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_ALTA);
+        if (producto.enStockMinimo()) {
+            switch (producto.getPrioridad()) {
+                case BAJA:
+                    producto.incCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_BAJA);
+                    break;
+                case MEDIA:
+                    producto.incCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_MEDIA);
+                    break;
+                case ALTA:
+                    producto.incCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_ALTA);
+            }
         }
     }
 
@@ -134,7 +137,7 @@ public class Inventario {
      * @return Booleano indicando si existía o no el producto en el inventario
      * @throws NullPointerException Si el producto es nulo
      */
-    private boolean existeProducto(Producto producto) throws NullPointerException {
+    private boolean existeProducto(Producto producto) {
         if (producto == null) throw new NullPointerException("Producto nulo");
 
         return existeProducto(producto.getIdentificador());
@@ -147,7 +150,7 @@ public class Inventario {
      * @return Booleano indicando si existía o no el producto en el inventario
      * @throws NullPointerException Si el identificador es nulo
      */
-    private boolean existeProducto(Identificador identificador) throws NullPointerException {
+    private boolean existeProducto(Identificador identificador) {
         if (identificador == null) throw new NullPointerException("Identificador nulo");
 
         return stock.containsKey(identificador.toString());
