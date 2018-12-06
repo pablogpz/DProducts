@@ -214,7 +214,7 @@ public class Producto {
         String estado = getEsReacondicionado() ? "Reacondicionado" : "Nuevo";
 
         String detalles = "PRODUCTO\t" + getNombre() + "-" + getFrabricante().toString() +
-                "\n\tIdentificador : " + getIdentificador().valorDe() + "\n\tCantidad en stock : " + getCantidad() +
+                "\n\tIdentificador : " + getIdentificador().toString() + "\n\tCantidad en stock : " + getCantidad() +
                 "\n\tCantidad en stock mínima : " + getStockMinimo() + "\n\tPrioridad de reabastecimiento : " +
                 getPrioridad().toString() + "\n\tFecha de lanzamiento : " + simpleDateFormat.format(getFechaLanzamiento().getTime()) +
                 "\n\tEstado : " + estado + "\n\tComentarios : \n";

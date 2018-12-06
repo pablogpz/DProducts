@@ -45,7 +45,7 @@ public class Inventario {
         }
 
         if (!existeProducto)                                                    // Comprueba que no exista ya el producto
-            stock.put(producto.getIdentificador().valorDe(), producto);         // Agrega el prodcuto al inventario
+            stock.put(producto.getIdentificador().toString(), producto);        // Agrega el prodcuto al inventario
         else                                                                    // Error si existía en inventario
             reportarError("ERROR al agregar el producto. Ya existe en inventario", producto);
 
@@ -68,7 +68,7 @@ public class Inventario {
         }
 
         if (existeProducto)                                                     // Comprueba si el producto está catalogado
-            stock.remove(producto.getIdentificador().valorDe());                // Elimina el producto del inventario
+            stock.remove(producto.getIdentificador().toString());               // Elimina el producto del inventario
         else                                                                    // Error si no existía en inventario
             reportarError("ERROR al eliminar producto. No existe en el inventario", producto);
 
@@ -150,7 +150,7 @@ public class Inventario {
     private boolean existeProducto(Identificador identificador) throws NullPointerException {
         if (identificador == null) throw new NullPointerException("Identificador nulo");
 
-        return stock.containsKey(identificador.valorDe());
+        return stock.containsKey(identificador.toString());
     }
 
     /**
@@ -169,11 +169,11 @@ public class Inventario {
             return null;
         }
 
-        if (existeProducto(identificador)) {                                // Comprueba que el producto exista en inventaio
-            return stock.get(identificador.valorDe());                      // Devuelve el producto buscado
+        if (existeProducto) {                                               // Comprueba que el producto exista en inventaio
+            return stock.get(identificador.toString());                     // Devuelve el producto buscado
         } else {
             reportarError("ERROR al recuperar un producto. " +
-                    "El identificador \"" + identificador.valorDe() +
+                    "El identificador \"" + identificador.toString() +
                     "\" no está asociado a ningún producto", null);
             return null;                                                    // El producto no está catalogado
         }

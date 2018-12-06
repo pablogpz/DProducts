@@ -42,7 +42,7 @@ public class IdentificadorTest {
     @Test
     public void identificadorEquivalente() {
         assertNotSame(identificador, Identificador.identificadorEquivalente("XE"));
-        assertEquals(identificador, Identificador.identificadorEquivalente("XE"));
+        assertEquals(identificador.toString(), Identificador.identificadorEquivalente("XE").toString());
     }
 
     /**
@@ -50,7 +50,7 @@ public class IdentificadorTest {
      */
     @Test
     public void valorDe() {
-        assertEquals("XE", identificador.valorDe());
+        assertEquals("XE", identificador.toString());
     }
 
 }
