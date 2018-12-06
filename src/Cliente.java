@@ -81,6 +81,15 @@ public class Cliente {
     }
 
     /**
+     * Método accesor del atributo 'tienda'
+     *
+     * @return Empresa a la que compra el cliente
+     */
+    public Inventario getTienda() {
+        return tienda;
+    }
+
+    /**
      * Añade un producto a la colección de productos favoritos del cliente. No se puede añadir el mismo producto más de una vez
      * y el nombre con el que se guarda no puede estar repetido. El producto también debe estar en el inventario de la
      * empresa asociada al Inventario y no se puede añadir un producto a favoritos más de una vez
@@ -124,13 +133,13 @@ public class Cliente {
      * @return Booleano indicando si se ha realizado correctamente la operación
      * @throws IllegalArgumentException Si el alias es nulo
      */
-    public boolean agregarFavorito(Identificador identificador, String alias) throws IllegalArgumentException {
+    public boolean agregarFavorito(Identificador identificador, String alias) {
         if (alias == null) throw new IllegalArgumentException("Alias nulo");
 
         if (existeAliasFavorito(alias)) {                               // Comprueba si el alias ya está en uso
             informarUsuario("ERROR al añadir un producto favorito. El alias \"" + alias + "\" ya está en uso");
         } else {
-            Producto producto = tienda.recuperarProducto(identificador);
+            Producto producto = getTienda().recuperarProducto(identificador);
             if (producto != null) {                                     // Comprueba que el producto a añadir a favoritos exista en la empresa
                 productosFavoritos.put(alias, producto);
             } else {
@@ -173,7 +182,7 @@ public class Cliente {
     public boolean pedirProducto(String alias, int cantidad) {
         if (existeAliasFavorito(alias)) {                               // Comprueba si existe el producto favorito
             Producto producto = recuperarFavorito(alias);
-            if (tienda.venderProducto(producto, cantidad)) {            // Intenta despachar el pedido
+            if (getTienda().venderProducto(producto, cantidad)) {       // Intenta despachar el pedido
                 informarUsuario("Su pedido ha sido procesado. Cantidad : " + cantidad + " ud(s).", producto);
             } else {
                 return false;                                           // No se pudo despachar el pedido

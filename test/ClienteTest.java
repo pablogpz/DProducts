@@ -86,6 +86,14 @@ public class ClienteTest {
     }
 
     /**
+     * Testeo del método accesor del atributo 'tienda'
+     */
+    @Test
+    public void getTienda() {
+        assertEquals(Inventario.recuperarInstancia(), cliente.getTienda());
+    }
+
+    /**
      * Testeo del método 'agregarFavorito()'. Comprueba que solo se puedan agregar productos del inventario de la tienda
      * (solo una vez) y que los aliases utilizados para recordar los productos no se repitan
      */
