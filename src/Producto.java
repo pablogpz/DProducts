@@ -149,7 +149,7 @@ public class Producto {
     public boolean entregar(int cantidad) {
         // Comprueba que la cantidad sea positiva mayor que 0 y que el pedido no supere el stock actual
         if (haySuficienteStock(cantidad))
-            this.cantidad -= cantidad;
+            varCantidad(-cantidad);
         else
             return false;                                               // No se pudo servir el pedido
 
@@ -157,19 +157,12 @@ public class Producto {
     }
 
     /**
-     * Método mutador del atributo 'cantidad'. Incrementa la cantidad del producto solo si está por
-     * debajo de su stock mínimo
+     * Método mutador del atributo 'cantidad'
      *
      * @param cantidad Incremento del stock del producto
-     * @return Booleano indicando si la operación se ha realizado
      */
-    public boolean incCantidad(int cantidad) {
-        if (getCantidad() < getStockMinimo()) {
-            this.cantidad += cantidad;
-            return true;
-        } else {
-            return false;
-        }
+    public void varCantidad(int cantidad) {
+        this.cantidad += cantidad;
     }
 
     /**
@@ -201,14 +194,14 @@ public class Producto {
      * @return Booleano indicando si hay suficiente stock
      */
     public boolean haySuficienteStock(int cantidad) {
-        return cantidad > 0 && this.cantidad - cantidad >= 0;
+        return cantidad > 0 && getCantidad() - cantidad >= 0;
     }
 
     /**
      * @return Si es necesario reponer el stock del producto
      */
     public boolean enStockMinimo() {
-        return cantidad < stockMinimo;
+        return getCantidad() < getStockMinimo();
     }
 
     /**

@@ -118,13 +118,13 @@ public class Inventario {
         if (producto.enStockMinimo()) {
             switch (producto.getPrioridad()) {
                 case BAJA:
-                    producto.incCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_BAJA);
+                    producto.varCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_BAJA);
                     break;
                 case MEDIA:
-                    producto.incCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_MEDIA);
+                    producto.varCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_MEDIA);
                     break;
                 case ALTA:
-                    producto.incCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_ALTA);
+                    producto.varCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_ALTA);
             }
         }
     }
@@ -172,13 +172,13 @@ public class Inventario {
             return null;
         }
 
-        if (existeProducto) {                                               // Comprueba que el producto exista en inventaio
-            return stock.get(identificador.toString());                     // Devuelve el producto buscado
+        if (existeProducto) {                                                   // Comprueba que el producto exista en inventaio
+            return stock.get(identificador.toString());                         // Devuelve el producto buscado
         } else {
             reportarError("ERROR al recuperar un producto. " +
                     "El identificador \"" + identificador.toString() +
                     "\" no está asociado a ningún producto", null);
-            return null;                                                    // El producto no está catalogado
+            return null;                                                        // El producto no está catalogado
         }
     }
 
