@@ -23,7 +23,7 @@ public class Comentario {
      * @param puntuacion Calificación del producto. Es un valor en el rango [1,5]
      * @throws IllegalArgumentException Si cualquierda de los parámetros son inválidos
      */
-    public Comentario(Cliente autor, String texto, int puntuacion) throws IllegalArgumentException {
+    public Comentario(Cliente autor, String texto, int puntuacion) {
         if (texto.replaceAll("\\s+", "").length() == 0 || puntuacion < 1 || puntuacion > 5)
             throw new IllegalArgumentException("ERROR al publicar un comentario." +
                     " Compruebe que el cuerpo del comentario contenga texto" +
