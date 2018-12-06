@@ -311,7 +311,7 @@ public class Cliente {
      */
     private void informarUsuario(String mensaje, Producto productoRelacionado) {
         String mensajeProducto = productoRelacionado == null ? "" : "\nProducto : \n\t" +
-                productoRelacionado.detalles();
+                productoRelacionado.toString();
 
         informarUsuario(mensaje + mensajeProducto);
     }

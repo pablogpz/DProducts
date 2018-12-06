@@ -199,7 +199,7 @@ public class Inventario {
      */
     private void reportarError(String error, Producto productoRelacionado) {
         String productoErroneo = productoRelacionado == null ? "" : "\nProducto : \n\t" +
-                productoRelacionado.detalles();
+                productoRelacionado.toString();
 
         mostrarMensaje(error + productoErroneo);
     }
@@ -222,7 +222,7 @@ public class Inventario {
         mostrarMensaje("INVENTARIO");
         mostrarMensaje(decorador);
         for (Producto producto : stock.values()) {                              // Muestra los detalles de cada producto
-            mostrarMensaje(producto.detalles());
+            mostrarMensaje(producto.toString());
             mostrarMensaje(decorador);
         }
     }

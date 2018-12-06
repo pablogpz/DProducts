@@ -3,6 +3,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import static org.junit.Assert.*;
@@ -39,13 +40,13 @@ public class ClienteTest {
         cliente = new Cliente("Nombre", 18, "Localidad");
         inventario = Inventario.recuperarInstancia();
         producto = new Producto("Nombre", 30, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
-                new GregorianCalendar(2011, 3, 26), true);
+                new GregorianCalendar(2011, Calendar.APRIL, 26), true);
         producto1 = new Producto("Nombre", 30, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
-                new GregorianCalendar(2011, 3, 26), true);
+                new GregorianCalendar(2011, Calendar.APRIL, 26), true);
         productoNoInventario = new Producto("Nombre", 30, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
-                new GregorianCalendar(2011, 3, 26), true);
+                new GregorianCalendar(2011, Calendar.APRIL, 26), true);
         productoNoFavorito = new Producto("Nombre", 30, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
-                new GregorianCalendar(2011, 3, 26), true);
+                new GregorianCalendar(2011, Calendar.APRIL, 26), true);
 
         inventario.agregarProducto(producto);
         inventario.agregarProducto(producto1);

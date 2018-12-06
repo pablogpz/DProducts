@@ -151,7 +151,7 @@ public class Identificador {
         int primo = 13;
         int hashCode = super.hashCode();
 
-        hashCode += valor.hashCode();
+        hashCode += primo * valor.hashCode();
 
         return hashCode;
     }

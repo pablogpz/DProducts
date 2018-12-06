@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import static org.junit.Assert.*;
@@ -25,7 +26,7 @@ public class ProductoTest {
     @Before
     public void setUp() {
         producto = new Producto("Nombre", 30, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
-                new GregorianCalendar(2011, 3, 26), true);
+                new GregorianCalendar(2011, Calendar.APRIL, 26), true);
     }
 
     /**
@@ -35,11 +36,11 @@ public class ProductoTest {
     @Test(expected = IllegalArgumentException.class)
     public void comprobarArgumentos() {
         producto = new Producto("Nombre", 0, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
-                new GregorianCalendar(2011, 3, 26), true);
+                new GregorianCalendar(2011, Calendar.APRIL, 26), true);
         producto = new Producto("Nombre", -1, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
-                new GregorianCalendar(2011, 3, 26), true);
+                new GregorianCalendar(2011, Calendar.APRIL, 26), true);
         producto = new Producto("Nombre", 1, -1, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
-                new GregorianCalendar(2011, 3, 26), true);
+                new GregorianCalendar(2011, Calendar.APRIL, 26), true);
     }
 
     /**
@@ -95,7 +96,7 @@ public class ProductoTest {
      */
     @Test
     public void getFechaLanzamiento() {
-        assertEquals(new GregorianCalendar(2011, 3, 26), producto.getFechaLanzamiento());
+        assertEquals(new GregorianCalendar(2011, Calendar.APRIL, 26), producto.getFechaLanzamiento());
     }
 
     /**
@@ -141,7 +142,7 @@ public class ProductoTest {
     }
 
     /**
-     * Testeo del método 'detalles()'. Comprueba que devuleva una cadena formateada con la información del producto
+     * Testeo del método 'toString()'. Comprueba que devuleva una cadena formateada con la información del producto
      */
     @Test
     public void detalles() {
@@ -152,7 +153,7 @@ public class ProductoTest {
                 "\tPrioridad de reabastecimiento : MEDIA\n" +
                 "\tFecha de lanzamiento : 2011/04/26\n" +
                 "\tEstado : Reacondicionado\n" +
-                "\tComentarios : \n", producto.detalles());
+                "\tComentarios : \n", producto.toString());
     }
 
 }

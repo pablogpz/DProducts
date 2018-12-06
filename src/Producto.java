@@ -51,7 +51,7 @@ public class Producto {
      * @throws IllegalArgumentException Si la cantidad es un entero negativo o 0 o si el stock mínimo es un entero negativo
      */
     public Producto(String nombre, int cantidad, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad,
-                    GregorianCalendar fechaLanzamiento, boolean esReacondicionado) throws IllegalArgumentException {
+                    GregorianCalendar fechaLanzamiento, boolean esReacondicionado) {
         if (cantidad <= 0 || stockMinimo < 0) throw new
                 IllegalArgumentException("Parámetros inválidos. Compruebe que 'cantidad' y 'stockMinimo' sean valores positivos" +
                 " y mayores que 0 (stockMinimo sí puede ser 0)");
@@ -164,12 +164,12 @@ public class Producto {
      * @return Booleano indicando si la operación se ha realizado
      */
     public boolean incCantidad(int cantidad) {
-        if (getCantidad() < getStockMinimo())
+        if (getCantidad() < getStockMinimo()) {
             this.cantidad += cantidad;
-        else
+            return true;
+        } else {
             return false;
-
-        return true;
+        }
     }
 
     /**
@@ -205,24 +205,6 @@ public class Producto {
     }
 
     /**
-     * Devuelve una cadena formateada con todos los detalles del producto
-     *
-     * @return Cadena formatrada de información del producto
-     */
-    public String detalles() {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMATO_FECHA);
-        String estado = getEsReacondicionado() ? "Reacondicionado" : "Nuevo";
-
-        String detalles = "PRODUCTO\t" + getNombre() + "-" + getFrabricante().toString() +
-                "\n\tIdentificador : " + getIdentificador().toString() + "\n\tCantidad en stock : " + getCantidad() +
-                "\n\tCantidad en stock mínima : " + getStockMinimo() + "\n\tPrioridad de reabastecimiento : " +
-                getPrioridad().toString() + "\n\tFecha de lanzamiento : " + simpleDateFormat.format(getFechaLanzamiento().getTime()) +
-                "\n\tEstado : " + estado + "\n\tComentarios : \n";
-
-        return detalles + recuperarComentarios();
-    }
-
-    /**
      * Devuelve los comentarios publicados sobre el producto
      *
      * @return Cadena formateada con todos los comentarios sobre el producto
@@ -236,6 +218,23 @@ public class Producto {
             comentarios += decorador + comentario.toString();
 
         return comentarios;
+    }
+
+    /**
+     * @return Cadena formatrada de información del producto
+     */
+    @Override
+    public String toString() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMATO_FECHA);
+        String estado = getEsReacondicionado() ? "Reacondicionado" : "Nuevo";
+
+        String detalles = "PRODUCTO\t" + getNombre() + "-" + getFrabricante().toString() +
+                "\n\tIdentificador : " + getIdentificador().toString() + "\n\tCantidad en stock : " + getCantidad() +
+                "\n\tCantidad en stock mínima : " + getStockMinimo() + "\n\tPrioridad de reabastecimiento : " +
+                getPrioridad().toString() + "\n\tFecha de lanzamiento : " + simpleDateFormat.format(getFechaLanzamiento().getTime()) +
+                "\n\tEstado : " + estado + "\n\tComentarios : \n";
+
+        return detalles + recuperarComentarios();
     }
 
 }
