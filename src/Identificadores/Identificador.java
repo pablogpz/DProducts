@@ -1,7 +1,6 @@
 package Identificadores;
 
 import java.util.Arrays;
-import java.util.Objects;
 import java.util.Stack;
 
 /**
@@ -47,7 +46,7 @@ public class Identificador {
      * @param identificador Objeto Identificador a clonar
      */
     public Identificador(Identificador identificador) {
-        valor = identificador.valorDe();
+        valor = identificador.toString();
     }
 
     /**
@@ -59,15 +58,6 @@ public class Identificador {
      */
     public static Identificador identificadorEquivalente(String cadena) {
         return new Identificador(cadena);
-    }
-
-    /**
-     * Consulta el valor del identificador
-     *
-     * @return Cadena de texto representando una secuencia de identificador
-     */
-    public String valorDe() {
-        return valor;
     }
 
     /**
@@ -125,17 +115,45 @@ public class Identificador {
         return identificadorConvertido.toString();
     }
 
+    /**
+     * @return Cadena de texto representando una secuencia de identificador
+     */
     @Override
-    public boolean equals(Object identificador) {
-        Identificador identificadorCasteado = (Identificador) identificador;
-
-        if (this == identificador) return true;
-        if (identificador == null || getClass() != identificador.getClass()) return false;
-        return valor.equals(identificadorCasteado.valorDe());
+    public String toString() {
+        return valor;
     }
 
+    /**
+     * Comprueba la igualdad entre dos identificadores basándose en su cadena identificadora única
+     *
+     * @param obj Identificador sobre el que comprobar la igualdad
+     * @return Booleano indicando el resultado de la comparación
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+
+        if (!(obj instanceof Identificador))
+            return false;
+
+        Identificador objCasteado = (Identificador) obj;
+
+        return super.equals(objCasteado) &&
+                valor.equals(objCasteado.valor);
+    }
+
+    /**
+     * @return Código hash único basado en multiplicaciones de primos
+     */
     @Override
     public int hashCode() {
-        return Objects.hash(valor);
+        int primo = 13;
+        int hashCode = super.hashCode();
+
+        hashCode += valor.hashCode();
+
+        return hashCode;
     }
+
 }
