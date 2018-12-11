@@ -24,7 +24,7 @@ public class Comentario {
      * @throws IllegalArgumentException Si cualquierda de los parámetros son inválidos
      */
     public Comentario(Cliente autor, String texto, int puntuacion) {
-        if (texto.replaceAll("\\s+", "").length() == 0 || puntuacion < 1 || puntuacion > 5)
+        if (esCorrecto(texto, puntuacion))
             throw new IllegalArgumentException("ERROR al publicar un comentario." +
                     " Compruebe que el cuerpo del comentario contenga texto" +
                     " y que la puntuación esté en el rango [1,5]");
@@ -71,6 +71,18 @@ public class Comentario {
         return "Autor : " + getAutor().getNombre() +
                 "\nCalificación " + "*****".substring(0, getPuntuacion()) +
                 "\n\tReseña :\n" + getTexto();
+    }
+
+    /**
+     * Comprueba la validez de los campos que almacena un comentario
+     *
+     * @param texto      Cuerpo del comentario. No puede estar vacío
+     * @param puntuacion Valoración del comentario. Debe ser un valor en el rango [1,5]
+     * @return Validez del comentario
+     */
+    private boolean esCorrecto(String texto, int puntuacion) {
+        return texto.replaceAll("\\s+", "").length() == 0 ||
+                puntuacion < 1 || puntuacion > 5;
     }
 
 }

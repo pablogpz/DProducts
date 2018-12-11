@@ -211,7 +211,7 @@ public class Cliente {
         boolean faltaProducto = false;                                  // Bandera para indicar si servir el pedido
 
         while (it.hasNext() && !faltaProducto) {
-            if (!it.next().haySuficienteStock(1)) {             // Comprueba si ha en stock una unidad de cada producto
+            if (!it.next().haySuficienteStock(1)) {            // Comprueba si ha en stock una unidad de cada producto
                 faltaProducto = true;                                   // Existe suficiente stock de cada producto
             }
         }
@@ -221,7 +221,7 @@ public class Cliente {
                     "No hay stock de alguno de los productos que desea");
         } else {
             for (String alias : productosFavoritos.keySet()) {
-                pedirProducto(alias, 1);                        // Realiza el pedido de todos los productos favoritos
+                pedirProducto(alias, 1);                       // Realiza el pedido de todos los productos favoritos
                 informarUsuario("***********************************************");
             }
 
@@ -254,10 +254,17 @@ public class Cliente {
                 return false;                                           // El comentario no es válido
             }
 
-            if (producto.comentar(comentario))                          // Intenta publicar el comentario
-                informarUsuario("Se ha publicado un comentario", producto);
-            else
-                return false;                                           // El comentario no fue publicado
+            // Intenta publicar el comentario si el producto es comentable
+            try {
+                if (((ProductoComentable) producto).comentar(comentario))
+                    informarUsuario("Se ha publicado un comentario", producto);
+                else
+                    return false;                                      // El comentario no fue publicado
+            } catch (ClassCastException e) {
+                informarUsuario("No es posible comentar este producto. Clase (" + producto.getClass() +
+                        ") No es comentable ");
+                return false;
+            }
 
             return true;                                                // El comentario es válido y fue publicado
         } else {
