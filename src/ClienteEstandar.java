@@ -13,4 +13,14 @@ public class ClienteEstandar extends Cliente {
         // TODO - implement ClienteEstandar.ClienteEstandar
     }
 
+    @Override
+    public boolean realizarPedido() {
+        return false;
+    }
+
+    @Override
+    public boolean comentarProducto(String alias, String texto, int puntuacion) {
+        return false;
+    }
+
 }

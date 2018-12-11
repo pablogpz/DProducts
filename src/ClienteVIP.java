@@ -13,4 +13,14 @@ public class ClienteVIP extends Cliente {
         // TODO - implement ClienteVIP.ClienteVIP
     }
 
+    @Override
+    public boolean realizarPedido() {
+        return false;
+    }
+
+    @Override
+    public boolean comentarProducto(String alias, String texto, int puntuacion) {
+        return false;
+    }
+
 }
