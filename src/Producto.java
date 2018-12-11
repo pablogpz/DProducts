@@ -48,7 +48,7 @@ public abstract class Producto {
      */
     public Producto(String nombre, int cantidad, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad,
                     GregorianCalendar fechaLanzamiento, boolean esReacondicionado) {
-        if (cantidad <= 0 || stockMinimo < 0) throw new
+        if (!esCorrecto(cantidad, stockMinimo)) throw new
                 IllegalArgumentException("Parámetros inválidos. Compruebe que 'cantidad' y 'stockMinimo' sean valores positivos" +
                 " y mayores que 0 (stockMinimo sí puede ser 0)");
 
@@ -68,7 +68,7 @@ public abstract class Producto {
      *
      * @return Nombre del producto
      */
-    public String getNombre() {
+    protected String getNombre() {
         return nombre;
     }
 
@@ -77,7 +77,7 @@ public abstract class Producto {
      *
      * @return Identificador del producto
      */
-    public Identificador getIdentificador() {
+    protected Identificador getIdentificador() {
         return identificador;
     }
 
@@ -86,7 +86,7 @@ public abstract class Producto {
      *
      * @return Cantidad actual en stock del producto
      */
-    public int getCantidad() {
+    protected int getCantidad() {
         return cantidad;
     }
 
@@ -95,7 +95,7 @@ public abstract class Producto {
      *
      * @return Cantidad en stock mínima del producto
      */
-    public int getStockMinimo() {
+    protected int getStockMinimo() {
         return stockMinimo;
     }
 
@@ -104,7 +104,7 @@ public abstract class Producto {
      *
      * @return Factor de prioridad con el que debe restablecerse el stock del producto
      */
-    public PRIORIDAD_PRODUCTO getPrioridad() {
+    protected PRIORIDAD_PRODUCTO getPrioridad() {
         return prioridad;
     }
 
@@ -113,7 +113,7 @@ public abstract class Producto {
      *
      * @return Fabricante del producto
      */
-    public FABRICANTES getFrabricante() {
+    protected FABRICANTES getFrabricante() {
         return fabricante;
     }
 
@@ -122,7 +122,7 @@ public abstract class Producto {
      *
      * @return Objeto Calendar que representa la fecha de lanzamiento del producto
      */
-    public GregorianCalendar getFechaLanzamiento() {
+    protected GregorianCalendar getFechaLanzamiento() {
         return fechaLanzamiento;
     }
 
@@ -131,7 +131,7 @@ public abstract class Producto {
      *
      * @return Booleano que representa si el producto es de segunda mano o no
      */
-    public boolean getEsReacondicionado() {
+    protected boolean getEsReacondicionado() {
         return esReacondicionado;
     }
 
@@ -178,10 +178,20 @@ public abstract class Producto {
     }
 
     /**
+     * @param cantidad    Cantidad de entrada en stock. Debe ser un entero positivo
+     * @param stockMinimo Cantidad mínima en inventario. Debe ser un natural
+     * @return Si los campos del producto son válidos
+     */
+    private boolean esCorrecto(int cantidad, int stockMinimo) {
+        return cantidad >= 0 || stockMinimo > 0;
+    }
+
+    /**
      * @return Cadena formatrada de información del producto
      */
     @Override
     public String toString() {
+        // TODO -
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMATO_FECHA);
         String estado = getEsReacondicionado() ? "Reacondicionado" : "Nuevo";
 
