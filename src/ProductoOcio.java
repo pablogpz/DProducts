@@ -37,16 +37,17 @@ public class ProductoOcio extends ProductoComentable implements Descontable {
 
     @Override
     public void calcularPrecioDescontado() {
-
+        // TODO - implement
     }
 
     @Override
     public float getDescuento() {
+        // TODO - implement
         return 0;
     }
 
     @Override
     public void setDescuento() {
-
+        // TODO - implement
     }
 }

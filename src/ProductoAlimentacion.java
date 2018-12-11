@@ -41,17 +41,18 @@ public class ProductoAlimentacion extends Producto implements Gustable {
 
     @Override
     public int getLikes() {
+        // TODO - implement
         return 0;
     }
 
     @Override
     public void like() {
-
+        // TODO - implement
     }
 
     @Override
     public void unlike() {
-
+        // TODO - implement
     }
 
 }
