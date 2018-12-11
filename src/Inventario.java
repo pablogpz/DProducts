@@ -137,12 +137,14 @@ public class Inventario {
      * Si el stock actual no puede cubrir odos los pedidos no se realiza ninguno.
      *
      * @param coleccionProductos Colección de productos a despachar
-     * @return Devuelve verdadero si se pudieron realizar todos los pedidos. Devuelve falso si la colección es nula,
+     * @return Devuelve verdadero si se pudieron realizar todos los pedidos. Devuelve falso si la colección es nula o vacía,
      * no se puede cubrir algún pedido u ocurrió algún error en la venta de alguno de los productos
      */
     public boolean venderColeccionProductos(Collection<Producto> coleccionProductos) {
-        if (coleccionProductos == null)                                         // Comprueba que la coleccion no sea nula
+        if (coleccionProductos == null || coleccionProductos.size() == 0) {     // Comprueba que la coleccion no sea nula ni vacía
+            reportarError("La colección de productos a pedir está vacía", null);
             return false;
+        }
 
         boolean pedidoCompleto = true;                                          // Indica si se pueden cubrir todos los pedidos
         boolean ocurrioError = false;                                           // Indica si ocurrió algún error en la venta
@@ -154,8 +156,11 @@ public class Inventario {
                 pedidoCompleto = false;
         }
 
-        if (!pedidoCompleto)                                                    // Si no se pudieron cubrir los pedidos no se realizan
+        if (!pedidoCompleto) {                                                    // Si no se pudieron cubrir los pedidos no se realizan
+            reportarError("ERROR al procesar el pedido de todos los productos favoritos. " +
+                    "No hay stock de alguno de los productos que desea", null);
             return false;
+        }
 
         // Intenta realizar la venta de todos los pedidos
         iterator = coleccionProductos.iterator();
