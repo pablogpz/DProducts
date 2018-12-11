@@ -1,12 +1,10 @@
 import Identificadores.Identificador;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
- * Clase que representa a la empresa de compra/venta de productos. Para esta entrega solo se tiene en consideración
- * la existencia de una única empresa, por lo que se ha implementado siguiendo el patrón de diseño Singleton. Es
- * fácilmente escalable y refactorizable para incorporarle una identidad propia en un futuro
+ * Clase que representa a la empresa de compra/venta de productos. Se tiene en consideración
+ * la existencia de una única empresa, por lo que se ha implementado siguiendo el patrón de diseño Singleton
  * <p>
  * El perfil de la empresa es de venta de componentes de ordenador y periféricos
  *
@@ -18,14 +16,40 @@ import java.util.Map;
 
 public class Inventario {
 
-    private static Inventario instanciaActual = null;                           // Instancia Singleton del inventario
+    // Cantidad vendida de cada unidad de la coleccion de productos a vender
+    private final static int CANTIDAD_VENTA_COLECCION = 1;
+
+    private Set<Cliente> clientes;                                              // Colección de clientes usuarios
     private Map<String, Producto> stock;                                        // Colección de productos en el inventario
+    private static Inventario instanciaActual = null;                           // Instancia Singleton del inventario
 
     /**
      * Constructor por defecto de la clase. Sigue el patrón de diseño Singleton
      */
     private Inventario() {
+        clientes = new HashSet<>();
         stock = new HashMap<>();
+    }
+
+    /**
+     * Registra a un nuevo cliente
+     *
+     * @param cliente Cliente a registrar
+     * @return Si se pudo agregar. No se permite añadir múltiples veces a un mismo cliente.
+     * Si se le pasa un cliente con valor nulo devuelve falso
+     */
+    public boolean agregarCliente(Cliente cliente) {
+        return cliente != null && clientes.add(cliente);
+    }
+
+    /**
+     * Da de baja a un cliente
+     *
+     * @param cliente Cliente a dar de baja
+     * @return Si se pudo eliminar al cliente. No se pueden eliminar clientes que no estén registrados
+     */
+    public boolean eliminarCliente(Cliente cliente) {
+        return cliente != null && clientes.remove(cliente);
     }
 
     /**
@@ -106,6 +130,40 @@ public class Inventario {
         }
 
         return true;                                                            // Venta completada
+    }
+
+    /**
+     * Realiza el pedido de una cantidad fija determinado por CANTIDAD_VENTA_COLECCION de una colección de productos.
+     * Si el stock actual no puede cubrir odos los pedidos no se realiza ninguno.
+     *
+     * @param coleccionProductos Colección de productos a despachar
+     * @return Devuelve verdadero si se pudieron realizar todos los pedidos. Devuelve falso si la colección es nula,
+     * no se puede cubrir algún pedido u ocurrió algún error en la venta de alguno de los productos
+     */
+    public boolean venderColeccionProductos(Collection<Producto> coleccionProductos) {
+        if (coleccionProductos == null)                                         // Comprueba que la coleccion no sea nula
+            return false;
+
+        boolean pedidoCompleto = true;                                          // Indica si se pueden cubrir todos los pedidos
+        boolean ocurrioError = false;                                           // Indica si ocurrió algún error en la venta
+
+        // Primer bucle para determinar si se pueden cubrir los pedidos
+        Iterator<Producto> iterator = coleccionProductos.iterator();
+        while (iterator.hasNext() && pedidoCompleto) {
+            if (!iterator.next().haySuficienteStock(CANTIDAD_VENTA_COLECCION))
+                pedidoCompleto = false;
+        }
+
+        if (!pedidoCompleto)                                                    // Si no se pudieron cubrir los pedidos no se realizan
+            return false;
+
+        // Intenta realizar la venta de todos los pedidos
+        iterator = coleccionProductos.iterator();
+        while (iterator.hasNext()) {
+            ocurrioError = venderProducto(iterator.next(), CANTIDAD_VENTA_COLECCION);
+        }
+
+        return ocurrioError;
     }
 
     /**
@@ -221,6 +279,7 @@ public class Inventario {
      */
     @Override
     public String toString() {
+        // TODO - Revisar todo lo que debe mostrar
         String decorador = "***************************************************************";
         StringBuilder stringBuilder = new StringBuilder(decorador);
 
