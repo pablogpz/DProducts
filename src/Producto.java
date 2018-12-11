@@ -2,13 +2,10 @@ import Identificadores.GeneradorIdentificador;
 import Identificadores.Identificador;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.Iterator;
-import java.util.List;
 
 /**
- * Clase que modela el comportamiento de un producto. Permite consultar sus detalles, añadir comentarios y hacer un pedido
+ * Clase que modela el comportamiento base de un producto. Permite consultar sus detalles base y hacer un pedido
  * del un producto en particular. Cada producto es asignado con una clave única en el ciclo de vida del programa que establece
  * una relación biunívoca entre su identididad y su identificador
  *
@@ -18,7 +15,7 @@ import java.util.List;
  * Curso : 2º GIIIS (Grupo A)
  */
 
-public class Producto {
+public abstract class Producto {
 
     // Valores de reabasteciemiento de productos según su prioridad
     public static final int REABASTECIMIENTO_PRIORIDAD_BAJA = 25;
@@ -34,7 +31,6 @@ public class Producto {
     private FABRICANTES fabricante;                                     // Fabricante del producto
     private GregorianCalendar fechaLanzamiento;                         // Fecha de lanzamiento al mercado del producto
     private boolean esReacondicionado;                                  // Estado del producto. Si es verdadero significa que es de segunda mano, sino es nuevo
-    private List<Comentario> comentarios;                               // Colección de comentarios que los clientes han publicado sobre el producto
 
     /**
      * Constructor parametrizado de la clase. Genera un producto a partir de su nombre, camtidad en stock, cantidad mínima en stock,
@@ -65,7 +61,6 @@ public class Producto {
         this.esReacondicionado = esReacondicionado;
 
         identificador = GeneradorIdentificador.recuperarInstancia().generarIdentificador();
-        comentarios = new ArrayList<>();
     }
 
     /**
@@ -141,6 +136,15 @@ public class Producto {
     }
 
     /**
+     * Método mutador del atributo 'cantidad'
+     *
+     * @param cantidad Incremento del stock del producto
+     */
+    public void varCantidad(int cantidad) {
+        this.cantidad += cantidad;
+    }
+
+    /**
      * Decrementa la cantidad en stock actual por el número de unidades del pedido
      *
      * @param cantidad Número en el que decrementar el stock actual del producto. Solo se admiten valores positivos mayores que 0
@@ -154,37 +158,6 @@ public class Producto {
             return false;                                               // No se pudo servir el pedido
 
         return true;
-    }
-
-    /**
-     * Método mutador del atributo 'cantidad'
-     *
-     * @param cantidad Incremento del stock del producto
-     */
-    public void varCantidad(int cantidad) {
-        this.cantidad += cantidad;
-    }
-
-    /**
-     * Añade un comentario al producto. Solo se permite un comentario por cliente y con una calificación entre 1 y 5 (ambos inclusive)
-     *
-     * @param comentario Objeto de la clase Comentario que representa el comentario a añadir a la colección de comentarios
-     * @return Booleano indicando si se ha podido publicar el comentario. Devuelve falso si el autor ya ha publicado un comentario
-     */
-    public boolean comentar(Comentario comentario) {
-        boolean autorRepetido = false;                                  // Bandera para comprobar la duplicidad de autores en comentarios
-
-        Iterator<Comentario> it = comentarios.iterator();
-        while (it.hasNext() && !autorRepetido) {
-            if (it.next().getAutor().getIdentificador().equals(
-                    comentario.getAutor().getIdentificador()))          // Comprueba que no exista ya un comentario con el mismo autor
-                autorRepetido = true;
-        }
-
-        if (!autorRepetido)                                             // Si no ha habido coincidencia se publica el comentario
-            comentarios.add(comentario);
-
-        return !autorRepetido;
     }
 
     /**
@@ -205,22 +178,6 @@ public class Producto {
     }
 
     /**
-     * Devuelve los comentarios publicados sobre el producto
-     *
-     * @return Cadena formateada con todos los comentarios sobre el producto
-     */
-    private String recuperarComentarios() {
-        String decorador = "\n===============================================================\n";
-        String comentarios = "";
-
-        // Adjunta los detalles de todos los comentarios publicados sobre el producto
-        for (Comentario comentario : this.comentarios)
-            comentarios += decorador + comentario.toString();
-
-        return comentarios;
-    }
-
-    /**
      * @return Cadena formatrada de información del producto
      */
     @Override
@@ -228,13 +185,11 @@ public class Producto {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMATO_FECHA);
         String estado = getEsReacondicionado() ? "Reacondicionado" : "Nuevo";
 
-        String detalles = "PRODUCTO\t" + getNombre() + "-" + getFrabricante().toString() +
+        return "PRODUCTO\t" + getNombre() + "-" + getFrabricante().toString() +
                 "\n\tIdentificador : " + getIdentificador().toString() + "\n\tCantidad en stock : " + getCantidad() +
                 "\n\tCantidad en stock mínima : " + getStockMinimo() + "\n\tPrioridad de reabastecimiento : " +
                 getPrioridad().toString() + "\n\tFecha de lanzamiento : " + simpleDateFormat.format(getFechaLanzamiento().getTime()) +
                 "\n\tEstado : " + estado + "\n\tComentarios : \n";
-
-        return detalles + recuperarComentarios();
     }
 
 }
