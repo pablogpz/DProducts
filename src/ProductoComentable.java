@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
 import java.util.Iterator;
 import java.util.List;
 
@@ -7,9 +6,8 @@ public abstract class ProductoComentable extends Producto {
 
     private List<Comentario> comentarios;                               // Colección de comentarios que los clientes han publicado sobre el producto
 
-    public ProductoComentable(String nombre, int cantidad, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad,
-                              GregorianCalendar fechaLanzamiento, boolean esReacondicionado) {
-        super(nombre, cantidad, stockMinimo, fabricante, prioridad, fechaLanzamiento, esReacondicionado);
+    public ProductoComentable(String nombre, int cantidad, float precio, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad) {
+        super(nombre, cantidad, precio, stockMinimo, fabricante, prioridad);
         comentarios = new ArrayList<>();
         // TODO - implement ProductoComentable.ProductoComentable
     }
@@ -41,7 +39,7 @@ public abstract class ProductoComentable extends Producto {
      *
      * @return Cadena formateada con todos los comentarios sobre el producto
      */
-    private String recuperarComentarios() {
+    protected String recuperarComentarios() {
         String decorador = "\n===============================================================\n";
         String comentarios = "";
 

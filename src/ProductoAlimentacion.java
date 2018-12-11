@@ -1,5 +1,4 @@
 import java.time.Month;
-import java.util.GregorianCalendar;
 
 public class ProductoAlimentacion extends Producto implements Gustable {
 
@@ -12,12 +11,10 @@ public class ProductoAlimentacion extends Producto implements Gustable {
      * @param stockMinimo
      * @param fabricante
      * @param prioridad
-     * @param fechaLanzamiento
-     * @param esReacondicionado
      * @param mesCaducidad
      */
-    public ProductoAlimentacion(String nombre, int cantidad, float precio, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad, GregorianCalendar fechaLanzamiento, boolean esReacondicionado, Month mesCaducidad) {
-        super(nombre, cantidad, stockMinimo, fabricante, prioridad, fechaLanzamiento, esReacondicionado);
+    public ProductoAlimentacion(String nombre, int cantidad, float precio, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad, Month mesCaducidad) {
+        super(nombre, cantidad, precio, stockMinimo, fabricante, prioridad);
         // TODO - implement ProductoAlimentacion.ProductoAlimentacion
     }
 

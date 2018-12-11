@@ -1,9 +1,6 @@
 import Identificadores.GeneradorIdentificador;
 import Identificadores.Identificador;
 
-import java.text.SimpleDateFormat;
-import java.util.GregorianCalendar;
-
 /**
  * Clase que modela el comportamiento base de un producto. Permite consultar sus detalles base y hacer un pedido
  * del un producto en particular. Cada producto es asignado con una clave única en el ciclo de vida del programa que establece
@@ -21,44 +18,39 @@ public abstract class Producto {
     public static final int REABASTECIMIENTO_PRIORIDAD_BAJA = 25;
     public static final int REABASTECIMIENTO_PRIORIDAD_MEDIA = 75;
     public static final int REABASTECIMIENTO_PRIORIDAD_ALTA = 150;
-    private static final String FORMATO_FECHA = "YYYY/MM/dd";           // Formato en el que mostrar las fechas de lanzamiento
 
     private String nombre;                                              // Nombre comercial del producto
     private Identificador identificador;                                // Identificador único del producto
     private int cantidad;                                               // Cantidad actual en stock del producto
+    private float precio;                                               // Precio del producto
     private int stockMinimo;                                            // Cantidad mínima que siempre debe existir en stock
     private PRIORIDAD_PRODUCTO prioridad;                               // Valor directamente relacionado con la cantidad con la que se reabastece el producto
     private FABRICANTES fabricante;                                     // Fabricante del producto
-    private GregorianCalendar fechaLanzamiento;                         // Fecha de lanzamiento al mercado del producto
-    private boolean esReacondicionado;                                  // Estado del producto. Si es verdadero significa que es de segunda mano, sino es nuevo
 
     /**
      * Constructor parametrizado de la clase. Genera un producto a partir de su nombre, camtidad en stock, cantidad mínima en stock,
      * fabricante, prioridad de reabastecimiento, fecha de lanzamiento y estado actual
      *
-     * @param nombre            Nombre del producto
-     * @param cantidad          Cantidad en stock del producto
-     * @param stockMinimo       Cantidad mínima en stock que siempre debe existir del producto
-     * @param fabricante        Valor del tipo enumerado de FABRICANTES
-     * @param prioridad         Valor del tipo enumerado PRIORIDAD_PRODUCTO. Representa la demanda del producto
-     *                          y se tiene en cuenta al reabastecerlo
-     * @param fechaLanzamiento  Fecha de lanzamiento reprensentada por el tipo GregorianCalendar asociado
-     * @param esReacondicionado Estado actual del producto. Representa si es de segunda mano o nuevo
+     * @param nombre      Nombre del producto
+     * @param cantidad    Cantidad en stock del producto
+     * @param precio      Precio del producto
+     * @param stockMinimo Cantidad mínima en stock que siempre debe existir del producto
+     * @param fabricante  Valor del tipo enumerado de FABRICANTES
+     * @param prioridad   Valor del tipo enumerado PRIORIDAD_PRODUCTO. Representa la demanda del producto
+     *                    y se tiene en cuenta al reabastecerlo
      * @throws IllegalArgumentException Si la cantidad es un entero negativo o 0 o si el stock mínimo es un entero negativo
      */
-    public Producto(String nombre, int cantidad, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad,
-                    GregorianCalendar fechaLanzamiento, boolean esReacondicionado) {
-        if (!esCorrecto(cantidad, stockMinimo)) throw new
-                IllegalArgumentException("Parámetros inválidos. Compruebe que 'cantidad' y 'stockMinimo' sean valores positivos" +
+    public Producto(String nombre, int cantidad, float precio, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad) {
+        if (!esCorrecto(cantidad, precio, stockMinimo)) throw new
+                IllegalArgumentException("Parámetros inválidos. Compruebe que 'cantidad', 'precio' y 'stockMinimo' sean valores positivos" +
                 " y mayores que 0 (stockMinimo sí puede ser 0)");
 
         this.nombre = nombre;
         this.cantidad = cantidad;
+        this.precio = precio;
         this.stockMinimo = stockMinimo;
         this.fabricante = fabricante;
         this.prioridad = prioridad;
-        this.fechaLanzamiento = fechaLanzamiento;
-        this.esReacondicionado = esReacondicionado;
 
         identificador = GeneradorIdentificador.recuperarInstancia().generarIdentificador();
     }
@@ -91,6 +83,15 @@ public abstract class Producto {
     }
 
     /**
+     * Método accesor del atributo 'precio'
+     *
+     * @return Precio del producto
+     */
+    protected float getPrecio() {
+        return precio;
+    }
+
+    /**
      * Método accesor del atributo 'stockMinimo'
      *
      * @return Cantidad en stock mínima del producto
@@ -115,24 +116,6 @@ public abstract class Producto {
      */
     protected FABRICANTES getFrabricante() {
         return fabricante;
-    }
-
-    /**
-     * Método accesor del atributo 'fechaLanzamiento'
-     *
-     * @return Objeto Calendar que representa la fecha de lanzamiento del producto
-     */
-    protected GregorianCalendar getFechaLanzamiento() {
-        return fechaLanzamiento;
-    }
-
-    /**
-     * Método accesor del atributo 'esReacondicionado'
-     *
-     * @return Booleano que representa si el producto es de segunda mano o no
-     */
-    protected boolean getEsReacondicionado() {
-        return esReacondicionado;
     }
 
     /**
@@ -179,27 +162,24 @@ public abstract class Producto {
 
     /**
      * @param cantidad    Cantidad de entrada en stock. Debe ser un entero positivo
+     * @param precio      Precio del producto. Debe ser un real no negativo distinto de 0
      * @param stockMinimo Cantidad mínima en inventario. Debe ser un natural
      * @return Si los campos del producto son válidos
      */
-    private boolean esCorrecto(int cantidad, int stockMinimo) {
-        return cantidad >= 0 || stockMinimo > 0;
+    private boolean esCorrecto(int cantidad, float precio, int stockMinimo) {
+        return cantidad >= 0 && precio > 0f && stockMinimo > 0;
     }
 
     /**
-     * @return Cadena formatrada de información del producto
+     * @return Cadena formateada de información del producto
      */
     @Override
     public String toString() {
-        // TODO -
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMATO_FECHA);
-        String estado = getEsReacondicionado() ? "Reacondicionado" : "Nuevo";
-
+        // TODO - Revisar qué mostrar
         return "PRODUCTO\t" + getNombre() + "-" + getFrabricante().toString() +
                 "\n\tIdentificador : " + getIdentificador().toString() + "\n\tCantidad en stock : " + getCantidad() +
                 "\n\tCantidad en stock mínima : " + getStockMinimo() + "\n\tPrioridad de reabastecimiento : " +
-                getPrioridad().toString() + "\n\tFecha de lanzamiento : " + simpleDateFormat.format(getFechaLanzamiento().getTime()) +
-                "\n\tEstado : " + estado + "\n\tComentarios : \n";
+                getPrioridad().toString();
     }
 
 }

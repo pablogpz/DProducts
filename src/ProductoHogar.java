@@ -1,5 +1,3 @@
-import java.util.GregorianCalendar;
-
 public class ProductoHogar extends ProductoComentable implements Gustable, Descontable {
 
     private PARTES_CASA parteCasa;
@@ -11,12 +9,10 @@ public class ProductoHogar extends ProductoComentable implements Gustable, Desco
      * @param stockMinimo
      * @param fabricante
      * @param prioridad
-     * @param fechaLanzamiento
-     * @param esReacondicionado
      * @param parteCasa
      */
-    public ProductoHogar(String nombre, int cantidad, float precio, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad, GregorianCalendar fechaLanzamiento, boolean esReacondicionado, PARTES_CASA parteCasa) {
-        super(nombre, cantidad, stockMinimo, fabricante, prioridad, fechaLanzamiento, esReacondicionado);
+    public ProductoHogar(String nombre, int cantidad, float precio, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad, PARTES_CASA parteCasa) {
+        super(nombre, cantidad, precio, stockMinimo, fabricante, prioridad);
         // TODO - implement ProductoHogar.ProductoHogar
     }
 
