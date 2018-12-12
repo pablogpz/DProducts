@@ -11,7 +11,7 @@ public interface Descontable {
     /**
      * Método accesor del atributo descuento
      *
-     * @return devuelve el valor del atributo descuento
+     * @return Valor del atributo descuento
      */
     int getDescuento();
 
