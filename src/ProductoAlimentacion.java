@@ -1,5 +1,15 @@
 import java.time.Month;
 
+/**
+ * Clase que extiende el producto base. Modela un producto de alimentación con mes de caducidad,
+ * descontable y gustable
+ *
+ * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
+ * @grupo : Wild True
+ * Entrega : EC1
+ * Curso : 2º GIIIS (Grupo A)
+ */
+
 public class ProductoAlimentacion extends Producto implements Gustable, Descontable {
 
     private static final int LIKES_BASE = 0;                                // Likes base del producto de alimentacion
@@ -65,8 +75,8 @@ public class ProductoAlimentacion extends Producto implements Gustable, Desconta
      * {@inheritDoc}
      */
     @Override
-    public void calcularPrecioDescontado() {
-
+    public float calcularPrecioDescontado() {
+        return getPrecio() * (1 + getDescuento());
     }
 
     /**

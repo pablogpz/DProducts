@@ -2,6 +2,16 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Clase que extiende el producto base para añadir comentarios.
+ * Permite realizar comentarios sobre el producto y recuperarlos
+ *
+ * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
+ * @grupo : Wild True
+ * Entrega : EC1
+ * Curso : 2º GIIIS (Grupo A)
+ */
+
 public abstract class ProductoComentable extends Producto {
 
     private List<Comentario> comentarios;                               // Colección de comentarios que los clientes han publicado sobre el producto
@@ -66,7 +76,11 @@ public abstract class ProductoComentable extends Producto {
      */
     @Override
     public String toString() {
-        return super.toString() + "\n\tComentarios:\n" + recuperarComentarios();
+        StringBuilder stringBuilder = new StringBuilder().append(super.toString());
+
+        stringBuilder.append("\n\t").append("Comentarios:\n").append(recuperarComentarios());
+
+        return stringBuilder.toString();
     }
 
     /**

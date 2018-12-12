@@ -7,6 +7,7 @@
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
  */
+
 public enum PARTES_CASA {
     SALA_ESTAR,
     COCINA,

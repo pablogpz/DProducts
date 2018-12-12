@@ -9,9 +9,9 @@
 public interface Descontable {
 
     /**
-     * Cálcula el valor del atributo precio una vez aplicado el descuento correspondiente
+     * Calcula el valor del atributo precio una vez aplicado el descuento correspondiente
      */
-    void calcularPrecioDescontado();
+    float calcularPrecioDescontado();
 
     /**
      * Método accesor del atributo descuento
