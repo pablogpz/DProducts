@@ -101,11 +101,9 @@ public class Comentario {
     }
 
     /**
-     * Comprueba la validez de los campos que almacena un comentario
-     *
      * @param texto      Cuerpo del comentario. No puede estar vacío
      * @param puntuacion Valoración del comentario. Debe ser un valor en el rango [1,5]
-     * @return Validez del comentario
+     * @return Si es valido el comentario
      */
     private boolean esCorrecto(String texto, int puntuacion) {
         return texto.replaceAll("\\s+", "").length() != 0 &&

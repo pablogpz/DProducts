@@ -29,11 +29,16 @@ public abstract class Cliente {
     /**
      * Constructor parametrizado de la clase. Genera un cliente a partir de un nombre, una edad y una localidad de residencia
      *
-     * @param nombre    Nombre completo del cliente
-     * @param edad      Edad actual del cliente
-     * @param localidad Nombre de la localidad de residencia del cliente
+     * @param nombre    Nombre completo del cliente. No puede ser vacío
+     * @param edad      Edad actual del cliente. Debe ser un natural
+     * @param localidad Nombre de la localidad de residencia del cliente. No puede ser vacío
+     * @throws IllegalArgumentException Si alguno de los parámetros no es válido
      */
     public Cliente(String nombre, int edad, String localidad) {
+        if (!esCorrecto(nombre, edad, localidad))
+            throw new IllegalArgumentException("ERROR al crear un cliente. Compruebe que el ni el nombre ni la localidad sean" +
+                    "vacíos, y que la edad sea un natural");
+
         this.nombre = nombre;
         this.edad = edad;
         this.localidad = localidad;
@@ -86,6 +91,47 @@ public abstract class Cliente {
      */
     protected Inventario getTienda() {
         return tienda;
+    }
+
+    /**
+     * Método mutador del atributo 'nombre'
+     *
+     * @param nombre Nuevo nombre del cliente. Debe ser válido
+     * @return Si se aceptaron los cambios
+     */
+    public boolean setNombre(String nombre) {
+        boolean esCorrecto = esCorrecto(nombre, getEdad(), getLocalidad());
+        if (esCorrecto) {
+            this.nombre = nombre;
+        }
+        return esCorrecto;
+    }
+
+    /**
+     * Método mutador del atributo 'edad'
+     *
+     * @param edad Nueva edad del cliente. Debe ser válida
+     */
+    public boolean setEdad(int edad) {
+        boolean esCorrecto = esCorrecto(getNombre(), edad, getLocalidad());
+        if (esCorrecto) {
+            this.edad = edad;
+        }
+        return esCorrecto;
+    }
+
+    /**
+     * Método mutador del atributo 'localidad'
+     *
+     * @param localidad Nueva residencia del cliente. Debe ser válida
+     * @return Si se aceptaron los cambios
+     */
+    public boolean setLocalidad(String localidad) {
+        boolean esCorrecto = esCorrecto(getNombre(), getEdad(), localidad);
+        if (esCorrecto) {
+            this.localidad = localidad;
+        }
+        return esCorrecto;
     }
 
     /**
@@ -179,6 +225,7 @@ public abstract class Cliente {
      */
     // TODO - mover la implementación
     public abstract boolean realizarPedido();
+
 //        if (existeAliasFavorito(alias)) {                               // Comprueba si existe el producto favorito
 //            Producto producto = recuperarFavorito(alias);
 //            if (getTienda().venderProducto(producto, cantidad)) {       // Intenta despachar el pedido
@@ -203,6 +250,7 @@ public abstract class Cliente {
      */
     // TODO - mover la implementación
     public abstract boolean comentarProducto(String alias);
+
 //        Comentario comentario;
 //
 //        if (existeAliasFavorito(alias)) {                               // Comprueba si existe el producto favorito
@@ -276,6 +324,18 @@ public abstract class Cliente {
             return null;                                                // No existe ningún producto para el alias dado
         }
         return productosFavoritos.get(alias);                           // Devuelve el producto favorito
+    }
+
+    /**
+     * @param nombre    Nombre del cliente. No puede estar vacío
+     * @param edad      Edad del cliente. Debe ser un natural
+     * @param localidad Residencia del cliente. No puede estar vacío
+     * @return Si los campos del cliente son válidos
+     */
+    private boolean esCorrecto(String nombre, int edad, String localidad) {
+        return nombre.replaceAll("\\s+", "").length() != 0 &&
+                edad > 0 &&
+                localidad.replaceAll("\\s+", "").length() != 0;
     }
 
     /**

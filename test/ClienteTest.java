@@ -47,6 +47,21 @@ public class ClienteTest {
     }
 
     /**
+     * Testea que se produzcan las excepciones de argumentos ilegales al intentar instanciar clientes con nombres
+     * y localidades vacías y edades no naturales
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void comprobarArgumentos() {
+        Cliente cliente;
+
+        cliente = new ClienteEstandar("", 18, "Localidad");
+        cliente = new ClienteEstandar("Nombre", 0, "Localidad");
+        cliente = new ClienteEstandar("Nombre", -1, "Localidad");
+        cliente = new ClienteEstandar("Nombre", 18, "");
+
+    }
+
+    /**
      * Testeo del método accesor del atributo 'nombre'
      */
     @Test
@@ -84,6 +99,39 @@ public class ClienteTest {
     @Test
     public void getTienda() {
         assertEquals(Inventario.recuperarInstancia(), cliente.getTienda());
+    }
+
+    /**
+     * Testeo del método mutador del atributo 'nombre'
+     */
+    @Test
+    public void setNombre() {
+        String nuevoNombre = "Nuevo nombre";
+        assertTrue(cliente.setNombre(nuevoNombre));
+        assertEquals(nuevoNombre, cliente.getNombre());
+    }
+
+    /**
+     * Testeo del método mutador del atributo 'edad'
+     */
+    @Test
+    public void setEdad() {
+        int nuevaEdad = 11;
+        assertTrue(cliente.setEdad(nuevaEdad));
+        assertEquals(nuevaEdad, cliente.getEdad());
+        assertFalse(cliente.setEdad(0));
+        assertFalse(cliente.setEdad(-1));
+    }
+
+    /**
+     * Testeo del método mutador del atributo 'localidad'
+     */
+    @Test
+    public void setLocalidad() {
+        String nuevaLocalidad = "Nueva localidad";
+        assertTrue(cliente.setLocalidad(nuevaLocalidad));
+        assertEquals(nuevaLocalidad, cliente.getLocalidad());
+        assertFalse(cliente.setLocalidad(""));
     }
 
     /**
@@ -153,4 +201,5 @@ public class ClienteTest {
 //        assertFalse(cliente.comentarProducto("noAlias", "Test", 5));
 //        assertFalse(cliente.comentarProducto(null, "Test", 5));
     }
+
 }
