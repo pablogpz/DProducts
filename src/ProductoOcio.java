@@ -43,7 +43,7 @@ public class ProductoOcio extends ProductoComentable implements Descontable {
     }
 
     @Override
-    public void setDescuento() {
+    public void setDescuento(float descuento) {
         // TODO - implement
     }
 }

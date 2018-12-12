@@ -28,6 +28,7 @@ public abstract class Producto {
     private int stockMinimo;                                            // Cantidad mínima que siempre debe existir en stock
     private PRIORIDAD_PRODUCTO prioridad;                               // Valor directamente relacionado con la cantidad con la que se reabastece el producto
     private FABRICANTES fabricante;                                     // Fabricante del producto
+
     /**
      * Constructor parametrizado de la clase. Genera un producto a partir de su nombre, camtidad en stock, cantidad mínima en stock,
      * fabricante, prioridad de reabastecimiento, fecha de lanzamiento y estado actual
@@ -246,10 +247,10 @@ public abstract class Producto {
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof Producto)) return false;
+        if (this == obj) return true;                                   // Comprueba si es la misma instancia
+        if (!(obj instanceof Producto)) return false;                   // Si pertenecen a la misma clase no procede
 
-        Producto castedObj = (Producto) obj;
+        Producto castedObj = (Producto) obj;                            // Casteado del objeto
 
         return getNombre().equals(castedObj.getNombre()) &&
                 getIdentificador().equals(castedObj.getIdentificador()) &&
@@ -265,8 +266,8 @@ public abstract class Producto {
      */
     @Override
     public int hashCode() {
-        int result = super.hashCode();
-        int primo = 37;
+        int result = super.hashCode();                                  // Hash base
+        int primo = 37;                                                 // Operador primo
 
         result = primo * result + getNombre().hashCode();
         result = primo * result + getIdentificador().hashCode();

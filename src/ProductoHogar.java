@@ -46,7 +46,7 @@ public class ProductoHogar extends ProductoComentable implements Gustable, Desco
     }
 
     @Override
-    public void setDescuento() {
+    public void setDescuento(float nuevoDescuento) {
         // TODO - implement
     }
 

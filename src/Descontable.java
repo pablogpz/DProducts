@@ -13,13 +13,13 @@ public interface Descontable {
      *
      * @return Valor del atributo descuento
      */
-    int getDescuento();
+    float getDescuento();
 
     /**
      * Método modificador del atributo descuento
      *
      * @param nuevoDescuento Nuevo descuento del precio
      */
-    void setDescuento(int nuevoDescuento);
+    void setDescuento(float nuevoDescuento);
 
 }

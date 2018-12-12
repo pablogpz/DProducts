@@ -88,7 +88,7 @@ public class ProductoTest {
      * Testeo del método accesor del atribtuo 'fabricante'
      */
     @Test
-    public void getFrabricante() {
+    public void getFabricante() {
         assertEquals(FABRICANTES.ACER, producto.getFabricante());
     }
 
@@ -196,4 +196,5 @@ public class ProductoTest {
                 "\tEstado : Reacondicionado\n" +
                 "\tComentarios : \n", producto.toString());
     }
+
 }
