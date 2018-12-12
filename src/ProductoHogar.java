@@ -35,8 +35,9 @@ public class ProductoHogar extends ProductoComentable implements Gustable, Desco
     }
 
     @Override
-    public void calcularPrecioDescontado() {
+    public float calcularPrecioDescontado() {
         // TODO - implement
+        return 0f;
     }
 
     @Override
