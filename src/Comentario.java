@@ -146,7 +146,7 @@ public class Comentario {
      */
     @Override
     public int hashCode() {
-        int hashCode = super.hashCode();
+        int hashCode = super.hashCode();                                    // Hash base
         int primo = 37;                                                     // Operador primo
 
         hashCode += primo * getAutor().hashCode();

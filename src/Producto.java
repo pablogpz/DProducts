@@ -230,11 +230,16 @@ public abstract class Producto {
      */
     @Override
     public String toString() {
-        // TODO - Revisar qué mostrar
-        return "PRODUCTO\t" + getNombre() + "-" + getFabricante().toString() +
-                "\n\tIdentificador : " + getIdentificador().toString() + "\n\tCantidad en stock : " + getCantidad() +
-                "\n\tCantidad en stock mínima : " + getStockMinimo() + "\n\tPrioridad de reabastecimiento : " +
-                getPrioridad().toString();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("PRODUCTO\t");
+        stringBuilder.append(getNombre()).append("-").append(getFabricante().toString());
+        stringBuilder.append("\n\t").append("Identificador : ").append(getIdentificador().toString());
+        stringBuilder.append("\n\t").append("Cantidad en stock : ").append(getCantidad());
+        stringBuilder.append("\n\t").append("Cantidad en stock mínima : ").append(getStockMinimo());
+        stringBuilder.append("\n\tPrioridad de reabastecimiento : ").append(getPrioridad().toString());
+
+        return stringBuilder.toString();
     }
 
 

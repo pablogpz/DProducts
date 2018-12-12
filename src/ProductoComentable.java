@@ -91,7 +91,7 @@ public abstract class ProductoComentable extends Producto {
      * @return Valor hashCode único de instancia. Basado en productos de números primos
      */
     public int hashCode() {
-        int hashCode = super.hashCode();
+        int hashCode = super.hashCode();                                    // Hash base
         int primo = 37;                                                     // Operador primo
 
         hashCode += primo * recuperarComentarios().hashCode();
