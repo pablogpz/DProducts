@@ -24,7 +24,7 @@ public class Comentario {
      * @throws IllegalArgumentException Si cualquierda de los parámetros son inválidos
      */
     public Comentario(Cliente autor, String texto, int puntuacion) {
-        if (esCorrecto(texto, puntuacion))
+        if (!esCorrecto(texto, puntuacion))
             throw new IllegalArgumentException("ERROR al publicar un comentario." +
                     " Compruebe que el cuerpo del comentario contenga texto" +
                     " y que la puntuación esté en el rango [1,5]");
@@ -73,19 +73,31 @@ public class Comentario {
     /**
      * Método mutador del atributo 'texto'
      *
-     * @param texto Nuevo texto del comentario
+     * @param texto Nuevo texto del comentario. Debe ser correcto
+     * @return Si el cambio fue aceptado
      */
-    public void setTexto(String texto) {
-        this.texto = texto;
+    public boolean setTexto(String texto) {
+        boolean esCorrecto = esCorrecto(texto, getPuntuacion());
+
+        if (esCorrecto)
+            this.texto = texto;
+
+        return esCorrecto;
     }
 
     /**
      * Método mutador del atributo 'puntuacion'
      *
-     * @param puntuacion Nueva puntuación del comentario
+     * @param puntuacion Nueva puntuación del comentario. Debe ser correcto
+     * @return Si el cambio fue aceptado
      */
-    public void setPuntuacion(int puntuacion) {
-        this.puntuacion = puntuacion;
+    public boolean setPuntuacion(int puntuacion) {
+        boolean esCorrecto = esCorrecto(getTexto(), puntuacion);
+
+        if (esCorrecto)
+            this.puntuacion = puntuacion;
+
+        return esCorrecto;
     }
 
     /**
@@ -96,8 +108,8 @@ public class Comentario {
      * @return Validez del comentario
      */
     private boolean esCorrecto(String texto, int puntuacion) {
-        return texto.replaceAll("\\s+", "").length() == 0 ||
-                puntuacion < 1 || puntuacion > 5;
+        return texto.replaceAll("\\s+", "").length() != 0 &&
+                puntuacion >= 1 && puntuacion <= 5;
     }
 
     /**
@@ -111,4 +123,5 @@ public class Comentario {
                 "\nCalificación " + "*****".substring(0, getPuntuacion()) +
                 "\n\tReseña :\n" + getTexto();
     }
+
 }

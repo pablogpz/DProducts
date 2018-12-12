@@ -1,8 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 
 /**
  * CLASE DE TESTEO de la clase Comentario.
@@ -74,6 +73,7 @@ public class ComentarioTest {
         String nuevoTexto = "Nuevo texto";
         comentario.setTexto(nuevoTexto);
         assertEquals(nuevoTexto, comentario.getTexto());
+        assertFalse(comentario.setTexto(""));
     }
 
     @Test
@@ -81,6 +81,8 @@ public class ComentarioTest {
         int nuevaPuntuacion = 4;
         comentario.setPuntuacion(nuevaPuntuacion);
         assertEquals(nuevaPuntuacion, comentario.getPuntuacion());
+        assertFalse(comentario.setPuntuacion(0));
+        assertFalse(comentario.setPuntuacion(6));
     }
 
     /**

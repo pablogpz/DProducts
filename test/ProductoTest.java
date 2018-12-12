@@ -61,6 +61,14 @@ public class ProductoTest {
     }
 
     /**
+     * Testeo del método accesor del atributo 'precio'
+     */
+    @Test
+    public void getPrecio() {
+        assertEquals(1f, producto.getPrecio(), 0);
+    }
+
+    /**
      * Testeo del método accesor del atribtuo 'stockMínimo'
      */
     @Test
@@ -84,6 +92,59 @@ public class ProductoTest {
         assertEquals(FABRICANTES.ACER, producto.getFrabricante());
     }
 
+
+    @Test
+    public void setNombre() {
+        String nuevoNombre = "Nuevo nombre";
+        producto.setNombre(nuevoNombre);
+        assertEquals(nuevoNombre, producto.getNombre());
+    }
+
+    @Test
+    public void setPrecio() {
+        float nuevoPrecio = 2.5f;
+        assertTrue(producto.setPrecio(nuevoPrecio));
+        assertEquals(nuevoPrecio, producto.getPrecio(), 0);
+        assertFalse(producto.setPrecio(0f));
+        assertFalse(producto.setPrecio(-1f));
+    }
+
+    @Test
+    public void setStockMinimo() {
+        int nuevoStockMinimo = 20;
+        assertTrue(producto.setStockMinimo(nuevoStockMinimo));
+        assertEquals(nuevoStockMinimo, producto.getStockMinimo());
+        assertFalse(producto.setStockMinimo(-1));
+    }
+
+    @Test
+    public void setPrioridad() {
+        producto.setPrioridad(PRIORIDAD_PRODUCTO.BAJA);
+        assertEquals(PRIORIDAD_PRODUCTO.BAJA, producto.getPrioridad());
+    }
+
+    @Test
+    public void setFabricante() {
+        producto.setFabricante(FABRICANTES.AMD);
+        assertEquals(FABRICANTES.AMD, producto.getFrabricante());
+    }
+
+    @Test
+    public void varCantidad() {
+        producto.varCantidad(10);
+        assertEquals(40, producto.getCantidad());
+        producto.varCantidad(-10);
+        assertEquals(30, producto.getCantidad());
+    }
+
+    @Test
+    public void enStockMinimo() {
+        assertFalse(producto.enStockMinimo());
+        producto.varCantidad(-6);
+        assertTrue(producto.enStockMinimo());
+        producto.varCantidad(1);
+        assertFalse(producto.enStockMinimo());
+    }
 
     /**
      * Testeo del método 'entregar()'. Comprueba que solo se puedan entregar cantidades positivas distintas de 0
@@ -135,5 +196,4 @@ public class ProductoTest {
                 "\tEstado : Reacondicionado\n" +
                 "\tComentarios : \n", producto.toString());
     }
-
 }

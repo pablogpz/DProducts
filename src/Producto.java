@@ -21,12 +21,13 @@ public abstract class Producto {
 
     private String nombre;                                              // Nombre comercial del producto
     private Identificador identificador;                                // Identificador único del producto
+
     private int cantidad;                                               // Cantidad actual en stock del producto
+
     private float precio;                                               // Precio del producto
     private int stockMinimo;                                            // Cantidad mínima que siempre debe existir en stock
     private PRIORIDAD_PRODUCTO prioridad;                               // Valor directamente relacionado con la cantidad con la que se reabastece el producto
     private FABRICANTES fabricante;                                     // Fabricante del producto
-
     /**
      * Constructor parametrizado de la clase. Genera un producto a partir de su nombre, camtidad en stock, cantidad mínima en stock,
      * fabricante, prioridad de reabastecimiento, fecha de lanzamiento y estado actual
@@ -116,6 +117,61 @@ public abstract class Producto {
      */
     protected FABRICANTES getFrabricante() {
         return fabricante;
+    }
+
+    /**
+     * Método mutador del atributo 'nombre'
+     *
+     * @param nombre Nuevo nombre del producto
+     */
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
+     * Método mutador del atributo 'precio'
+     *
+     * @param precio Nuevo precio del producto. Debe ser correcto
+     * @return Si el cambio no fue aceptado
+     */
+    public boolean setPrecio(float precio) {
+        boolean esCorrecto = esCorrecto(getCantidad(), precio, getStockMinimo());
+        if (esCorrecto) {
+            this.precio = precio;
+        }
+        return esCorrecto;
+    }
+
+    /**
+     * Método mutador del atributo 'stockMinimo'
+     *
+     * @param stockMinimo Nuevo stock minimo del producto. Debe ser correcto
+     * @return Si el cambio fue aceptado
+     */
+    public boolean setStockMinimo(int stockMinimo) {
+        boolean esCorrecto = esCorrecto(getCantidad(), getPrecio(), stockMinimo);
+        if (esCorrecto) {
+            this.stockMinimo = stockMinimo;
+        }
+        return esCorrecto;
+    }
+
+    /**
+     * Método mutador del atributo 'prioridad'
+     *
+     * @param prioridad Nueva prioridad del producto
+     */
+    public void setPrioridad(PRIORIDAD_PRODUCTO prioridad) {
+        this.prioridad = prioridad;
+    }
+
+    /**
+     * Método mutador del atributo 'fabricante'
+     *
+     * @param fabricante Nuevo fabricante del producto
+     */
+    public void setFabricante(FABRICANTES fabricante) {
+        this.fabricante = fabricante;
     }
 
     /**
