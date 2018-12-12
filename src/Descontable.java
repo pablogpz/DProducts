@@ -1,9 +1,25 @@
+/**
+ * Interfaz para aquellos productos cuyo precio sea modificable
+ */
 public interface Descontable {
 
+    /**
+     * Cálcula el valor del atributo precio una vez aplicado el descuento correspondiente
+     */
     void calcularPrecioDescontado();
 
-    float getDescuento();
+    /**
+     * Método accesor del atributo descuento
+     *
+     * @return devuelve el valor del atributo descuento
+     */
+    int getDescuento();
 
-    void setDescuento();
+    /**
+     * Método modificador del atributo descuento
+     *
+     * @param nuevoDescuento Nuevo descuento del precio
+     */
+    void setDescuento(int nuevoDescuento);
 
 }
