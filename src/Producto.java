@@ -242,7 +242,7 @@ public abstract class Producto {
 
     /**
      * @param obj Objeto con el que se ha de comparar
-     * @return Devuelve verdadero si 'obj' es hay coincidencia entre todos los atributos
+     * @return Devuelve verdadero si entre esta instancia y 'obj' hay coincidencia entre todos los atributos
      * y pertenecen a la misma clase
      */
     @Override
@@ -262,21 +262,21 @@ public abstract class Producto {
     }
 
     /**
-     * @return valor hashCode único de la clase Producto. Basado en productos de números primos
+     * @return Valor hashCode único de instancia. Basado en productos de números primos
      */
     @Override
     public int hashCode() {
-        int result = super.hashCode();                                  // Hash base
-        int primo = 37;                                                 // Operador primo
+        int hashCode = super.hashCode();                                  // Hash base
+        int primo = 37;                                                   // Operador primo
 
-        result = primo * result + getNombre().hashCode();
-        result = primo * result + getIdentificador().hashCode();
-        result = primo * result + getCantidad();
-        result = primo * result + Math.round(getPrecio());
-        result = primo * result + getStockMinimo();
-        result = primo * result + getPrioridad().hashCode();
-        result = primo * result + getFabricante().hashCode();
+        hashCode += primo * getNombre().hashCode();
+        hashCode += primo * getIdentificador().hashCode();
+        hashCode += primo * getCantidad();
+        hashCode += primo * Math.round(getPrecio());
+        hashCode += primo * getStockMinimo();
+        hashCode += primo * getPrioridad().hashCode();
+        hashCode += primo * getFabricante().hashCode();
 
-        return result;
+        return hashCode;
     }
 }

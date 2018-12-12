@@ -122,4 +122,36 @@ public class Comentario {
                 "\n\tReseña :\n" + getTexto();
     }
 
+    /**
+     * @param obj Objeto con el que comparar
+     * @return Devuelve verdadero si entre esta instancia y 'obj' hay coincidencia entre todos los atributos
+     * y pertenecen a la misma clase
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;                                       // Comprueba si es la misma instancia
+        if (!(this instanceof Comentario)) return false;                    // Si pertenecen a la misma clase no procede
+
+        Comentario castedObj = (Comentario) obj;                            // Casteado del objeto
+
+        return getAutor().equals(castedObj.getAutor()) &&
+                getPuntuacion() == castedObj.getPuntuacion() &&
+                getTexto().equals(castedObj.getTexto());
+    }
+
+    /**
+     * @return Valor hashCode único de instancia. Basado en productos de números primos
+     */
+    @Override
+    public int hashCode() {
+        int hashCode = super.hashCode();
+        int primo = 37;                                                     // Operador primo
+
+        hashCode += primo * getAutor().hashCode();
+        hashCode += primo * getPuntuacion();
+        hashCode += primo * getTexto().hashCode();
+
+        return hashCode;
+    }
+
 }

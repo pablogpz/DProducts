@@ -96,4 +96,25 @@ public class ComentarioTest {
                 "\tReseña :\n" +
                 "Test", comentario.toString());
     }
+
+    /**
+     * Testeo del método 'equals()'
+     */
+    @Test
+    public void testEquals() {
+        assertTrue(comentario.equals(comentario));
+        assertTrue(comentario.equals(new Comentario(cliente, "Test", 5)));
+        assertFalse(comentario.equals(new Comentario(cliente, "Otro test", 5)));
+    }
+
+    /**
+     * Testeo del método 'hashCode()'
+     */
+    @Test
+    public void testHashCode() {
+        assertTrue(comentario.hashCode() == comentario.hashCode());
+        assertFalse(comentario.hashCode() == new Comentario(cliente, "Test", 5).hashCode());
+        assertFalse(comentario.hashCode() == new Comentario(cliente, "Otro test", 5).hashCode());
+    }
+    
 }
