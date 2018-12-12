@@ -123,7 +123,7 @@ public abstract class Producto {
      *
      * @param nombre Nuevo nombre del producto
      */
-    public void setNombre(String nombre) {
+    protected void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
@@ -133,7 +133,7 @@ public abstract class Producto {
      * @param precio Nuevo precio del producto. Debe ser correcto
      * @return Si el cambio no fue aceptado
      */
-    public boolean setPrecio(float precio) {
+    protected boolean setPrecio(float precio) {
         boolean esCorrecto = esCorrecto(getCantidad(), precio, getStockMinimo());
         if (esCorrecto) {
             this.precio = precio;
@@ -147,7 +147,7 @@ public abstract class Producto {
      * @param stockMinimo Nuevo stock minimo del producto. Debe ser correcto
      * @return Si el cambio fue aceptado
      */
-    public boolean setStockMinimo(int stockMinimo) {
+    protected boolean setStockMinimo(int stockMinimo) {
         boolean esCorrecto = esCorrecto(getCantidad(), getPrecio(), stockMinimo);
         if (esCorrecto) {
             this.stockMinimo = stockMinimo;
@@ -160,7 +160,7 @@ public abstract class Producto {
      *
      * @param prioridad Nueva prioridad del producto
      */
-    public void setPrioridad(PRIORIDAD_PRODUCTO prioridad) {
+    protected void setPrioridad(PRIORIDAD_PRODUCTO prioridad) {
         this.prioridad = prioridad;
     }
 
@@ -169,7 +169,7 @@ public abstract class Producto {
      *
      * @param fabricante Nuevo fabricante del producto
      */
-    public void setFabricante(FABRICANTES fabricante) {
+    protected void setFabricante(FABRICANTES fabricante) {
         this.fabricante = fabricante;
     }
 
@@ -178,7 +178,7 @@ public abstract class Producto {
      *
      * @param cantidad Incremento del stock del producto
      */
-    public void varCantidad(int cantidad) {
+    protected void varCantidad(int cantidad) {
         this.cantidad += cantidad;
     }
 

@@ -99,7 +99,7 @@ public abstract class Cliente {
      * @param nombre Nuevo nombre del cliente. Debe ser válido
      * @return Si se aceptaron los cambios
      */
-    public boolean setNombre(String nombre) {
+    protected boolean setNombre(String nombre) {
         boolean esCorrecto = esCorrecto(nombre, getEdad(), getLocalidad());
         if (esCorrecto) {
             this.nombre = nombre;
@@ -112,7 +112,7 @@ public abstract class Cliente {
      *
      * @param edad Nueva edad del cliente. Debe ser válida
      */
-    public boolean setEdad(int edad) {
+    protected boolean setEdad(int edad) {
         boolean esCorrecto = esCorrecto(getNombre(), edad, getLocalidad());
         if (esCorrecto) {
             this.edad = edad;
@@ -126,7 +126,7 @@ public abstract class Cliente {
      * @param localidad Nueva residencia del cliente. Debe ser válida
      * @return Si se aceptaron los cambios
      */
-    public boolean setLocalidad(String localidad) {
+    protected boolean setLocalidad(String localidad) {
         boolean esCorrecto = esCorrecto(getNombre(), getEdad(), localidad);
         if (esCorrecto) {
             this.localidad = localidad;
