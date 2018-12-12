@@ -48,6 +48,15 @@ public class ProductoAlimentacion extends Producto implements Gustable, Desconta
     }
 
     /**
+     * Método mutador del atributo 'mesCaducidad'
+     *
+     * @param mesCaducidad Nuevo mes de caducidad del producto
+     */
+    protected void setMesCaducidad(Month mesCaducidad) {
+        this.mesCaducidad = mesCaducidad;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override

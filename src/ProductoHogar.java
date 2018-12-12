@@ -47,6 +47,15 @@ public class ProductoHogar extends ProductoComentable implements Gustable, Desco
     }
 
     /**
+     * Método mutador del atriburo 'parteCasa'
+     *
+     * @param parteCasa Nueva parte de la casa del producto
+     */
+    protected void setParteCasa(PARTES_CASA parteCasa) {
+        this.parteCasa = parteCasa;
+    }
+
+    /**
      * {@inheritDoc}
      */
     @Override
