@@ -360,4 +360,57 @@ public abstract class Cliente {
         System.out.println(mensaje);
     }
 
+    /**
+     * @return Cadena con el contenido base del cliente formateado (nombre, identificador, edad y localidad)
+     */
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("CLIENTE\t").append(getNombre());
+        stringBuilder.append("\n\t").append("Identificador : ").append(getIdentificador().toString());
+        stringBuilder.append("\n\t").append("Edad : ").append(getEdad());
+        stringBuilder.append("\n\t").append("Localidad : ").append(getLocalidad());
+
+        return stringBuilder.toString();
+    }
+
+    /**
+     * @param obj Objeto con el que comparar
+     * @return Devuelve verdadero si entre esta instancia y 'obj' hay coincidencia entre todos los atributos
+     * y pertenecen a la misma clase
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;                                       // Comprueba si es la misma instancia
+        if (!(obj instanceof Cliente)) return false;                       // Si pertenecen a la misma clase no procede
+
+        Cliente objCasteado = (Cliente) obj;                                // Casteado del objeto
+
+        return getNombre().equals(objCasteado.getNombre()) &&
+                getIdentificador() == objCasteado.getIdentificador() &&
+                getEdad() == objCasteado.getEdad() &&
+                getLocalidad().equals(objCasteado.getLocalidad()) &&
+                getTienda().equals(objCasteado.getTienda()) &&
+                productosFavoritos.equals(objCasteado.productosFavoritos);
+    }
+
+    /**
+     * @return Valor hashCode único de instancia. Basado en productos de números primos
+     */
+    @Override
+    public int hashCode() {
+        int hashCode = 0;
+        int primo = 37;                                                     // Operador primo
+
+        hashCode += primo * getNombre().hashCode();
+        hashCode += primo * getIdentificador().hashCode();
+        hashCode += primo * getEdad();
+        hashCode += primo * getLocalidad().hashCode();
+        hashCode += primo * getTienda().hashCode();
+        hashCode += primo * productosFavoritos.hashCode();
+
+        return hashCode;
+    }
+
 }
