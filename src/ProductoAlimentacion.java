@@ -119,7 +119,7 @@ public class ProductoAlimentacion extends Producto implements Gustable, Desconta
 
         ProductoAlimentacion objCasteado = (ProductoAlimentacion) obj;      // Casteado del objeto
 
-        return super.equals(objCasteado) &&
+        return super.equals(obj) &&
                 getMesCaducidad().equals(objCasteado.getMesCaducidad()) &&
                 getLikes() == objCasteado.getLikes() &&
                 getDescuento() == objCasteado.getDescuento();

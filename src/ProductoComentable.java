@@ -96,7 +96,7 @@ public abstract class ProductoComentable extends Producto {
 
         ProductoComentable objCasteado = (ProductoComentable) obj;          // Casteado del objeto
 
-        return super.equals(objCasteado) &&
+        return super.equals(obj) &&
                 recuperarComentarios().equals(objCasteado.recuperarComentarios());
 
     }
