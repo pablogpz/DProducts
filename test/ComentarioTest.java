@@ -1,8 +1,7 @@
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertSame;
+import static org.junit.Assert.*;
 
 /**
  * CLASE DE TESTEO de la clase Comentario.
@@ -24,9 +23,9 @@ public class ComentarioTest {
     // Cliente de ejemplo
     private static Cliente cliente;
 
-    @BeforeClass
-    public static void setUp() {
-        cliente = new Cliente("Nombre", 18, "Localidad");
+    @Before
+    public void setUp() {
+        cliente = new ClienteEstandar("Nombre", 18, "Localidad");
         comentario = new Comentario(cliente, "Test", 5);
     }
 
@@ -62,6 +61,30 @@ public class ComentarioTest {
         assertEquals(5, comentario.getPuntuacion());
     }
 
+    @Test
+    public void setAutor() {
+        ClienteEstandar nuevoAutor = new ClienteEstandar("Nuevo nombre", 18, "Localidad");
+        comentario.setAutor(nuevoAutor);
+        assertEquals(nuevoAutor, comentario.getAutor());
+    }
+
+    @Test
+    public void setTexto() {
+        String nuevoTexto = "Nuevo texto";
+        comentario.setTexto(nuevoTexto);
+        assertEquals(nuevoTexto, comentario.getTexto());
+        assertFalse(comentario.setTexto(""));
+    }
+
+    @Test
+    public void setPuntuacion() {
+        int nuevaPuntuacion = 4;
+        comentario.setPuntuacion(nuevaPuntuacion);
+        assertEquals(nuevaPuntuacion, comentario.getPuntuacion());
+        assertFalse(comentario.setPuntuacion(0));
+        assertFalse(comentario.setPuntuacion(6));
+    }
+
     /**
      * Testeo del método 'toString()', que devuelve toda la información
      * del comentario formateado
@@ -74,4 +97,24 @@ public class ComentarioTest {
                 "Test", comentario.toString());
     }
 
+    /**
+     * Testeo del método 'equals()'
+     */
+    @Test
+    public void testEquals() {
+        assertTrue(comentario.equals(comentario));
+        assertTrue(comentario.equals(new Comentario(cliente, "Test", 5)));
+        assertFalse(comentario.equals(new Comentario(cliente, "Otro test", 5)));
+    }
+
+    /**
+     * Testeo del método 'hashCode()'
+     */
+    @Test
+    public void testHashCode() {
+        assertTrue(comentario.hashCode() == comentario.hashCode());
+        assertFalse(comentario.hashCode() == new Comentario(cliente, "Test", 5).hashCode());
+        assertFalse(comentario.hashCode() == new Comentario(cliente, "Otro test", 5).hashCode());
+    }
+    
 }

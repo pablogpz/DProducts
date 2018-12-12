@@ -24,7 +24,7 @@ public class Comentario {
      * @throws IllegalArgumentException Si cualquierda de los parámetros son inválidos
      */
     public Comentario(Cliente autor, String texto, int puntuacion) {
-        if (texto.replaceAll("\\s+", "").length() == 0 || puntuacion < 1 || puntuacion > 5)
+        if (!esCorrecto(texto, puntuacion))
             throw new IllegalArgumentException("ERROR al publicar un comentario." +
                     " Compruebe que el cuerpo del comentario contenga texto" +
                     " y que la puntuación esté en el rango [1,5]");
@@ -62,15 +62,98 @@ public class Comentario {
     }
 
     /**
-     * Devuelve una cadena formateada con todos los detalles del comentario
+     * Método mutador del atributo 'autor'
      *
+     * @param autor Nuevo autor del comentario
+     */
+    public void setAutor(Cliente autor) {
+        this.autor = autor;
+    }
+
+    /**
+     * Método mutador del atributo 'texto'
+     *
+     * @param texto Nuevo texto del comentario. Debe ser correcto
+     * @return Si el cambio fue aceptado
+     */
+    public boolean setTexto(String texto) {
+        boolean esCorrecto = esCorrecto(texto, getPuntuacion());
+
+        if (esCorrecto)
+            this.texto = texto;
+
+        return esCorrecto;
+    }
+
+    /**
+     * Método mutador del atributo 'puntuacion'
+     *
+     * @param puntuacion Nueva puntuación del comentario. Debe ser correcto
+     * @return Si el cambio fue aceptado
+     */
+    public boolean setPuntuacion(int puntuacion) {
+        boolean esCorrecto = esCorrecto(getTexto(), puntuacion);
+
+        if (esCorrecto)
+            this.puntuacion = puntuacion;
+
+        return esCorrecto;
+    }
+
+    /**
+     * @param texto      Cuerpo del comentario. No puede estar vacío
+     * @param puntuacion Valoración del comentario. Debe ser un valor en el rango [1,5]
+     * @return Si es valido el comentario
+     */
+    private boolean esCorrecto(String texto, int puntuacion) {
+        return texto.replaceAll("\\s+", "").length() != 0 &&
+                puntuacion >= 1 && puntuacion <= 5;
+    }
+
+    /**
      * @return Cadena con el contenido del comentario formateado
      */
     @Override
     public String toString() {
-        return "Autor : " + getAutor().getNombre() +
-                "\nCalificación " + "*****".substring(0, getPuntuacion()) +
-                "\n\tReseña :\n" + getTexto();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("Autor : ").append(getAutor().toString()).append("\n");
+        stringBuilder.append("Calificación ").append("*****".substring(0, getPuntuacion())).append("\n");
+        stringBuilder.append("\tReseña :\n").append(getTexto()).append("\n");
+
+        return stringBuilder.toString();
+    }
+
+    /**
+     * @param obj Objeto con el que comparar
+     * @return Devuelve verdadero si entre esta instancia y 'obj' hay coincidencia entre todos los atributos
+     * y pertenecen a la misma clase
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;                                       // Comprueba si es la misma instancia
+        if (!(obj instanceof Comentario)) return false;                    // Si pertenecen a la misma clase no procede
+
+        Comentario objCasteado = (Comentario) obj;                          // Casteado del objeto
+
+        return getAutor().equals(objCasteado.getAutor()) &&
+                getPuntuacion() == objCasteado.getPuntuacion() &&
+                getTexto().equals(objCasteado.getTexto());
+    }
+
+    /**
+     * @return Valor hashCode único de instancia. Basado en productos de números primos
+     */
+    @Override
+    public int hashCode() {
+        int hashCode = super.hashCode();                                    // Hash base
+        int primo = 37;                                                     // Operador primo
+
+        hashCode += primo * getAutor().hashCode();
+        hashCode += primo * getPuntuacion();
+        hashCode += primo * getTexto().hashCode();
+
+        return hashCode;
     }
 
 }

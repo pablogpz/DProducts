@@ -1,9 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import static org.junit.Assert.*;
 
 /**
@@ -25,8 +22,7 @@ public class ProductoTest {
 
     @Before
     public void setUp() {
-        producto = new Producto("Nombre", 30, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
-                new GregorianCalendar(2011, Calendar.APRIL, 26), true);
+        producto = new ProductoOcio("Nombre", 30, 1, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA);
     }
 
     /**
@@ -35,12 +31,9 @@ public class ProductoTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void comprobarArgumentos() {
-        producto = new Producto("Nombre", 0, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
-                new GregorianCalendar(2011, Calendar.APRIL, 26), true);
-        producto = new Producto("Nombre", -1, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
-                new GregorianCalendar(2011, Calendar.APRIL, 26), true);
-        producto = new Producto("Nombre", 1, -1, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
-                new GregorianCalendar(2011, Calendar.APRIL, 26), true);
+        producto = new ProductoOcio("Nombre", 0, 1, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA);
+        producto = new ProductoOcio("Nombre", -1, 1, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA);
+        producto = new ProductoOcio("Nombre", 1, 1, -1, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA);
     }
 
     /**
@@ -68,6 +61,14 @@ public class ProductoTest {
     }
 
     /**
+     * Testeo del método accesor del atributo 'precio'
+     */
+    @Test
+    public void getPrecio() {
+        assertEquals(1f, producto.getPrecio(), 0);
+    }
+
+    /**
      * Testeo del método accesor del atribtuo 'stockMínimo'
      */
     @Test
@@ -87,24 +88,62 @@ public class ProductoTest {
      * Testeo del método accesor del atribtuo 'fabricante'
      */
     @Test
-    public void getFrabricante() {
-        assertEquals(FABRICANTES.ACER, producto.getFrabricante());
+    public void getFabricante() {
+        assertEquals(FABRICANTES.ACER, producto.getFabricante());
     }
 
-    /**
-     * Testeo del método accesor del atribtuo 'fechaLanzamiento'
-     */
+
     @Test
-    public void getFechaLanzamiento() {
-        assertEquals(new GregorianCalendar(2011, Calendar.APRIL, 26), producto.getFechaLanzamiento());
+    public void setNombre() {
+        String nuevoNombre = "Nuevo nombre";
+        producto.setNombre(nuevoNombre);
+        assertEquals(nuevoNombre, producto.getNombre());
     }
 
-    /**
-     * Testeo del método accesor del atribtuo 'esReacondicionado'
-     */
     @Test
-    public void getEsReacondicionado() {
-        assertTrue(producto.getEsReacondicionado());
+    public void setPrecio() {
+        float nuevoPrecio = 2.5f;
+        assertTrue(producto.setPrecio(nuevoPrecio));
+        assertEquals(nuevoPrecio, producto.getPrecio(), 0);
+        assertFalse(producto.setPrecio(0f));
+        assertFalse(producto.setPrecio(-1f));
+    }
+
+    @Test
+    public void setStockMinimo() {
+        int nuevoStockMinimo = 20;
+        assertTrue(producto.setStockMinimo(nuevoStockMinimo));
+        assertEquals(nuevoStockMinimo, producto.getStockMinimo());
+        assertFalse(producto.setStockMinimo(-1));
+    }
+
+    @Test
+    public void setPrioridad() {
+        producto.setPrioridad(PRIORIDAD_PRODUCTO.BAJA);
+        assertEquals(PRIORIDAD_PRODUCTO.BAJA, producto.getPrioridad());
+    }
+
+    @Test
+    public void setFabricante() {
+        producto.setFabricante(FABRICANTES.AMD);
+        assertEquals(FABRICANTES.AMD, producto.getFabricante());
+    }
+
+    @Test
+    public void varCantidad() {
+        producto.varCantidad(10);
+        assertEquals(40, producto.getCantidad());
+        producto.varCantidad(-10);
+        assertEquals(30, producto.getCantidad());
+    }
+
+    @Test
+    public void enStockMinimo() {
+        assertFalse(producto.enStockMinimo());
+        producto.varCantidad(-6);
+        assertTrue(producto.enStockMinimo());
+        producto.varCantidad(1);
+        assertFalse(producto.enStockMinimo());
     }
 
     /**
@@ -121,14 +160,15 @@ public class ProductoTest {
     /**
      * Testeo del método 'comentar()'. Comprueba que un mismo autor solo pueda publicar un comentario sobre un producto
      */
+    // TODO - mover implementación
     @Test(expected = NullPointerException.class)
     public void comentar() {
-        Comentario comentario = new Comentario(new Cliente("Nombre", 18, "Localidad"),
-                "Test", 5);
-
-        assertTrue(producto.comentar(comentario));
-        assertFalse(producto.comentar(comentario));
-        assertFalse(producto.comentar(null));
+//        Comentario comentario = new Comentario(new Cliente("Nombre", 18, "Localidad"),
+//                "Test", 5);
+//
+//        assertTrue(producto.comentar(comentario));
+//        assertFalse(producto.comentar(comentario));
+//        assertFalse(producto.comentar(null));
     }
 
     /**
@@ -139,21 +179,6 @@ public class ProductoTest {
         assertFalse(producto.haySuficienteStock(50));
         assertFalse(producto.haySuficienteStock(-1));
         assertTrue(producto.haySuficienteStock(25));
-    }
-
-    /**
-     * Testeo del método 'toString()'. Comprueba que devuleva una cadena formateada con la información del producto
-     */
-    @Test
-    public void detalles() {
-        assertEquals("PRODUCTO\tNombre-ACER\n" +
-                "\tIdentificador : X5PK7\n" +
-                "\tCantidad en stock : 30\n" +
-                "\tCantidad en stock mínima : 25\n" +
-                "\tPrioridad de reabastecimiento : MEDIA\n" +
-                "\tFecha de lanzamiento : 2011/04/26\n" +
-                "\tEstado : Reacondicionado\n" +
-                "\tComentarios : \n", producto.toString());
     }
 
 }
