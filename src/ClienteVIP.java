@@ -20,7 +20,7 @@ public class ClienteVIP extends Cliente {
     }
 
     @Override
-    public boolean comentarProducto(String alias, String texto, int puntuacion) {
+    public boolean comentarProducto(String alias) {
         // TODO - implement
         return false;
     }

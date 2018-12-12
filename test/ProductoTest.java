@@ -1,9 +1,6 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
 import static org.junit.Assert.*;
 
 /**
@@ -25,8 +22,7 @@ public class ProductoTest {
 
     @Before
     public void setUp() {
-        producto = new Producto("Nombre", 30, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
-                new GregorianCalendar(2011, Calendar.APRIL, 26), true);
+        producto = new ProductoOcio("Nombre", 30, 1, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA);
     }
 
     /**
@@ -35,12 +31,9 @@ public class ProductoTest {
      */
     @Test(expected = IllegalArgumentException.class)
     public void comprobarArgumentos() {
-        producto = new Producto("Nombre", 0, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
-                new GregorianCalendar(2011, Calendar.APRIL, 26), true);
-        producto = new Producto("Nombre", -1, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
-                new GregorianCalendar(2011, Calendar.APRIL, 26), true);
-        producto = new Producto("Nombre", 1, -1, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA,
-                new GregorianCalendar(2011, Calendar.APRIL, 26), true);
+        producto = new ProductoOcio("Nombre", 0, 1, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA);
+        producto = new ProductoOcio("Nombre", -1, 1, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA);
+        producto = new ProductoOcio("Nombre", 1, 1, -1, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA);
     }
 
     /**
@@ -91,21 +84,6 @@ public class ProductoTest {
         assertEquals(FABRICANTES.ACER, producto.getFrabricante());
     }
 
-    /**
-     * Testeo del método accesor del atribtuo 'fechaLanzamiento'
-     */
-    @Test
-    public void getFechaLanzamiento() {
-        assertEquals(new GregorianCalendar(2011, Calendar.APRIL, 26), producto.getFechaLanzamiento());
-    }
-
-    /**
-     * Testeo del método accesor del atribtuo 'esReacondicionado'
-     */
-    @Test
-    public void getEsReacondicionado() {
-        assertTrue(producto.getEsReacondicionado());
-    }
 
     /**
      * Testeo del método 'entregar()'. Comprueba que solo se puedan entregar cantidades positivas distintas de 0
@@ -121,14 +99,15 @@ public class ProductoTest {
     /**
      * Testeo del método 'comentar()'. Comprueba que un mismo autor solo pueda publicar un comentario sobre un producto
      */
+    // TODO - mover implementación
     @Test(expected = NullPointerException.class)
     public void comentar() {
-        Comentario comentario = new Comentario(new Cliente("Nombre", 18, "Localidad"),
-                "Test", 5);
-
-        assertTrue(producto.comentar(comentario));
-        assertFalse(producto.comentar(comentario));
-        assertFalse(producto.comentar(null));
+//        Comentario comentario = new Comentario(new Cliente("Nombre", 18, "Localidad"),
+//                "Test", 5);
+//
+//        assertTrue(producto.comentar(comentario));
+//        assertFalse(producto.comentar(comentario));
+//        assertFalse(producto.comentar(null));
     }
 
     /**
@@ -144,6 +123,7 @@ public class ProductoTest {
     /**
      * Testeo del método 'toString()'. Comprueba que devuleva una cadena formateada con la información del producto
      */
+    // TODO - Modificar prueba
     @Test
     public void detalles() {
         assertEquals("PRODUCTO\tNombre-ACER\n" +

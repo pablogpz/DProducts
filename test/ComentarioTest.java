@@ -26,7 +26,7 @@ public class ComentarioTest {
 
     @BeforeClass
     public static void setUp() {
-        cliente = new Cliente("Nombre", 18, "Localidad");
+        cliente = new ClienteEstandar("Nombre", 18, "Localidad");
         comentario = new Comentario(cliente, "Test", 5);
     }
 
