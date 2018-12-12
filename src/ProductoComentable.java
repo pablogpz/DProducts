@@ -6,10 +6,22 @@ public abstract class ProductoComentable extends Producto {
 
     private List<Comentario> comentarios;                               // Colección de comentarios que los clientes han publicado sobre el producto
 
+    /**
+     * Constructor parametrizado de la clase. Genera un producto a partir de su nombre, camtidad en stock, cantidad mínima en stock y
+     * fabricante
+     *
+     * @param nombre      Nombre del producto
+     * @param cantidad    Cantidad en stock del producto
+     * @param precio      Precio del producto
+     * @param stockMinimo Cantidad mínima en stock que siempre debe existir del producto
+     * @param fabricante  Valor del tipo enumerado de FABRICANTES
+     * @param prioridad   Valor del tipo enumerado PRIORIDAD_PRODUCTO. Representa la demanda del producto
+     *                    y se tiene en cuenta al reabastecerlo
+     * @throws IllegalArgumentException Si la cantidad o el precio es un entero negativo o 0 o si el stock mínimo es un entero negativo
+     */
     public ProductoComentable(String nombre, int cantidad, float precio, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad) {
         super(nombre, cantidad, precio, stockMinimo, fabricante, prioridad);
         comentarios = new ArrayList<>();
-        // TODO - implement ProductoComentable.ProductoComentable
     }
 
     /**
@@ -50,21 +62,42 @@ public abstract class ProductoComentable extends Producto {
         return comentarios;
     }
 
+    /**
+     * @return Cadena formateada base y con todos los comentarios del producto
+     */
+    @Override
     public String toString() {
-        // TODO - implement ProductoComentable.toString
-        return null;
+        return super.toString() + "\n\tComentarios:\n" + recuperarComentarios();
     }
 
     /**
-     * @param obj
+     * Indica si es exactamente igual que el Objeto obj
+     *
+     * @param obj Objeto con el que comparar
+     * @return Devuelve verdadero si entre esta instancia y 'obj' hay coincidencia entre todos los atributos
+     * y pertenecen a la misma clase
      */
     public boolean equals(Object obj) {
-        // TODO - implement ProductoComentable.equals
-        return false;
+        if (this == obj) return true;
+        if (!(obj instanceof ProductoComentable)) return false;
+
+        ProductoComentable castedObj = (ProductoComentable) obj;
+
+        return super.equals(castedObj) &&
+                recuperarComentarios().equals(castedObj.recuperarComentarios());
+
     }
 
+    /**
+     * @return Valor hashCode único de instancia. Basado en productos de números primos
+     */
     public int hashCode() {
-        // TODO - implement ProductoComentable.hashCode
-        return 0;
+        int hashCode = super.hashCode();
+        int primo = 37;
+
+        hashCode += primo * recuperarComentarios().hashCode();
+
+        return hashCode;
     }
+
 }

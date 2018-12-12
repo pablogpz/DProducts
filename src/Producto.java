@@ -21,17 +21,15 @@ public abstract class Producto {
 
     private String nombre;                                              // Nombre comercial del producto
     private Identificador identificador;                                // Identificador único del producto
-
     private int cantidad;                                               // Cantidad actual en stock del producto
-
     private float precio;                                               // Precio del producto
     private int stockMinimo;                                            // Cantidad mínima que siempre debe existir en stock
     private PRIORIDAD_PRODUCTO prioridad;                               // Valor directamente relacionado con la cantidad con la que se reabastece el producto
     private FABRICANTES fabricante;                                     // Fabricante del producto
 
     /**
-     * Constructor parametrizado de la clase. Genera un producto a partir de su nombre, camtidad en stock, cantidad mínima en stock,
-     * fabricante, prioridad de reabastecimiento, fecha de lanzamiento y estado actual
+     * Constructor parametrizado de la clase. Genera un producto a partir de su nombre, camtidad en stock, cantidad mínima en stock y
+     * fabricante
      *
      * @param nombre      Nombre del producto
      * @param cantidad    Cantidad en stock del producto

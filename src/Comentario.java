@@ -111,8 +111,6 @@ public class Comentario {
     }
 
     /**
-     * Devuelve una cadena formateada con todos los detalles del comentario
-     *
      * @return Cadena con el contenido del comentario formateado
      */
     @Override
