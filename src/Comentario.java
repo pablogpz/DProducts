@@ -115,9 +115,13 @@ public class Comentario {
      */
     @Override
     public String toString() {
-        return "Autor : " + getAutor().getNombre() +
-                "\nCalificación " + "*****".substring(0, getPuntuacion()) +
-                "\n\tReseña :\n" + getTexto();
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append("Autor : ").append(getAutor().toString()).append("\n");
+        stringBuilder.append("Calificación ").append("*****".substring(0, getPuntuacion())).append("\n");
+        stringBuilder.append("\tReseña :\n").append(getTexto()).append("\n");
+
+        return stringBuilder.toString();
     }
 
     /**
