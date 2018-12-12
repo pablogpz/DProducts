@@ -62,18 +62,6 @@ public class Comentario {
     }
 
     /**
-     * Devuelve una cadena formateada con todos los detalles del comentario
-     *
-     * @return Cadena con el contenido del comentario formateado
-     */
-    @Override
-    public String toString() {
-        return "Autor : " + getAutor().getNombre() +
-                "\nCalificación " + "*****".substring(0, getPuntuacion()) +
-                "\n\tReseña :\n" + getTexto();
-    }
-
-    /**
      * Comprueba la validez de los campos que almacena un comentario
      *
      * @param texto      Cuerpo del comentario. No puede estar vacío
@@ -83,6 +71,18 @@ public class Comentario {
     private boolean esCorrecto(String texto, int puntuacion) {
         return texto.replaceAll("\\s+", "").length() == 0 ||
                 puntuacion < 1 || puntuacion > 5;
+    }
+
+    /**
+     * Devuelve una cadena formateada con todos los detalles del comentario
+     *
+     * @return Cadena con el contenido del comentario formateado
+     */
+    @Override
+    public String toString() {
+        return "Autor : " + getAutor().getNombre() +
+                "\nCalificación " + "*****".substring(0, getPuntuacion()) +
+                "\n\tReseña :\n" + getTexto();
     }
 
 }

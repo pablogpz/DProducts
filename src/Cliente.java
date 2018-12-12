@@ -197,14 +197,12 @@ public abstract class Cliente {
      * Publica un comentario sobre un producto. El producto debe estar entre los productos favoritos y un cliente solo puede
      * publicar un comentario sobre un producto
      *
-     * @param alias      Alias con el que se guardó el producto en la colección de favoritos
-     * @param texto      Cuerpo del comentario. No puede ser vacío
-     * @param puntuacion Calificación del producto. Debe estar en el rango [1,5]
+     * @param alias Alias con el que se guardó el producto en la colección de favoritos
      * @return Booleano indicando si se pudo publicar el comentario. Devuelve falso si el cuerpo está vacío o si la
      * puntuación no es válida
      */
     // TODO - mover la implementación
-    public abstract boolean comentarProducto(String alias, String texto, int puntuacion);
+    public abstract boolean comentarProducto(String alias);
 //        Comentario comentario;
 //
 //        if (existeAliasFavorito(alias)) {                               // Comprueba si existe el producto favorito
@@ -272,13 +270,12 @@ public abstract class Cliente {
      * de productos favoritos
      */
     protected Producto recuperarFavorito(String alias) {
-        if (existeAliasFavorito(alias)) {                               // Comprueba si el alias está asociado a algún producto
-            return productosFavoritos.get(alias);                       // Devuelve el producto favorito
-        } else {
+        if (!existeAliasFavorito(alias)) {                              // Comprueba si el alias está asociado a algún producto
             informarUsuario("ERROR al recuperar un producto favorito. " +
                     "El alias \"" + alias + "\" no está asociado a ningún producto favorito");
             return null;                                                // No existe ningún producto para el alias dado
         }
+        return productosFavoritos.get(alias);                           // Devuelve el producto favorito
     }
 
     /**

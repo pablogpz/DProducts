@@ -65,7 +65,7 @@ public class Inventario {
         try {
             existeProducto = existeProducto(producto);
         } catch (NullPointerException e) {
-            reportarError(e.getMessage(), null);
+            reportarError(e.getMessage(), producto);
         }
 
         if (!existeProducto)                                                    // Comprueba que no exista ya el producto
@@ -88,7 +88,7 @@ public class Inventario {
         try {
             existeProducto = existeProducto(producto);
         } catch (NullPointerException e) {
-            reportarError(e.getMessage(), null);
+            reportarError(e.getMessage(), producto);
         }
 
         if (existeProducto)                                                     // Comprueba si el producto está catalogado
@@ -113,7 +113,7 @@ public class Inventario {
         try {
             existeProducto = existeProducto(producto);
         } catch (NullPointerException e) {
-            reportarError(e.getMessage(), null);
+            reportarError(e.getMessage(), producto);
             return false;
         }
 
@@ -142,7 +142,7 @@ public class Inventario {
      */
     public boolean venderColeccionProductos(Collection<Producto> coleccionProductos) {
         if (coleccionProductos == null || coleccionProductos.size() == 0) {     // Comprueba que la coleccion no sea nula ni vacía
-            reportarError("La colección de productos a pedir está vacía", null);
+            mostrarMensaje("La colección de productos a pedir está vacía");
             return false;
         }
 
@@ -158,7 +158,7 @@ public class Inventario {
 
         if (!pedidoCompleto) {                                                    // Si no se pudieron cubrir los pedidos no se realizan
             reportarError("ERROR al procesar el pedido de todos los productos favoritos. " +
-                    "No hay stock de alguno de los productos que desea", null);
+                    "No hay stock de alguno de los productos que desea", coleccionProductos);
             return false;
         }
 
@@ -191,7 +191,6 @@ public class Inventario {
             }
         }
     }
-
 
     /**
      * Comprueba si existe un determinado producto catalogado en el inventario
@@ -231,7 +230,7 @@ public class Inventario {
         try {
             existeProducto = existeProducto(identificador);
         } catch (NullPointerException e) {
-            reportarError(e.getMessage(), null);
+            reportarError(e.getMessage(), identificador);
             return null;
         }
 
@@ -240,7 +239,7 @@ public class Inventario {
         } else {
             reportarError("ERROR al recuperar un producto. " +
                     "El identificador \"" + identificador.toString() +
-                    "\" no está asociado a ningún producto", null);
+                    "\" no está asociado a ningún producto", identificador);
             return null;                                                        // El producto no está catalogado
         }
     }
@@ -260,14 +259,14 @@ public class Inventario {
     /**
      * Reporta un error en alguna operación del Inventario
      *
-     * @param error               Cadena con información en relación al error
-     * @param productoRelacionado Instancia de la clase Producto que generó el error
+     * @param error             Cadena con información en relación al error
+     * @param objetoRelacionado Instancia que generó el error
      */
-    private void reportarError(String error, Producto productoRelacionado) {
-        String productoErroneo = productoRelacionado == null ? "" : "\nProducto : \n\t" +
-                productoRelacionado.toString();
+    private void reportarError(String error, Object objetoRelacionado) {
+        String objetoErroneo = objetoRelacionado == null ? "" : "\nObjeto : \n\t" +
+                objetoRelacionado.toString();
 
-        mostrarMensaje(error + productoErroneo);
+        mostrarMensaje(error + objetoErroneo);
     }
 
     /**

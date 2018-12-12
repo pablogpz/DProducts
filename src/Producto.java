@@ -38,7 +38,7 @@ public abstract class Producto {
      * @param fabricante  Valor del tipo enumerado de FABRICANTES
      * @param prioridad   Valor del tipo enumerado PRIORIDAD_PRODUCTO. Representa la demanda del producto
      *                    y se tiene en cuenta al reabastecerlo
-     * @throws IllegalArgumentException Si la cantidad es un entero negativo o 0 o si el stock mínimo es un entero negativo
+     * @throws IllegalArgumentException Si la cantidad o el precio es un entero negativo o 0 o si el stock mínimo es un entero negativo
      */
     public Producto(String nombre, int cantidad, float precio, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad) {
         if (!esCorrecto(cantidad, precio, stockMinimo)) throw new
