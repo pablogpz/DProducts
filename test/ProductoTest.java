@@ -6,8 +6,8 @@ import static org.junit.Assert.*;
 /**
  * CLASE DE TESTEO de la clase Producto.
  * <p>
- * Realiza las pruebas de todos los métodos públicos de la clase para todas
- * sus posibles entradas y estados
+ * Realiza las pruebas de todos los métodos públicos y protegidos de la clase base utilizando la clase
+ * ProductoOcio como subclase para probar los métodos de la clase base que no son sobreescritos por otras subclases
  *
  * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
  * @grupo : Wild True
@@ -161,7 +161,7 @@ public class ProductoTest {
      * Testeo del método 'comentar()'. Comprueba que un mismo autor solo pueda publicar un comentario sobre un producto
      */
     // TODO - mover implementación
-    @Test(expected = NullPointerException.class)
+//    @Test(expected = NullPointerException.class)
     public void comentar() {
 //        Comentario comentario = new Comentario(new Cliente("Nombre", 18, "Localidad"),
 //                "Test", 5);
