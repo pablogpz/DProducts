@@ -248,15 +248,15 @@ public abstract class Producto {
         if (this == obj) return true;                                   // Comprueba si es la misma instancia
         if (!(obj instanceof Producto)) return false;                   // Si pertenecen a la misma clase no procede
 
-        Producto castedObj = (Producto) obj;                            // Casteado del objeto
+        Producto objCasteado = (Producto) obj;                          // Casteado del objeto
 
-        return getNombre().equals(castedObj.getNombre()) &&
-                getIdentificador().equals(castedObj.getIdentificador()) &&
-                getCantidad() == castedObj.getCantidad() &&
-                getPrecio() == castedObj.getPrecio() &&
-                getStockMinimo() == castedObj.getStockMinimo() &&
-                getPrioridad().equals(castedObj.getPrioridad()) &&
-                getFabricante().equals(castedObj.getFabricante());
+        return getNombre().equals(objCasteado.getNombre()) &&
+                getIdentificador().equals(objCasteado.getIdentificador()) &&
+                getCantidad() == objCasteado.getCantidad() &&
+                getPrecio() == objCasteado.getPrecio() &&
+                getStockMinimo() == objCasteado.getStockMinimo() &&
+                getPrioridad().equals(objCasteado.getPrioridad()) &&
+                getFabricante().equals(objCasteado.getFabricante());
     }
 
     /**

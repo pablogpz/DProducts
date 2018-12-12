@@ -130,11 +130,11 @@ public class Comentario {
         if (this == obj) return true;                                       // Comprueba si es la misma instancia
         if (!(this instanceof Comentario)) return false;                    // Si pertenecen a la misma clase no procede
 
-        Comentario castedObj = (Comentario) obj;                            // Casteado del objeto
+        Comentario objCasteado = (Comentario) obj;                          // Casteado del objeto
 
-        return getAutor().equals(castedObj.getAutor()) &&
-                getPuntuacion() == castedObj.getPuntuacion() &&
-                getTexto().equals(castedObj.getTexto());
+        return getAutor().equals(objCasteado.getAutor()) &&
+                getPuntuacion() == objCasteado.getPuntuacion() &&
+                getTexto().equals(objCasteado.getTexto());
     }
 
     /**

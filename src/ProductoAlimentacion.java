@@ -1,55 +1,132 @@
 import java.time.Month;
 
-public class ProductoAlimentacion extends Producto implements Gustable {
+public class ProductoAlimentacion extends Producto implements Gustable, Descontable {
 
-    private Month mesCaducidad;
+    private static final int LIKES_BASE = 0;                                // Likes base del producto de alimentacion
+    public static final int DESCUENTO_PRODUCTO_ALIMENTACION = 10;           // Descuento por defecto del producto
+
+    private Month mesCaducidad;                                             // Mes en el que caduca el producto
+    private int likes;                                                      // Votos positivos del producto
+    private float descuento;                                                // Modificador del precio base del producto
 
     /**
-     * @param nombre
-     * @param cantidad
-     * @param precio
-     * @param stockMinimo
-     * @param fabricante
-     * @param prioridad
-     * @param mesCaducidad
+     * Constructor parametrizado de la clase. Agrega mes de caducidad al producto base
+     *
+     * @param nombre            Nombre comercial del producto
+     * @param cantidad          Cantidad actual en stock del producto
+     * @param precio            Precio del producto
+     * @param stockMinimo       Cantidad mínima que siempre debe existir en stock
+     * @param fabricante        Valor del tipo enumerado de FABRICANTES
+     * @param prioridad         Valor del tipo enumerado PRIORIDAD_PRODUCTO. Representa la demanda del producto
+     *                          y se tiene en cuenta al reabastecerlo
+     * @param mesCaducidad      Mes de caducidad del producto de alimentación
      */
     public ProductoAlimentacion(String nombre, int cantidad, float precio, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad, Month mesCaducidad) {
         super(nombre, cantidad, precio, stockMinimo, fabricante, prioridad);
-        // TODO - implement ProductoAlimentacion.ProductoAlimentacion
-    }
-
-    public String toString() {
-        // TODO - implement ProductoAlimentacion.toString
-        return null;
+        this.mesCaducidad = mesCaducidad;
+        this.likes = LIKES_BASE;
+        descuento = DESCUENTO_PRODUCTO_ALIMENTACION;
     }
 
     /**
-     * @param obj
+     * Método accesor del atributo 'mesCaducidad'
+     *
+     * @return Mes de caducidad del producto
      */
-    public boolean equals(Object obj) {
-        // TODO - implement ProductoAlimentacion.equals
-        return false;
+    public Month getMesCaducidad() {
+        return mesCaducidad;
     }
 
-    public int hashCode() {
-        // TODO - implement ProductoAlimentacion.hashCode
-        return 0;
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int getLikes() {
-        // TODO - implement
-        return 0;
+        return likes;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void like() {
-        // TODO - implement
+        likes++;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void unlike() {
-        // TODO - implement
+        if (likes > 0) likes--;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void calcularPrecioDescontado() {
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public float getDescuento() {
+        return descuento;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public void setDescuento(float nuevoDescuento) {
+        descuento = nuevoDescuento;
+    }
+
+    /**
+     * @return Cadena con el contenido base del producto, su mes de caducidad, likes y su descuento
+     */
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder(super.toString());
+
+        stringBuilder.append("\n\t").append("Mes de caducidad :").append(getMesCaducidad());
+        stringBuilder.append("\n\t").append("Likes :").append(getLikes());
+        stringBuilder.append("\n\t").append("Descuento aplicable :").append(getDescuento() * 100).append("%");
+
+        return stringBuilder.toString();
+    }
+
+    /**
+     * @param obj Objeto con el que comparar
+     * @return Devuelve verdadero si entre esta instancia y 'obj' hay coincidencia entre todos los atributos
+     * y pertenecen a la misma clase
+     */
+    public boolean equals(Object obj) {
+        if (this == obj) return true;                                       // Comprueba si es la misma instancia
+        if (!(obj instanceof ProductoAlimentacion)) return false;           // Si pertenecen a la misma clase no procede
+
+        ProductoAlimentacion objCasteado = (ProductoAlimentacion) obj;      // Casteado del objeto
+
+        return super.equals(objCasteado) &&
+                getMesCaducidad().equals(objCasteado.getMesCaducidad()) &&
+                getLikes() == objCasteado.getLikes() &&
+                getDescuento() == objCasteado.getDescuento();
+    }
+
+    /**
+     * @return Valor hashCode único de instancia. Basado en productos de números primos
+     */
+    public int hashCode() {
+        int hashCode = super.hashCode();
+        int primo = 37;                                                     // Operador primo
+
+        hashCode += primo * getMesCaducidad().hashCode();
+        hashCode += primo * getLikes();
+        hashCode += primo * Math.round(getDescuento());
+
+        return hashCode;
     }
 
 }

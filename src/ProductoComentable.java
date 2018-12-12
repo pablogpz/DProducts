@@ -7,8 +7,7 @@ public abstract class ProductoComentable extends Producto {
     private List<Comentario> comentarios;                               // Colección de comentarios que los clientes han publicado sobre el producto
 
     /**
-     * Constructor parametrizado de la clase. Genera un producto a partir de su nombre, camtidad en stock, cantidad mínima en stock y
-     * fabricante
+     * Constructor parametrizado de la clase. Agrega comentarios al producto base
      *
      * @param nombre      Nombre del producto
      * @param cantidad    Cantidad en stock del producto
@@ -78,13 +77,13 @@ public abstract class ProductoComentable extends Producto {
      * y pertenecen a la misma clase
      */
     public boolean equals(Object obj) {
-        if (this == obj) return true;
-        if (!(obj instanceof ProductoComentable)) return false;
+        if (this == obj) return true;                                       // Comprueba si es la misma instancia
+        if (!(obj instanceof ProductoComentable)) return false;             // Si pertenecen a la misma clase no procede
 
-        ProductoComentable castedObj = (ProductoComentable) obj;
+        ProductoComentable objCasteado = (ProductoComentable) obj;          // Casteado del objeto
 
-        return super.equals(castedObj) &&
-                recuperarComentarios().equals(castedObj.recuperarComentarios());
+        return super.equals(objCasteado) &&
+                recuperarComentarios().equals(objCasteado.recuperarComentarios());
 
     }
 
@@ -93,7 +92,7 @@ public abstract class ProductoComentable extends Producto {
      */
     public int hashCode() {
         int hashCode = super.hashCode();
-        int primo = 37;
+        int primo = 37;                                                     // Operador primo
 
         hashCode += primo * recuperarComentarios().hashCode();
 

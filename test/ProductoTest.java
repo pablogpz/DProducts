@@ -181,20 +181,4 @@ public class ProductoTest {
         assertTrue(producto.haySuficienteStock(25));
     }
 
-    /**
-     * Testeo del método 'toString()'. Comprueba que devuleva una cadena formateada con la información del producto
-     */
-    // TODO - Modificar prueba
-    @Test
-    public void detalles() {
-        assertEquals("PRODUCTO\tNombre-ACER\n" +
-                "\tIdentificador : X5PK7\n" +
-                "\tCantidad en stock : 30\n" +
-                "\tCantidad en stock mínima : 25\n" +
-                "\tPrioridad de reabastecimiento : MEDIA\n" +
-                "\tFecha de lanzamiento : 2011/04/26\n" +
-                "\tEstado : Reacondicionado\n" +
-                "\tComentarios : \n", producto.toString());
-    }
-
 }
