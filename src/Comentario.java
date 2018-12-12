@@ -62,6 +62,33 @@ public class Comentario {
     }
 
     /**
+     * Método mutador del atributo 'autor'
+     *
+     * @param autor Nuevo autor del comentario
+     */
+    public void setAutor(Cliente autor) {
+        this.autor = autor;
+    }
+
+    /**
+     * Método mutador del atributo 'texto'
+     *
+     * @param texto Nuevo texto del comentario
+     */
+    public void setTexto(String texto) {
+        this.texto = texto;
+    }
+
+    /**
+     * Método mutador del atributo 'puntuacion'
+     *
+     * @param puntuacion Nueva puntuación del comentario
+     */
+    public void setPuntuacion(int puntuacion) {
+        this.puntuacion = puntuacion;
+    }
+
+    /**
      * Comprueba la validez de los campos que almacena un comentario
      *
      * @param texto      Cuerpo del comentario. No puede estar vacío
@@ -84,5 +111,4 @@ public class Comentario {
                 "\nCalificación " + "*****".substring(0, getPuntuacion()) +
                 "\n\tReseña :\n" + getTexto();
     }
-
 }

@@ -1,4 +1,4 @@
-import org.junit.BeforeClass;
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -24,8 +24,8 @@ public class ComentarioTest {
     // Cliente de ejemplo
     private static Cliente cliente;
 
-    @BeforeClass
-    public static void setUp() {
+    @Before
+    public void setUp() {
         cliente = new ClienteEstandar("Nombre", 18, "Localidad");
         comentario = new Comentario(cliente, "Test", 5);
     }
@@ -62,6 +62,27 @@ public class ComentarioTest {
         assertEquals(5, comentario.getPuntuacion());
     }
 
+    @Test
+    public void setAutor() {
+        ClienteEstandar nuevoAutor = new ClienteEstandar("Nuevo nombre", 18, "Localidad");
+        comentario.setAutor(nuevoAutor);
+        assertEquals(nuevoAutor, comentario.getAutor());
+    }
+
+    @Test
+    public void setTexto() {
+        String nuevoTexto = "Nuevo texto";
+        comentario.setTexto(nuevoTexto);
+        assertEquals(nuevoTexto, comentario.getTexto());
+    }
+
+    @Test
+    public void setPuntuacion() {
+        int nuevaPuntuacion = 4;
+        comentario.setPuntuacion(nuevaPuntuacion);
+        assertEquals(nuevaPuntuacion, comentario.getPuntuacion());
+    }
+
     /**
      * Testeo del método 'toString()', que devuelve toda la información
      * del comentario formateado
@@ -73,5 +94,4 @@ public class ComentarioTest {
                 "\tReseña :\n" +
                 "Test", comentario.toString());
     }
-
 }
