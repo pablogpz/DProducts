@@ -89,7 +89,7 @@ public class ProductoTest {
      */
     @Test
     public void getFrabricante() {
-        assertEquals(FABRICANTES.ACER, producto.getFrabricante());
+        assertEquals(FABRICANTES.ACER, producto.getFabricante());
     }
 
 
@@ -126,7 +126,7 @@ public class ProductoTest {
     @Test
     public void setFabricante() {
         producto.setFabricante(FABRICANTES.AMD);
-        assertEquals(FABRICANTES.AMD, producto.getFrabricante());
+        assertEquals(FABRICANTES.AMD, producto.getFabricante());
     }
 
     @Test

@@ -115,7 +115,7 @@ public abstract class Producto {
      *
      * @return Fabricante del producto
      */
-    protected FABRICANTES getFrabricante() {
+    protected FABRICANTES getFabricante() {
         return fabricante;
     }
 
@@ -232,10 +232,50 @@ public abstract class Producto {
     @Override
     public String toString() {
         // TODO - Revisar qué mostrar
-        return "PRODUCTO\t" + getNombre() + "-" + getFrabricante().toString() +
+        return "PRODUCTO\t" + getNombre() + "-" + getFabricante().toString() +
                 "\n\tIdentificador : " + getIdentificador().toString() + "\n\tCantidad en stock : " + getCantidad() +
                 "\n\tCantidad en stock mínima : " + getStockMinimo() + "\n\tPrioridad de reabastecimiento : " +
                 getPrioridad().toString();
     }
 
+
+    /**
+     * @param obj Objeto con el que se ha de comparar
+     * @return Devuelve verdadero si 'obj' es hay coincidencia entre todos los atributos
+     * y pertenecen a la misma clase
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (!(obj instanceof Producto)) return false;
+
+        Producto castedObj = (Producto) obj;
+
+        return getNombre().equals(castedObj.getNombre()) &&
+                getIdentificador().equals(castedObj.getIdentificador()) &&
+                getCantidad() == castedObj.getCantidad() &&
+                getPrecio() == castedObj.getPrecio() &&
+                getStockMinimo() == castedObj.getStockMinimo() &&
+                getPrioridad().equals(castedObj.getPrioridad()) &&
+                getFabricante().equals(castedObj.getFabricante());
+    }
+
+    /**
+     * @return valor hashCode único de la clase Producto. Basado en productos de números primos
+     */
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        int primo = 37;
+
+        result = primo * result + getNombre().hashCode();
+        result = primo * result + getIdentificador().hashCode();
+        result = primo * result + getCantidad();
+        result = primo * result + Math.round(getPrecio());
+        result = primo * result + getStockMinimo();
+        result = primo * result + getPrioridad().hashCode();
+        result = primo * result + getFabricante().hashCode();
+
+        return result;
+    }
 }
