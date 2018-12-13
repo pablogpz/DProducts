@@ -86,6 +86,9 @@ public class ProductoAlimentacionTest {
 
     }
 
+    /**
+     * Testeo del método mutador del atributo 'descuento'
+     */
     @Test
     public void setDescuento() {
         float nuevoDescuento = 0.1f;

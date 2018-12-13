@@ -109,9 +109,9 @@ public class ProductoHogar extends ProductoComentable implements Gustable, Desco
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder(super.toString());
 
-        stringBuilder.append("\n\t").append("Parte de la casa :").append(getParteCasa());
-        stringBuilder.append("\n\t").append("Likes :").append(getLikes());
-        stringBuilder.append("\n\t").append("Descuento aplicable :").append(getDescuento() * 100).append("%");
+        stringBuilder.append("\n\t").append("Parte de la casa : ").append(getParteCasa());
+        stringBuilder.append("\n\t").append("Likes : ").append(getLikes());
+        stringBuilder.append("\n\t").append("Descuento aplicable : ").append(getDescuento() * 100).append("%");
 
         return stringBuilder.toString();
     }
