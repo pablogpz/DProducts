@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Clase que extiende el producto base para añadir comentarios.
- * Permite realizar comentarios sobre el producto y recuperarlos
+ * Permite realizar comentarios ordenados por puntuación sobre el producto y recuperarlos
  *
  * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
  * @grupo : Wild True
@@ -49,8 +49,10 @@ public abstract class ProductoComentable extends Producto {
                 autorRepetido = true;
         }
 
-        if (!autorRepetido)                                             // Si no ha habido coincidencia se publica el comentario
+        if (!autorRepetido) {                                            // Si no ha habido coincidencia se publica el comentario
             comentarios.add(comentario);
+            comentarios.sort(new ComparadorComentarioPuntuacion());     // Ordena la colección de comentarios por puntuación
+        }
 
         return !autorRepetido;
     }
@@ -64,6 +66,7 @@ public abstract class ProductoComentable extends Producto {
         String decorador = "\n===============================================================\n";
         String comentarios = "";
 
+        this.comentarios.sort(new ComparadorComentarioPuntuacion());    // Ordena la colección de comentarios por puntuación
         // Adjunta los detalles de todos los comentarios publicados sobre el producto
         for (Comentario comentario : this.comentarios)
             comentarios += decorador + comentario.toString();
