@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE data [
+        <!ELEMENT data (stock, clients, favorites)>
+        <!ELEMENT stock (product+)>
+        <!ELEMENT product EMPTY>
+        <!ATTLIST product
+                name ID #REQUIRED
+                quantity NMTOKEN #REQUIRED
+                price NMTOKEN #REQUIRED
+                minimum_stock CDATA #REQUIRED
+                manufacturer CDATA #REQUIRED
+                priority (BAJA|MEDIA|ALTA) #REQUIRED
+                category (OCIO|HOGAR|ALIMENTACION) #REQUIRED
+                room (SALA_ESTAR|COCINA|DORMITORIO|ASEO|JARDIN) #IMPLIED
+                expiration (1|2|3|4|5|6|7|8|9|10|11|12) #IMPLIED>
+        <!ELEMENT clients (client+)>
+        <!ELEMENT client EMPTY>
+        <!ATTLIST client
+                name ID #REQUIRED
+                age NMTOKEN #REQUIRED
+                location CDATA #REQUIRED
+                category (ESTANDAR|VIP) #REQUIRED>
+        <!ELEMENT favorites (favorite*)>
+        <!ELEMENT favorite EMPTY>
+        <!ATTLIST favorite
+                product_name IDREF #REQUIRED
+                client_name IDREF #REQUIRED
+                alias CDATA #REQUIRED>
+        ]>
+<data>
+    <stock>
+        <product name="Nintendo_Switch" quantity="4" price="300" minimum_stock="2" manufacturer="NINTENDO"
+                 priority="BAJA" category="OCIO"/>
+        <product name="Xbox_One" quantity="5" price="220" minimum_stock="2" manufacturer="MICROSOFT" priority="BAJA"
+                 category="OCIO"/>
+        <product name="Samsung_Galaxy_Tablet" quantity="50" price="180" minimum_stock="8" manufacturer="SAMSUNG"
+                 priority="MEDIA" category="OCIO"/>
+        <product name="Wireless_Headphones" quantity="60" price="32" minimum_stock="5" manufacturer="BEHRINGER"
+                 priority="ALTA" category="OCIO"/>
+        <product name="Kindle" quantity="40" price="80" minimum_stock="10" manufacturer="AMAZON" priority="BAJA"
+                 category="OCIO"/>
+        <product name="Amazon_Echo" quantity="10" price="100" minimum_stock="3" manufacturer="AMAZON" priority="ALTA"
+                 category="OCIO"/>
+        <product name="Lamp" quantity="5" price="17" minimum_stock="2" manufacturer="PHILIPS" priority="MEDIA"
+                 category="HOGAR" room="SALA_ESTAR"/>
+        <product name="Barbecue" quantity="2" price="80" minimum_stock="1" manufacturer="LG" priority="BAJA"
+                 category="HOGAR" room="JARDIN"/>
+        <product name="Towel" quantity="10" price="9" minimum_stock="5" manufacturer="AMAZON" priority="ALTA"
+                 category="HOGAR" room="ASEO"/>
+        <product name="Coffee_Machine" quantity="15" price="55" minimum_stock="10" manufacturer="HUAWEI" priority="BAJA"
+                 category="HOGAR" room="COCINA"/>
+        <product name="Nordic_Filling" quantity="2" price="60" minimum_stock="1" manufacturer="HUAWEI" priority="BAJA"
+                 category="HOGAR" room="DORMITORIO"/>
+        <product name="Table" quantity="5" price="100" minimum_stock="1" manufacturer="DXRACER" priority="MEDIA"
+                 category="HOGAR" room="SALA_ESTAR"/>
+        <product name="Curtains" quantity="2" price="40.5" minimum_stock="1" manufacturer="GOOGLE" priority="BAJA"
+                 category="HOGAR" room="DORMITORIO"/>
+        <product name="Carpet" quantity="3" price="80" minimum_stock="2" manufacturer="GOOGLE" priority="BAJA"
+                 category="HOGAR" room="SALA_ESTAR"/>
+        <product name="Soft_drink" quantity="50" price="1.5" minimum_stock="30" manufacturer="EVGA" priority="ALTA"
+                 category="ALIMENTACION" expiration="1"/>
+        <product name="Cookies" quantity="100" price="2" minimum_stock="50" manufacturer="AMAZON" priority="MEDIA"
+                 category="ALIMENTACION" expiration="2"/>
+        <product name="Rice" quantity="80" price="1.5" minimum_stock="40" manufacturer="AMAZON" priority="ALTA"
+                 category="ALIMENTACION" expiration="12"/>
+        <product name="Bread" quantity="50" price="1.2" minimum_stock="25" manufacturer="AMAZON" priority="ALTA"
+                 category="ALIMENTACION" expiration="12"/>
+        <product name="Coffee" quantity="150" price="1" minimum_stock="100" manufacturer="AMAZON" priority="MEDIA"
+                 category="ALIMENTACION" expiration="11"/>
+        <product name="Milk" quantity="100" price="0.6" minimum_stock="50" manufacturer="AMAZON" priority="MEDIA"
+                 category="ALIMENTACION" expiration="12"/>
+    </stock>
+    <clients>
+        <client name="Rafa_Nadal" age="32" location="Manacor" category="ESTANDAR"/>
+        <client name="Carolina_Marin" age="25" location="Huelva" category="VIP"/>
+        <client name="Jose_Manuel_Calderon" age="37" location="Villanueva de la Serena" category="ESTANDAR"/>
+        <client name="Laia_Palau" age="39" location="Barcelona" category="ESTANDAR"/>
+        <client name="Javier_Guerra" age="35" location="Segovia" category="VIP"/>
+        <client name="Ana_Peleteiro" age="22" location="Riveira" category="VIP"/>
+    </clients>
+    <favorites>
+        <favorite product_name="Nintendo_Switch" client_name="Rafa_Nadal" alias="rafanint"/>
+        <favorite product_name="Xbox_One" client_name="Rafa_Nadal" alias="rafaxbox"/>
+        <favorite product_name="Lamp" client_name="Rafa_Nadal" alias="rafalamp"/>
+        <favorite product_name="Barbecue" client_name="Rafa_Nadal" alias="rafabarbe"/>
+        <favorite product_name="Towel" client_name="Rafa_Nadal" alias="rafatowel"/>
+        <favorite product_name="Milk" client_name="Rafa_Nadal" alias="rafamilk"/>
+        <favorite product_name="Nintendo_Switch" client_name="Carolina_Marin" alias="caronint"/>
+        <favorite product_name="Lamp" client_name="Carolina_Marin" alias="carolamp"/>
+        <favorite product_name="Barbecue" client_name="Carolina_Marin" alias="carobarbe"/>
+        <favorite product_name="Milk" client_name="Carolina_Marin" alias="caromilk"/>
+        <favorite product_name="Nintendo_Switch" client_name="Jose_Manuel_Calderon" alias="josenint"/>
+        <favorite product_name="Barbecue" client_name="Jose_Manuel_Calderon" alias="josebarbe"/>
+        <favorite product_name="Nintendo_Switch" client_name="Laia_Palau" alias="laianint"/>
+        <favorite product_name="Barbecue" client_name="Javier_Guerra" alias="javibarbe"/>
+        <favorite product_name="Xbox_One" client_name="Ana_Peleteiro" alias="anaxbox"/>
+        <favorite product_name="Barbecue" client_name="Ana_Peleteiro" alias="anabarbe"/>
+        <favorite product_name="Towel" client_name="Ana_Peleteiro" alias="anatowel"/>
+        <favorite product_name="Bread" client_name="Ana_Peleteiro" alias="anabread"/>
+        <favorite product_name="Coffee" client_name="Ana_Peleteiro" alias="anacoffee"/>
+        <favorite product_name="Milk" client_name="Ana_Peleteiro" alias="anamilk"/>
+    </favorites>
+</data>
