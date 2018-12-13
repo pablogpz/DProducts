@@ -13,7 +13,7 @@ import java.time.Month;
 public class ProductoAlimentacion extends Producto implements Gustable, Descontable {
 
     private static final int LIKES_BASE = 0;                                // Likes base del producto de alimentacion
-    public static final int DESCUENTO_PRODUCTO_ALIMENTACION = 10;           // Descuento por defecto del producto
+    public static final float DESCUENTO_PRODUCTO_ALIMENTACION = -0.1f;      // Descuento por defecto del producto
 
     private Month mesCaducidad;                                             // Mes en el que caduca el producto
     private int likes;                                                      // Votos positivos del producto
@@ -110,9 +110,9 @@ public class ProductoAlimentacion extends Producto implements Gustable, Desconta
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder(super.toString());
 
-        stringBuilder.append("\n\t").append("Mes de caducidad :").append(getMesCaducidad());
-        stringBuilder.append("\n\t").append("Likes :").append(getLikes());
-        stringBuilder.append("\n\t").append("Descuento aplicable :").append(getDescuento() * 100).append("%");
+        stringBuilder.append("\n\t").append("Mes de caducidad : ").append(getMesCaducidad());
+        stringBuilder.append("\n\t").append("Likes : ").append(getLikes());
+        stringBuilder.append("\n\t").append("Descuento aplicable : ").append(getDescuento() * 100).append("%");
 
         return stringBuilder.toString();
     }

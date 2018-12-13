@@ -10,7 +10,7 @@
 
 public class ProductoOcio extends ProductoComentable implements Descontable {
 
-    public static final int DESCUENTO_PRODUCTO_OCIO = 20;                   // Descuento por defecto del producto
+    public static final float DESCUENTO_PRODUCTO_OCIO = 0.2f;               // Descuento por defecto del producto
 
     private float descuento;                                                // Descuento sobre el precio base del producto
 

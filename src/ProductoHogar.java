@@ -11,7 +11,7 @@
 public class ProductoHogar extends ProductoComentable implements Gustable, Descontable {
 
     private static final int LIKES_BASE = 0;                                // Likes base del producto del hogar
-    public static final int DESCUENTO_PRODUCTO_HOGAR = 5;                   // Descuento por defecto del producto
+    public static final float DESCUENTO_PRODUCTO_HOGAR = -0.05f;            // Descuento por defecto del producto
 
     private PARTES_CASA parteCasa;                                          // Zona de la casa para el uso del producto
     private int likes;                                                      // Votos positivos del producto

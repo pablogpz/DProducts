@@ -63,4 +63,5 @@ public class ProductoComentableTest {
                 "\tReseña :\n" +
                 "Texto\n", productoComentable.recuperarComentarios());
     }
+
 }
