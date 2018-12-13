@@ -19,7 +19,7 @@ public class ComparadorComentarioPuntuacion implements Comparator<Comentario> {
     }
 
     /**
-     * Compara dos objetos comentario según su puntuación en orden descendente
+     * Compara dos objetos comentario según su puntuación
      *
      * @param c1 Primer comentario
      * @param c2 Segundo comentario
