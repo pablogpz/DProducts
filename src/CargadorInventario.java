@@ -1,5 +1,6 @@
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -7,6 +8,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -20,30 +22,23 @@ import java.util.Map;
  */
 public class CargadorInventario {
 
-    /**
-     * Instancia que representa el documento XML de entrada
-     */
+    private static final String XML_TAG_PRODUCTOS = "stock";    // Tag XML de la colección de productos
+    private static final String XML_TAG_CLIENTES = "clients";   // Tag XML de la colección de productos
+    private static final String XML_TAG_FAVORITOS = "favorites";// Tag XML de la colección de productos
+
+    // Instancia que representa el documento XML de entrada
     private Document datosEntrada;
 
-    /**
-     * Elemento con la raíz de la que cuelga el DOM del archivo XML con los datos de entrada
-     */
-    private Element raizDatos;
-
-    /**
+    /*
      * Colección de productos parseados. Son indexados por nombre para asociarlos a los clientes
      * que lo han incluido como favorito
      */
     private Map<String, Producto> productos;
 
-    /**
-     * Colección de clientes parseados. Son indexados por nombre para asociarlos a sus productos favoritos
-     */
+    // Colección de clientes parseados. Son indexados por nombre para asociarlos a sus productos favoritos
     private Map<String, Cliente> clientes;
 
-    /**
-     * Bandera que indica si ocurrió algún error de configuración inicial
-     */
+    // Bandera que indica si ocurrió algún error de configuración inicial
     private boolean estadoIlegal;
 
     /**
@@ -53,11 +48,13 @@ public class CargadorInventario {
      */
     public CargadorInventario(File ficheroDatos) {
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        productos = new HashMap<>();
+        clientes = new HashMap<>();
         estadoIlegal = false;                                   // Estado legal inicial
         try {
             DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
             datosEntrada = docBuilder.parse(ficheroDatos);      // Inicialización del fichero XML de entrada
-            raizDatos = datosEntrada.getDocumentElement();      // Inicialización de la raíz del DOM
+            datosEntrada.getDocumentElement().normalize();      // Inicialización de la raíz del DOM
         } catch (ParserConfigurationException e) {
             reportarError("ERROR al construir un parseador XML\n" + e.getMessage());
             estadoIlegal = true;
@@ -120,10 +117,46 @@ public class CargadorInventario {
      * Parsea la colección de productos contenida en el documento XML de datos de entrada
      *
      * @return Verdadero si todos los productos pudieron ser correctamente parseados. Falso en otro caso
+     * @throws IllegalStateException Si el cargador no fue correctamente incializado
      */
     private boolean cargarProductos() {
-        // TODO - implement CargadorInventario.cargarProductos
-        return false;
+        if (estadoIlegal)                                       // Comprueba que el cargador esté bien inicializado
+            throw new IllegalStateException("Ocurrió un problema al inicializar el cargador del inventario");
+
+        // Bandera para indicar su ocurrió algún error en la carga de productos
+        boolean cargaCorrecta = true;
+        // Colección de productos en formato XML
+        NodeList stock = datosEntrada.getElementsByTagName(XML_TAG_PRODUCTOS);
+
+        Element productoXML;
+
+        Producto producto;
+        TIPOS_PRODUCTO categoria;
+
+        for (int i = 0; i < stock.getLength(); i++) {
+            productoXML = (Element) stock.item(i);
+            categoria = TIPOS_PRODUCTO.toTipoProducto(productoXML.getAttribute("category"));
+            switch (categoria) {
+                case ALIMENTACION:
+//                    producto = new ProductoAlimentacion(productoXML.getAttribute("name"),
+//                            Integer.valueOf(productoXML.getAttribute("quantity")),
+//                            Float.valueOf(productoXML.getAttribute("price")),
+//                            Integer.valueOf(productoXML.getAttribute("minimum_stock")),
+//                            );
+                    break;
+                case HOGAR:
+//                    producto = new ProductoHogar();
+                    break;
+                case OCIO:
+//                    producto = new ProductoOcio();
+                    break;
+                case DEFAULT:                                   // No se reconoció el tipo de producto
+
+                    cargaCorrecta = false;
+            }
+        }
+
+        return cargaCorrecta;
     }
 
     /**
