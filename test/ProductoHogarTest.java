@@ -3,6 +3,17 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * CLASE DE TESTEO de la clase ProductoHogar.
+ * <p>
+ * Realiza las pruebas de todos los métodos públicos y protegidos de la clase.
+ *
+ * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
+ * @grupo : Wild True
+ * Entrega : EC1
+ * Curso : 2º GIIIS (Grupo A)
+ */
+
 public class ProductoHogarTest {
 
     // Fixture de productos del hogar de prueba
@@ -17,12 +28,21 @@ public class ProductoHogarTest {
                 PRIORIDAD_PRODUCTO.MEDIA, PARTES_CASA.ASEO);
     }
 
+    /**
+     * Testeo del método accesor del atributo 'parteCasa'
+     */
     @Test
     public void getParteCasa() {
+        assertEquals(PARTES_CASA.ASEO, productoHogar.getParteCasa());
     }
 
+    /**
+     * Testeo del método mutador del atributo 'parteCasa'
+     */
     @Test
     public void setParteCasa() {
+        productoHogar.setParteCasa(PARTES_CASA.COCINA);
+        assertEquals(PARTES_CASA.COCINA, productoHogar.getParteCasa());
     }
 
     /**
@@ -61,7 +81,6 @@ public class ProductoHogarTest {
     @Test
     public void getDescuento() {
         assertEquals(-0.05f, productoHogar.getDescuento(), 0);
-
     }
 
     /**
@@ -126,4 +145,5 @@ public class ProductoHogarTest {
         assertEquals(productoHogar.hashCode(), productoHogar.hashCode());
         assertNotEquals(productoHogar.hashCode(), productoDistinto.hashCode());
     }
+
 }
