@@ -77,10 +77,43 @@ public class CargadorInventario {
      *
      * @return Verdadero si el documento XML es válido y todos los datos fueron cargardos correctamente.
      * Falso en caso de que el documento XML no se pueda validar o algún dato estaba mal formado
+     * @throws IllegalStateException Si el cargador no fue correctamente incializado
      */
     public boolean cargarDatos() {
-        // TODO - implement CargadorInventario.cargarDatos
-        return false;
+        if (estadoIlegal)                                       // Comprueba que el cargador esté bien inicializado
+            throw new IllegalStateException("Ocurrió un problema al inicializar el cargador del inventario");
+
+        boolean cargaCorrecta;                                  // Bandera para indicar su ocurrió algún error en la carga
+
+        cargaCorrecta = cargarProductos();                      // Intenta cargar los productos en el inventario
+        cargaCorrecta = cargarClientes();                       // Intenta cargar los clientes en el inventario
+        cargaCorrecta = cargarProductosFavoritos();             // Intenta relacionar los favoritos con sus clientes
+
+        if (!cargaCorrecta) {                                   // Comprueba que no haya ocurrido ningún error hasta ahora
+            reportarError("ERROR. Algo fue mal en la carga de datos");
+            return false;
+        }
+
+        Inventario inventario = Inventario.recuperarInstancia();
+        // Carga de los productos en el inventario
+        for (Producto producto : productos.values()) {
+            cargaCorrecta = inventario.agregarProducto(producto);
+        }
+        if (!cargaCorrecta) {
+            reportarError("ERROR. No se pudieron añadir todos los productos al inventario");
+            return false;                                      // Algún producto no se pudo añadir al inventario
+        }
+
+        // Carga de los clientes en el inventario
+        for (Cliente cliente : clientes.values()) {
+            cargaCorrecta = inventario.agregarCliente(cliente);
+        }
+        if (!cargaCorrecta) {
+            reportarError("ERROR. No se pudieron añadir todos los clientes al inventario");
+            return false;                                      // Algún cliente no se pudo añadir al inventario
+        }
+
+        return true;                                           // Todos los datos se cargaron correctamente
     }
 
     /**
