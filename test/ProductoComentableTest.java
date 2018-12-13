@@ -44,6 +44,7 @@ public class ProductoComentableTest {
     @Test
     public void comentar() {
         assertTrue(productoComentable.comentar(comentario));
+        assertFalse(productoComentable.comentar(comentario));
         assertFalse(productoComentable.comentar(comentarioRepetido));
     }
 

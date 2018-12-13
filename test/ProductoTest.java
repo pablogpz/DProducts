@@ -158,20 +158,6 @@ public class ProductoTest {
     }
 
     /**
-     * Testeo del método 'comentar()'. Comprueba que un mismo autor solo pueda publicar un comentario sobre un producto
-     */
-    // TODO - mover implementación
-//    @Test(expected = NullPointerException.class)
-    public void comentar() {
-//        Comentario comentario = new Comentario(new Cliente("Nombre", 18, "Localidad"),
-//                "Test", 5);
-//
-//        assertTrue(producto.comentar(comentario));
-//        assertFalse(producto.comentar(comentario));
-//        assertFalse(producto.comentar(null));
-    }
-
-    /**
      * Testeo del método 'haySuficienteStock()'. Comprueba que solo se acepten cantidades válidas en la venta de productos
      */
     @Test
