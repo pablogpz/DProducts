@@ -1,14 +1,32 @@
 import java.util.Comparator;
 
+/**
+ * Clase que implementa la interfaz Comparator para ordenar comentarios por su puntuación
+ *
+ * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
+ * @grupo : Wild True
+ * Entrega : EC1
+ * Curso : 2º GIIIS (Grupo A)
+ */
+
 public class ComparadorComentarioPuntuacion implements Comparator<Comentario> {
 
     /**
-     * @param c1
-     * @param c2
+     * Compara dos objetos comentario según su puntuación
+     *
+     * @param c1 Primer comentario
+     * @param c2 Segundo comentario
+     * @return 1 sii c1 > c2
+     * 0 sii c1 == c2
+     * -1 sii c1 < c2
      */
     public int compare(Comentario c1, Comentario c2) {
-        // TODO - implement ComparadorComentarioPuntuacion.compare
-        return 0;
+        if (c1.getPuntuacion() > c2.getPuntuacion())
+            return 1;
+        else if (c1.getPuntuacion() == c2.getPuntuacion())
+            return 0;
+        else
+            return -1;
     }
 
 }
