@@ -372,7 +372,7 @@ public abstract class Cliente {
         stringBuilder.append("\n\t").append("Edad : ").append(getEdad());
         stringBuilder.append("\n\t").append("Localidad : ").append(getLocalidad());
 
-        return stringBuilder.toString();
+        return stringBuilder.toString() + "\n";
     }
 
     /**

@@ -294,7 +294,7 @@ public class Inventario {
             stringBuilder.append(decorador);
         }
 
-        return stringBuilder.toString();
+        return stringBuilder.toString() + "\n";
     }
 
 }

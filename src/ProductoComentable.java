@@ -90,7 +90,7 @@ public abstract class ProductoComentable extends Producto {
 
         stringBuilder.append("\n\t").append("Comentarios:\n").append(recuperarComentarios());
 
-        return stringBuilder.toString();
+        return stringBuilder.toString() + "\n";
     }
 
     /**

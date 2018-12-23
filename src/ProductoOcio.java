@@ -64,7 +64,7 @@ public class ProductoOcio extends ProductoComentable implements Descontable {
 
         stringBuilder.append("\n\t").append("Descuento aplicable : ").append(getDescuento() * 100).append("%");
 
-        return stringBuilder.toString();
+        return stringBuilder.toString() + "\n";
     }
 
     /**

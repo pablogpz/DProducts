@@ -119,9 +119,9 @@ public class Comentario {
 
         stringBuilder.append("Autor : ").append(getAutor().toString()).append("\n");
         stringBuilder.append("Calificación ").append("*****".substring(0, getPuntuacion())).append("\n");
-        stringBuilder.append("\tReseña :\n").append(getTexto()).append("\n");
+        stringBuilder.append("\tReseña :\n").append(getTexto());
 
-        return stringBuilder.toString();
+        return stringBuilder.toString() + "\n";
     }
 
     /**

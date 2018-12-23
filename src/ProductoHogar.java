@@ -113,7 +113,7 @@ public class ProductoHogar extends ProductoComentable implements Gustable, Desco
         stringBuilder.append("\n\t").append("Likes : ").append(getLikes());
         stringBuilder.append("\n\t").append("Descuento aplicable : ").append(getDescuento() * 100).append("%");
 
-        return stringBuilder.toString();
+        return stringBuilder.toString() + "\n";
     }
 
     /**

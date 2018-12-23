@@ -239,7 +239,7 @@ public abstract class Producto {
         stringBuilder.append("\n\t").append("Cantidad en stock mínima : ").append(getStockMinimo());
         stringBuilder.append("\n\tPrioridad de reabastecimiento : ").append(getPrioridad().toString());
 
-        return stringBuilder.toString();
+        return stringBuilder.toString() + "\n";
     }
 
 

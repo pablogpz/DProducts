@@ -114,7 +114,7 @@ public class ProductoAlimentacion extends Producto implements Gustable, Desconta
         stringBuilder.append("\n\t").append("Likes : ").append(getLikes());
         stringBuilder.append("\n\t").append("Descuento aplicable : ").append(getDescuento() * 100).append("%");
 
-        return stringBuilder.toString();
+        return stringBuilder.toString() + "\n";
     }
 
     /**
