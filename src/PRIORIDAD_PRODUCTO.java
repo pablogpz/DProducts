@@ -16,24 +16,4 @@ public enum PRIORIDAD_PRODUCTO {
     BAJA,
     MEDIA,
     ALTA,
-    DEFAULT;
-
-    /**
-     * Convierte cadenas de texto en su constante enumerada equivalente
-     *
-     * @param categoria Cadena a evaluar
-     * @return Prioridad correspondiente o DEFAULT si no hay coincidencia
-     */
-    public static PRIORIDAD_PRODUCTO toPrioridadProducto(String categoria) {
-        switch (categoria) {
-            case "BAJA":
-                return BAJA;
-            case "MEDIA":
-                return MEDIA;
-            case "ALTA":
-                return ALTA;
-            default:
-                return DEFAULT;
-        }
-    }
 }

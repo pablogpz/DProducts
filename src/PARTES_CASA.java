@@ -17,28 +17,4 @@ public enum PARTES_CASA {
     DORMITORIO,
     ASEO,
     JARDIN,
-    DEFAULT;
-
-    /**
-     * Convierte cadenas de texto en su constante enumerada equivalente
-     *
-     * @param categoria Cadena a evaluar
-     * @return Parte de la casa correspondiente o DEFAULT si no hay coincidencia
-     */
-    public static PARTES_CASA toParteCasa(String categoria) {
-        switch (categoria) {
-            case "SALA_ESTAR":
-                return SALA_ESTAR;
-            case "COCINA":
-                return COCINA;
-            case "DORMITORIO":
-                return DORMITORIO;
-            case "ASEO":
-                return ASEO;
-            case "JARDIN":
-                return JARDIN;
-            default:
-                return DEFAULT;
-        }
-    }
 }

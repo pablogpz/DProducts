@@ -13,25 +13,4 @@ public enum TIPOS_PRODUCTO {
     ALIMENTACION,
     HOGAR,
     OCIO,
-    DEFAULT;            // Tipo por defecto
-
-    /**
-     * Convierte cadenas de texto en su constante enumerada equivalente
-     *
-     * @param categoria Cadena a evaluar
-     * @return Tipo producto correspondiente o DEFAULT si no hay coincidencia
-     */
-    public static TIPOS_PRODUCTO toTipoProducto(String categoria) {
-        switch (categoria) {
-            case "ALIMENTACION":
-                return ALIMENTACION;
-            case "HOGAR":
-                return HOGAR;
-            case "OCIO":
-                return OCIO;
-            default:
-                return DEFAULT;
-        }
-    }
-
 }

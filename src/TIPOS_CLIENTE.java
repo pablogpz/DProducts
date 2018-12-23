@@ -12,23 +12,4 @@
 public enum TIPOS_CLIENTE {
     ESTANDAR,
     VIP,
-    DEFAULT;            // Tipo por defecto
-
-    /**
-     * Convierte cadenas de texto en su constante enumerada equivalente
-     *
-     * @param categoria Cadena a evaluar
-     * @return Tipo cliente correspondiente o DEFAULT si no hay coincidencia
-     */
-    public static TIPOS_CLIENTE toTipoCliente(String categoria) {
-        switch (categoria) {
-            case "ESTANDAR":
-                return ESTANDAR;
-            case "VIP":
-                return VIP;
-            default:
-                return DEFAULT;
-        }
-    }
-
 }
