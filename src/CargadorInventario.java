@@ -8,6 +8,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.time.Month;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -130,15 +131,51 @@ public class CargadorInventario {
 
         // Bandera para indicar su ocurrió algún error en la carga de productos
         boolean cargaCorrecta = true;
-        // Colección de productos en formato XML
-        NodeList stock = datosEntrada.getElementsByTagName(XML_TAG_PRODUCTOS);
 
-        Element productoXML;
+        // Elementos del DOM
+        Element stock = (Element) datosEntrada.getElementsByTagName(XML_TAG_PRODUCTOS).item(0);
+        NodeList listaProductos = stock.getElementsByTagName("product");
+        Element entradaProducto;
 
-        Producto producto;
-        TIPOS_PRODUCTO categoria;
+        // Campos de todos los tipos de productos
+        String nombre;
+        int cantidad;
+        float precio;
+        int stockMinimo;
+        FABRICANTES fabricante;
+        PRIORIDAD_PRODUCTO prioridad;
+        TIPOS_PRODUCTO tipo;
+        PARTES_CASA habitacion;
+        Month mesCaducidad;
 
-        // TODO - Implementar la carga de productos
+        for (int i = 0; i < listaProductos.getLength() && cargaCorrecta; i++) {
+            entradaProducto = (Element) listaProductos.item(i);
+
+            nombre = entradaProducto.getAttribute("name");
+            cantidad = Integer.parseInt(entradaProducto.getAttribute("quantity"));
+            precio = Float.parseFloat(entradaProducto.getAttribute("price"));
+            stockMinimo = Integer.parseInt(entradaProducto.getAttribute("minimum_stock"));
+            fabricante = FABRICANTES.valueOf(entradaProducto.getAttribute("manufacturer"));
+            prioridad = PRIORIDAD_PRODUCTO.valueOf(entradaProducto.getAttribute("priority"));
+            tipo = TIPOS_PRODUCTO.valueOf(entradaProducto.getAttribute("category"));
+
+            try {
+                switch (tipo) {
+                    case OCIO:
+                        productos.put(nombre, new ProductoOcio(nombre, cantidad, precio, stockMinimo, fabricante, prioridad));
+                        break;
+                    case HOGAR:
+                        habitacion = PARTES_CASA.valueOf(entradaProducto.getAttribute("room"));
+                        productos.put(nombre, new ProductoHogar(nombre, cantidad, precio, stockMinimo, fabricante, prioridad, habitacion));
+                        break;
+                    case ALIMENTACION:
+                        mesCaducidad = Month.valueOf(entradaProducto.getAttribute("expiration"));
+                        productos.put(nombre, new ProductoAlimentacion(nombre, cantidad, precio, stockMinimo, fabricante, prioridad, mesCaducidad));
+                }
+            } catch (IllegalArgumentException e) {
+                cargaCorrecta = false;
+            }
+        }
 
         return cargaCorrecta ? 0 : -1;
     }

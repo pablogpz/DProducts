@@ -12,7 +12,7 @@
                 priority (BAJA|MEDIA|ALTA) #REQUIRED
                 category (OCIO|HOGAR|ALIMENTACION) #REQUIRED
                 room (SALA_ESTAR|COCINA|DORMITORIO|ASEO|JARDIN) #IMPLIED
-                expiration (1|2|3|4|5|6|7|8|9|10|11|12) #IMPLIED>
+                expiration (JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE|JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER) #IMPLIED>
         <!ELEMENT clients (client+)>
         <!ELEMENT client EMPTY>
         <!ATTLIST client
@@ -58,17 +58,17 @@
         <product name="Carpet" quantity="3" price="80" minimum_stock="2" manufacturer="GOOGLE" priority="BAJA"
                  category="HOGAR" room="SALA_ESTAR"/>
         <product name="Soft_drink" quantity="50" price="1.5" minimum_stock="30" manufacturer="EVGA" priority="ALTA"
-                 category="ALIMENTACION" expiration="1"/>
+                 category="ALIMENTACION" expiration="JANUARY"/>
         <product name="Cookies" quantity="100" price="2" minimum_stock="50" manufacturer="AMAZON" priority="MEDIA"
-                 category="ALIMENTACION" expiration="2"/>
+                 category="ALIMENTACION" expiration="FEBRUARY"/>
         <product name="Rice" quantity="80" price="1.5" minimum_stock="40" manufacturer="AMAZON" priority="ALTA"
-                 category="ALIMENTACION" expiration="12"/>
+                 category="ALIMENTACION" expiration="DECEMBER"/>
         <product name="Bread" quantity="50" price="1.2" minimum_stock="25" manufacturer="AMAZON" priority="ALTA"
-                 category="ALIMENTACION" expiration="12"/>
+                 category="ALIMENTACION" expiration="DECEMBER"/>
         <product name="Coffee" quantity="150" price="1" minimum_stock="100" manufacturer="AMAZON" priority="MEDIA"
-                 category="ALIMENTACION" expiration="11"/>
+                 category="ALIMENTACION" expiration="NOVEMBER"/>
         <product name="Milk" quantity="100" price="0.6" minimum_stock="50" manufacturer="AMAZON" priority="MEDIA"
-                 category="ALIMENTACION" expiration="12"/>
+                 category="ALIMENTACION" expiration="DECEMBER"/>
     </stock>
     <clients>
         <client name="Rafa_Nadal" age="32" location="Manacor" category="ESTANDAR"/>
