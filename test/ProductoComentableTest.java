@@ -68,7 +68,7 @@ public class ProductoComentableTest {
 
     /**
      * Testeo de la ordenación de comentarios por puntuación. Comprueba que al inserar varios comentarios
-     * después se muestren en orden (TESTEO VISUAL. YA FUE COMPROBADO EN LOS COMPARADORES)
+     * después se muestren en orden (COMRPOBACIÓN VISUAL. YA FUE COMPROBADO EN LOS COMPARADORES)
      * <p>
      * [INIT] productoComentable.comentarios -> c1(5) - c2(1) - c3(3)
      * [FIN] roductoComentable.comentarios -> c1(5) - c3(3) - c2(1)
