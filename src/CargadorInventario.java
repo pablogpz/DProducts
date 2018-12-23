@@ -80,32 +80,37 @@ public class CargadorInventario {
         if (estadoIlegal)                                       // Comprueba que el cargador esté bien inicializado
             throw new IllegalStateException("Ocurrió un problema al inicializar el cargador del inventario");
 
-        boolean cargaCorrecta;                                  // Bandera para indicar su ocurrió algún error en la carga
+        int cargaCorrecta = 0;                                   // Bandera que indica si ocurrió algún error en la carga
+        boolean insercionCorrecta = false;                       // Bandera para indicar si ocurrió algún error en la inserción
 
-        cargaCorrecta = cargarProductos();                      // Intenta cargar los productos en el inventario
-        cargaCorrecta = cargarClientes();                       // Intenta cargar los clientes en el inventario
-        cargaCorrecta = cargarProductosFavoritos();             // Intenta relacionar los favoritos con sus clientes
+        // *****    LECTURA DE DATOS    *****
 
-        if (!cargaCorrecta) {                                   // Comprueba que no haya ocurrido ningún error hasta ahora
+        cargaCorrecta += cargarProductos();                      // Intenta cargar los productos en el inventario
+        cargaCorrecta += cargarClientes();                       // Intenta cargar los clientes en el inventario
+        cargaCorrecta += cargarProductosFavoritos();             // Intenta relacionar los favoritos con sus clientes
+
+        if (cargaCorrecta < 0) {                                 // Comprueba que no haya ocurrido ningún error hasta ahora
             reportarError("ERROR. Algo fue mal en la carga de datos");
             return false;
         }
 
+        // *****    CARGA DE DATOS      *****
+
         Inventario inventario = Inventario.recuperarInstancia();
         // Carga de los productos en el inventario
         for (Producto producto : productos.values()) {
-            cargaCorrecta = inventario.agregarProducto(producto);
+            insercionCorrecta = inventario.agregarProducto(producto);
         }
-        if (!cargaCorrecta) {
+        if (!insercionCorrecta) {
             reportarError("ERROR. No se pudieron añadir todos los productos al inventario");
             return false;                                      // Algún producto no se pudo añadir al inventario
         }
 
         // Carga de los clientes en el inventario
         for (Cliente cliente : clientes.values()) {
-            cargaCorrecta = inventario.agregarCliente(cliente);
+            insercionCorrecta = inventario.agregarCliente(cliente);
         }
-        if (!cargaCorrecta) {
+        if (!insercionCorrecta) {
             reportarError("ERROR. No se pudieron añadir todos los clientes al inventario");
             return false;                                      // Algún cliente no se pudo añadir al inventario
         }
@@ -116,10 +121,10 @@ public class CargadorInventario {
     /**
      * Parsea la colección de productos contenida en el documento XML de datos de entrada
      *
-     * @return Verdadero si todos los productos pudieron ser correctamente parseados. Falso en otro caso
+     * @return 0 si todos los productos pudieron ser correctamente parseados. -1 en otro caso
      * @throws IllegalStateException Si el cargador no fue correctamente incializado
      */
-    private boolean cargarProductos() {
+    private int cargarProductos() {
         if (estadoIlegal)                                       // Comprueba que el cargador esté bien inicializado
             throw new IllegalStateException("Ocurrió un problema al inicializar el cargador del inventario");
 
@@ -133,51 +138,30 @@ public class CargadorInventario {
         Producto producto;
         TIPOS_PRODUCTO categoria;
 
-        for (int i = 0; i < stock.getLength(); i++) {
-            productoXML = (Element) stock.item(i);
-            categoria = TIPOS_PRODUCTO.toTipoProducto(productoXML.getAttribute("category"));
-            switch (categoria) {
-                case ALIMENTACION:
-//                    producto = new ProductoAlimentacion(productoXML.getAttribute("name"),
-//                            Integer.valueOf(productoXML.getAttribute("quantity")),
-//                            Float.valueOf(productoXML.getAttribute("price")),
-//                            Integer.valueOf(productoXML.getAttribute("minimum_stock")),
-//                            );
-                    break;
-                case HOGAR:
-//                    producto = new ProductoHogar();
-                    break;
-                case OCIO:
-//                    producto = new ProductoOcio();
-                    break;
-                case DEFAULT:                                   // No se reconoció el tipo de producto
+        // TODO - Implementar la carga de productos
 
-                    cargaCorrecta = false;
-            }
-        }
-
-        return cargaCorrecta;
+        return cargaCorrecta ? 0 : -1;
     }
 
     /**
      * Parsea la colección de clientes contenida en el documento XML de datos de entrada
      *
-     * @return Verdadero si todos los clientes fueron parseados correctamente. Falso en otro caso
+     * @return 0 si todos los clientes fueron parseados correctamente. -1 en otro caso
      */
-    private boolean cargarClientes() {
+    private int cargarClientes() {
         // TODO - implement CargadorInventario.cargarClientes
-        return false;
+        return -1;
     }
 
     /**
      * Realiza las relaciones entre clientes y sus productos favoritos indicadas en el documento XML de entrada
      *
-     * @return Verdadero si todas las relaciones tienen referencias correctas y el alias
-     * no se repite en el mismo cliente. Falso en otro caso
+     * @return 0 si todas las relaciones tienen referencias correctas y el alias
+     * no se repite en el mismo cliente. -1 en otro caso
      */
-    private boolean cargarProductosFavoritos() {
+    private int cargarProductosFavoritos() {
         // TODO - implement CargadorInventario.cargarProductosFavoritos
-        return false;
+        return -1;
     }
 
     /**

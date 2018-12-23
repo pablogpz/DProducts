@@ -49,12 +49,18 @@ public abstract class ProductoComentable extends Producto {
                 autorRepetido = true;
         }
 
-        if (!autorRepetido) {                                            // Si no ha habido coincidencia se publica el comentario
+        if (!autorRepetido) {                                           // Si no ha habido coincidencia se publica el comentario
             comentarios.add(comentario);
-            comentarios.sort(new ComparadorComentarioPuntuacion());     // Ordena la colección de comentarios por puntuación
         }
 
         return !autorRepetido;
+    }
+
+    /**
+     * Ordena la lista de comentarios por puntuación
+     */
+    protected void orderarComentarios() {
+        comentarios.sort(new ComparadorComentarioPuntuacion());
     }
 
     /**
@@ -66,7 +72,7 @@ public abstract class ProductoComentable extends Producto {
         String decorador = "\n===============================================================\n";
         String comentarios = "";
 
-        this.comentarios.sort(new ComparadorComentarioPuntuacion());    // Ordena la colección de comentarios por puntuación
+        orderarComentarios();                                           // Ordena los comentarios antes de mostrarlos
         // Adjunta los detalles de todos los comentarios publicados sobre el producto
         for (Comentario comentario : this.comentarios)
             comentarios += decorador + comentario.toString();
