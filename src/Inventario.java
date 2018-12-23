@@ -284,14 +284,14 @@ public class Inventario {
     @Override
     public String toString() {
         // TODO - Revisar todo lo que debe mostrar
-        String decorador = "***************************************************************\n";
+        String decorador = "***************************************************************";
         StringBuilder stringBuilder = new StringBuilder(decorador);
 
         stringBuilder.append("INVENTARIO");
-        stringBuilder.append(decorador);
+        stringBuilder.append(decorador).append("\n");
         for (Producto producto : stock.values()) {                              // Almacena los detalles de cada producto
             stringBuilder.append(producto.toString());
-            stringBuilder.append(decorador);
+            stringBuilder.append(decorador).append("\n");
         }
 
         return stringBuilder.toString() + "\n";
