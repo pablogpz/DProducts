@@ -284,7 +284,7 @@ public class Inventario {
     @Override
     public String toString() {
         // TODO - Revisar todo lo que debe mostrar
-        String decorador = "***************************************************************";
+        String decorador = "***************************************************************\n";
         StringBuilder stringBuilder = new StringBuilder(decorador);
 
         stringBuilder.append("INVENTARIO");

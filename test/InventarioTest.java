@@ -91,49 +91,11 @@ public class InventarioTest {
     }
 
     /**
-     * Testea el método 'toString()'. Se hace una comprobación visual la salida por consola
+     * Testea el método 'toString()'. (COMPROBACIÓN VISUAL)
      */
-    // TODO - Modificar prueba
     @Test
     public void eMostrarDetallesStock() {
-        assertEquals("***************************************************************INVENTARIO***************************************************************PRODUCTO\tNombre-ACER\n" +
-                "\tIdentificador : X5P1P\n" +
-                "\tCantidad en stock : 99\n" +
-                "\tCantidad en stock mínima : 25\n" +
-                "\tPrioridad de reabastecimiento : MEDIA\n" +
-                "\tFecha de lanzamiento : 2011/04/26\n" +
-                "\tEstado : Reacondicionado\n" +
-                "\tComentarios : \n" +
-                "***************************************************************PRODUCTO\tNombre-ACER\n" +
-                "\tIdentificador : X5P1S\n" +
-                "\tCantidad en stock : 25\n" +
-                "\tCantidad en stock mínima : 25\n" +
-                "\tPrioridad de reabastecimiento : MEDIA\n" +
-                "\tFecha de lanzamiento : 2011/04/26\n" +
-                "\tEstado : Reacondicionado\n" +
-                "\tComentarios : \n" +
-                "\n" +
-                "===============================================================\n" +
-                "Autor : Nombre\n" +
-                "Calificación *****\n" +
-                "\tReseña :\n" +
-                "Test***************************************************************PRODUCTO\tNombre-ACER\n" +
-                "\tIdentificador : X5P1G\n" +
-                "\tCantidad en stock : 29\n" +
-                "\tCantidad en stock mínima : 25\n" +
-                "\tPrioridad de reabastecimiento : MEDIA\n" +
-                "\tFecha de lanzamiento : 2011/04/26\n" +
-                "\tEstado : Reacondicionado\n" +
-                "\tComentarios : \n" +
-                "***************************************************************PRODUCTO\tNombre-ACER\n" +
-                "\tIdentificador : X5P1J\n" +
-                "\tCantidad en stock : 29\n" +
-                "\tCantidad en stock mínima : 25\n" +
-                "\tPrioridad de reabastecimiento : MEDIA\n" +
-                "\tFecha de lanzamiento : 2011/04/26\n" +
-                "\tEstado : Reacondicionado\n" +
-                "\tComentarios : \n" +
-                "***************************************************************", inventario.toString());
+        System.out.println(inventario);
     }
 
 }

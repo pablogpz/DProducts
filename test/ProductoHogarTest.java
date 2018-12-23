@@ -109,21 +109,11 @@ public class ProductoHogarTest {
 
     /**
      * Testeo del método 'toString()'. Comprueba que se formatee bien la cadena que representa a un
-     * producto del hogar. (El identificador ha sido eliminado por motivos de simplicidad en su
-     * detección)
+     * producto del hogar. (COMPROBACIÓN VISUAL)
      */
     @Test
     public void testToString() {
-        final String cadena = productoHogar.toString();
-        assertEquals("PRODUCTO\tNombre-ACER\n" +
-                "\tCantidad en stock : 30\n" +
-                "\tCantidad en stock mínima : 25\n" +
-                "\tPrioridad de reabastecimiento : MEDIA\n" +
-                "\tComentarios:\n" +
-                "\n" +
-                "\tParte de la casa : ASEO\n" +
-                "\tLikes : 0\n" +
-                "\tDescuento aplicable : -5.0%", cadena.substring(0, 22) + cadena.substring(45));
+        System.out.println(productoHogar);
     }
 
     /**
