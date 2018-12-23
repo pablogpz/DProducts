@@ -51,6 +51,7 @@ public abstract class ProductoComentable extends Producto {
 
         if (!autorRepetido) {                                           // Si no ha habido coincidencia se publica el comentario
             comentarios.add(comentario);
+            orderarComentarios();                                       // Ordena el nuevo comentario
         }
 
         return !autorRepetido;
