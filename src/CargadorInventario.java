@@ -5,6 +5,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import java.io.File;
 import java.io.IOException;
+import java.util.Iterator;
 
 /**
  * Clase encargada de cargar desde un fichero xml bien formado y validado colecciones de productos y clientes
@@ -18,9 +19,11 @@ import java.io.IOException;
 
 public class CargadorInventario {
 
-    private SAXParser parser;                                   // Parseador SAX de documentos XML
     private File ficheroDatos;                                  // Ruta al fichero XML de datos de entrada
+    private SAXParser parser;                                   // Parseador SAX de documentos XML
+    private ManejadorSAXParser manejadorSAXParser;              // Manejador de los eventos del SAXParser
     private boolean estadoIlegal;                               // Bandera que indica si ocurrió algún error de configuración
+    private boolean lecturaSucia;                               // Bandera que indica si ocurrió algún error en la lectura
 
     /**
      * Constructor parametrizado de la clase. Inicializa el constructor de documentos, dejándolo en estado listo
@@ -30,8 +33,10 @@ public class CargadorInventario {
      */
     public CargadorInventario(File ficheroDatos) {
         SAXParserFactory SAXBuilderFactory = SAXParserFactory.newInstance();
+        manejadorSAXParser = new ManejadorSAXParser();
         this.ficheroDatos = ficheroDatos;
         estadoIlegal = false;                                   // Estado legal inicial
+        lecturaSucia = true;                                    // No se permite la carga hasta que no se lean los datos
         try {
             parser = SAXBuilderFactory.newSAXParser();
         } catch (ParserConfigurationException | SAXException e) {
@@ -41,60 +46,85 @@ public class CargadorInventario {
     }
 
     /**
-     * Carga todos los datos leídos del fichero (productos, clientes y productos favoritos)
-     * de entrada en la instancia de inventario
+     * Lee todos los datos del fichero XML (productos, clientes y productos favoritos) de entrada
      *
-     * @return Verdadero si el documento XML es válido y todos los datos fueron cargardos correctamente.
-     * Falso en caso de que el documento XML no se pueda validar o algún dato estaba mal formado
+     * Modifica la bandera de lectura sucia tal que es :  Verdadero si el documento XML es válido y todos los datos
+     * fueron leídos correctamente. Falso en caso de que el documento XML no se pueda validar o algún dato estaba mal formado
      * @throws IllegalStateException Si el cargador no fue correctamente incializado
      */
-    public boolean cargarDatos() {
-        if (estadoIlegal)                                        // Comprueba que el cargador esté bien inicializado
+    public void lecturaDatos() {
+        if (estadoIlegal)                                       // Comprueba que el cargador esté bien inicializado
             throw new IllegalStateException("Ocurrió un problema al inicializar el cargador del inventario");
 
-        int cargaCorrecta = 0;                                   // Bandera que indica si ocurrió algún error en la carga
-        boolean insercionCorrecta = false;                       // Bandera para indicar si ocurrió algún error en la inserción
-
-        // *****    LECTURA DE DATOS    *****
-
-        ManejadorSAXParser manejadorSAXParser = new ManejadorSAXParser();
-
         try {
-            parser.parse(ficheroDatos, manejadorSAXParser);
+            parser.parse(ficheroDatos, manejadorSAXParser);     // Parsea el documento XML
         } catch (SAXException e) {
             reportarError("ERROR parsando el documento XML\n" + e.getMessage());
+            lecturaSucia = true;
         } catch (IOException e) {
             reportarError("ERROR al abrir el fichero de datos de entrda. Compruebe la ruta el archivo y sus permisos\n" +
                     e.getMessage());
+            lecturaSucia = true;
         }
 
-//        if (cargaCorrecta < 0) {                                 // Comprueba que no haya ocurrido ningún error hasta ahora
-//            reportarError("ERROR. Algo fue mal en la carga de datos");
-//            return false;
-//        }
-//
-//        // *****    CARGA DE DATOS      *****
-//
-//        Inventario inventario = Inventario.recuperarInstancia();
-//        // Carga de los productos en el inventario
-//        for (Producto producto : productos.values()) {
-//            insercionCorrecta = inventario.agregarProducto(producto);
-//        }
-//        if (!insercionCorrecta) {
-//            reportarError("ERROR. No se pudieron añadir todos los productos al inventario");
-//            return false;                                      // Algún producto no se pudo añadir al inventario
-//        }
-//
-//        // Carga de los clientes en el inventario
-//        for (Cliente cliente : clientes.values()) {
-//            insercionCorrecta = inventario.agregarCliente(cliente);
-//        }
-//        if (!insercionCorrecta) {
-//            reportarError("ERROR. No se pudieron añadir todos los clientes al inventario");
-//            return false;                                      // Algún cliente no se pudo añadir al inventario
-//        }
-//
-        return true;                                           // Todos los datos se cargaron correctamente
+        if (manejadorSAXParser.getEstado() < 0) {               // Comprueba que no haya ocurrido ningún error en la carga
+            reportarError("ERROR. Algo fue mal en la carga de datos");
+            lecturaSucia = true;
+            return false;
+        }
+
+        lecturaSucia = manejadorSAXParser.getEstado() < 0;     // Actualiza la bandera de lectura
+    }
+
+    private boolean cargarDatos() {
+        if (estadoIlegal)                                       // Comprueba que el cargador esté bien inicializado
+            throw new IllegalStateException("Ocurrió un problema al inicializar el cargador del inventario");
+
+        boolean insercionCorrecta = true;                       // Bandera que indica si hubo error en la carga
+
+        Inventario inventario = Inventario.recuperarInstancia();
+        // Carga de los productos en el inventario
+        Iterator<Producto> itProductos = manejadorSAXParser.getIteradorProductosParseados();
+        while (itProductos.hasNext() && insercionCorrecta) {
+            insercionCorrecta = inventario.agregarProducto(itProductos.next());
+        }
+
+        if (!insercionCorrecta) {
+            reportarError("ERROR. No se pudieron añadir todos los productos al inventario");
+            return false;                                        // Algún producto no se pudo añadir al inventario
+        }
+
+        // Carga de los clientes en el inventario
+        Iterator<Cliente> itClientes = manejadorSAXParser.getIteradorClientesParseados();
+        while (itClientes.hasNext() && insercionCorrecta) {
+            insercionCorrecta = inventario.agregarCliente(itClientes.next());
+        }
+
+        if (!insercionCorrecta) {
+            reportarError("ERROR. No se pudieron añadir todos los clientes al inventario");
+            return false;                                        // Algún cliente no se pudo añadir al inventario
+        }
+
+        // Relaciona los clientes con sus productos favoritos
+        Iterator<Object[]> itProductosFav = manejadorSAXParser.getIteradorProductosFavParseados();
+        Object[] datosRelacion;                                  // Datos del cliente, producto favorito y alias
+        while (itProductosFav.hasNext() && insercionCorrecta) {
+            datosRelacion = itProductosFav.next();
+
+            Producto producto = (Producto) datosRelacion[0];
+            Cliente cliente = (Cliente) datosRelacion[1];
+            String alias = (String) datosRelacion[2];
+
+            // Intenta añadir el producto favorito a su cliente con el alias dado
+            insercionCorrecta = cliente.agregarFavorito(producto, alias);
+        }
+
+        if (!insercionCorrecta) {
+            reportarError("ERROR. No se pudieron relacionar todos los productos favoritos con sus clientes");
+            return false;                                        // Algún relacion falló
+        }
+
+        return true;                                             // Todos los datos se cargaron correctamente
     }
 
     /**

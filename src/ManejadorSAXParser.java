@@ -20,11 +20,13 @@ import java.util.*;
 public class ManejadorSAXParser extends DefaultHandler {
 
     // Tags XML que denominan los objetos de entrada
+
     private static final String XML_TAG_PRODUCTO = "product";
     private static final String XML_TAG_CLIENTE = "client";
     private static final String XML_TAG_PRODUCTO_FAVORITO = "favorite";
 
     // Nombres de los atributos de los productos
+
     private static final String XML_PRODUCTO_NOMBRE = "name";
     private static final String XML_PRODUCTO_CANTIDAD = "quantity";
     private static final String XML_PRODUCTO_PRECIO = "price";
@@ -36,15 +38,23 @@ public class ManejadorSAXParser extends DefaultHandler {
     private static final String XML_PRODUCTO_MES_CADUCIDAD = "expiration";
 
     // Nombres de los atributos de los clientes
+
     private static final String XML_CLIENTE_NOMBRE = "name";
     private static final String XML_CLIENTE_EDAD = "age";
     private static final String XML_CLIENTE_LOCALIDAD = "location";
     private static final String XML_CLIENTE_CATEGORIA = "category";
 
     // Nombres de los atributos de los productos favoritos
+
     private static final String XML_PRODUCTO_FAV_NOMBRE = "product_name";
     private static final String XML_PRODUCTO_FAV_CLIENTE = "client_name";
     private static final String XML_PRODUCTO_FAV_ALIAS = "alias";
+
+    // Códigos de error
+
+    public static final int ERR_CODE_PARSEADO_CORRECTO = 0;
+    public static final int ERR_CODE_PRODUCTO_MALFORMADO = -1;
+    public static final int ERR_CODE_CLIENTE_MALFORMADO = -2;
 
     /*
      * Colección de productos parseados. Son indexados por nombre para asociarlos a los clientes
@@ -58,20 +68,18 @@ public class ManejadorSAXParser extends DefaultHandler {
     // Lista de relaciones entre clientes, sus productos favoritos y los sobrenombres con el que los recuerdan
     private List<Object[]> productosFavoritos;
 
-    /*
-     * Bandera que indica el estado en el que terminó el proceso de parseado. Un valor de 0 indica una carga correcta,
-     * y un valor negativo que ocurrió algún error durante la carga y no fue correcta
-     */
+    // Bandera que indica el estado en el que terminó el proceso de parseado
     private int estado;
 
     /**
-     * Constructor por defecto de la clase. Inicializa las estructuras de datos para almacenar productos y clientes
+     * Constructor por defecto de la clase. Inicializa las estructuras de datos para almacenar productos, clientes y
+     * las relaciones con sus productos favoritos
      */
     public ManejadorSAXParser() {
         productos = new HashMap<>();
         clientes = new HashMap<>();
         productosFavoritos = new ArrayList<>();
-        estado = 0;
+        estado = ERR_CODE_PARSEADO_CORRECTO;
     }
 
     /**
@@ -88,9 +96,9 @@ public class ManejadorSAXParser extends DefaultHandler {
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         // Determina de qué tipo es el elemento actual leído
         if (qName.equalsIgnoreCase(XML_TAG_PRODUCTO))
-            estado += cargarProducto(attributes);
+            estado = cargarProducto(attributes);
         else if (qName.equalsIgnoreCase(XML_TAG_CLIENTE))
-            estado += cargarCliente(attributes);
+            estado = cargarCliente(attributes);
         else if (qName.equalsIgnoreCase(XML_TAG_PRODUCTO_FAVORITO))
             cargarProductoFavorito(attributes);
     }
@@ -99,7 +107,8 @@ public class ManejadorSAXParser extends DefaultHandler {
      * Intenta parsear un producto a partir de su etiqueta de especificación XML
      *
      * @param attributes Datos acerca del producto a instanciar
-     * @return 0 si se pudo instanciar el producto. -1 Si ocurrió algún error al instanciar el producto
+     * @return ERR_CODE_PARSEADO_CORRECTO si se pudo instanciar el producto. ERR_CODE_PRODUCTO_MALFORMADO Si ocurrió
+     * algún error al instanciar el producto
      */
     private int cargarProducto(Attributes attributes) {
         // Campos comunes a todos los productos
@@ -128,17 +137,18 @@ public class ManejadorSAXParser extends DefaultHandler {
                             prioridad, mesCaducidad));
             }
         } catch (IllegalArgumentException e) {                              // Algún parámetro del constructor no era válido
-            return -1;
+            return ERR_CODE_PRODUCTO_MALFORMADO;
         }
 
-        return 0;                                                           // El producto fue instanciado correctamente
+        return ERR_CODE_PARSEADO_CORRECTO;                                  // El producto fue instanciado correctamente
     }
 
     /**
      * Intenta parsear un cliente a partir de su etiqueta de especificación XML
      *
      * @param attributes Datos acerca del cliente a instanciar
-     * @return 0 si se pudo instanciar el cliente. -1 Si ocurrió algún error al instanciar el cliente
+     * @return ERR_CODE_PARSEADO_CORRECTO si se pudo instanciar el cliente. ERR_CODE_CLIENTE_MALFORMADO
+     * Si ocurrió algún error al instanciar el cliente
      */
     private int cargarCliente(Attributes attributes) {
         // Campos comunes a todos los clientes
@@ -157,10 +167,10 @@ public class ManejadorSAXParser extends DefaultHandler {
                     clientes.put(nombre, new ClienteVIP(nombre, edad, localidad));
             }
         } catch (IllegalArgumentException e) {                              // Algún parámetro del constructor no era válido
-            return -1;
+            return ERR_CODE_CLIENTE_MALFORMADO;
         }
 
-        return 0;                                                           // El cliente fue instanciado correctamente
+        return ERR_CODE_PARSEADO_CORRECTO;                                  // El cliente fue instanciado correctamente
     }
 
     /**
@@ -182,7 +192,13 @@ public class ManejadorSAXParser extends DefaultHandler {
     }
 
     /**
-     * Método accesor del atributo 'estado'
+     * Método accesor del atributo 'estado'. Puede encontrarse en los siguientes estados.
+     * <ul>
+     * <li>0 indica un parseado correcto</li>
+     * <li>-1 que ocurrió un error al parsear un producto</li>
+     * <li>-2 que ocurrió un error al parsear un cliente</li>
+     * <li>-3 que ocurrió un error al parsear un producto favorito</li>
+     * </ul>
      *
      * @return Estado en el que se encuentra el manejador
      */
