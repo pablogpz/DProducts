@@ -9,7 +9,14 @@ import java.util.*;
  * Manejador del parseador SAX personalizado para atender a los eventos generador por éste parser.
  * Implementa el parseado de los objetos definidos en el fichero xml de datos de entrada.
  * El documento XML debe ser validado con anterioridad, por lo que se presupone que las
- * relaciones incluyen referencias correctas
+ * relaciones incluyen referencias correctas.
+ * <p>
+ * SUMARIO DE CÓDIGOS DE ERROR
+ * <ul>
+ * <li>0 indica un parseado correcto</li>
+ * <li>-5 indica que ocurrió un error al parsear un producto</li>
+ * <li>-6 indica que ocurrió un error al parsear un cliente</li>
+ * </ul>
  *
  * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
  * @grupo : Wild True
@@ -53,8 +60,8 @@ public class ManejadorSAXParser extends DefaultHandler {
     // CÓDIGOS DE ERROR
 
     public static final int ERR_CODE_PARSEADO_CORRECTO = 0;
-    public static final int ERR_CODE_PRODUCTO_MALFORMADO = -3;
-    public static final int ERR_CODE_CLIENTE_MALFORMADO = -4;
+    public static final int ERR_CODE_PRODUCTO_MALFORMADO = -5;
+    public static final int ERR_CODE_CLIENTE_MALFORMADO = -6;
 
     /*
      * Colección de productos parseados. Son indexados por nombre para asociarlos a los clientes
@@ -96,9 +103,9 @@ public class ManejadorSAXParser extends DefaultHandler {
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         // Determina de qué tipo es el elemento actual leído
         if (qName.equalsIgnoreCase(XML_TAG_PRODUCTO))
-            estado = cargarProducto(attributes);
+            setEstado(cargarProducto(attributes));
         else if (qName.equalsIgnoreCase(XML_TAG_CLIENTE))
-            estado = cargarCliente(attributes);
+            setEstado(cargarCliente(attributes));
         else if (qName.equalsIgnoreCase(XML_TAG_PRODUCTO_FAVORITO))
             cargarProductoFavorito(attributes);
     }
@@ -192,18 +199,22 @@ public class ManejadorSAXParser extends DefaultHandler {
     }
 
     /**
-     * Método accesor del atributo 'estado'. Puede encontrarse en los siguientes estados.
-     * <ul>
-     * <li>0 indica un parseado correcto</li>
-     * <li>-1 que ocurrió un error al parsear un producto</li>
-     * <li>-2 que ocurrió un error al parsear un cliente</li>
-     * <li>-3 que ocurrió un error al parsear un producto favorito</li>
-     * </ul>
+     * Método accesor del atributo 'estado'
      *
      * @return Estado en el que se encuentra el manejador
+     * @see ManejadorSAXParser
      */
     public int getEstado() {
         return estado;
+    }
+
+    /**
+     * Método mutador del atributo 'estado'
+     *
+     * @param estado Nuevo estado
+     */
+    private void setEstado(int estado) {
+        this.estado = estado;
     }
 
     /**
