@@ -9,31 +9,31 @@ import java.util.Iterator;
 
 /**
  * Clase encargada de cargar desde un fichero xml colecciones de productos y clientes en el inventario. El documento
- * debe estar bien form·do y ser validado contra su esquema de validaciÛn para que sea procesado.
+ * debe estar bien formado y ser validado contra su esquema de validaci√≥n para que sea procesado.
  * <p>
- * SUMARIO DE C”DIGOS DE ERROR
+ * SUMARIO DE C√ìDIGOS DE ERROR
  * <ul>
  * <li>0 indica una carga correcta</li>
- * <li>-1 indica que ocurriÛ un error al configurar el parseador</li>
+ * <li>-1 indica que ocurri√≥ un error al configurar el parseador</li>
  * <li>-2 indica que no se pudo parsear el fichero de entrada</li>
  * <li>-3 indica que no se pudo encontrar el fichero de entrada</li>
- * <li>-4 indica que el fichero XML de entrada no cumple la validaciÛn</li>
- * <li>-5 indica que ocurriÛ un error al parsear un producto</li>
- * <li>-6 indica que ocurriÛ un error al parsear un cliente</li>
- * <li>-7 indica que ocurriÛ al cargar un producto en el inventario</li>
- * <li>-8 indica que ocurriÛ al cargar un cliente en el inventario</li>
- * <li>-9 indica que ocurriÛ al aÒadir un producto favorito a un cliente</li>
+ * <li>-4 indica que el fichero XML de entrada no cumple la validaci√≥n</li>
+ * <li>-5 indica que ocurri√≥ un error al parsear un producto</li>
+ * <li>-6 indica que ocurri√≥ un error al parsear un cliente</li>
+ * <li>-7 indica que ocurri√≥ al cargar un producto en el inventario</li>
+ * <li>-8 indica que ocurri√≥ al cargar un cliente en el inventario</li>
+ * <li>-9 indica que ocurri√≥ al a√±adir un producto favorito a un cliente</li>
  * </ul>
  *
- * @author : Juan Pablo GarcÌa Plaza PÈrez - Jose ¡ngel Concha Carrasco
+ * @author : Juan Pablo Garc√≠a Plaza P√©rez - Jose √Ångel Concha Carrasco
  * @grupo : Wild True
  * Entrega : EC1
- * Curso : 2∫ GIIIS (Grupo A)
+ * Curso : 2¬∫ GIIIS (Grupo A)
  */
 
 public class CargadorInventario {
 
-    // C”DIGOS DE ERROR. Los cÛdigos del (-5) al (-6) est·n reservador por el manejador del parser SAX
+    // C√ìDIGOS DE ERROR. Los c√≥digos del (-5) al (-6) est√°n reservador por el manejador del parser SAX
 
     public static int ERR_CODE_CARGA_CORRECTA = 0;
     public static int ERR_CODE_CONFIGURACION_FALLIDA = -1;
@@ -47,13 +47,13 @@ public class CargadorInventario {
     private File ficheroDatos;                                  // Ruta al fichero XML de datos de entrada
     private SAXParser parser;                                   // Parseador SAX de documentos XML
     private ManejadorSAXParser manejadorSAXParser;              // Manejador de los eventos del SAXParser
-    private int estado;                                         // Bandera que indica si ocurriÛ alg˙n error
+    private int estado;                                         // Bandera que indica si ocurri√≥ alg√∫n error
 
     /**
-     * Constructor parametrizado de la clase. Inicializa el constructor de documentos, dej·ndolo en estado listo
+     * Constructor parametrizado de la clase. Inicializa el constructor de documentos, dej√°ndolo en estado listo
      * para la carga de datos
      *
-     * @param ficheroDatos Contiene la informaciÛn acerca del fichero de datos de entrada
+     * @param ficheroDatos Contiene la informaci√≥n acerca del fichero de datos de entrada
      */
     public CargadorInventario(File ficheroDatos) {
         SAXParserFactory SAXBuilderFactory = SAXParserFactory.newInstance();
@@ -63,7 +63,6 @@ public class CargadorInventario {
 
         try {
             parser = SAXBuilderFactory.newSAXParser();
-            ;
         } catch (ParserConfigurationException | SAXException e) {
 //            reportarError("ERROR al construir el parseador XML\n" + e.getMessage());
             setEstado(ERR_CODE_CONFIGURACION_FALLIDA);
@@ -74,23 +73,23 @@ public class CargadorInventario {
      * Lee todos los datos del fichero XML (productos, clientes y productos favoritos) de entrada e instancia sus
      * objetos correspondientes
      * <p>
-     * // TODO - Reemplazar por excepciÛn personalizada
+     * // TODO - Reemplazar por excepci√≥n personalizada
      *
      * @throws IllegalStateException Si el cargador no fue correctamente incializado
      */
     public void lecturaDatos() {
-        if (!enEstadoValido())                                  // Comprueba que el cargador estÈ bien inicializado
-            // TODO - Reemplazar por excepciÛn personalizada
-            throw new IllegalStateException("OcurriÛ un problema al inicializar el cargador del inventario");
+        if (!enEstadoValido())                                  // Comprueba que el cargador est√° bien inicializado
+            // TODO - Reemplazar por excepci√≥n personalizada
+            throw new IllegalStateException("Ocurri√≥ un problema al inicializar el cargador del inventario");
 
         try {
             parser.parse(ficheroDatos, manejadorSAXParser);     // Parsea el documento XML
         } catch (SAXException e) {
-            // TODO - Moverlo a excepciÛn personalizada
+            // TODO - Moverlo a excepci√≥n personalizada
 //            reportarError("ERROR parsando el documento XML\n" + e.getMessage());
             setEstado(ERR_CODE_PARSEADO_FALLIDO);
         } catch (IOException e) {
-            // TODO - Moverlo a excepciÛn personalizada
+            // TODO - Moverlo a excepci√≥n personalizada
 //            reportarError("ERROR al abrir el fichero de datos de entrda. Compruebe la ruta el archivo y sus permisos\n" +
 //                    e.getMessage());
             setEstado(ERR_CODE_FICHERO_NO_ENCONTRADO);
@@ -98,8 +97,8 @@ public class CargadorInventario {
 
         setEstado(manejadorSAXParser.getEstado());              // Actualiza la bandera de estado
 
-        if (!enEstadoValido()) {                                // Comprueba que no haya ocurrido ning˙n error en la carga
-            // TODO - Moverlo a excepciÛn personalizada
+        if (!enEstadoValido()) {                                // Comprueba que no haya ocurrido ning√∫n error en la carga
+            // TODO - Moverlo a excepci√≥n personalizada
 //            reportarError("ERROR. Algo fue mal en la carga de datos");
         }
     }
@@ -107,14 +106,14 @@ public class CargadorInventario {
     /**
      * Carga en el inventario los datos parseados por el manejador del parser SAX
      * <p>
-     * // TODO - Reemplazar por excepciÛn personalizada
+     * // TODO - Reemplazar por excepci√≥n personalizada
      *
      * @throws IllegalStateException Si el cargador no fue correctamente incializado
      */
     public void cargarDatos() {
-        if (!enEstadoValido())                                  // Comprueba que el cargador estÈ bien inicializado
-            // TODO - Reemplazar por excepciÛn personalizada
-            throw new IllegalStateException("OcurriÛ un problema al inicializar el cargador del inventario");
+        if (!enEstadoValido())                                  // Comprueba que el cargador est√° bien inicializado
+            // TODO - Reemplazar por excepci√≥n personalizada
+            throw new IllegalStateException("Ocurri√≥ un problema al inicializar el cargador del inventario");
 
         boolean insercionCorrecta = true;                       // Bandera que indica si hubo error en la carga
 
@@ -126,9 +125,9 @@ public class CargadorInventario {
         }
 
         if (!insercionCorrecta) {
-            // TODO - Reemplazar por excepciÛn personalizada
-            setEstado(ERR_CODE_CARGA_PRODUCTO_FALLIDA);         // Alg˙n producto no se pudo aÒadir al inventario
-//            reportarError("ERROR. No se pudieron aÒadir todos los productos al inventario");
+            // TODO - Reemplazar por excepci√≥n personalizada
+            setEstado(ERR_CODE_CARGA_PRODUCTO_FALLIDA);         // Alg√∫n producto no se pudo a√±adir al inventario
+//            reportarError("ERROR. No se pudieron a√±adir todos los productos al inventario");
         }
 
         // Carga de los clientes en el inventario
@@ -138,9 +137,9 @@ public class CargadorInventario {
         }
 
         if (!insercionCorrecta) {
-            // TODO - Reemplazar por excepciÛn personalizada
-            setEstado(ERR_CODE_CARGA_CLIENTE_FALLIDA);          // Alg˙n cliente no se pudo aÒadir al inventario
-//            reportarError("ERROR. No se pudieron aÒadir todos los clientes al inventario");
+            // TODO - Reemplazar por excepci√≥n personalizada
+            setEstado(ERR_CODE_CARGA_CLIENTE_FALLIDA);          // Alg√∫n cliente no se pudo a√±adir al inventario
+//            reportarError("ERROR. No se pudieron a√±adir todos los clientes al inventario");
         }
 
         // Relaciona los clientes con sus productos favoritos
@@ -153,26 +152,26 @@ public class CargadorInventario {
             Cliente cliente = (Cliente) datosRelacion[1];
             String alias = (String) datosRelacion[2];
 
-            // Intenta aÒadir el producto favorito a su cliente con el alias dado
+            // Intenta a√±adir el producto favorito a su cliente con el alias dado
             insercionCorrecta = cliente.agregarFavorito(producto, alias);
         }
 
         if (!insercionCorrecta) {
-            // TODO - Reemplazar por excepciÛn personalizada
-            setEstado(ERR_CODE_CARGA_PRODUCTO_FAV_FALLIDA);     // Alguna relaciÛn fallÛ
+            // TODO - Reemplazar por excepci√≥n personalizada
+            setEstado(ERR_CODE_CARGA_PRODUCTO_FAV_FALLIDA);     // Alguna relaci√≥n fall√≥
 //            reportarError("ERROR. No se pudieron relacionar todos los productos favoritos con sus clientes");
         }
     }
 
     /**
-     * @return Si el cargador se ha encontrado con alg˙n error hasta ahora
+     * @return Si el cargador se ha encontrado con alg√∫n error hasta ahora
      */
     private boolean enEstadoValido() {
         return estado == ERR_CODE_CARGA_CORRECTA;
     }
 
     /**
-     * MÈtodo accesor del atributo 'estado'
+     * M√©todo accesor del atributo 'estado'
      *
      * @return Estado en el que se encuentra el cargador
      * @see CargadorInventario
@@ -182,7 +181,7 @@ public class CargadorInventario {
     }
 
     /**
-     * MÈtodo mutador del atributo 'estado'
+     * M√©todo mutador del atributo 'estado'
      *
      * @param estado Nuevo estado
      */
