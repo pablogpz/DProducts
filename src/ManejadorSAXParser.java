@@ -50,11 +50,11 @@ public class ManejadorSAXParser extends DefaultHandler {
     private static final String XML_PRODUCTO_FAV_CLIENTE = "client_name";
     private static final String XML_PRODUCTO_FAV_ALIAS = "alias";
 
-    // Códigos de error
+    // CÓDIGOS DE ERROR
 
     public static final int ERR_CODE_PARSEADO_CORRECTO = 0;
-    public static final int ERR_CODE_PRODUCTO_MALFORMADO = -1;
-    public static final int ERR_CODE_CLIENTE_MALFORMADO = -2;
+    public static final int ERR_CODE_PRODUCTO_MALFORMADO = -3;
+    public static final int ERR_CODE_CLIENTE_MALFORMADO = -4;
 
     /*
      * Colección de productos parseados. Son indexados por nombre para asociarlos a los clientes
