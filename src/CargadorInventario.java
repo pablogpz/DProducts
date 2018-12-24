@@ -7,8 +7,8 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * Clase encargada de cargar desde un fichero xml bien formado (sigue el DTD) colecciones de productos
- * y clientes en el inventario
+ * Clase encargada de cargar desde un fichero xml bien formado y validado colecciones de productos y clientes
+ * en el inventario
  *
  * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
  * @grupo : Wild True
@@ -20,9 +20,7 @@ public class CargadorInventario {
 
     private SAXParser parser;                                   // Parseador SAX de documentos XML
     private File ficheroDatos;                                  // Ruta al fichero XML de datos de entrada
-
-    // Bandera que indica si ocurrió algún error de configuración inicial
-    private boolean estadoIlegal;
+    private boolean estadoIlegal;                               // Bandera que indica si ocurrió algún error de configuración
 
     /**
      * Constructor parametrizado de la clase. Inicializa el constructor de documentos, dejándolo en estado listo
@@ -51,7 +49,7 @@ public class CargadorInventario {
      * @throws IllegalStateException Si el cargador no fue correctamente incializado
      */
     public boolean cargarDatos() {
-        if (estadoIlegal)                                       // Comprueba que el cargador esté bien inicializado
+        if (estadoIlegal)                                        // Comprueba que el cargador esté bien inicializado
             throw new IllegalStateException("Ocurrió un problema al inicializar el cargador del inventario");
 
         int cargaCorrecta = 0;                                   // Bandera que indica si ocurrió algún error en la carga
