@@ -3,8 +3,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.time.Month;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Manejador del parseador SAX personalizado para atender a los eventos generador por éste parser.
@@ -56,6 +55,9 @@ public class ManejadorSAXParser extends DefaultHandler {
     // Colección de clientes parseados. Son indexados por nombre para asociarlos a sus productos favoritos
     private Map<String, Cliente> clientes;
 
+    // Lista de relaciones entre clientes, sus productos favoritos y los sobrenombres con el que los recuerdan
+    private List<Object[]> productosFavoritos;
+
     /*
      * Bandera que indica el estado en el que terminó el proceso de parseado. Un valor de 0 indica una carga correcta,
      * y un valor negativo que ocurrió algún error durante la carga y no fue correcta
@@ -68,6 +70,7 @@ public class ManejadorSAXParser extends DefaultHandler {
     public ManejadorSAXParser() {
         productos = new HashMap<>();
         clientes = new HashMap<>();
+        productosFavoritos = new ArrayList<>();
         estado = 0;
     }
 
@@ -89,7 +92,7 @@ public class ManejadorSAXParser extends DefaultHandler {
         else if (qName.equalsIgnoreCase(XML_TAG_CLIENTE))
             estado += cargarCliente(attributes);
         else if (qName.equalsIgnoreCase(XML_TAG_PRODUCTO_FAVORITO))
-            estado += cargarProductoFavorito(attributes);
+            cargarProductoFavorito(attributes);
     }
 
     /**
@@ -116,11 +119,13 @@ public class ManejadorSAXParser extends DefaultHandler {
                     break;
                 case HOGAR:
                     PARTES_CASA habitacion = PARTES_CASA.valueOf(attributes.getValue(XML_PRODUCTO_PARTE_CASA));
-                    productos.put(nombre, new ProductoHogar(nombre, cantidad, precio, stockMinimo, fabricante, prioridad, habitacion));
+                    productos.put(nombre, new ProductoHogar(nombre, cantidad, precio, stockMinimo, fabricante, prioridad,
+                            habitacion));
                     break;
                 case ALIMENTACION:
                     Month mesCaducidad = Month.valueOf(attributes.getValue(XML_PRODUCTO_MES_CADUCIDAD));
-                    productos.put(nombre, new ProductoAlimentacion(nombre, cantidad, precio, stockMinimo, fabricante, prioridad, mesCaducidad));
+                    productos.put(nombre, new ProductoAlimentacion(nombre, cantidad, precio, stockMinimo, fabricante,
+                            prioridad, mesCaducidad));
             }
         } catch (IllegalArgumentException e) {                              // Algún parámetro del constructor no era válido
             return -1;
@@ -159,25 +164,52 @@ public class ManejadorSAXParser extends DefaultHandler {
     }
 
     /**
-     * Relaciona un cliente con uno de sus productos que debe aparecer com favorito a partir de la especificación
-     * de su etiqueta XML. El documento XML debe ser validado con anterioridad, por lo que se presupone que las
-     * relaciones incluyen referencias correctas
+     * Guarda la relación de un cliente con uno de sus productos que debe aparecer com favorito a partir de la
+     * especificación de su etiqueta XML. El documento XML debe ser validado con anterioridad, por lo que se presupone
+     * que las relaciones incluyen referencias correctas
      *
      * @param attributes Contiene el nombre del producto y del cliente que deben ser relacionados, así como el alias
      *                   con el que se recordará el producto
-     * @return 0 si se pudo añadir el producto a la lista de favoritos del cliente. -1 si ocurrió algún error
      */
-    private int cargarProductoFavorito(Attributes attributes) {
-        // Campos que relacionan clientes con sus productos favoritos
-        String nombreProducto = attributes.getValue(XML_PRODUCTO_FAV_NOMBRE);
-        String nombreCliente = attributes.getValue(XML_PRODUCTO_FAV_CLIENTE);
-        String alias = attributes.getValue(XML_PRODUCTO_FAV_ALIAS);
+    private void cargarProductoFavorito(Attributes attributes) {
+        Producto producto = productos.get(attributes.getValue(XML_PRODUCTO_FAV_NOMBRE));    // Producto a relacionar
+        Cliente cliente = clientes.get(attributes.getValue(XML_PRODUCTO_FAV_CLIENTE));      // Cliente a relacionar
+        String alias = attributes.getValue(XML_PRODUCTO_FAV_ALIAS);                         // Alias del producto
 
-        Producto producto = productos.get(nombreProducto);                  // Producto a relacionar
-        Cliente cliente = clientes.get(nombreCliente);                      // Cliente a relacionar
-        boolean cargaFavorito = cliente.agregarFavorito(producto, alias);   // El cliente agrega el producto a favoritos
+        // Colección heterogénea de los datos necesarios para relacionar un cliente con un producto favorito
+        Object[] relacionFavorito = {producto, cliente, alias};
+        productosFavoritos.add(relacionFavorito);
+    }
 
-        return cargaFavorito ? 0 : -1;
+    /**
+     * Método accesor del atributo 'estado'
+     *
+     * @return Estado en el que se encuentra el manejador
+     */
+    public int getEstado() {
+        return estado;
+    }
+
+    /**
+     * @return Iterador sobre la colección de productos parseados del fichero de datos de entrada
+     */
+    public Iterator<Producto> getIteradorProductosParseados() {
+        return productos.values().iterator();
+    }
+
+    /**
+     * @return Iterador sobre la colección de clientes parseados del fichero de datos de entrada
+     */
+    public Iterator<Cliente> getIteradorClientesParseados() {
+        return clientes.values().iterator();
+    }
+
+    /**
+     * @return Iterador sobre la colección de relaciones entre clientes y sus productos favoritos
+     * parseados del fichero de datos de entrada
+     */
+    public Iterator<Object[]> getIteradorProductosFavParseados() {
+        return productosFavoritos.iterator();
     }
 
 }
