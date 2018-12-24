@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="data" type="dataType"/>
+    <xs:complexType name="productType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute type="xs:string" name="name" use="optional"/>
+                <xs:attribute type="xs:positiveInteger" name="quantity" use="optional"/>
+                <xs:attribute type="xs:decimal" name="price" use="optional"/>
+                <xs:attribute type="xs:positiveInteger" name="minimum_stock" use="optional"/>
+                <xs:attribute type="xs:string" name="manufacturer" use="optional"/>
+                <xs:attribute type="xs:string" name="priority" use="optional"/>
+                <xs:attribute type="xs:string" name="category" use="optional"/>
+                <xs:attribute type="xs:string" name="room" use="optional"/>
+                <xs:attribute type="xs:string" name="expiration" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="stockType">
+        <xs:sequence>
+            <xs:element type="productType" name="product" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="clientType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute type="xs:string" name="name" use="optional"/>
+                <xs:attribute type="xs:positiveInteger" name="age" use="optional"/>
+                <xs:attribute type="xs:string" name="location" use="optional"/>
+                <xs:attribute type="xs:string" name="category" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="clientsType">
+        <xs:sequence>
+            <xs:element type="clientType" name="client" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="favoriteType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute type="xs:string" name="product_name" use="optional"/>
+                <xs:attribute type="xs:string" name="client_name" use="optional"/>
+                <xs:attribute type="xs:string" name="alias" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="favoritesType">
+        <xs:sequence>
+            <xs:element type="favoriteType" name="favorite" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="dataType">
+        <xs:sequence>
+            <xs:element type="stockType" name="stock"/>
+            <xs:element type="clientsType" name="clients"/>
+            <xs:element type="favoritesType" name="favorites"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

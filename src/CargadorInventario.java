@@ -60,8 +60,10 @@ public class CargadorInventario {
         manejadorSAXParser = new ManejadorSAXParser();
         this.ficheroDatos = ficheroDatos;
         setEstado(ERR_CODE_CARGA_CORRECTA);                     // Estado legal inicial
+
         try {
             parser = SAXBuilderFactory.newSAXParser();
+            ;
         } catch (ParserConfigurationException | SAXException e) {
 //            reportarError("ERROR al construir el parseador XML\n" + e.getMessage());
             setEstado(ERR_CODE_CONFIGURACION_FALLIDA);

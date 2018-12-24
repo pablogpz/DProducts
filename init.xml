@@ -1,33 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE data [
-        <!ELEMENT data (stock, clients, favorites)>
-        <!ELEMENT stock (product+)>
-        <!ELEMENT product EMPTY>
-        <!ATTLIST product
-                name ID #REQUIRED
-                quantity NMTOKEN #REQUIRED
-                price NMTOKEN #REQUIRED
-                minimum_stock CDATA #REQUIRED
-                manufacturer CDATA #REQUIRED
-                priority (BAJA|MEDIA|ALTA) #REQUIRED
-                category (OCIO|HOGAR|ALIMENTACION) #REQUIRED
-                room (SALA_ESTAR|COCINA|DORMITORIO|ASEO|JARDIN) #IMPLIED
-                expiration (JANUARY|FEBRUARY|MARCH|APRIL|MAY|JUNE|JULY|AUGUST|SEPTEMBER|OCTOBER|NOVEMBER|DECEMBER) #IMPLIED>
-        <!ELEMENT clients (client+)>
-        <!ELEMENT client EMPTY>
-        <!ATTLIST client
-                name ID #REQUIRED
-                age NMTOKEN #REQUIRED
-                location CDATA #REQUIRED
-                category (ESTANDAR|VIP) #REQUIRED>
-        <!ELEMENT favorites (favorite*)>
-        <!ELEMENT favorite EMPTY>
-        <!ATTLIST favorite
-                product_name IDREF #REQUIRED
-                client_name IDREF #REQUIRED
-                alias CDATA #REQUIRED>
-        ]>
-<data>
+<data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="init.xsd">
     <stock>
         <product name="Nintendo_Switch" quantity="4" price="300" minimum_stock="2" manufacturer="NINTENDO"
                  priority="BAJA" category="OCIO"/>
