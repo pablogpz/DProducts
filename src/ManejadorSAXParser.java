@@ -202,7 +202,7 @@ public class ManejadorSAXParser extends DefaultHandler {
      * Método accesor del atributo 'estado'
      *
      * @return Estado en el que se encuentra el manejador
-     * @see ManejadorSAXParser
+     * @see ManejadorSAXParser Para obtener información acerca de los códigos de error
      */
     public int getEstado() {
         return estado;

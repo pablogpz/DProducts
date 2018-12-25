@@ -174,7 +174,7 @@ public class CargadorInventario {
      * Método accesor del atributo 'estado'
      *
      * @return Estado en el que se encuentra el cargador
-     * @see CargadorInventario
+     * @see CargadorInventario Para obtener información acerca de los códigos de error
      */
     public int getEstado() {
         return estado;
