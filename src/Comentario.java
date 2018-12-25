@@ -3,7 +3,7 @@
  * una breve reseña sobre el producto y una calificiación en el rango [1,5]
  *
  * @author : Juan Pablo García Plaza Pérez
-@author Jose Ángel Concha Carrasco
+ * @author Jose Ángel Concha Carrasco
  * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
@@ -45,6 +45,15 @@ public class Comentario {
     }
 
     /**
+     * Método mutador del atributo 'autor'
+     *
+     * @param autor Nuevo autor del comentario
+     */
+    public void setAutor(Cliente autor) {
+        this.autor = autor;
+    }
+
+    /**
      * Método accesor del atributo 'texto'
      *
      * @return Texto del comentario
@@ -60,15 +69,6 @@ public class Comentario {
      */
     public int getPuntuacion() {
         return puntuacion;
-    }
-
-    /**
-     * Método mutador del atributo 'autor'
-     *
-     * @param autor Nuevo autor del comentario
-     */
-    public void setAutor(Cliente autor) {
-        this.autor = autor;
     }
 
     /**

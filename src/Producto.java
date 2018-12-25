@@ -7,7 +7,7 @@ import Identificadores.Identificador;
  * una relación biunívoca entre su identididad y su identificador
  *
  * @author : Juan Pablo García Plaza Pérez
-@author Jose Ángel Concha Carrasco
+ * @author Jose Ángel Concha Carrasco
  * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
@@ -66,6 +66,15 @@ public abstract class Producto {
     }
 
     /**
+     * Método mutador del atributo 'nombre'
+     *
+     * @param nombre Nuevo nombre del producto
+     */
+    protected void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    /**
      * Método accesor del atributo 'identificador'
      *
      * @return Identificador del producto
@@ -111,6 +120,15 @@ public abstract class Producto {
     }
 
     /**
+     * Método mutador del atributo 'prioridad'
+     *
+     * @param prioridad Nueva prioridad del producto
+     */
+    protected void setPrioridad(PRIORIDAD_PRODUCTO prioridad) {
+        this.prioridad = prioridad;
+    }
+
+    /**
      * Método accesor del atributo 'fabricante'
      *
      * @return Fabricante del producto
@@ -120,12 +138,12 @@ public abstract class Producto {
     }
 
     /**
-     * Método mutador del atributo 'nombre'
+     * Método mutador del atributo 'fabricante'
      *
-     * @param nombre Nuevo nombre del producto
+     * @param fabricante Nuevo fabricante del producto
      */
-    protected void setNombre(String nombre) {
-        this.nombre = nombre;
+    protected void setFabricante(FABRICANTES fabricante) {
+        this.fabricante = fabricante;
     }
 
     /**
@@ -154,24 +172,6 @@ public abstract class Producto {
             this.stockMinimo = stockMinimo;
         }
         return esCorrecto;
-    }
-
-    /**
-     * Método mutador del atributo 'prioridad'
-     *
-     * @param prioridad Nueva prioridad del producto
-     */
-    protected void setPrioridad(PRIORIDAD_PRODUCTO prioridad) {
-        this.prioridad = prioridad;
-    }
-
-    /**
-     * Método mutador del atributo 'fabricante'
-     *
-     * @param fabricante Nuevo fabricante del producto
-     */
-    protected void setFabricante(FABRICANTES fabricante) {
-        this.fabricante = fabricante;
     }
 
     /**

@@ -5,7 +5,7 @@ import java.time.Month;
  * descontable y gustable
  *
  * @author : Juan Pablo García Plaza Pérez
-@author Jose Ángel Concha Carrasco
+ * @author Jose Ángel Concha Carrasco
  * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
@@ -13,9 +13,8 @@ import java.time.Month;
 
 public class ProductoAlimentacion extends Producto implements Gustable, Descontable {
 
-    private static final int LIKES_BASE = 0;                                // Likes base del producto de alimentacion
     public static final float DESCUENTO_PRODUCTO_ALIMENTACION = -0.1f;      // Descuento por defecto del producto
-
+    private static final int LIKES_BASE = 0;                                // Likes base del producto de alimentacion
     private Month mesCaducidad;                                             // Mes en el que caduca el producto
     private int likes;                                                      // Votos positivos del producto
     private float descuento;                                                // Modificador del precio base del producto
@@ -23,14 +22,14 @@ public class ProductoAlimentacion extends Producto implements Gustable, Desconta
     /**
      * Constructor parametrizado de la clase. Agrega mes de caducidad al producto base
      *
-     * @param nombre            Nombre comercial del producto
-     * @param cantidad          Cantidad actual en stock del producto
-     * @param precio            Precio del producto
-     * @param stockMinimo       Cantidad mínima que siempre debe existir en stock
-     * @param fabricante        Valor del tipo enumerado de FABRICANTES
-     * @param prioridad         Valor del tipo enumerado PRIORIDAD_PRODUCTO. Representa la demanda del producto
-     *                          y se tiene en cuenta al reabastecerlo
-     * @param mesCaducidad      Mes de caducidad del producto de alimentación
+     * @param nombre       Nombre comercial del producto
+     * @param cantidad     Cantidad actual en stock del producto
+     * @param precio       Precio del producto
+     * @param stockMinimo  Cantidad mínima que siempre debe existir en stock
+     * @param fabricante   Valor del tipo enumerado de FABRICANTES
+     * @param prioridad    Valor del tipo enumerado PRIORIDAD_PRODUCTO. Representa la demanda del producto
+     *                     y se tiene en cuenta al reabastecerlo
+     * @param mesCaducidad Mes de caducidad del producto de alimentación
      */
     public ProductoAlimentacion(String nombre, int cantidad, float precio, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad, Month mesCaducidad) {
         super(nombre, cantidad, precio, stockMinimo, fabricante, prioridad);

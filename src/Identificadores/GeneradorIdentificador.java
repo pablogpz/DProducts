@@ -8,7 +8,7 @@ package Identificadores;
  * Por ejemplo, para un identificador de longitud 5, existen 36^5 = 60.466.176 identificadores distintos
  *
  * @author : Juan Pablo García Plaza Pérez
-@author Jose Ángel Concha Carrasco
+ * @author Jose Ángel Concha Carrasco
  * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
@@ -39,15 +39,6 @@ public class GeneradorIdentificador {
     }
 
     /**
-     * Consulta la siguiente clave que se usará como identificador sin modificarla
-     *
-     * @return Identificador que representa el valor actual de la secuencia
-     */
-    public Identificador consultarIdentificador() {
-        return valorActual;
-    }
-
-    /**
      * Devuelve la única instancia de la clase que existe. Sigue el patrón de diseño Singleton
      *
      * @return Única instancia de la clase GeneradorIdentificador
@@ -57,6 +48,15 @@ public class GeneradorIdentificador {
             instanciaActual = new GeneradorIdentificador(VALOR_BASE_GENERADOR_IDENTIFICADOR, INCREMENTO_GENERADOR_IDENTIFICADOR);
 
         return instanciaActual;
+    }
+
+    /**
+     * Consulta la siguiente clave que se usará como identificador sin modificarla
+     *
+     * @return Identificador que representa el valor actual de la secuencia
+     */
+    public Identificador consultarIdentificador() {
+        return valorActual;
     }
 
     /**

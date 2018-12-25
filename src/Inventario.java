@@ -9,7 +9,7 @@ import java.util.*;
  * El perfil de la empresa es de venta de componentes de ordenador y periféricos
  *
  * @author : Juan Pablo García Plaza Pérez
-@author Jose Ángel Concha Carrasco
+ * @author Jose Ángel Concha Carrasco
  * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
@@ -19,10 +19,9 @@ public class Inventario {
 
     // Cantidad vendida de cada unidad de la coleccion de productos a vender
     private final static int CANTIDAD_VENTA_COLECCION = 1;
-
+    private static Inventario instanciaActual = null;                           // Instancia Singleton del inventario
     private Set<Cliente> clientes;                                              // Colección de clientes usuarios
     private Map<String, Producto> stock;                                        // Colección de productos en el inventario
-    private static Inventario instanciaActual = null;                           // Instancia Singleton del inventario
 
     /**
      * Constructor por defecto de la clase. Sigue el patrón de diseño Singleton
@@ -30,6 +29,18 @@ public class Inventario {
     private Inventario() {
         clientes = new HashSet<>();
         stock = new HashMap<>();
+    }
+
+    /**
+     * Devuelve la instancia del Inventario asociada a todos los clientes. Sigue el patrón de diseño Singleton
+     *
+     * @return Única instancia de Inventario existente
+     */
+    public static Inventario recuperarInstancia() {
+        if (instanciaActual == null)
+            instanciaActual = new Inventario();
+
+        return instanciaActual;
     }
 
     /**
@@ -243,18 +254,6 @@ public class Inventario {
                     "\" no está asociado a ningún producto", identificador);
             return null;                                                        // El producto no está catalogado
         }
-    }
-
-    /**
-     * Devuelve la instancia del Inventario asociada a todos los clientes. Sigue el patrón de diseño Singleton
-     *
-     * @return Única instancia de Inventario existente
-     */
-    public static Inventario recuperarInstancia() {
-        if (instanciaActual == null)
-            instanciaActual = new Inventario();
-
-        return instanciaActual;
     }
 
     /**

@@ -3,7 +3,7 @@
  * Es descontable y gustable
  *
  * @author : Juan Pablo García Plaza Pérez
-@author Jose Ángel Concha Carrasco
+ * @author Jose Ángel Concha Carrasco
  * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
@@ -11,9 +11,8 @@
 
 public class ProductoHogar extends ProductoComentable implements Gustable, Descontable {
 
-    private static final int LIKES_BASE = 0;                                // Likes base del producto del hogar
     public static final float DESCUENTO_PRODUCTO_HOGAR = -0.05f;            // Descuento por defecto del producto
-
+    private static final int LIKES_BASE = 0;                                // Likes base del producto del hogar
     private PARTES_CASA parteCasa;                                          // Zona de la casa para el uso del producto
     private int likes;                                                      // Votos positivos del producto
     private float descuento;                                                // Modificador del precio base del producto

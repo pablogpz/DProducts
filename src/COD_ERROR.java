@@ -1,6 +1,6 @@
 /**
  * Tipo enumerado que contiene los diferentes códigos de error utilizados por el programa
- *
+ * <p>
  * SUMARIO DE CÓDIGOS DE ERROR
  * <ul>
  * <li>{@code CARGA_CORRECTA} indica una carga correcta</li>
@@ -16,7 +16,7 @@
  * </ul>
  *
  * @author : Juan Pablo García Plaza Pérez
-@author Jose Ángel Concha Carrasco
+ * @author Jose Ángel Concha Carrasco
  * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)

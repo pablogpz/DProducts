@@ -8,7 +8,7 @@ import java.util.Stack;
  * Su propósito es generar cadenas alfanuméricas aparentemente aleatorias que asignar como identificadores a las clases Cliente y Producto.
  *
  * @author : Juan Pablo García Plaza Pérez
-@author Jose Ángel Concha Carrasco
+ * @author Jose Ángel Concha Carrasco
  * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
