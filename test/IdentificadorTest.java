@@ -2,11 +2,10 @@ import Identificadores.Identificador;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.*;
 
 /**
- * CLASE DE TESTEO de la clase Identificador.
+ * CLASE DE TESTEO de la clase {@see Identificador}.
  * <p>
  * Realiza las pruebas de todos los métodos públicos de la clase para todas
  * sus posibles entradas y estados
@@ -47,11 +46,33 @@ public class IdentificadorTest {
     }
 
     /**
-     * Testeo del método accesor del atributo 'valor'
+     * Testeo del método {@link Identificador#toString()}
      */
     @Test
     public void valorDe() {
         assertEquals("XE", identificador.toString());
+    }
+
+    /**
+     * Testeo del método {@link Identificador#equals(Object)}. Comprueba que dos identificadores sean iguales solo
+     * si sus atributos son exáctamente iguales
+     */
+    @Test
+    public void testEquals() {
+        assertTrue(identificador.equals(identificador));
+        assertTrue(identificador.equals(new Identificador(36)));
+        assertFalse(identificador.equals(new Identificador(5)));
+    }
+
+    /**
+     * Testeo del método {@link Identificador#hashCode()}. Comprueba que dos hashCodes coincidan solo si son
+     * exáctamente el mismo objeto
+     */
+    @Test
+    public void testHashCode() {
+        assertTrue(identificador.hashCode() == identificador.hashCode());
+        assertFalse(identificador.hashCode() == new Identificador(36).hashCode());
+        assertFalse(identificador.hashCode() == new Identificador(5).hashCode());
     }
 
 }

@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * CLASE DE TESTEO de la clase ProductoOcio.
+ * CLASE DE TESTEO de la clase {@see ProductoOcio}.
  * <p>
  * Realiza las pruebas de todos los métodos públicos y protegidos de la clase.
  *
@@ -30,7 +30,7 @@ public class ProductoOcioTest {
     }
 
     /**
-     * Testeo del método accesor del atributo 'descuento'
+     * Testeo del método accesor {@link ProductoOcio#getDescuento()} ()}
      */
     @Test
     public void getDescuento() {
@@ -38,7 +38,7 @@ public class ProductoOcioTest {
     }
 
     /**
-     * Testeo del método mutador del atributo 'descuento'
+     * Testeo del método mutador {@link ProductoOcio#setDescuento(float)}
      */
     @Test
     public void setDescuento() {

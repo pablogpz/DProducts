@@ -141,8 +141,7 @@ public class Identificador {
 
         Identificador objCasteado = (Identificador) obj;
 
-        return super.equals(objCasteado) &&
-                valor.equals(objCasteado.valor);
+        return valor.equals(objCasteado.valor);
     }
 
     /**

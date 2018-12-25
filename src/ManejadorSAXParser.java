@@ -188,7 +188,7 @@ public class ManejadorSAXParser extends DefaultHandler {
     }
 
     /**
-     * Método accesor del atributo 'estado'
+     * Método accesor del atributo {@link ManejadorSAXParser#estado}
      *
      * @return Estado en el que se encuentra el manejador
      * @see COD_ERROR Para obtener información acerca de los códigos de error
@@ -198,7 +198,7 @@ public class ManejadorSAXParser extends DefaultHandler {
     }
 
     /**
-     * Método mutador del atributo 'estado'
+     * Método mutador del atributo {@link ManejadorSAXParser#estado}
      *
      * @param estado Nuevo estado
      */

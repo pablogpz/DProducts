@@ -40,7 +40,7 @@ public class ProductoAlimentacion extends Producto implements Gustable, Desconta
     }
 
     /**
-     * Método accesor del atributo 'mesCaducidad'
+     * Método accesor del atributo {@link ProductoAlimentacion#mesCaducidad}
      *
      * @return Mes de caducidad del producto
      */
@@ -49,7 +49,7 @@ public class ProductoAlimentacion extends Producto implements Gustable, Desconta
     }
 
     /**
-     * Método mutador del atributo 'mesCaducidad'
+     * Método mutador del atributo {@link ProductoAlimentacion#mesCaducidad}
      *
      * @param mesCaducidad Nuevo mes de caducidad del producto
      */

@@ -8,7 +8,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 
 /**
- * CLASE DE TESTEO de la clase GeneradorIdentificador.
+ * CLASE DE TESTEO de la clase {@see GeneradorIdentificador}.
  * <p>
  * Realiza las pruebas de todos los métodos públicos de la clase para todas
  * sus posibles entradas y estados

@@ -6,7 +6,7 @@ import org.junit.runners.MethodSorters;
 import static org.junit.Assert.*;
 
 /**
- * CLASE DE TESTEO de la clase Inventario.
+ * CLASE DE TESTEO de la clase {@see Inventario}.
  * <p>
  * Realiza las pruebas de todos los métodos públicos de la clase para todas
  * sus posibles entradas y estados
@@ -31,8 +31,10 @@ public class InventarioTest {
     @BeforeClass
     public static void setUp() {
         inventario = Inventario.recuperarInstancia();
-        producto = new ProductoOcio("Nombre", 30, 1, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA);
-        productoNoInventario = new ProductoOcio("Nombre", 30, 1, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA);
+        producto = new ProductoOcio("Nombre", 30, 1, 25, FABRICANTES.ACER,
+                PRIORIDAD_PRODUCTO.MEDIA);
+        productoNoInventario = new ProductoOcio("Nombre", 30, 1, 25,
+                FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA);
     }
 
     /**

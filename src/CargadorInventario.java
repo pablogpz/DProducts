@@ -147,7 +147,7 @@ public class CargadorInventario {
     }
 
     /**
-     * Método accesor del atributo 'estado'
+     * Método accesor del atributo {@link CargadorInventario#estado}
      *
      * @return Estado en el que se encuentra el cargador
      * @see COD_ERROR Para obtener información acerca de los códigos de error
@@ -157,7 +157,7 @@ public class CargadorInventario {
     }
 
     /**
-     * Método mutador del atributo 'estado'
+     * Método mutador del atributo {@link CargadorInventario#estado}
      *
      * @param estado Nuevo estado
      */

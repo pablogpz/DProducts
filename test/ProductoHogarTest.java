@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * CLASE DE TESTEO de la clase ProductoHogar.
+ * CLASE DE TESTEO de la clase {@see ProductoHogar}.
  * <p>
  * Realiza las pruebas de todos los métodos públicos y protegidos de la clase.
  *
@@ -30,7 +30,7 @@ public class ProductoHogarTest {
     }
 
     /**
-     * Testeo del método accesor del atributo 'parteCasa'
+     * Testeo del método accesor {@link ProductoHogar#getParteCasa()}
      */
     @Test
     public void getParteCasa() {
@@ -38,7 +38,7 @@ public class ProductoHogarTest {
     }
 
     /**
-     * Testeo del método mutador del atributo 'parteCasa'
+     * Testeo del método mutador {@link ProductoHogar#getParteCasa()}
      */
     @Test
     public void setParteCasa() {
@@ -47,7 +47,7 @@ public class ProductoHogarTest {
     }
 
     /**
-     * Testeo del método accesor del atributo 'likes'
+     * Testeo del método accesor {@link ProductoHogar#getLikes()}
      */
     @Test
     public void getLikes() {
@@ -55,7 +55,7 @@ public class ProductoHogarTest {
     }
 
     /**
-     * Testo del método mutador del atributo 'likes'. Comprueba que incremente en 1 el contador de 'likes'
+     * Testo del método mutador {@link ProductoHogar#getLikes()}. Comprueba que incremente en 1 el contador de likes
      */
     @Test
     public void like() {
@@ -64,7 +64,7 @@ public class ProductoHogarTest {
     }
 
     /**
-     * Testeo del método mutador del atributo 'likes'. Comprueba que decremente en 1 el contador de 'likes'
+     * Testeo del método mutador {@link ProductoHogar#getLikes()}. Comprueba que decremente en 1 el contador de likes
      * siempre y cuando no lo deje por debajo de 0
      */
     @Test
@@ -77,7 +77,7 @@ public class ProductoHogarTest {
     }
 
     /**
-     * Testeo del método accesor del atributo 'descuento'
+     * Testeo del método accesor {@link ProductoHogar#getDescuento()}
      */
     @Test
     public void getDescuento() {
@@ -85,7 +85,7 @@ public class ProductoHogarTest {
     }
 
     /**
-     * Testeo del método mutador del atributo 'descuento'
+     * Testeo del método mutador {@link ProductoHogar#getDescuento()}
      */
     @Test
     public void setDescuento() {

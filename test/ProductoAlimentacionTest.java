@@ -6,7 +6,7 @@ import java.time.Month;
 import static org.junit.Assert.*;
 
 /**
- * CLASE DE TESTEO de la clase ProductoAlimentacion.
+ * CLASE DE TESTEO de la clase {@see ProductoAlimentacion}.
  * <p>
  * Realiza las pruebas de todos los métodos públicos y protegidos de la clase.
  *
@@ -32,7 +32,7 @@ public class ProductoAlimentacionTest {
     }
 
     /**
-     * Testo del método accesor del atributo 'mesCaducidad'
+     * Testo del método accesor {@link ProductoAlimentacion#getMesCaducidad()}
      */
     @Test
     public void getMesCaducidad() {
@@ -40,7 +40,7 @@ public class ProductoAlimentacionTest {
     }
 
     /**
-     * Testeo del método mutador del atributo 'mesCaducidad'
+     * Testeo del método mutador {@link ProductoAlimentacion#getMesCaducidad()}
      */
     @Test
     public void setMesCaducidad() {
@@ -49,7 +49,7 @@ public class ProductoAlimentacionTest {
     }
 
     /**
-     * Testeo del método accesor del atributo 'likes'
+     * Testeo del método accesor {@link ProductoAlimentacion#getLikes()}
      */
     @Test
     public void getLikes() {
@@ -57,7 +57,7 @@ public class ProductoAlimentacionTest {
     }
 
     /**
-     * Testo del método mutador del atributo 'likes'. Comprueba que incremente en 1 el contador de 'likes'
+     * Testo del método mutador {@link ProductoAlimentacion#getLikes()}. Comprueba que incremente en 1 el contador de likes
      */
     @Test
     public void like() {
@@ -66,7 +66,7 @@ public class ProductoAlimentacionTest {
     }
 
     /**
-     * Testeo del método mutador del atributo 'likes'. Comprueba que decremente en 1 el contador de 'likes'
+     * Testeo del método mutador {@link ProductoAlimentacion#getLikes()}. Comprueba que decremente en 1 el contador de likes
      * siempre y cuando no lo deje por debajo de 0
      */
     @Test
@@ -79,7 +79,7 @@ public class ProductoAlimentacionTest {
     }
 
     /**
-     * Testeo del método accesor del atributo 'descuento'
+     * Testeo del método accesor {@link ProductoAlimentacion#getDescuento()}
      */
     @Test
     public void getDescuento() {
@@ -88,7 +88,7 @@ public class ProductoAlimentacionTest {
     }
 
     /**
-     * Testeo del método mutador del atributo 'descuento'
+     * Testeo del método mutador {@link ProductoAlimentacion#getDescuento()}
      */
     @Test
     public void setDescuento() {

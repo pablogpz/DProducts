@@ -36,7 +36,7 @@ public class Comentario {
     }
 
     /**
-     * Método accesor del atributo 'autor'
+     * Método accesor del atributo {@link Comentario#autor}
      *
      * @return Autor del comentario
      */
@@ -45,7 +45,7 @@ public class Comentario {
     }
 
     /**
-     * Método mutador del atributo 'autor'
+     * Método mutador del atributo {@link Comentario#autor}
      *
      * @param autor Nuevo autor del comentario
      */
@@ -54,7 +54,7 @@ public class Comentario {
     }
 
     /**
-     * Método accesor del atributo 'texto'
+     * Método accesor del atributo {@link Comentario#texto}
      *
      * @return Texto del comentario
      */
@@ -63,7 +63,7 @@ public class Comentario {
     }
 
     /**
-     * Método accesor del atributo 'puntuacion'
+     * Método accesor del atributo {@link Comentario#puntuacion}
      *
      * @return Puntuación del comentario
      */
@@ -72,7 +72,7 @@ public class Comentario {
     }
 
     /**
-     * Método mutador del atributo 'texto'
+     * Método mutador del atributo {@link Comentario#texto}
      *
      * @param texto Nuevo texto del comentario. Debe ser correcto
      * @return Si el cambio fue aceptado
@@ -87,7 +87,7 @@ public class Comentario {
     }
 
     /**
-     * Método mutador del atributo 'puntuacion'
+     * Método mutador del atributo {@link Comentario#puntuacion}
      *
      * @param puntuacion Nueva puntuación del comentario. Debe ser correcto
      * @return Si el cambio fue aceptado

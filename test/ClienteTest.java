@@ -6,7 +6,7 @@ import org.junit.runners.MethodSorters;
 import static org.junit.Assert.*;
 
 /**
- * CLASE DE TESTEO de la clase Cliente.
+ * CLASE DE TESTEO de la clase {@see Cliente}.
  * <p>
  * Realiza las pruebas de todos los métodos públicos de la clase para todas
  * sus posibles entradas y estados
@@ -37,10 +37,14 @@ public class ClienteTest {
     public static void setUp() {
         cliente = new ClienteEstandar("Nombre", 18, "Localidad");
         inventario = Inventario.recuperarInstancia();
-        producto = new ProductoOcio("Nombre", 30, 1, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA);
-        producto1 = new ProductoOcio("Nombre", 30, 1, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA);
-        productoNoInventario = new ProductoOcio("Nombre", 30, 1, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA);
-        productoNoFavorito = new ProductoOcio("Nombre", 30, 1, 25, FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA);
+        producto = new ProductoOcio("Nombre", 30, 1, 25, FABRICANTES.ACER,
+                PRIORIDAD_PRODUCTO.MEDIA);
+        producto1 = new ProductoOcio("Nombre", 30, 1, 25, FABRICANTES.ACER,
+                PRIORIDAD_PRODUCTO.MEDIA);
+        productoNoInventario = new ProductoOcio("Nombre", 30, 1, 25, FABRICANTES.ACER,
+                PRIORIDAD_PRODUCTO.MEDIA);
+        productoNoFavorito = new ProductoOcio("Nombre", 30, 1, 25, FABRICANTES.ACER,
+                PRIORIDAD_PRODUCTO.MEDIA);
 
         inventario.agregarProducto(producto);
         inventario.agregarProducto(producto1);
@@ -63,7 +67,7 @@ public class ClienteTest {
     }
 
     /**
-     * Testeo del método accesor del atributo 'nombre'
+     * Testeo del método accesor {@link Cliente#getNombre()}
      */
     @Test
     public void getNombre() {
@@ -71,7 +75,7 @@ public class ClienteTest {
     }
 
     /**
-     * Testeo del método accesor del atributo 'identificador'
+     * Testeo del método accesor {@link Cliente#getIdentificador()}
      */
     @Test
     public void getIdentificador() {
@@ -79,7 +83,7 @@ public class ClienteTest {
     }
 
     /**
-     * Testeo del método accesor del atributo 'edad'
+     * Testeo del método accesor {@link Cliente#getEdad()}
      */
     @Test
     public void getEdad() {
@@ -87,7 +91,7 @@ public class ClienteTest {
     }
 
     /**
-     * Testeo del método accesor del atributo 'localidad'
+     * Testeo del método accesor {@link Cliente#getLocalidad()}
      */
     @Test
     public void getLocalidad() {
@@ -95,7 +99,7 @@ public class ClienteTest {
     }
 
     /**
-     * Testeo del método accesor del atributo 'tienda'
+     * Testeo del método accesor {@link Cliente#getTienda()}
      */
     @Test
     public void getTienda() {
@@ -103,7 +107,7 @@ public class ClienteTest {
     }
 
     /**
-     * Testeo del método mutador del atributo 'nombre'
+     * Testeo del método mutador {@link Cliente#getNombre()}
      */
     @Test
     public void setNombre() {
@@ -113,7 +117,7 @@ public class ClienteTest {
     }
 
     /**
-     * Testeo del método mutador del atributo 'edad'
+     * Testeo del método mutador {@link Cliente#getEdad()}
      */
     @Test
     public void setEdad() {
@@ -125,7 +129,7 @@ public class ClienteTest {
     }
 
     /**
-     * Testeo del método mutador del atributo 'localidad'
+     * Testeo del método mutador {@link Cliente#getLocalidad()}
      */
     @Test
     public void setLocalidad() {

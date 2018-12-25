@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * CLASE DE TESTEO de la clase Comentario.
+ * CLASE DE TESTEO de la clase {@see Comentario}.
  * <p>
  * Realiza las pruebas de todos los métodos públicos de la clase para todas
  * sus posibles entradas y estados
@@ -39,7 +39,7 @@ public class ComentarioTest {
     }
 
     /**
-     * Testeo del método accesor del atributo 'autor'
+     * Testeo del método accesor {@link Comentario#getAutor()}
      */
     @Test
     public void getAutor() {
@@ -47,7 +47,7 @@ public class ComentarioTest {
     }
 
     /**
-     * Testeo del método accesor del atributo 'texto'
+     * Testeo del método accesor {@link Comentario#getTexto()}
      */
     @Test
     public void getTexto() {
@@ -55,13 +55,16 @@ public class ComentarioTest {
     }
 
     /**
-     * Testeo del método accesor del atributo 'puntuacion'
+     * Testeo del método accesor {@link Comentario#getPuntuacion()}
      */
     @Test
     public void getPuntuacion() {
         assertEquals(5, comentario.getPuntuacion());
     }
 
+    /**
+     * Testeo del método mutador {@link Comentario#setAutor(Cliente)}
+     */
     @Test
     public void setAutor() {
         ClienteEstandar nuevoAutor = new ClienteEstandar("Nuevo nombre", 18, "Localidad");
@@ -69,6 +72,9 @@ public class ComentarioTest {
         assertEquals(nuevoAutor, comentario.getAutor());
     }
 
+    /**
+     * Testeo del método mutador {@link Comentario#setTexto(String)}
+     */
     @Test
     public void setTexto() {
         String nuevoTexto = "Nuevo texto";
@@ -77,6 +83,9 @@ public class ComentarioTest {
         assertFalse(comentario.setTexto(""));
     }
 
+    /**
+     * Testeo del método mutador {@link Comentario#setPuntuacion(int)}
+     */
     @Test
     public void setPuntuacion() {
         int nuevaPuntuacion = 4;
@@ -87,7 +96,7 @@ public class ComentarioTest {
     }
 
     /**
-     * Testeo del método 'toString()', que devuelve toda la información
+     * Testeo del método {@link Comentario#toString()}, que devuelve toda la información
      * del comentario formateado. (COMPROBACIÓN VISUAL)
      */
     @Test
@@ -96,7 +105,8 @@ public class ComentarioTest {
     }
 
     /**
-     * Testeo del método 'equals()'
+     * Testeo del método {@link Comentario#equals(Object)}. Comprueba que dos comentarios sean iguales solo si
+     * sus atributos son exáctamente iguales
      */
     @Test
     public void testEquals() {
@@ -106,7 +116,8 @@ public class ComentarioTest {
     }
 
     /**
-     * Testeo del método 'hashCode()'
+     * Testeo del método {@link Comentario#equals(Object)}. Comprueba que dos hashCodes coincidan solo si
+     * son exáctamente el mismo objeto
      */
     @Test
     public void testHashCode() {

@@ -7,7 +7,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
- * CLASE DE TESTEO de la clase ComparadorProductoPrecio.
+ * CLASE DE TESTEO de la clase {@see ComparadorProductoPrecio}.
  * <p>
  * Comprueba que puedan ordenarse correctamente colecciones de productos por el criterio
  * de precio en orden descendente. Utiliza la subclase ProductoOcio para los tests
@@ -46,10 +46,11 @@ public class ComparadorProductoPrecioTest {
     }
 
     /**
-     * Testeo el método 'compare'. Comprueba que se ordene correctamente la coleccion de productos por su precio
+     * Testeo el método 'compare()'. Comprueba que se ordene correctamente la coleccion de productos por su precio
      * en orden descendente
      * <p>
-     * [INIT] coleccion {@literal ->} p1(1) - p3(10) - p2(30) - p3(10) | [FIN] coleccion {@literal ->} p2(30) - p3(10) - p3(10) - p1(1)
+     * [INIT] coleccion {@literal ->} p1(1) - p3(10) - p2(30) - p3(10)
+     * [FIN] coleccion {@literal ->} p2(30) - p3(10) - p3(10) - p1(1)
      */
     @Test
     public void compare() {

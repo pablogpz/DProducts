@@ -50,7 +50,7 @@ public abstract class Cliente {
     }
 
     /**
-     * Método accesor del atributo 'nombre'
+     * Método accesor del atributo {@link Cliente#nombre}
      *
      * @return Nombre del cliente
      */
@@ -59,7 +59,7 @@ public abstract class Cliente {
     }
 
     /**
-     * Método accesor del atributo 'identificador'
+     * Método accesor del atributo {@link Cliente#identificador}
      *
      * @return Identificador del cliente
      */
@@ -68,7 +68,7 @@ public abstract class Cliente {
     }
 
     /**
-     * Método accesor del atributo 'edad'
+     * Método accesor del atributo {@link Cliente#edad}
      *
      * @return Edad del cliente
      */
@@ -77,7 +77,7 @@ public abstract class Cliente {
     }
 
     /**
-     * Método accesor del atributo 'localidad'
+     * Método accesor del atributo {@link Cliente#localidad}
      *
      * @return Localidad del cliente
      */
@@ -86,7 +86,7 @@ public abstract class Cliente {
     }
 
     /**
-     * Método accesor del atributo 'tienda'
+     * Método accesor del atributo {@link Cliente#tienda}
      *
      * @return Empresa a la que compra el cliente
      */
@@ -95,7 +95,7 @@ public abstract class Cliente {
     }
 
     /**
-     * Método mutador del atributo 'nombre'
+     * Método mutador del atributo {@link Cliente#nombre}
      *
      * @param nombre Nuevo nombre del cliente. Debe ser válido
      * @return Si se aceptaron los cambios
@@ -109,7 +109,7 @@ public abstract class Cliente {
     }
 
     /**
-     * Método mutador del atributo 'edad'
+     * Método mutador del atributo {@link Cliente#edad}
      *
      * @param edad Nueva edad del cliente. Debe ser válida
      */
@@ -122,7 +122,7 @@ public abstract class Cliente {
     }
 
     /**
-     * Método mutador del atributo 'localidad'
+     * Método mutador del atributo {@link Cliente#localidad}
      *
      * @param localidad Nueva residencia del cliente. Debe ser válida
      * @return Si se aceptaron los cambios

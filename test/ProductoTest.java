@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * CLASE DE TESTEO de la clase Producto.
+ * CLASE DE TESTEO de la clase {@see Producto}.
  * <p>
  * Realiza las pruebas de todos los métodos públicos y protegidos de la clase base utilizando la clase
  * ProductoOcio como subclase para probar los métodos de la clase base que no son sobreescritos por otras subclases
@@ -38,7 +38,7 @@ public class ProductoTest {
     }
 
     /**
-     * Testeo del método accesor del atribtuo 'nombre'
+     * Testeo del método accesor {@link Producto#getNombre()}
      */
     @Test
     public void getNombre() {
@@ -46,7 +46,7 @@ public class ProductoTest {
     }
 
     /**
-     * Testeo del método accesor del atribtuo 'identificador'
+     * Testeo del método {@link Producto#getNombre()}
      */
     @Test
     public void getIdentificador() {
@@ -54,7 +54,7 @@ public class ProductoTest {
     }
 
     /**
-     * Testeo del método accesor del atribtuo 'cantidad'
+     * Testeo del método accesor {@link Producto#getCantidad()}
      */
     @Test
     public void getCantidad() {
@@ -62,7 +62,7 @@ public class ProductoTest {
     }
 
     /**
-     * Testeo del método accesor del atributo 'precio'
+     * Testeo del método accesor {@link Producto#getPrecio()}
      */
     @Test
     public void getPrecio() {
@@ -70,7 +70,7 @@ public class ProductoTest {
     }
 
     /**
-     * Testeo del método accesor del atribtuo 'stockMínimo'
+     * Testeo del método accesor {@link Producto#getStockMinimo()}
      */
     @Test
     public void getStockMinimo() {
@@ -78,7 +78,7 @@ public class ProductoTest {
     }
 
     /**
-     * Testeo del método accesor del atribtuo 'prioridad'
+     * Testeo del método accesor {@link Producto#getPrioridad()}
      */
     @Test
     public void getPrioridad() {
@@ -86,14 +86,16 @@ public class ProductoTest {
     }
 
     /**
-     * Testeo del método accesor del atribtuo 'fabricante'
+     * Testeo del método accesor {@link Producto#getFabricante()}
      */
     @Test
     public void getFabricante() {
         assertEquals(FABRICANTES.ACER, producto.getFabricante());
     }
 
-
+    /**
+     * Testeo del método mutador {@link Producto#setNombre(String)}
+     */
     @Test
     public void setNombre() {
         String nuevoNombre = "Nuevo nombre";
@@ -101,6 +103,9 @@ public class ProductoTest {
         assertEquals(nuevoNombre, producto.getNombre());
     }
 
+    /**
+     * Testeo del método mutador {@link Producto#setPrecio(float)}
+     */
     @Test
     public void setPrecio() {
         float nuevoPrecio = 2.5f;
@@ -110,6 +115,9 @@ public class ProductoTest {
         assertFalse(producto.setPrecio(-1f));
     }
 
+    /**
+     * Testeo del método mutador {@link Producto#setStockMinimo(int)}
+     */
     @Test
     public void setStockMinimo() {
         int nuevoStockMinimo = 20;
@@ -118,18 +126,27 @@ public class ProductoTest {
         assertFalse(producto.setStockMinimo(-1));
     }
 
+    /**
+     * Testeo del método mutador {@link Producto#setPrioridad(PRIORIDAD_PRODUCTO)}
+     */
     @Test
     public void setPrioridad() {
         producto.setPrioridad(PRIORIDAD_PRODUCTO.BAJA);
         assertEquals(PRIORIDAD_PRODUCTO.BAJA, producto.getPrioridad());
     }
 
+    /**
+     * Testeo del método mutador {@link Producto#setFabricante(FABRICANTES)}
+     */
     @Test
     public void setFabricante() {
         producto.setFabricante(FABRICANTES.AMD);
         assertEquals(FABRICANTES.AMD, producto.getFabricante());
     }
 
+    /**
+     * Testeo del método mutador {@link Producto#varCantidad(int)}
+     */
     @Test
     public void varCantidad() {
         producto.varCantidad(10);
@@ -138,6 +155,9 @@ public class ProductoTest {
         assertEquals(30, producto.getCantidad());
     }
 
+    /**
+     * Testeo del método {@link Producto#enStockMinimo()}
+     */
     @Test
     public void enStockMinimo() {
         assertFalse(producto.enStockMinimo());

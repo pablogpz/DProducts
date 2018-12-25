@@ -57,7 +57,7 @@ public abstract class Producto {
     }
 
     /**
-     * Método accesor del atributo 'nombre'
+     * Método accesor del atributo {@link Producto#nombre}
      *
      * @return Nombre del producto
      */
@@ -66,7 +66,7 @@ public abstract class Producto {
     }
 
     /**
-     * Método mutador del atributo 'nombre'
+     * Método mutador del atributo {@link Producto#nombre}
      *
      * @param nombre Nuevo nombre del producto
      */
@@ -75,7 +75,7 @@ public abstract class Producto {
     }
 
     /**
-     * Método accesor del atributo 'identificador'
+     * Método accesor del atributo {@link Producto#identificador}
      *
      * @return Identificador del producto
      */
@@ -84,7 +84,7 @@ public abstract class Producto {
     }
 
     /**
-     * Método accesor del atributo 'cantidad'
+     * Método accesor del atributo {@link Producto#cantidad}
      *
      * @return Cantidad actual en stock del producto
      */
@@ -93,7 +93,7 @@ public abstract class Producto {
     }
 
     /**
-     * Método accesor del atributo 'precio'
+     * Método accesor del atributo {@link Producto#precio}
      *
      * @return Precio del producto
      */
@@ -102,7 +102,7 @@ public abstract class Producto {
     }
 
     /**
-     * Método accesor del atributo 'stockMinimo'
+     * Método accesor del atributo {@link Producto#stockMinimo}
      *
      * @return Cantidad en stock mínima del producto
      */
@@ -111,7 +111,7 @@ public abstract class Producto {
     }
 
     /**
-     * Método accesor del atributo 'prioridad'
+     * Método accesor del atributo {@link Producto#prioridad}
      *
      * @return Factor de prioridad con el que debe restablecerse el stock del producto
      */
@@ -120,7 +120,7 @@ public abstract class Producto {
     }
 
     /**
-     * Método mutador del atributo 'prioridad'
+     * Método mutador del atributo {@link Producto#prioridad}
      *
      * @param prioridad Nueva prioridad del producto
      */
@@ -129,7 +129,7 @@ public abstract class Producto {
     }
 
     /**
-     * Método accesor del atributo 'fabricante'
+     * Método accesor del atributo {@link Producto#fabricante}
      *
      * @return Fabricante del producto
      */
@@ -138,7 +138,7 @@ public abstract class Producto {
     }
 
     /**
-     * Método mutador del atributo 'fabricante'
+     * Método mutador del atributo {@link Producto#fabricante}
      *
      * @param fabricante Nuevo fabricante del producto
      */
@@ -147,7 +147,7 @@ public abstract class Producto {
     }
 
     /**
-     * Método mutador del atributo 'precio'
+     * Método mutador del atributo {@link Producto#precio}
      *
      * @param precio Nuevo precio del producto. Debe ser correcto
      * @return Si el cambio no fue aceptado
@@ -161,7 +161,7 @@ public abstract class Producto {
     }
 
     /**
-     * Método mutador del atributo 'stockMinimo'
+     * Método mutador del atributo {@link Producto#stockMinimo}
      *
      * @param stockMinimo Nuevo stock minimo del producto. Debe ser correcto
      * @return Si el cambio fue aceptado
@@ -175,7 +175,7 @@ public abstract class Producto {
     }
 
     /**
-     * Método mutador del atributo 'cantidad'
+     * Método mutador del atributo {@link Producto#cantidad}
      *
      * @param cantidad Incremento del stock del producto
      */

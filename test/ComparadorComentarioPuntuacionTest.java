@@ -7,7 +7,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 /**
- * CLASE DE TESTEO de la clase ComparadorComentarioPuntuacion.
+ * CLASE DE TESTEO de la clase {@see ComparadorComentarioPuntuacion}.
  * <p>
  * Comprueba que puedan ordenarse correctamente colecciones de comentarios por el criterio
  * de puntuación en orden descendente
@@ -51,7 +51,8 @@ public class ComparadorComentarioPuntuacionTest {
      * Testeo del método 'compare()'. Comprueba que se ordene correctamente la colección de comentarios por
      * su puntuación descendente
      * <p>
-     * [INIT] coleccion {@literal ->} c3(5) - c2(1) - c1(3) - c3(5) | [FIN] coleccion {@literal ->} c3(5) - c3(5) - c1(3) - c2(1)
+     * [INIT] coleccion {@literal ->} c3(5) - c2(1) - c1(3) - c3(5)
+     * [FIN] coleccion {@literal ->} c3(5) - c3(5) - c1(3) - c2(1)
      */
     @Test
     public void compare() {

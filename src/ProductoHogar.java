@@ -39,7 +39,7 @@ public class ProductoHogar extends ProductoComentable implements Gustable, Desco
     }
 
     /**
-     * Método accesor del atributo 'parteCasa'
+     * Método accesor del atributo {@link ProductoHogar#parteCasa}
      *
      * @return Parte de la casa a la que está destinado el producto
      */
@@ -48,7 +48,7 @@ public class ProductoHogar extends ProductoComentable implements Gustable, Desco
     }
 
     /**
-     * Método mutador del atriburo 'parteCasa'
+     * Método mutador del atriburo {@link ProductoHogar#parteCasa}
      *
      * @param parteCasa Nueva parte de la casa del producto
      */
