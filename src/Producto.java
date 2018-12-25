@@ -36,8 +36,8 @@ public abstract class Producto {
      * @param cantidad    Cantidad en stock del producto
      * @param precio      Precio del producto
      * @param stockMinimo Cantidad mínima en stock que siempre debe existir del producto
-     * @param fabricante  Valor del tipo enumerado de FABRICANTES
-     * @param prioridad   Valor del tipo enumerado PRIORIDAD_PRODUCTO. Representa la demanda del producto
+     * @param fabricante  Valor del tipo enumerado de {@code FABRICANTES}
+     * @param prioridad   Valor del tipo enumerado {@code PRIORIDAD_PRODUCTO}. Representa la demanda del producto
      *                    y se tiene en cuenta al reabastecerlo
      * @throws IllegalArgumentException Si la cantidad o el precio es un entero negativo o 0 o si el stock mínimo es un entero negativo
      */

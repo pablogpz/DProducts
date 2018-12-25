@@ -25,7 +25,9 @@ public class ComparadorProductoPrecio implements Comparator<Producto> {
      * @param p1 Primer producto
      * @param p2 Segundo producto
      * @return 1 sii p1 {@literal <} p2
+     * <p>
      * 0 sii p1 == p2
+     * <p>
      * -1 sii p1 {@literal >} p2
      */
     public int compare(Producto p1, Producto p2) {

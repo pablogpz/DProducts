@@ -26,12 +26,13 @@ public class ProductoAlimentacion extends Producto implements Gustable, Desconta
      * @param cantidad     Cantidad actual en stock del producto
      * @param precio       Precio del producto
      * @param stockMinimo  Cantidad mínima que siempre debe existir en stock
-     * @param fabricante   Valor del tipo enumerado de FABRICANTES
-     * @param prioridad    Valor del tipo enumerado PRIORIDAD_PRODUCTO. Representa la demanda del producto
+     * @param fabricante   Valor del tipo enumerado de {@code FABRICANTES}
+     * @param prioridad    Valor del tipo enumerado {@code PRIORIDAD_PRODUCTO}. Representa la demanda del producto
      *                     y se tiene en cuenta al reabastecerlo
      * @param mesCaducidad Mes de caducidad del producto de alimentación
      */
-    public ProductoAlimentacion(String nombre, int cantidad, float precio, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad, Month mesCaducidad) {
+    public ProductoAlimentacion(String nombre, int cantidad, float precio, int stockMinimo, FABRICANTES fabricante,
+                                PRIORIDAD_PRODUCTO prioridad, Month mesCaducidad) {
         super(nombre, cantidad, precio, stockMinimo, fabricante, prioridad);
         this.mesCaducidad = mesCaducidad;
         this.likes = LIKES_BASE;

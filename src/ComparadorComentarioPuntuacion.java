@@ -25,7 +25,9 @@ public class ComparadorComentarioPuntuacion implements Comparator<Comentario> {
      * @param c1 Primer comentario
      * @param c2 Segundo comentario
      * @return 1 sii c1 {@literal <} c2
+     * <p>
      * 0 sii c1 == c2
+     * <p>
      * -1 sii c1 {@literal >} c2
      */
     public int compare(Comentario c1, Comentario c2) {

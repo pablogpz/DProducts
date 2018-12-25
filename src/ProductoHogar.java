@@ -18,19 +18,20 @@ public class ProductoHogar extends ProductoComentable implements Gustable, Desco
     private float descuento;                                                // Modificador del precio base del producto
 
     /**
-     * Constructor parametrizado de la clase. Genera un producto a partir de su nombre, cantidad en stock, precio, cantidad mínima en stock,
-     * fabricante, prioridad de reabastecimiento y parte de la casa a la que pertenece.
+     * Constructor parametrizado de la clase. Genera un producto a partir de su nombre, cantidad en stock, precio,
+     * cantidad mínima en stock, fabricante, prioridad de reabastecimiento y parte de la casa a la que pertenece.
      *
      * @param nombre      Nombre del producto
      * @param cantidad    Cantidad en stock del producto
      * @param precio      Precio del producto
      * @param stockMinimo Cantidad mínima en stock que siempre debe existir del producto
-     * @param fabricante  Valor del tipo enumerado de FABRICANTES
-     * @param prioridad   Valor del tipo enumerado PRIORIDAD_PRODUCTO. Representa la demanda del producto
+     * @param fabricante  Valor del tipo enumerado de {@code FABRICANTES}
+     * @param prioridad   Valor del tipo enumerado {@code PRIORIDAD_PRODUCTO}. Representa la demanda del producto
      *                    y se tiene en cuenta al reabastecerlo
      * @param parteCasa   Parte de la casa a la que está destinado el producto.
      */
-    public ProductoHogar(String nombre, int cantidad, float precio, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad, PARTES_CASA parteCasa) {
+    public ProductoHogar(String nombre, int cantidad, float precio, int stockMinimo, FABRICANTES fabricante,
+                         PRIORIDAD_PRODUCTO prioridad, PARTES_CASA parteCasa) {
         super(nombre, cantidad, precio, stockMinimo, fabricante, prioridad);
         this.parteCasa = parteCasa;
         likes = LIKES_BASE;

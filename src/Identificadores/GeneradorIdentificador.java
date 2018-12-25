@@ -41,7 +41,7 @@ public class GeneradorIdentificador {
     /**
      * Devuelve la única instancia de la clase que existe. Sigue el patrón de diseño Singleton
      *
-     * @return Única instancia de la clase GeneradorIdentificador
+     * @return Única instancia de la clase {@code GeneradorIdentificador}
      */
     public static GeneradorIdentificador recuperarInstancia() {
         if (instanciaActual == null)

@@ -145,7 +145,7 @@ public class Inventario {
     }
 
     /**
-     * Realiza el pedido de una cantidad fija determinado por CANTIDAD_VENTA_COLECCION de una colección de productos.
+     * Realiza el pedido de una cantidad fija determinado por {@code CANTIDAD_VENTA_COLECCION} de una colección de productos.
      * Si el stock actual no puede cubrir odos los pedidos no se realiza ninguno.
      *
      * @param coleccionProductos Colección de productos a despachar
@@ -246,7 +246,7 @@ public class Inventario {
             return null;
         }
 
-        if (existeProducto) {                                                   // Comprueba que el producto exista en inventaio
+        if (existeProducto) {                                                   // Comprueba que el producto exista en inventario
             return stock.get(identificador.toString());                         // Devuelve el producto buscado
         } else {
             reportarError("ERROR al recuperar un producto. " +

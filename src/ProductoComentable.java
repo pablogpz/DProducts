@@ -15,7 +15,8 @@ import java.util.List;
 
 public abstract class ProductoComentable extends Producto {
 
-    private List<Comentario> comentarios;                               // Colección de comentarios que los clientes han publicado sobre el producto
+    // Colección de comentarios que los clientes han publicado sobre el producto
+    private List<Comentario> comentarios;
 
     /**
      * Constructor parametrizado de la clase. Agrega comentarios al producto base
@@ -24,21 +25,25 @@ public abstract class ProductoComentable extends Producto {
      * @param cantidad    Cantidad en stock del producto
      * @param precio      Precio del producto
      * @param stockMinimo Cantidad mínima en stock que siempre debe existir del producto
-     * @param fabricante  Valor del tipo enumerado de FABRICANTES
-     * @param prioridad   Valor del tipo enumerado PRIORIDAD_PRODUCTO. Representa la demanda del producto
+     * @param fabricante  Valor del tipo enumerado de {@code FABRICANTES}
+     * @param prioridad   Valor del tipo enumerado {@code PRIORIDAD_PRODUCTO}. Representa la demanda del producto
      *                    y se tiene en cuenta al reabastecerlo
-     * @throws IllegalArgumentException Si la cantidad o el precio es un entero negativo o 0 o si el stock mínimo es un entero negativo
+     * @throws IllegalArgumentException Si la cantidad o el precio es un entero negativo o 0 o si el stock mínimo
+     *                                  es un entero negativo
      */
-    public ProductoComentable(String nombre, int cantidad, float precio, int stockMinimo, FABRICANTES fabricante, PRIORIDAD_PRODUCTO prioridad) {
+    public ProductoComentable(String nombre, int cantidad, float precio, int stockMinimo, FABRICANTES fabricante,
+                              PRIORIDAD_PRODUCTO prioridad) {
         super(nombre, cantidad, precio, stockMinimo, fabricante, prioridad);
         comentarios = new ArrayList<>();
     }
 
     /**
-     * Añade un comentario al producto. Solo se permite un comentario por cliente y con una calificación entre 1 y 5 (ambos inclusive)
+     * Añade un comentario al producto. Solo se permite un comentario por cliente y con una calificación entre
+     * 1 y 5 (ambos inclusive)
      *
      * @param comentario Objeto de la clase Comentario que representa el comentario a añadir a la colección de comentarios
-     * @return Booleano indicando si se ha podido publicar el comentario. Devuelve falso si el autor ya ha publicado un comentario
+     * @return Booleano indicando si se ha podido publicar el comentario. Devuelve falso si el autor ya ha publicado
+     * un comentario
      */
     public boolean comentar(Comentario comentario) {
         boolean autorRepetido = false;                                  // Bandera para comprobar la duplicidad de autores en comentarios
@@ -95,8 +100,6 @@ public abstract class ProductoComentable extends Producto {
     }
 
     /**
-     * Indica si es exactamente igual que el Objeto obj
-     *
      * @param obj Objeto con el que comparar
      * @return Devuelve verdadero si entre esta instancia y 'obj' hay coincidencia entre todos los atributos
      * y pertenecen a la misma clase

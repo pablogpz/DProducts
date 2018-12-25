@@ -4,8 +4,9 @@ import java.util.Arrays;
 import java.util.Stack;
 
 /**
- * Clase que representa un nuevo sistema de numeración en base BASE_IDENTIFICADOR (es una biyección entre el sistema decimal y el nuevo sistema).
- * Su propósito es generar cadenas alfanuméricas aparentemente aleatorias que asignar como identificadores a las clases Cliente y Producto.
+ * Clase que representa un nuevo sistema de numeración en base {@code BASE_IDENTIFICADOR } (es una biyección entre
+ * el sistema decimal y el nuevo sistema). Su propósito es generar cadenas alfanuméricas aparentemente aleatorias
+ * que asignar como identificadores a las clases Cliente y Producto.
  *
  * @author : Juan Pablo García Plaza Pérez
  * @author Jose Ángel Concha Carrasco
