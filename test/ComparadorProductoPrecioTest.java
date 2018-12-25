@@ -12,8 +12,9 @@ import static org.junit.Assert.assertEquals;
  * Comprueba que puedan ordenarse correctamente colecciones de productos por el criterio
  * de precio en orden descendente. Utiliza la subclase ProductoOcio para los tests
  *
- * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
- * @grupo : Wild True
+ * @author : Juan Pablo García Plaza Pérez
+@author Jose Ángel Concha Carrasco
+ * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
  */
@@ -48,7 +49,7 @@ public class ComparadorProductoPrecioTest {
      * Testeo el método 'compare'. Comprueba que se ordene correctamente la coleccion de productos por su precio
      * en orden descendente
      * <p>
-     * [INIT] coleccion -> p1(1) - p3(10) - p2(30) - p3(10) | [FIN] coleccion -> p2(30) - p3(10) - p3(10) - p1(1)
+     * [INIT] coleccion {@literal ->} p1(1) - p3(10) - p2(30) - p3(10) | [FIN] coleccion {@literal ->} p2(30) - p3(10) - p3(10) - p1(1)
      */
     @Test
     public void compare() {

@@ -8,8 +8,9 @@ import java.util.*;
  * <p>
  * El perfil de la empresa es de venta de componentes de ordenador y periféricos
  *
- * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
- * @grupo : Wild True
+ * @author : Juan Pablo García Plaza Pérez
+@author Jose Ángel Concha Carrasco
+ * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
  */

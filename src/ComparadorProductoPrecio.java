@@ -4,8 +4,9 @@ import java.util.Comparator;
  * Clase que implementa la interfaz Comparator para ordenar productos por su precio en
  * orden descendente
  *
- * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
- * @grupo : Wild True
+ * @author : Juan Pablo García Plaza Pérez
+@author Jose Ángel Concha Carrasco
+ * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
  */
@@ -23,9 +24,9 @@ public class ComparadorProductoPrecio implements Comparator<Producto> {
      *
      * @param p1 Primer producto
      * @param p2 Segundo producto
-     * @return 1 sii p1 < p2
+     * @return 1 sii p1 {@literal <} p2
      * 0 sii p1 == p2
-     * -1 sii p1 > p2
+     * -1 sii p1 {@literal >} p2
      */
     public int compare(Producto p1, Producto p2) {
         if (p1.getPrecio() < p2.getPrecio())

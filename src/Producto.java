@@ -6,8 +6,9 @@ import Identificadores.Identificador;
  * del un producto en particular. Cada producto es asignado con una clave única en el ciclo de vida del programa que establece
  * una relación biunívoca entre su identididad y su identificador
  *
- * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
- * @grupo : Wild True
+ * @author : Juan Pablo García Plaza Pérez
+@author Jose Ángel Concha Carrasco
+ * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
  */

@@ -10,8 +10,9 @@ import static org.junit.Assert.assertTrue;
  * Realiza las pruebas de todos los métodos públicos y protegidos de la clase base utilizando la clase
  * ProductoOcio como subclase para probar los métodos de la clase base que no son sobreescritos por otras subclases
  *
- * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
- * @grupo : Wild True
+ * @author : Juan Pablo García Plaza Pérez
+@author Jose Ángel Concha Carrasco
+ * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
  */
@@ -70,8 +71,8 @@ public class ProductoComentableTest {
      * Testeo de la ordenación de comentarios por puntuación. Comprueba que al inserar varios comentarios
      * después se muestren en orden (COMRPOBACIÓN VISUAL. YA FUE COMPROBADO EN LOS COMPARADORES)
      * <p>
-     * [INIT] productoComentable.comentarios -> c1(5) - c2(1) - c3(3)
-     * [FIN] roductoComentable.comentarios -> c1(5) - c3(3) - c2(1)
+     * [INIT] productoComentable.comentarios {@literal ->} c1(5) - c2(1) - c3(3)
+     * [FIN] roductoComentable.comentarios {@literal ->} c1(5) - c3(3) - c2(1)
      */
     @Test
     public void ordenacion() {

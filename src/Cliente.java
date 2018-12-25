@@ -11,8 +11,9 @@ import java.util.Map;
  * número de unidades de un producto favorito, realizar un pedido de una unidad de cada producto favorito y publicar un
  * comentario (solo uno) sobre sus productos favoritos
  *
- * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
- * @grupo : Wild True
+ * @author : Juan Pablo García Plaza Pérez
+@author Jose Ángel Concha Carrasco
+ * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
  */

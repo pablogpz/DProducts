@@ -11,15 +11,10 @@ import java.util.*;
  * El documento XML debe ser validado con anterioridad, por lo que se presupone que las
  * relaciones incluyen referencias correctas.
  * <p>
- * SUMARIO DE CÓDIGOS DE ERROR
- * <ul>
- * <li>0 indica un parseado correcto</li>
- * <li>-5 indica que ocurrió un error al parsear un producto</li>
- * <li>-6 indica que ocurrió un error al parsear un cliente</li>
- * </ul>
  *
- * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
- * @grupo : Wild True
+ * @author : Juan Pablo García Plaza Pérez
+@author Jose Ángel Concha Carrasco
+ * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
  */
@@ -57,12 +52,6 @@ public class ManejadorSAXParser extends DefaultHandler {
     private static final String XML_PRODUCTO_FAV_CLIENTE = "client_name";
     private static final String XML_PRODUCTO_FAV_ALIAS = "alias";
 
-    // CÓDIGOS DE ERROR
-
-    public static final int ERR_CODE_PARSEADO_CORRECTO = 0;
-    public static final int ERR_CODE_PRODUCTO_MALFORMADO = -5;
-    public static final int ERR_CODE_CLIENTE_MALFORMADO = -6;
-
     /*
      * Colección de productos parseados. Son indexados por nombre para asociarlos a los clientes
      * que lo han incluido como favorito
@@ -76,7 +65,7 @@ public class ManejadorSAXParser extends DefaultHandler {
     private List<Object[]> productosFavoritos;
 
     // Bandera que indica el estado en el que terminó el proceso de parseado
-    private int estado;
+    private COD_ERROR estado;
 
     /**
      * Constructor por defecto de la clase. Inicializa las estructuras de datos para almacenar productos, clientes y
@@ -86,7 +75,7 @@ public class ManejadorSAXParser extends DefaultHandler {
         productos = new HashMap<>();
         clientes = new HashMap<>();
         productosFavoritos = new ArrayList<>();
-        estado = ERR_CODE_PARSEADO_CORRECTO;
+        estado = COD_ERROR.CARGA_CORRECTA;                                   // Estado legal inicial
     }
 
     /**
@@ -114,10 +103,10 @@ public class ManejadorSAXParser extends DefaultHandler {
      * Intenta parsear un producto a partir de su etiqueta de especificación XML
      *
      * @param attributes Datos acerca del producto a instanciar
-     * @return ERR_CODE_PARSEADO_CORRECTO si se pudo instanciar el producto. ERR_CODE_PRODUCTO_MALFORMADO Si ocurrió
+     * @return COD_ERROR.PARSEADO_CORRECTO si se pudo instanciar el producto. COD_ERROR.PRODUCTO_MALFORMADO Si ocurrió
      * algún error al instanciar el producto
      */
-    private int cargarProducto(Attributes attributes) {
+    private COD_ERROR cargarProducto(Attributes attributes) {
         // Campos comunes a todos los productos
         String nombre = attributes.getValue(XML_PRODUCTO_NOMBRE);
         int cantidad = Integer.parseInt(attributes.getValue(XML_PRODUCTO_CANTIDAD));
@@ -143,21 +132,21 @@ public class ManejadorSAXParser extends DefaultHandler {
                     productos.put(nombre, new ProductoAlimentacion(nombre, cantidad, precio, stockMinimo, fabricante,
                             prioridad, mesCaducidad));
             }
-        } catch (IllegalArgumentException e) {                              // Algún parámetro del constructor no era válido
-            return ERR_CODE_PRODUCTO_MALFORMADO;
+        } catch (IllegalArgumentException e) {                               // Algún parámetro del constructor no era válido
+            return COD_ERROR.PRODUCTO_MALFORMADO;
         }
 
-        return ERR_CODE_PARSEADO_CORRECTO;                                  // El producto fue instanciado correctamente
+        return COD_ERROR.CARGA_CORRECTA;                                     // El producto fue instanciado correctamente
     }
 
     /**
      * Intenta parsear un cliente a partir de su etiqueta de especificación XML
      *
      * @param attributes Datos acerca del cliente a instanciar
-     * @return ERR_CODE_PARSEADO_CORRECTO si se pudo instanciar el cliente. ERR_CODE_CLIENTE_MALFORMADO
+     * @return COD_ERROR.PARSEADO_CORRECTO si se pudo instanciar el cliente. COD_ERROR.CLIENTE_MALFORMADO
      * Si ocurrió algún error al instanciar el cliente
      */
-    private int cargarCliente(Attributes attributes) {
+    private COD_ERROR cargarCliente(Attributes attributes) {
         // Campos comunes a todos los clientes
         String nombre = attributes.getValue(XML_CLIENTE_NOMBRE);
         int edad = Integer.parseInt(attributes.getValue(XML_CLIENTE_EDAD));
@@ -173,11 +162,11 @@ public class ManejadorSAXParser extends DefaultHandler {
                 case VIP:
                     clientes.put(nombre, new ClienteVIP(nombre, edad, localidad));
             }
-        } catch (IllegalArgumentException e) {                              // Algún parámetro del constructor no era válido
-            return ERR_CODE_CLIENTE_MALFORMADO;
+        } catch (IllegalArgumentException e) {                               // Algún parámetro del constructor no era válido
+            return COD_ERROR.CLIENTE_MALFORMADO;
         }
 
-        return ERR_CODE_PARSEADO_CORRECTO;                                  // El cliente fue instanciado correctamente
+        return COD_ERROR.CARGA_CORRECTA;                                     // El cliente fue instanciado correctamente
     }
 
     /**
@@ -202,9 +191,9 @@ public class ManejadorSAXParser extends DefaultHandler {
      * Método accesor del atributo 'estado'
      *
      * @return Estado en el que se encuentra el manejador
-     * @see ManejadorSAXParser Para obtener información acerca de los códigos de error
+     * @see COD_ERROR Para obtener información acerca de los códigos de error
      */
-    public int getEstado() {
+    public COD_ERROR getEstado() {
         return estado;
     }
 
@@ -213,7 +202,7 @@ public class ManejadorSAXParser extends DefaultHandler {
      *
      * @param estado Nuevo estado
      */
-    private void setEstado(int estado) {
+    private void setEstado(COD_ERROR estado) {
         this.estado = estado;
     }
 

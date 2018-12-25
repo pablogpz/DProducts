@@ -6,8 +6,9 @@ import java.util.List;
  * Clase que extiende el producto base para añadir comentarios.
  * Permite realizar comentarios ordenados por puntuación sobre el producto y recuperarlos
  *
- * @author : Juan Pablo García Plaza Pérez - Jose Ángel Concha Carrasco
- * @grupo : Wild True
+ * @author : Juan Pablo García Plaza Pérez
+@author Jose Ángel Concha Carrasco
+ * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
  */
