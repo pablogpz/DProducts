@@ -48,8 +48,8 @@ public class ComparadorComentarioPuntuacionTest {
     }
 
     /**
-     * Testeo del método 'compare()'. Comprueba que se ordene correctamente la colección de comentarios por
-     * su puntuación descendente
+     * Testeo del método {@link ComparadorComentarioPuntuacion#compare(Comentario, Comentario)}. Comprueba que se ordene
+     * correctamente la colección de comentarios por su puntuación descendente
      * <p>
      * [INIT] coleccion {@literal ->} c3(5) - c2(1) - c1(3) - c3(5)
      * [FIN] coleccion {@literal ->} c3(5) - c3(5) - c1(3) - c2(1)

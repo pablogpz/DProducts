@@ -38,7 +38,7 @@ public class InventarioTest {
     }
 
     /**
-     * Testeo del método 'agregarProducto()'. Comprueba que se pueda agregar un producto (no nulo)
+     * Testeo del método {@link Inventario#agregarProducto(Producto)}. Comprueba que se pueda agregar un producto (no nulo)
      * , pero no más de una vez
      */
     @Test
@@ -49,8 +49,8 @@ public class InventarioTest {
     }
 
     /**
-     * Testeo del método 'eliminarProducto()'. Comprueba que solo se pueden eliminar productos (no nulos)
-     * que están en el inventario
+     * Testeo del método {@link Inventario#eliminarProducto(Producto)}. Comprueba que solo se pueden eliminar productos
+     * (no nulos) que están en el inventario
      */
     @Test
     public void eliminarProducto() {
@@ -61,8 +61,8 @@ public class InventarioTest {
     }
 
     /**
-     * Testeo del método 'venderProduto()'. Comprueba que solo se despachen pedidos de productos (no nulos)
-     * en el inventario. Comprueba que se reponga el stock del prduto si es necesario
+     * Testeo del método {@link Inventario#venderProducto(Producto, int)}. Comprueba que solo se despachen
+     * pedidos de productos (no nulos) en el inventario. Comprueba que se reponga el stock del prduto si es necesario
      */
     @Test
     public void bVenderProducto() {
@@ -75,7 +75,8 @@ public class InventarioTest {
     }
 
     /**
-     * Testeo del método 'recuperarProducto()'. Comprueba que solo se puedan recuperar productos del inventario
+     * Testeo del método {@link Inventario#recuperarProducto(Identificadores.Identificador)}. Comprueba que solo
+     * se puedan recuperar productos del inventario
      */
     @Test
     public void dRecuperarProducto() {
@@ -85,8 +86,8 @@ public class InventarioTest {
     }
 
     /**
-     * Testeo del método 'recuperarInstancia()'. Comrpueba que solo exista una insrancia Singleton durante
-     * el ciclo de vida del programa
+     * Testeo del método {@link Inventario#recuperarInstancia()}. Comrpueba que solo exista una insrancia Singleton
+     * durante el ciclo de vida del programa
      */
     @Test
     public void recuperarInstancia() {
@@ -94,7 +95,7 @@ public class InventarioTest {
     }
 
     /**
-     * Testea el método 'toString()'. (COMPROBACIÓN VISUAL)
+     * Testea el método {@link Inventario#toString()}. (COMPROBACIÓN VISUAL)
      */
     @Test
     public void eMostrarDetallesStock() {

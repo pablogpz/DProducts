@@ -96,8 +96,8 @@ public class ProductoHogarTest {
     }
 
     /**
-     * Testeo del método 'calcularPrecioDescontado()'. Comprueba que devuelva el precio final de un produto
-     * descontable tanto con descuentos positivos como negativos
+     * Testeo del método {@link ProductoHogar#calcularPrecioDescontado()}. Comprueba que devuelva el precio final
+     * de un produto descontable tanto con descuentos positivos como negativos
      */
     @Test
     public void calcularPrecioDescontado() {
@@ -109,7 +109,7 @@ public class ProductoHogarTest {
     }
 
     /**
-     * Testeo del método 'toString()'. Comprueba que se formatee bien la cadena que representa a un
+     * Testeo del método {@link ProductoHogar#toString()}. Comprueba que se formatee bien la cadena que representa a un
      * producto del hogar. (COMPROBACIÓN VISUAL)
      */
     @Test
@@ -118,8 +118,8 @@ public class ProductoHogarTest {
     }
 
     /**
-     * Testeo del método 'equals()'. Comprueba que dos productos del hogar sean iguales solo si sus atributos
-     * son exáctamente iguales
+     * Testeo del método {@link ProductoHogar#equals(Object)}. Comprueba que dos productos del hogar sean iguales
+     * solo si sus atributos son exáctamente iguales
      */
     @Test
     public void testEquals() {

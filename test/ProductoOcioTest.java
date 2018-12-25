@@ -49,7 +49,7 @@ public class ProductoOcioTest {
     }
 
     /**
-     * Testeo del método 'calcularPrecioDescontado()'. Comprueba que devuelva el precio final de un produto
+     * Testeo del método {@link ProductoOcio#calcularPrecioDescontado()}. Comprueba que devuelva el precio final de un produto
      * descontable tanto con descuentos positivos como negativos
      */
     @Test
@@ -62,7 +62,7 @@ public class ProductoOcioTest {
     }
 
     /**
-     * Testeo del método 'toString()'. Comprueba que se formatee bien la cadena que representa a un
+     * Testeo del método {@link ProductoOcio#toString()}. Comprueba que se formatee bien la cadena que representa a un
      * producto de ocio. (COMPROBACIÓN VISUAL)
      */
     @Test
@@ -71,8 +71,8 @@ public class ProductoOcioTest {
     }
 
     /**
-     * Testeo del método 'equals()'. Comprueba que dos productos de ocio sean iguales solo si sus atributos
-     * son exáctamente iguales
+     * Testeo del método {@link ProductoOcio#equals(Object)}. Comprueba que dos productos de ocio sean iguales
+     * solo si sus atributos son exáctamente iguales
      */
     @Test
     public void testEquals() {
@@ -82,7 +82,8 @@ public class ProductoOcioTest {
     }
 
     /**
-     * Testeo del método 'hashCode()'. Comprueba que solo dos hashCodes coincidad si son exactamente el mismo objeto
+     * Testeo del método {@link ProductoOcio#hashCode()}. Comprueba que solo dos hashCodes coincidad si son
+     * exactamente el mismo objeto
      */
     @Test
     public void testHashCode() {

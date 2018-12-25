@@ -168,8 +168,8 @@ public class ProductoTest {
     }
 
     /**
-     * Testeo del método 'entregar()'. Comprueba que solo se puedan entregar cantidades positivas distintas de 0
-     * y que haya stock suficiente para cubrirlo
+     * Testeo del método {@link Producto#entregar(int)}. Comprueba que solo se puedan entregar cantidades positivas
+     * distintas de 0 y que haya stock suficiente para cubrirlo
      */
     @Test
     public void entregar() {
@@ -179,7 +179,8 @@ public class ProductoTest {
     }
 
     /**
-     * Testeo del método 'haySuficienteStock()'. Comprueba que solo se acepten cantidades válidas en la venta de productos
+     * Testeo del método {@link Producto#haySuficienteStock(int)}. Comprueba que solo se acepten cantidades válidas
+     * en la venta de productos
      */
     @Test
     public void haySuficienteStock() {

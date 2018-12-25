@@ -46,8 +46,8 @@ public class ComparadorProductoPrecioTest {
     }
 
     /**
-     * Testeo el método 'compare()'. Comprueba que se ordene correctamente la coleccion de productos por su precio
-     * en orden descendente
+     * Testeo el método {@link ComparadorProductoPrecio#compare(Producto, Producto)}. Comprueba que se ordene
+     * correctamente la coleccion de productos por su precio en orden descendente
      * <p>
      * [INIT] coleccion {@literal ->} p1(1) - p3(10) - p2(30) - p3(10)
      * [FIN] coleccion {@literal ->} p2(30) - p3(10) - p3(10) - p1(1)

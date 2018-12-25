@@ -99,8 +99,8 @@ public class ProductoAlimentacionTest {
     }
 
     /**
-     * Testeo del método 'calcularPrecioDescontado()'. Comprueba que devuelva el precio final de un produto
-     * descontable tanto con descuentos positivos como negativos
+     * Testeo del método {@link ProductoAlimentacion#calcularPrecioDescontado()}. Comprueba que devuelva el
+     * precio final de un produto descontable tanto con descuentos positivos como negativos
      */
     @Test
     public void calcularPrecioDescontado() {
@@ -112,8 +112,8 @@ public class ProductoAlimentacionTest {
     }
 
     /**
-     * Testeo del método 'toString()'. Comprueba que se formatee bien la cadena que representa a un
-     * producto de alimentación. (COMPROBACIÓN VISUAL)
+     * Testeo del método {@link ProductoAlimentacion#toString()}. Comprueba que se formatee bien la cadena que
+     * representa a un producto de alimentación. (COMPROBACIÓN VISUAL)
      */
     @Test
     public void testToString() {
@@ -121,8 +121,8 @@ public class ProductoAlimentacionTest {
     }
 
     /**
-     * Testeo del método 'equals()'. Comprueba que dos productos de alimentación sean iguales solo si sus atributos
-     * son exáctamente iguales
+     * Testeo del método {@link ProductoAlimentacion#equals(Object)}. Comprueba que dos productos de alimentación sean
+     * iguales solo si sus atributos son exáctamente iguales
      */
     @Test
     public void testEquals() {
@@ -132,7 +132,8 @@ public class ProductoAlimentacionTest {
     }
 
     /**
-     * Testeo del método 'hashCode()'. Comprueba que solo dos hashCodes coincidad si son exactamente el mismo objeto
+     * Testeo del método {@link ProductoAlimentacion#hashCode()}. Comprueba que solo dos hashCodes coincidad si son
+     * exactamente el mismo objeto
      */
     @Test
     public void testHashCode() {

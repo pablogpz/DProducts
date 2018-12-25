@@ -32,8 +32,9 @@ public class GeneradorIdentificadorTest {
     }
 
     /**
-     * Testeo del método accesor 'consultarIdentificador()'. Comprueba que se lea el mismo identificador consecutivamente
-     * al consultar el siguiente identificador a asignar sin modificarlo. Basado en la comparación de hashes
+     * Testeo del método accesor {@link GeneradorIdentificador#consultarIdentificador()}. Comprueba que se lea el mismo
+     * identificador consecutivamente al consultar el siguiente identificador a asignar sin modificarlo.
+     * Basado en la comparación de hashes
      */
     @Test
     public void consultarIdentificador() {
@@ -43,8 +44,8 @@ public class GeneradorIdentificadorTest {
     }
 
     /**
-     * Testeo del método 'generarIdentificador()'. Comprueba que dos llamadas a generación de identificador no devuelvan
-     * el mismo valor. Basado en la comparación de hashes
+     * Testeo del método {@link GeneradorIdentificador#generarIdentificador()}. Comprueba que dos llamadas a
+     * generación de identificador no devuelvan el mismo valor. Basado en la comparación de hashes
      */
     @Test
     public void generadorIdentificador() {

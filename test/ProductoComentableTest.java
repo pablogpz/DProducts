@@ -48,8 +48,8 @@ public class ProductoComentableTest {
     }
 
     /**
-     * Testeo del método 'comentar()'. Comprueba que solo se puedan insertar comentarios válidos y una sola
-     * vez por autor
+     * Testeo del método {@link ProductoComentable#comentar(Comentario)}. Comprueba que solo se puedan insertar
+     * comentarios válidos y una sola vez por autor
      */
     @Test
     public void comentar() {
@@ -59,8 +59,8 @@ public class ProductoComentableTest {
     }
 
     /**
-     * Testeo del método 'recuperarComentarios()'. Comprueba que se formateen correctamente los comentarios
-     * almacenados (TESTEO VISUAL)
+     * Testeo del método {@link ProductoComentable#recuperarComentarios()}. Comprueba que se formateen correctamente
+     * los comentarios almacenados (TESTEO VISUAL)
      */
     @Test
     public void recuperarComentarios() {
