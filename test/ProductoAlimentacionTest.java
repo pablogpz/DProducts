@@ -11,7 +11,7 @@ import static org.junit.Assert.*;
  * Realiza las pruebas de todos los métodos públicos y protegidos de la clase.
  *
  * @author : Juan Pablo García Plaza Pérez
-@author Jose Ángel Concha Carrasco
+ * @author Jose Ángel Concha Carrasco
  * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)

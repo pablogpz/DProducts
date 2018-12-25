@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
  * sus posibles entradas y estados
  *
  * @author : Juan Pablo García Plaza Pérez
-@author Jose Ángel Concha Carrasco
+ * @author Jose Ángel Concha Carrasco
  * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
@@ -114,5 +114,5 @@ public class ComentarioTest {
         assertFalse(comentario.hashCode() == new Comentario(cliente, "Test", 5).hashCode());
         assertFalse(comentario.hashCode() == new Comentario(cliente, "Otro test", 5).hashCode());
     }
-    
+
 }

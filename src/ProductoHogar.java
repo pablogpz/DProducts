@@ -119,7 +119,7 @@ public class ProductoHogar extends ProductoComentable implements Gustable, Desco
 
     /**
      * @param obj Objeto con el que comparar
-     * @return Devuelve verdadero si entre esta instancia y 'obj' hay coincidencia entre todos los atributos
+     * @return Devuelve verdadero si entre esta instancia y {@code obj} hay coincidencia entre todos los atributos
      * y pertenecen a la misma clase
      */
     public boolean equals(Object obj) {

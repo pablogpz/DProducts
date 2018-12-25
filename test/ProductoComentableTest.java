@@ -11,7 +11,7 @@ import static org.junit.Assert.assertTrue;
  * ProductoOcio como subclase para probar los métodos de la clase base que no son sobreescritos por otras subclases
  *
  * @author : Juan Pablo García Plaza Pérez
-@author Jose Ángel Concha Carrasco
+ * @author Jose Ángel Concha Carrasco
  * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
