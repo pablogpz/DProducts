@@ -24,7 +24,7 @@ public class Inventario {
     private final static int CANTIDAD_VENTA_COLECCION = 1;
     private static Inventario instanciaActual = null;                           // Instancia Singleton del inventario
     private Map<Identificador, Cliente> clientes;                               // Colección de clientes usuarios
-    private Map<String, Producto> stock;                                        // Colección de productos en el inventario
+    private Map<Identificador, Producto> stock;                                 // Colección de productos en el inventario
 
     /**
      * Constructor por defecto de la clase. Sigue el patrón de diseño Singleton
@@ -100,7 +100,7 @@ public class Inventario {
         }
 
         if (!existeProducto)                                                    // Comprueba que no exista ya el producto
-            stock.put(producto.getIdentificador().toString(), producto);        // Agrega el prodcuto al inventario
+            stock.put(producto.getIdentificador(), producto);                   // Agrega el prodcuto al inventario
         else                                                                    // Error si existía en inventario
             reportarError("ERROR al agregar el producto. Ya existe en inventario", producto);
 
@@ -123,7 +123,7 @@ public class Inventario {
         }
 
         if (existeProducto)                                                     // Comprueba si el producto está catalogado
-            stock.remove(producto.getIdentificador().toString());               // Elimina el producto del inventario
+            stock.remove(producto.getIdentificador());                          // Elimina el producto del inventario
         else                                                                    // Error si no existía en inventario
             reportarError("ERROR al eliminar producto. No existe en el inventario", producto);
 
@@ -246,7 +246,7 @@ public class Inventario {
     private boolean existeProducto(Identificador identificador) {
         if (identificador == null) throw new NullPointerException("Identificador nulo");
 
-        return stock.containsKey(identificador.toString());
+        return stock.containsKey(identificador);
     }
 
     /**
@@ -266,7 +266,7 @@ public class Inventario {
         }
 
         if (existeProducto) {                                                   // Comprueba que el producto exista en inventario
-            return stock.get(identificador.toString());                         // Devuelve el producto buscado
+            return stock.get(identificador);                                    // Devuelve el producto buscado
         } else {
             reportarError("ERROR al recuperar un producto. " +
                     "El identificador \"" + identificador.toString() +
