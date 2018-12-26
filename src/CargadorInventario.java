@@ -39,9 +39,9 @@ public class CargadorInventario {
      * para la carga de datos
      *
      * @param ficheroDatos Contiene la información acerca del fichero de datos de entrada
-     * @throws ExcepcionCargadorEntrada Si se produce algún error al inicializar el cargador
+     * @throws ExcepcionCargaEntrada Si se produce algún error al inicializar el cargador
      */
-    public CargadorInventario(File ficheroDatos) throws ExcepcionCargadorEntrada {
+    public CargadorInventario(File ficheroDatos) throws ExcepcionCargaEntrada {
         SAXParserFactory SAXBuilderFactory = SAXParserFactory.newInstance();
         manejadorSAXParser = new ManejadorSAXParser();
         this.ficheroDatos = ficheroDatos;
@@ -50,7 +50,7 @@ public class CargadorInventario {
             parser = SAXBuilderFactory.newSAXParser();
         } catch (ParserConfigurationException | SAXException e) {
             setEstado(COD_ERROR.CONFIGURACION_FALLIDA);
-            throw new ExcepcionCargadorEntrada(getEstado());
+            throw new ExcepcionCargaEntrada(getEstado());
         }
     }
 
@@ -59,11 +59,11 @@ public class CargadorInventario {
      * objetos correspondientes
      * <p>
      *
-     * @throws ExcepcionCargadorEntrada Si se produce algún error al inicializar el cargador o al leer los datos
+     * @throws ExcepcionCargaEntrada Si se produce algún error al inicializar el cargador o al leer los datos
      */
-    public void lecturaDatos() throws ExcepcionCargadorEntrada {
+    public void lecturaDatos() throws ExcepcionCargaEntrada {
         if (!enEstadoValido())                                  // Comprueba que el cargador está bien inicializado
-            throw new ExcepcionCargadorEntrada(getEstado());
+            throw new ExcepcionCargaEntrada(getEstado());
 
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 
@@ -75,29 +75,29 @@ public class CargadorInventario {
             parser.parse(ficheroDatos, manejadorSAXParser);     // Parsea el documento XML
         } catch (SAXException e) {
             setEstado(COD_ERROR.XML_INVALIDO);
-            throw new ExcepcionCargadorEntrada(getEstado());
+            throw new ExcepcionCargaEntrada(getEstado());
         } catch (IOException e) {
             setEstado(COD_ERROR.FICHERO_NO_ENCONTRADO);
-            throw new ExcepcionCargadorEntrada(getEstado());
+            throw new ExcepcionCargaEntrada(getEstado());
         }
 
         setEstado(manejadorSAXParser.getEstado());              // Actualiza la bandera de estado
 
         if (!enEstadoValido())                                  // Comprueba que no haya ocurrido ningún error en la lectura
-            throw new ExcepcionCargadorEntrada(getEstado());
+            throw new ExcepcionCargaEntrada(getEstado());
     }
 
     /**
      * Carga en el inventario los datos parseados por el manejador del parser SAX
      * <p>
      *
-     * @throws ExcepcionCargadorEntrada Si el cargador no ha leído datos o si se produce algún error al inicializar el cargador,
+     * @throws ExcepcionCargaEntrada Si el cargador no ha leído datos o si se produce algún error al inicializar el cargador,
      * o al cargar los datos
      */
-    public void cargarDatos() throws ExcepcionCargadorEntrada {
+    public void cargarDatos() throws ExcepcionCargaEntrada {
         // Comprueba que el cargador esté bien inicializado y se hayan leído datos
         if (!enEstadoInicializado())
-            throw new ExcepcionCargadorEntrada(getEstado());
+            throw new ExcepcionCargaEntrada(getEstado());
 
         boolean insercionCorrecta = true;                       // Bandera que indica si hubo error en la carga
 
@@ -110,7 +110,7 @@ public class CargadorInventario {
 
         if (!insercionCorrecta) {
             setEstado(COD_ERROR.CARGA_PRODUCTO_FALLIDA);        // Algún producto no se pudo añadir al inventario
-            throw new ExcepcionCargadorEntrada(getEstado());
+            throw new ExcepcionCargaEntrada(getEstado());
         }
 
         // Carga de los clientes en el inventario
@@ -121,7 +121,7 @@ public class CargadorInventario {
 
         if (!insercionCorrecta) {
             setEstado(COD_ERROR.CARGA_CLIENTE_FALLIDA);         // Algún cliente no se pudo añadir al inventario
-            throw new ExcepcionCargadorEntrada(getEstado());
+            throw new ExcepcionCargaEntrada(getEstado());
         }
 
         // Relaciona los clientes con sus productos favoritos
@@ -140,7 +140,7 @@ public class CargadorInventario {
 
         if (!insercionCorrecta) {
             setEstado(COD_ERROR.CARGA_PRODUCTO_FAV_FALLIDA);    // Alguna relación falló
-            throw new ExcepcionCargadorEntrada(getEstado());
+            throw new ExcepcionCargaEntrada(getEstado());
         }
     }
 

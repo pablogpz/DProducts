@@ -12,7 +12,7 @@
  * @see COD_ERROR
  */
 
-public class ExcepcionCargadorEntrada extends Exception {
+public class ExcepcionCargaEntrada extends Exception {
 
     // MENSAJES DE ERROR
     private static final String MSJ_CARGADOR_NO_INICIALIZADO = "ERROR al cargar los datos. No se ha leído de ninguna entrada";
@@ -33,7 +33,7 @@ public class ExcepcionCargadorEntrada extends Exception {
      *
      * @param error Código de error del evento que generó la excepción
      */
-    public ExcepcionCargadorEntrada(COD_ERROR error) {
+    public ExcepcionCargaEntrada(COD_ERROR error) {
         switch (error) {
             case CARGADOR_NO_INICIALIZADO:
                 mensajeError = MSJ_CARGADOR_NO_INICIALIZADO;
@@ -66,7 +66,7 @@ public class ExcepcionCargadorEntrada extends Exception {
     }
 
     /**
-     * Método accesor del atributo {@link ExcepcionCargadorEntrada#mensajeError}
+     * Método accesor del atributo {@link ExcepcionCargaEntrada#mensajeError}
      *
      * @return Mensaje de error adecuado al evento que lo ocasionó
      */

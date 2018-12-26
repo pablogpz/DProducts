@@ -46,7 +46,7 @@ public class CargaDatosTest {
     private static HashMap<String, Cliente> clientesLeidos;
 
     @BeforeClass
-    public static void setUp() throws ExcepcionCargadorEntrada {
+    public static void setUp() throws ExcepcionCargaEntrada {
         cargadorInventario = new CargadorInventario(new File(FICHERO_DATOS_PRUEBA));
 
         producto1 = new ProductoOcio("Nintendo_Switch", 4, 300, 2, FABRICANTES.NINTENDO,
@@ -69,7 +69,7 @@ public class CargaDatosTest {
     public void aLecturaDatos() {
         try {
             cargadorInventario.lecturaDatos();                          // Lee los datos de entrada de prueba
-        } catch (ExcepcionCargadorEntrada ignored) {
+        } catch (ExcepcionCargaEntrada ignored) {
         }
 
         // Comprobación de productos leídos
@@ -101,7 +101,7 @@ public class CargaDatosTest {
     public void cargarDatos() {
         try {
             cargadorInventario.cargarDatos();                           // Carga los datos leidos en inventario
-        } catch (ExcepcionCargadorEntrada ignored) {
+        } catch (ExcepcionCargaEntrada ignored) {
         }
 
         Inventario inventario = Inventario.recuperarInstancia();
