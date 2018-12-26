@@ -1,6 +1,9 @@
 import Identificadores.Identificador;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * Clase que representa a la empresa de compra/venta de productos. Se tiene en consideración
@@ -20,14 +23,14 @@ public class Inventario {
     // Cantidad vendida de cada unidad de la coleccion de productos a vender
     private final static int CANTIDAD_VENTA_COLECCION = 1;
     private static Inventario instanciaActual = null;                           // Instancia Singleton del inventario
-    private Set<Cliente> clientes;                                              // Colección de clientes usuarios
+    private Map<Identificador, Cliente> clientes;                               // Colección de clientes usuarios
     private Map<String, Producto> stock;                                        // Colección de productos en el inventario
 
     /**
      * Constructor por defecto de la clase. Sigue el patrón de diseño Singleton
      */
     private Inventario() {
-        clientes = new HashSet<>();
+        clientes = new HashMap<>();
         stock = new HashMap<>();
     }
 
@@ -51,17 +54,33 @@ public class Inventario {
      * Si se le pasa un cliente con valor nulo devuelve falso
      */
     public boolean agregarCliente(Cliente cliente) {
-        return cliente != null && clientes.add(cliente);
+        if (cliente == null)
+            return false;
+
+        boolean existeCliente = clientes.containsKey(cliente.getIdentificador());
+
+        if (!existeCliente)
+            clientes.put(cliente.getIdentificador(), cliente);
+
+        return !existeCliente;
     }
 
     /**
      * Da de baja a un cliente
      *
-     * @param cliente Cliente a dar de baja
+     * @param identificador Identificador del cliente a dar de baja
      * @return Si se pudo eliminar al cliente. No se pueden eliminar clientes que no estén registrados
      */
-    public boolean eliminarCliente(Cliente cliente) {
-        return cliente != null && clientes.remove(cliente);
+    public boolean eliminarCliente(Identificador identificador) {
+        if (identificador == null)
+            return false;
+
+        boolean existeCliente = clientes.containsKey(identificador);
+
+        if (existeCliente)
+            clientes.remove(identificador);
+
+        return existeCliente;
     }
 
     /**

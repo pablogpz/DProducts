@@ -169,6 +169,15 @@ public class CargadorInventario {
     }
 
     /**
+     * Método accesor del atributo {@link CargadorInventario#manejadorSAXParser}
+     *
+     * @return Manejador del parseador SAX
+     */
+    public ManejadorSAXParser getManejadorSAXParser() {
+        return manejadorSAXParser;
+    }
+
+    /**
      * Método mutador del atributo {@link CargadorInventario#estado}
      *
      * @param estado Nuevo estado

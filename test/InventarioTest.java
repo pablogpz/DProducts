@@ -121,14 +121,14 @@ public class InventarioTest {
     }
 
     /**
-     * Testeo del método {@link Inventario#eliminarCliente(Cliente)}. Comprueba que solo se puedan eliminr clientes
-     * (no nulos= que estén en el inventario
+     * Testeo del método {@link Inventario#eliminarCliente(Identificadores.Identificador)}. Comprueba que solo se puedan
+     * eliminr clientes (no nulos) que estén en el inventario
      */
     @Test
     public void eliminarCliente() {
-        assertTrue(inventario.eliminarCliente(cliente));
-        assertFalse(inventario.eliminarCliente(cliente));
-        assertFalse(inventario.eliminarCliente(clienteNoInventario));
+        assertTrue(inventario.eliminarCliente(cliente.getIdentificador()));
+        assertFalse(inventario.eliminarCliente(cliente.getIdentificador()));
+        assertFalse(inventario.eliminarCliente(clienteNoInventario.getIdentificador()));
         assertFalse(inventario.eliminarCliente(null));
     }
 
