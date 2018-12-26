@@ -50,7 +50,7 @@ public class CargadorInventario {
             parser = SAXBuilderFactory.newSAXParser();
         } catch (ParserConfigurationException | SAXException e) {
             setEstado(COD_ERROR.CONFIGURACION_FALLIDA);
-            throw new ExcepcionCargadorEntrada(this);
+            throw new ExcepcionCargadorEntrada(getEstado());
         }
     }
 
@@ -63,7 +63,7 @@ public class CargadorInventario {
      */
     public void lecturaDatos() throws ExcepcionCargadorEntrada {
         if (!enEstadoValido())                                  // Comprueba que el cargador está bien inicializado
-            throw new ExcepcionCargadorEntrada(this);
+            throw new ExcepcionCargadorEntrada(getEstado());
 
         SchemaFactory schemaFactory = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 
@@ -75,16 +75,16 @@ public class CargadorInventario {
             parser.parse(ficheroDatos, manejadorSAXParser);     // Parsea el documento XML
         } catch (SAXException e) {
             setEstado(COD_ERROR.XML_INVALIDO);
-            throw new ExcepcionCargadorEntrada(this);
+            throw new ExcepcionCargadorEntrada(getEstado());
         } catch (IOException e) {
             setEstado(COD_ERROR.FICHERO_NO_ENCONTRADO);
-            throw new ExcepcionCargadorEntrada(this);
+            throw new ExcepcionCargadorEntrada(getEstado());
         }
 
         setEstado(manejadorSAXParser.getEstado());              // Actualiza la bandera de estado
 
         if (!enEstadoValido())                                  // Comprueba que no haya ocurrido ningún error en la lectura
-            throw new ExcepcionCargadorEntrada(this);
+            throw new ExcepcionCargadorEntrada(getEstado());
     }
 
     /**
@@ -97,7 +97,7 @@ public class CargadorInventario {
     public void cargarDatos() throws ExcepcionCargadorEntrada {
         // Comprueba que el cargador esté bien inicializado y se hayan leído datos
         if (!enEstadoInicializado())
-            throw new ExcepcionCargadorEntrada(this);
+            throw new ExcepcionCargadorEntrada(getEstado());
 
         boolean insercionCorrecta = true;                       // Bandera que indica si hubo error en la carga
 
@@ -110,7 +110,7 @@ public class CargadorInventario {
 
         if (!insercionCorrecta) {
             setEstado(COD_ERROR.CARGA_PRODUCTO_FALLIDA);        // Algún producto no se pudo añadir al inventario
-            throw new ExcepcionCargadorEntrada(this);
+            throw new ExcepcionCargadorEntrada(getEstado());
         }
 
         // Carga de los clientes en el inventario
@@ -121,7 +121,7 @@ public class CargadorInventario {
 
         if (!insercionCorrecta) {
             setEstado(COD_ERROR.CARGA_CLIENTE_FALLIDA);         // Algún cliente no se pudo añadir al inventario
-            throw new ExcepcionCargadorEntrada(this);
+            throw new ExcepcionCargadorEntrada(getEstado());
         }
 
         // Relaciona los clientes con sus productos favoritos
@@ -140,7 +140,7 @@ public class CargadorInventario {
 
         if (!insercionCorrecta) {
             setEstado(COD_ERROR.CARGA_PRODUCTO_FAV_FALLIDA);    // Alguna relación falló
-            throw new ExcepcionCargadorEntrada(this);
+            throw new ExcepcionCargadorEntrada(getEstado());
         }
     }
 

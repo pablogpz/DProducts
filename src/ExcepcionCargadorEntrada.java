@@ -31,10 +31,10 @@ public class ExcepcionCargadorEntrada extends Exception {
      * Constructor parametrizado de la clase. Genera distintos mensajes de error según el códgo de error de
      * programa con el que se instancie
      *
-     * @param cargadorError Cargador que generó el error
+     * @param error Código de error del evento que generó la excepción
      */
-    public ExcepcionCargadorEntrada(CargadorInventario cargadorError) {
-        switch (cargadorError.getEstado()) {
+    public ExcepcionCargadorEntrada(COD_ERROR error) {
+        switch (error) {
             case CARGADOR_NO_INICIALIZADO:
                 mensajeError = MSJ_CARGADOR_NO_INICIALIZADO;
                 break;

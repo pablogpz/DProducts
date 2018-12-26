@@ -92,9 +92,9 @@ public class ManejadorSAXParser extends DefaultHandler {
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         // Determina de qué tipo es el elemento actual leído
         if (qName.equalsIgnoreCase(XML_TAG_PRODUCTO))
-            setEstado(cargarProducto(attributes));
+            cargarProducto(attributes);
         else if (qName.equalsIgnoreCase(XML_TAG_CLIENTE))
-            setEstado(cargarCliente(attributes));
+            cargarCliente(attributes);
         else if (qName.equalsIgnoreCase(XML_TAG_PRODUCTO_FAVORITO))
             cargarProductoFavorito(attributes);
     }
@@ -103,10 +103,8 @@ public class ManejadorSAXParser extends DefaultHandler {
      * Intenta parsear un producto a partir de su etiqueta de especificación XML
      *
      * @param attributes Datos acerca del producto a instanciar
-     * @return COD_ERROR.PARSEADO_CORRECTO si se pudo instanciar el producto. COD_ERROR.PRODUCTO_MALFORMADO Si ocurrió
-     * algún error al instanciar el producto
      */
-    private COD_ERROR cargarProducto(Attributes attributes) {
+    private void cargarProducto(Attributes attributes) {
         // Campos comunes a todos los productos
         String nombre = attributes.getValue(XML_PRODUCTO_NOMBRE);
         int cantidad = Integer.parseInt(attributes.getValue(XML_PRODUCTO_CANTIDAD));
@@ -133,20 +131,16 @@ public class ManejadorSAXParser extends DefaultHandler {
                             prioridad, mesCaducidad));
             }
         } catch (IllegalArgumentException e) {                               // Algún parámetro del constructor no era válido
-            return COD_ERROR.PRODUCTO_MALFORMADO;
+            setEstado(COD_ERROR.PRODUCTO_MALFORMADO);
         }
-
-        return COD_ERROR.CARGA_CORRECTA;                                     // El producto fue instanciado correctamente
     }
 
     /**
      * Intenta parsear un cliente a partir de su etiqueta de especificación XML
      *
      * @param attributes Datos acerca del cliente a instanciar
-     * @return COD_ERROR.PARSEADO_CORRECTO si se pudo instanciar el cliente. COD_ERROR.CLIENTE_MALFORMADO
-     * Si ocurrió algún error al instanciar el cliente
      */
-    private COD_ERROR cargarCliente(Attributes attributes) {
+    private void cargarCliente(Attributes attributes) {
         // Campos comunes a todos los clientes
         String nombre = attributes.getValue(XML_CLIENTE_NOMBRE);
         int edad = Integer.parseInt(attributes.getValue(XML_CLIENTE_EDAD));
@@ -163,10 +157,8 @@ public class ManejadorSAXParser extends DefaultHandler {
                     clientes.put(nombre, new ClienteVIP(nombre, edad, localidad));
             }
         } catch (IllegalArgumentException e) {                               // Algún parámetro del constructor no era válido
-            return COD_ERROR.CLIENTE_MALFORMADO;
+            setEstado(COD_ERROR.CLIENTE_MALFORMADO);
         }
-
-        return COD_ERROR.CARGA_CORRECTA;                                     // El cliente fue instanciado correctamente
     }
 
     /**
@@ -198,15 +190,6 @@ public class ManejadorSAXParser extends DefaultHandler {
     }
 
     /**
-     * Método mutador del atributo {@link ManejadorSAXParser#estado}
-     *
-     * @param estado Nuevo estado
-     */
-    private void setEstado(COD_ERROR estado) {
-        this.estado = estado;
-    }
-
-    /**
      * @return Iterador sobre la colección de productos parseados del fichero de datos de entrada
      */
     public Iterator<Producto> getIteradorProductosParseados() {
@@ -226,6 +209,15 @@ public class ManejadorSAXParser extends DefaultHandler {
      */
     public Iterator<Object[]> getIteradorProductosFavParseados() {
         return productosFavoritos.iterator();
+    }
+
+    /**
+     * Método mutador del atributo {@link ManejadorSAXParser#estado}
+     *
+     * @param estado Nuevo estado
+     */
+    private void setEstado(COD_ERROR estado) {
+        this.estado = estado;
     }
 
 }
