@@ -106,7 +106,7 @@ public class ManejadorSAXParser extends DefaultHandler {
      */
     private void cargarProducto(Attributes attributes) {
         // Campos comunes a todos los productos
-        String nombre = attributes.getValue(XML_PRODUCTO_NOMBRE);
+        String nombre = attributes.getValue(XML_PRODUCTO_NOMBRE).replaceAll("_", " ");
         int cantidad = Integer.parseInt(attributes.getValue(XML_PRODUCTO_CANTIDAD));
         float precio = Float.parseFloat(attributes.getValue(XML_PRODUCTO_PRECIO));
         int stockMinimo = Integer.parseInt(attributes.getValue(XML_PRODUCTO_STOCk_MINIMO));
@@ -142,7 +142,7 @@ public class ManejadorSAXParser extends DefaultHandler {
      */
     private void cargarCliente(Attributes attributes) {
         // Campos comunes a todos los clientes
-        String nombre = attributes.getValue(XML_CLIENTE_NOMBRE);
+        String nombre = attributes.getValue(XML_CLIENTE_NOMBRE).replaceAll("_", " ");
         int edad = Integer.parseInt(attributes.getValue(XML_CLIENTE_EDAD));
         String localidad = attributes.getValue(XML_CLIENTE_LOCALIDAD);
         TIPOS_CLIENTE tipo = TIPOS_CLIENTE.valueOf(attributes.getValue(XML_CLIENTE_CATEGORIA));
@@ -170,9 +170,12 @@ public class ManejadorSAXParser extends DefaultHandler {
      *                   con el que se recordará el producto
      */
     private void cargarProductoFavorito(Attributes attributes) {
-        Producto producto = productos.get(attributes.getValue(XML_PRODUCTO_FAV_NOMBRE));    // Producto a relacionar
-        Cliente cliente = clientes.get(attributes.getValue(XML_PRODUCTO_FAV_CLIENTE));      // Cliente a relacionar
-        String alias = attributes.getValue(XML_PRODUCTO_FAV_ALIAS);                         // Alias del producto
+        // Producto a relacionar
+        Producto producto = productos.get(attributes.getValue(XML_PRODUCTO_FAV_NOMBRE).replaceAll("_", " "));
+        // Cliente a relacionar
+        Cliente cliente = clientes.get(attributes.getValue(XML_PRODUCTO_FAV_CLIENTE).replaceAll("_", " "));
+        // Alias del producto
+        String alias = attributes.getValue(XML_PRODUCTO_FAV_ALIAS).replaceAll("_", " ");
 
         // Colección heterogénea de los datos necesarios para relacionar un cliente con un producto favorito
         Object[] relacionFavorito = {producto, cliente, alias};

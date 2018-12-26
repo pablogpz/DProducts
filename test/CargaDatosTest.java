@@ -48,14 +48,14 @@ public class CargaDatosTest {
     public static void setUp() throws ExcepcionCargaEntrada {
         cargadorInventario = new CargadorInventario(new File(FICHERO_DATOS_PRUEBA));
 
-        producto1 = new ProductoOcio("Nintendo_Switch", 4, 300, 2, FABRICANTES.NINTENDO,
+        producto1 = new ProductoOcio("Nintendo Switch", 4, 300, 2, FABRICANTES.NINTENDO,
                 PRIORIDAD_PRODUCTO.BAJA);
-        producto2 = new ProductoOcio("Xbox_One", 5, 220, 2, FABRICANTES.MICROSOFT,
+        producto2 = new ProductoOcio("Xbox One", 5, 220, 2, FABRICANTES.MICROSOFT,
                 PRIORIDAD_PRODUCTO.BAJA);
-        producto3 = new ProductoOcio("Samsung_Galaxy_Tablet", 50, 180, 8, FABRICANTES.SAMSUNG,
+        producto3 = new ProductoOcio("Samsung Galaxy Tablet", 50, 180, 8, FABRICANTES.SAMSUNG,
                 PRIORIDAD_PRODUCTO.MEDIA);
-        cliente1 = new ClienteEstandar("Laia_Palau", 39, "Barcelona");
-        cliente2 = new ClienteEstandar("Carolina_Marin", 25, "Huelva");
+        cliente1 = new ClienteEstandar("Laia Palau", 39, "Barcelona");
+        cliente2 = new ClienteEstandar("Carolina Marin", 25, "Huelva");
         productosLeidos = new HashMap<>();
         clientesLeidos = new HashMap<>();
     }
