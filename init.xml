@@ -2,54 +2,64 @@
 <data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="init.xsd">
     <stock>
-        <product name="Nintendo_Switch" quantity="4" price="300" minimum_stock="2" manufacturer="NINTENDO"
-                 priority="BAJA" category="OCIO"/>
-        <product name="Xbox_One" quantity="5" price="220" minimum_stock="2" manufacturer="MICROSOFT" priority="BAJA"
-                 category="OCIO"/>
-        <product name="Samsung_Galaxy_Tablet" quantity="50" price="180" minimum_stock="8" manufacturer="SAMSUNG"
-                 priority="MEDIA" category="OCIO"/>
-        <product name="Wireless_Headphones" quantity="60" price="32" minimum_stock="5" manufacturer="BEHRINGER"
-                 priority="ALTA" category="OCIO"/>
-        <product name="Kindle" quantity="40" price="80" minimum_stock="10" manufacturer="AMAZON" priority="BAJA"
-                 category="OCIO"/>
-        <product name="Amazon_Echo" quantity="10" price="100" minimum_stock="3" manufacturer="AMAZON" priority="ALTA"
-                 category="OCIO"/>
-        <product name="Lamp" quantity="5" price="17" minimum_stock="2" manufacturer="PHILIPS" priority="MEDIA"
-                 category="HOGAR" room="SALA_ESTAR"/>
-        <product name="Barbecue" quantity="2" price="80" minimum_stock="1" manufacturer="LG" priority="BAJA"
-                 category="HOGAR" room="JARDIN"/>
-        <product name="Towel" quantity="10" price="9" minimum_stock="5" manufacturer="AMAZON" priority="ALTA"
-                 category="HOGAR" room="ASEO"/>
-        <product name="Coffee_Machine" quantity="15" price="55" minimum_stock="10" manufacturer="HUAWEI" priority="BAJA"
-                 category="HOGAR" room="COCINA"/>
-        <product name="Nordic_Filling" quantity="2" price="60" minimum_stock="1" manufacturer="HUAWEI" priority="BAJA"
-                 category="HOGAR" room="DORMITORIO"/>
-        <product name="Table" quantity="5" price="100" minimum_stock="1" manufacturer="DXRACER" priority="MEDIA"
-                 category="HOGAR" room="SALA_ESTAR"/>
-        <product name="Curtains" quantity="2" price="40.5" minimum_stock="1" manufacturer="GOOGLE" priority="BAJA"
-                 category="HOGAR" room="DORMITORIO"/>
-        <product name="Carpet" quantity="3" price="80" minimum_stock="2" manufacturer="GOOGLE" priority="BAJA"
-                 category="HOGAR" room="SALA_ESTAR"/>
-        <product name="Soft_drink" quantity="50" price="1.5" minimum_stock="30" manufacturer="EVGA" priority="ALTA"
-                 category="ALIMENTACION" expiration="JANUARY"/>
-        <product name="Cookies" quantity="100" price="2" minimum_stock="50" manufacturer="AMAZON" priority="MEDIA"
-                 category="ALIMENTACION" expiration="FEBRUARY"/>
-        <product name="Rice" quantity="80" price="1.5" minimum_stock="40" manufacturer="AMAZON" priority="ALTA"
-                 category="ALIMENTACION" expiration="DECEMBER"/>
-        <product name="Bread" quantity="50" price="1.2" minimum_stock="25" manufacturer="AMAZON" priority="ALTA"
-                 category="ALIMENTACION" expiration="DECEMBER"/>
-        <product name="Coffee" quantity="150" price="1" minimum_stock="100" manufacturer="AMAZON" priority="MEDIA"
-                 category="ALIMENTACION" expiration="NOVEMBER"/>
-        <product name="Milk" quantity="100" price="0.6" minimum_stock="50" manufacturer="AMAZON" priority="MEDIA"
-                 category="ALIMENTACION" expiration="DECEMBER"/>
+        <entertainmentProduct name="Nintendo_Switch" quantity="4" price="300" minimum_stock="2" manufacturer="NINTENDO"
+                              priority="BAJA" category="OCIO"/>
+        <entertainmentProduct name="Xbox_One" quantity="5" price="220" minimum_stock="2" manufacturer="MICROSOFT"
+                              priority="BAJA"
+                              category="OCIO"/>
+        <entertainmentProduct name="Samsung_Galaxy_Tablet" quantity="50" price="180" minimum_stock="8"
+                              manufacturer="SAMSUNG"
+                              priority="MEDIA" category="OCIO"/>
+        <entertainmentProduct name="Wireless_Headphones" quantity="60" price="32" minimum_stock="5"
+                              manufacturer="BEHRINGER"
+                              priority="ALTA" category="OCIO"/>
+        <entertainmentProduct name="Kindle" quantity="40" price="80" minimum_stock="10" manufacturer="AMAZON"
+                              priority="BAJA"
+                              category="OCIO"/>
+        <entertainmentProduct name="Amazon_Echo" quantity="10" price="100" minimum_stock="3" manufacturer="AMAZON"
+                              priority="ALTA"
+                              category="OCIO"/>
+        <houseProduct name="Lamp" quantity="5" price="17" minimum_stock="2" manufacturer="PHILIPS" priority="MEDIA"
+                      category="HOGAR" room="SALA_ESTAR"/>
+        <houseProduct name="Barbecue" quantity="2" price="80" minimum_stock="1" manufacturer="LG" priority="BAJA"
+                      category="HOGAR" room="JARDIN"/>
+        <houseProduct name="Towel" quantity="10" price="9" minimum_stock="5" manufacturer="AMAZON" priority="ALTA"
+                      category="HOGAR" room="ASEO"/>
+        <houseProduct name="Coffee_Machine" quantity="15" price="55" minimum_stock="10" manufacturer="HUAWEI"
+                      priority="BAJA"
+                      category="HOGAR" room="COCINA"/>
+        <houseProduct name="Nordic_Filling" quantity="2" price="60" minimum_stock="1" manufacturer="HUAWEI"
+                      priority="BAJA"
+                      category="HOGAR" room="DORMITORIO"/>
+        <houseProduct name="Table" quantity="5" price="100" minimum_stock="1" manufacturer="DXRACER" priority="MEDIA"
+                      category="HOGAR" room="SALA_ESTAR"/>
+        <houseProduct name="Curtains" quantity="2" price="40.5" minimum_stock="1" manufacturer="GOOGLE" priority="BAJA"
+                      category="HOGAR" room="DORMITORIO"/>
+        <houseProduct name="Carpet" quantity="3" price="80" minimum_stock="2" manufacturer="GOOGLE" priority="BAJA"
+                      category="HOGAR" room="SALA_ESTAR"/>
+        <feedingProduct name="Soft_drink" quantity="50" price="1.5" minimum_stock="30" manufacturer="EVGA"
+                        priority="ALTA"
+                        category="ALIMENTACION" expiration="JANUARY"/>
+        <feedingProduct name="Cookies" quantity="100" price="2" minimum_stock="50" manufacturer="AMAZON"
+                        priority="MEDIA"
+                        category="ALIMENTACION" expiration="FEBRUARY"/>
+        <feedingProduct name="Rice" quantity="80" price="1.5" minimum_stock="40" manufacturer="AMAZON" priority="ALTA"
+                        category="ALIMENTACION" expiration="DECEMBER"/>
+        <feedingProduct name="Bread" quantity="50" price="1.2" minimum_stock="25" manufacturer="AMAZON" priority="ALTA"
+                        category="ALIMENTACION" expiration="DECEMBER"/>
+        <feedingProduct name="Coffee" quantity="150" price="1" minimum_stock="100" manufacturer="AMAZON"
+                        priority="MEDIA"
+                        category="ALIMENTACION" expiration="NOVEMBER"/>
+        <feedingProduct name="Milk" quantity="100" price="0.6" minimum_stock="50" manufacturer="AMAZON" priority="MEDIA"
+                        category="ALIMENTACION" expiration="DECEMBER"/>
     </stock>
     <clients>
-        <client name="Rafa_Nadal" age="32" location="Manacor" category="ESTANDAR"/>
-        <client name="Carolina_Marin" age="25" location="Huelva" category="VIP"/>
-        <client name="Jose_Manuel_Calderon" age="37" location="Villanueva de la Serena" category="ESTANDAR"/>
-        <client name="Laia_Palau" age="39" location="Barcelona" category="ESTANDAR"/>
-        <client name="Javier_Guerra" age="35" location="Segovia" category="VIP"/>
-        <client name="Ana_Peleteiro" age="22" location="Riveira" category="VIP"/>
+        <standartClient name="Rafa_Nadal" age="32" location="Manacor" category="ESTANDAR"/>
+        <standartClient name="Jose_Manuel_Calderon" age="37" location="Villanueva de la Serena" category="ESTANDAR"/>
+        <standartClient name="Laia_Palau" age="39" location="Barcelona" category="ESTANDAR"/>
+        <VIPClient name="Carolina_Marin" age="25" location="Huelva" category="VIP"/>
+        <VIPClient name="Javier_Guerra" age="35" location="Segovia" category="VIP"/>
+        <VIPClient name="Ana_Peleteiro" age="22" location="Riveira" category="VIP"/>
     </clients>
     <favorites>
         <favorite product_name="Nintendo_Switch" client_name="Rafa_Nadal" alias="rafanint"/>

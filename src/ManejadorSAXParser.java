@@ -23,8 +23,8 @@ public class ManejadorSAXParser extends DefaultHandler {
 
     // Tags XML que denominan los objetos de entrada
 
-    private static final String XML_TAG_PRODUCTO = "product";
-    private static final String XML_TAG_CLIENTE = "client";
+    private static final String XML_TAG_PRODUCTO = "Product";
+    private static final String XML_TAG_CLIENTE = "Client";
     private static final String XML_TAG_PRODUCTO_FAVORITO = "favorite";
 
     // Nombres de los atributos de los productos
@@ -91,9 +91,9 @@ public class ManejadorSAXParser extends DefaultHandler {
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
         // Determina de qué tipo es el elemento actual leído
-        if (qName.equalsIgnoreCase(XML_TAG_PRODUCTO))
+        if (qName.matches("\\w+(" + XML_TAG_PRODUCTO + ")$")) {
             cargarProducto(attributes);
-        else if (qName.equalsIgnoreCase(XML_TAG_CLIENTE))
+        } else if (qName.matches("\\w+(" + XML_TAG_CLIENTE + ")$"))
             cargarCliente(attributes);
         else if (qName.equalsIgnoreCase(XML_TAG_PRODUCTO_FAVORITO))
             cargarProductoFavorito(attributes);
@@ -187,6 +187,27 @@ public class ManejadorSAXParser extends DefaultHandler {
      */
     public COD_ERROR getEstado() {
         return estado;
+    }
+
+    /**
+     * @return Número de productos parseados por el manejador
+     */
+    public int getNumProductos() {
+        return productos.size();
+    }
+
+    /**
+     * @return Número de clientes parseados por el manejador
+     */
+    public int getNumClientes() {
+        return clientes.size();
+    }
+
+    /**
+     * @return Número de productos favoritos parseados por el manejador
+     */
+    public int getNumProductosFav() {
+        return productosFavoritos.size();
     }
 
     /**

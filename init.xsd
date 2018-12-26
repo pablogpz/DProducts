@@ -1,48 +1,176 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
-           elementFormDefault="qualified">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
     <xs:element name="data" type="dataType"/>
-    <xs:complexType name="productType">
+    <xs:simpleType name="fabricante">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="ACER"/>
+            <xs:enumeration value="AMD"/>
+            <xs:enumeration value="AOC"/>
+            <xs:enumeration value="AMAZON"/>
+            <xs:enumeration value="ASROCK"/>
+            <xs:enumeration value="ASUS"/>
+            <xs:enumeration value="BEHRINGER"/>
+            <xs:enumeration value="BENQ"/>
+            <xs:enumeration value="BQ"/>
+            <xs:enumeration value="CHERRY"/>
+            <xs:enumeration value="COOLERMASTER"/>
+            <xs:enumeration value="CORSAIR"/>
+            <xs:enumeration value="CREATIVE"/>
+            <xs:enumeration value="DELL"/>
+            <xs:enumeration value="DXRACER"/>
+            <xs:enumeration value="EVGA"/>
+            <xs:enumeration value="GSKILL"/>
+            <xs:enumeration value="GIGABYTE"/>
+            <xs:enumeration value="GOOGLE"/>
+            <xs:enumeration value="HP"/>
+            <xs:enumeration value="HUAWEI"/>
+            <xs:enumeration value="HYPERX"/>
+            <xs:enumeration value="INTEL"/>
+            <xs:enumeration value="KENSINGTON"/>
+            <xs:enumeration value="LG"/>
+            <xs:enumeration value="LOGITECH"/>
+            <xs:enumeration value="MICROSOFT"/>
+            <xs:enumeration value="MSI"/>
+            <xs:enumeration value="NEWSKILL"/>
+            <xs:enumeration value="NOCTUA"/>
+            <xs:enumeration value="NINTENDO"/>
+            <xs:enumeration value="NVIDIA"/>
+            <xs:enumeration value="NZXT"/>
+            <xs:enumeration value="OWLOTECH"/>
+            <xs:enumeration value="PALIT"/>
+            <xs:enumeration value="PHANTEKS"/>
+            <xs:enumeration value="PHILIPS"/>
+            <xs:enumeration value="RACER"/>
+            <xs:enumeration value="SAMSUNG"/>
+            <xs:enumeration value="SANDISK"/>
+            <xs:enumeration value="SAPPHIRE"/>
+            <xs:enumeration value="SEAGATE"/>
+            <xs:enumeration value="SEASONIC"/>
+            <xs:enumeration value="SENNHEISER"/>
+            <xs:enumeration value="SILVERSTONE"/>
+            <xs:enumeration value="STEELSERIES"/>
+            <xs:enumeration value="TACENS"/>
+            <xs:enumeration value="THERMALTAKE"/>
+            <xs:enumeration value="TPLINK"/>
+            <xs:enumeration value="TRANSCEND"/>
+            <xs:enumeration value="TRITTON"/>
+            <xs:enumeration value="TRUST"/>
+            <xs:enumeration value="VIEWSONIC"/>
+            <xs:enumeration value="WACOM"/>
+            <xs:enumeration value="WESTERNDIGITAL"/>
+            <xs:enumeration value="ZOTAC"/>
+            <xs:enumeration value="ZOWIE"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="prioridad">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="BAJA"/>
+            <xs:enumeration value="MEDIA"/>
+            <xs:enumeration value="ALTA"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="parte_casa">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="SALA_ESTAR"/>
+            <xs:enumeration value="COCINA"/>
+            <xs:enumeration value="DORMITORIO"/>
+            <xs:enumeration value="ASEO"/>
+            <xs:enumeration value="JARDIN"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="mes">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="JANUARY"/>
+            <xs:enumeration value="FEBRUARY"/>
+            <xs:enumeration value="MARCH"/>
+            <xs:enumeration value="APRIL"/>
+            <xs:enumeration value="MAY"/>
+            <xs:enumeration value="JUNE"/>
+            <xs:enumeration value="JULY"/>
+            <xs:enumeration value="AUGUST"/>
+            <xs:enumeration value="SEPTEMBER"/>
+            <xs:enumeration value="OCTOBER"/>
+            <xs:enumeration value="NOVEMBER"/>
+            <xs:enumeration value="DECEMBER"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="productoBase">
         <xs:simpleContent>
             <xs:extension base="xs:string">
-                <xs:attribute type="xs:string" name="name" use="optional"/>
-                <xs:attribute type="xs:positiveInteger" name="quantity" use="optional"/>
-                <xs:attribute type="xs:decimal" name="price" use="optional"/>
-                <xs:attribute type="xs:positiveInteger" name="minimum_stock" use="optional"/>
-                <xs:attribute type="xs:string" name="manufacturer" use="optional"/>
-                <xs:attribute type="xs:string" name="priority" use="optional"/>
-                <xs:attribute type="xs:string" name="category" use="optional"/>
-                <xs:attribute type="xs:string" name="room" use="optional"/>
-                <xs:attribute type="xs:string" name="expiration" use="optional"/>
+                <xs:attribute type="xs:ID" name="name" use="required"/>
+                <xs:attribute type="xs:positiveInteger" name="quantity" use="required"/>
+                <xs:attribute type="xs:decimal" name="price" use="required"/>
+                <xs:attribute type="xs:positiveInteger" name="minimum_stock" use="required"/>
+                <xs:attribute type="fabricante" name="manufacturer" use="required"/>
+                <xs:attribute type="prioridad" name="priority" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="productoOcio">
+        <xs:simpleContent>
+            <xs:extension base="productoBase">
+                <xs:attribute type="xs:string" name="category" fixed="OCIO" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="productoHogar">
+        <xs:simpleContent>
+            <xs:extension base="productoBase">
+                <xs:attribute type="xs:string" name="category" fixed="HOGAR" use="required"/>
+                <xs:attribute type="parte_casa" name="room" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="productoAlimentacion">
+        <xs:simpleContent>
+            <xs:extension base="productoBase">
+                <xs:attribute type="xs:string" name="category" fixed="ALIMENTACION" use="required"/>
+                <xs:attribute type="mes" name="expiration" use="required"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
     <xs:complexType name="stockType">
         <xs:sequence>
-            <xs:element type="productType" name="product" maxOccurs="unbounded"/>
+            <xs:element type="productoOcio" name="entertainmentProduct" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element type="productoHogar" name="houseProduct" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element type="productoAlimentacion" name="feedingProduct" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
-    <xs:complexType name="clientType">
+    <xs:complexType name="clienteBase">
         <xs:simpleContent>
             <xs:extension base="xs:string">
-                <xs:attribute type="xs:string" name="name" use="optional"/>
-                <xs:attribute type="xs:positiveInteger" name="age" use="optional"/>
-                <xs:attribute type="xs:string" name="location" use="optional"/>
-                <xs:attribute type="xs:string" name="category" use="optional"/>
+                <xs:attribute type="xs:ID" name="name" use="required"/>
+                <xs:attribute type="xs:positiveInteger" name="age" use="required"/>
+                <xs:attribute type="xs:string" name="location" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="clienteEstandar">
+        <xs:simpleContent>
+            <xs:extension base="clienteBase">
+                <xs:attribute type="xs:string" name="category" fixed="ESTANDAR" use="required"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="clienteVIP">
+        <xs:simpleContent>
+            <xs:extension base="clienteBase">
+                <xs:attribute type="xs:string" name="category" fixed="VIP" use="required"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>
     <xs:complexType name="clientsType">
         <xs:sequence>
-            <xs:element type="clientType" name="client" maxOccurs="unbounded"/>
+            <xs:element type="clienteEstandar" name="standartClient" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element type="clienteVIP" name="VIPClient" minOccurs="0" maxOccurs="unbounded"/>
         </xs:sequence>
     </xs:complexType>
     <xs:complexType name="favoriteType">
         <xs:simpleContent>
             <xs:extension base="xs:string">
-                <xs:attribute type="xs:string" name="product_name" use="optional"/>
-                <xs:attribute type="xs:string" name="client_name" use="optional"/>
-                <xs:attribute type="xs:string" name="alias" use="optional"/>
+                <xs:attribute type="xs:IDREF" name="product_name" use="required"/>
+                <xs:attribute type="xs:IDREF" name="client_name" use="required"/>
+                <xs:attribute type="xs:string" name="alias" use="required"/>
             </xs:extension>
         </xs:simpleContent>
     </xs:complexType>

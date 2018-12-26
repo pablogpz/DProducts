@@ -92,7 +92,7 @@ public class CargadorInventario {
      * <p>
      *
      * @throws ExcepcionCargaEntrada Si el cargador no ha leído datos o si se produce algún error al inicializar el cargador,
-     * o al cargar los datos
+     *                               o al cargar los datos
      */
     public void cargarDatos() throws ExcepcionCargaEntrada {
         // Comprueba que el cargador esté bien inicializado y se hayan leído datos
@@ -142,6 +142,8 @@ public class CargadorInventario {
             setEstado(COD_ERROR.CARGA_PRODUCTO_FAV_FALLIDA);    // Alguna relación falló
             throw new ExcepcionCargaEntrada(getEstado());
         }
+
+        System.out.println(recuperarEstadisticas());            // Muestra el resultado de la carga
     }
 
     /**
@@ -184,6 +186,19 @@ public class CargadorInventario {
      */
     private void setEstado(COD_ERROR estado) {
         this.estado = estado;
+    }
+
+    /**
+     * @return Cadena con las estadísticas sobre los datos procesados por el cargador
+     */
+    private String recuperarEstadisticas() {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("Productos cargados : ").append(manejadorSAXParser.getNumProductos()).append("\n");
+        sb.append("Clientes cargados : ").append(manejadorSAXParser.getNumClientes()).append("\n");
+        sb.append("Productos favoritos cargados : ").append(manejadorSAXParser.getNumProductosFav()).append("\n");
+
+        return sb.toString();
     }
 
 }

@@ -2,16 +2,18 @@
 <data xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:noNamespaceSchemaLocation="init.xsd">
     <stock>
-        <product name="Nintendo_Switch" quantity="4" price="300" minimum_stock="2" manufacturer="NINTENDO"
-                 priority="BAJA" category="OCIO"/>
-        <product name="Xbox_One" quantity="5" price="220" minimum_stock="2" manufacturer="MICROSOFT" priority="BAJA"
-                 category="OCIO"/>
-        <product name="Samsung_Galaxy_Tablet" quantity="50" price="180" minimum_stock="8" manufacturer="SAMSUNG"
-                 priority="MEDIA" category="OCIO"/>
+        <entertainmentProduct name="Nintendo_Switch" quantity="4" price="300" minimum_stock="2" manufacturer="NINTENDO"
+                              priority="BAJA" category="OCIO"/>
+        <entertainmentProduct name="Xbox_One" quantity="5" price="220" minimum_stock="2" manufacturer="MICROSOFT"
+                              priority="BAJA"
+                              category="OCIO"/>
+        <entertainmentProduct name="Samsung_Galaxy_Tablet" quantity="50" price="180" minimum_stock="8"
+                              manufacturer="SAMSUNG"
+                              priority="MEDIA" category="OCIO"/>
     </stock>
     <clients>
-        <client name="Laia_Palau" age="39" location="Barcelona" category="ESTANDAR"/>
-        <client name="Carolina_Marin" age="25" location="Huelva" category="VIP"/>
+        <standartClient name="Laia_Palau" age="39" location="Barcelona" category="ESTANDAR"/>
+        <VIPClient name="Carolina_Marin" age="25" location="Huelva" category="VIP"/>
     </clients>
     <favorites>
         <favorite product_name="Nintendo_Switch" client_name="Laia_Palau" alias="laianint"/>

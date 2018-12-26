@@ -8,8 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * CLASE DE TESTEO de la carga de datos (Clases {@link CargadorInventario}, {@link ManejadorSAXParser})
@@ -95,7 +94,8 @@ public class CargaDatosTest {
     }
 
     /**
-     *
+     * Testeo de la carga de datos en inventario. Comprueba que tanto los productos leídos como sus clientes (y sus
+     * productos favoritos) estén en el inventario.
      */
     @Test
     public void cargarDatos() {
@@ -121,6 +121,30 @@ public class CargaDatosTest {
         Cliente rafaNadal = clientesLeidos.get(cliente1.getNombre());
         assertTrue(rafaNadal.existeAliasFavorito("laianint"));
         assertTrue(rafaNadal.existeProductoFavorito(nintendoSwitch));
+    }
+
+    /**
+     * Testeo del método {@link ManejadorSAXParser#getNumProductos()}
+     */
+    @Test
+    public void getNumProductos() {
+        assertEquals(3, cargadorInventario.getManejadorSAXParser().getNumProductos());
+    }
+
+    /**
+     * Testeo del método {@link ManejadorSAXParser#getNumClientes()}
+     */
+    @Test
+    public void getNumClientes() {
+        assertEquals(2, cargadorInventario.getManejadorSAXParser().getNumClientes());
+    }
+
+    /**
+     * Testeo del método {@link ManejadorSAXParser#getNumProductosFav()}
+     */
+    @Test
+    public void getNumProductosFav() {
+        assertEquals(1, cargadorInventario.getManejadorSAXParser().getNumProductosFav());
     }
 
 }
