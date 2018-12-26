@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * CLASE DE TESTEO de la clase {@see ProductoHogar}.
+ * CLASE DE TESTEO de la clase {@link ProductoHogar}.
  * <p>
  * Realiza las pruebas de todos los métodos públicos y protegidos de la clase.
  *

@@ -6,7 +6,7 @@ import org.junit.runners.MethodSorters;
 import static org.junit.Assert.*;
 
 /**
- * CLASE DE TESTEO de la clase {@see Cliente}.
+ * CLASE DE TESTEO de la clase {@link Cliente}.
  * <p>
  * Realiza las pruebas de todos los métodos públicos de la clase para todas
  * sus posibles entradas y estados
@@ -140,28 +140,18 @@ public class ClienteTest {
     }
 
     /**
-     * Testeo del método 'agregarFavorito()'. Comprueba que solo se puedan agregar productos del inventario de la tienda
-     * (solo una vez) y que los aliases utilizados para recordar los productos no se repitan
+     * Testeo del método {@link Cliente#agregarFavorito(Producto, String)}. Comprueba que solo se puedan agregar
+     * productos del inventario de la tienda (solo una vez) y que los aliases utilizados para recordar
+     * los productos no se repitan
      */
     @Test
-    public void aAgregarFavorito() {
+    public void agregarFavorito() {
         assertTrue(cliente.agregarFavorito(producto, "alias1"));
         assertFalse(cliente.agregarFavorito(producto, "alias2"));
         assertFalse(cliente.agregarFavorito(productoNoInventario, "aliasNuevo"));
         assertFalse(cliente.agregarFavorito(productoNoFavorito, "alias1"));
         assertFalse(cliente.agregarFavorito(productoNoFavorito, null));
         assertFalse(cliente.agregarFavorito((Producto) null, "alias3"));
-    }
-
-    /**
-     * Testeo del método 'eliminarFavorito()'. Comprueba que se eliminen de la colección de favoritos productos
-     * favoritos asociados a un alias (no nulo)
-     */
-    @Test
-    public void dEliminarFavorito() {
-        assertTrue(cliente.eliminarFavorito("alias1"));
-        assertFalse(cliente.eliminarFavorito("cualquierAlias"));
-        assertFalse(cliente.eliminarFavorito(null));
     }
 
     /**
@@ -174,6 +164,17 @@ public class ClienteTest {
 //        assertTrue(cliente.pedirProducto("alias1", 3));
 //        assertFalse(cliente.pedirProducto("aliasNoExiste", 3));
 //        assertFalse(cliente.pedirProducto(null, 3));
+    }
+
+    /**
+     * Testeo del método {@link Cliente#eliminarFavorito(String)}. Comprueba que se eliminen de la colección de
+     * favoritos productos favoritos asociados a un alias (no nulo)
+     */
+    @Test
+    public void dEliminarFavorito() {
+        assertTrue(cliente.eliminarFavorito("alias1"));
+        assertFalse(cliente.eliminarFavorito("cualquierAlias"));
+        assertFalse(cliente.eliminarFavorito(null));
     }
 
     /**

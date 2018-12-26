@@ -10,7 +10,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 /**
- * CLASE DE TESTEO de la clase {@see Inventario}.
+ * CLASE DE TESTEO de la clase {@link Inventario}.
  * <p>
  * Realiza las pruebas de todos los métodos públicos de la clase para todas
  * sus posibles entradas y estados

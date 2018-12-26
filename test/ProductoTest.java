@@ -4,7 +4,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- * CLASE DE TESTEO de la clase {@see Producto}.
+ * CLASE DE TESTEO de la clase {@link Producto}.
  * <p>
  * Realiza las pruebas de todos los métodos públicos y protegidos de la clase base utilizando la clase
  * ProductoOcio como subclase para probar los métodos de la clase base que no son sobreescritos por otras subclases

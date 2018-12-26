@@ -7,7 +7,7 @@ import org.junit.runners.MethodSorters;
 import static org.junit.Assert.*;
 
 /**
- * CLASE DE TESTEO de la clase {@see GeneradorIdentificador}.
+ * CLASE DE TESTEO de la clase {@link GeneradorIdentificador}.
  * <p>
  * Realiza las pruebas de todos los métodos públicos de la clase para todas
  * sus posibles entradas y estados

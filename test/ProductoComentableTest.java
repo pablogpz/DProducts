@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 /**
- * CLASE DE TESTEO de la clase {@see ProductoComentable}.
+ * CLASE DE TESTEO de la clase {@link ProductoComentable}.
  * <p>
  * Realiza las pruebas de todos los métodos públicos y protegidos de la clase base utilizando la clase
  * ProductoOcio como subclase para probar los métodos de la clase base que no son sobreescritos por otras subclases
