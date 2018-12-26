@@ -4,8 +4,9 @@
  * SUMARIO DE CÓDIGOS DE ERROR
  * <ul>
  * <li>{@code CARGA_CORRECTA} indica una carga correcta</li>
+ * <li>{@code CARGADOR_NO_INICIALIZADO} indica que se ha intentado cargar datos al inventario
+ * pero no se ha leído nada previamente</li>
  * <li>{@code CONFIGURACION_FALLIDA} indica que ocurrió un error al configurar el parseador</li>
- * <li>{@code PARSEADO_FALLIDO} indica que no se pudo parsear el fichero de entrada</li>
  * <li>{@code FICHERO_NO_ENCONTRADO} indica que no se pudo encontrar el fichero de entrada</li>
  * <li>{@code XML_INVALIDO} indica que el fichero XML de entrada no cumple la validación</li>
  * <li>{@code CARGA_PRODUCTO_FALLIDA} indica que ocurrió un error al parsear un producto</li>
@@ -24,8 +25,8 @@
 
 public enum COD_ERROR {
     CARGA_CORRECTA,
+    CARGADOR_NO_INICIALIZADO,
     CONFIGURACION_FALLIDA,
-    PARSEADO_FALLIDO,
     FICHERO_NO_ENCONTRADO,
     XML_INVALIDO,
     CARGA_PRODUCTO_FALLIDA,
