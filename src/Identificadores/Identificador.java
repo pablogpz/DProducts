@@ -63,7 +63,9 @@ public class Identificador {
     }
 
     /**
-     * Incrementa el valor del identificador en una cantidad
+     * Incrementa el valor del identificador en una cantidad. Su uso está restringido a ser usado dentro del
+     * paquete {@link Identificadores}, por lo que solo es empleado por la clase {@link GeneradorIdentificador}
+     * para generar nuevos identificadores y la suite de pruebas
      *
      * @param incremento Entero en el que incrementar el valor del identificador
      */

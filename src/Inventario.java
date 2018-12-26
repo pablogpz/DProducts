@@ -47,7 +47,7 @@ public class Inventario {
      * Registra a un nuevo cliente
      *
      * @param cliente Cliente a registrar
-     * @return Si se pudo agregar. No se permite añadir múltiples veces a un mismo cliente.
+     * @return Si se pudo agregar. No se permite añadir múltiples veces un mismo cliente.
      * Si se le pasa un cliente con valor nulo devuelve falso
      */
     public boolean agregarCliente(Cliente cliente) {

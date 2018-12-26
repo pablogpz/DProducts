@@ -14,12 +14,6 @@ import java.util.Comparator;
 public class ComparadorComentarioPuntuacion implements Comparator<Comentario> {
 
     /**
-     * Constructor por defecto de la clase. Es vacío
-     */
-    public ComparadorComentarioPuntuacion() {
-    }
-
-    /**
      * Compara dos objetos comentario según su puntuación
      *
      * @param c1 Primer comentario

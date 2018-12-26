@@ -14,12 +14,6 @@ import java.util.Comparator;
 public class ComparadorProductoPrecio implements Comparator<Producto> {
 
     /**
-     * Constructor por defecto de la clase. Está vacío
-     */
-    public ComparadorProductoPrecio() {
-    }
-
-    /**
      * Compara dos objetos Prodcucto según su precio
      *
      * @param p1 Primer producto

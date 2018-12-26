@@ -4,8 +4,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 
 /**
  * CLASE DE TESTEO de la clase {@see GeneradorIdentificador}.
@@ -48,10 +47,18 @@ public class GeneradorIdentificadorTest {
      * generación de identificador no devuelvan el mismo valor. Basado en la comparación de hashes
      */
     @Test
-    public void generadorIdentificador() {
+    public void generarIdentificador() {
         int identificador = generadorIdentificador.generarIdentificador().hashCode();
         int identificador1 = generadorIdentificador.generarIdentificador().hashCode();
         assertNotEquals(0, identificador - identificador1);
     }
 
+    /**
+     * Testeo del método {@link GeneradorIdentificador#recuperarInstancia()}. Comrpueba que solo exista una
+     * instancia Singleton durante el ciclo de vida del programa
+     */
+    @Test
+    public void recuperarInstancia() {
+        assertSame(generadorIdentificador, GeneradorIdentificador.recuperarInstancia());
+    }
 }
