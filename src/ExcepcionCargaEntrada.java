@@ -25,7 +25,8 @@ public class ExcepcionCargaEntrada extends Exception {
     private static final String MSJ_PRODUCTO_MALFORMADO = "ERROR. No se pudo instanciar algún producto leído";
     private static final String MSJ_CLIENTE_MALFORMADO = "ERROR. No se pudo instanciar algún cliente leído";
 
-    private String mensajeError;
+    private COD_ERROR codigoError;                                  // Código de error que generó la excepción
+    private String mensajeError;                                    // Mensaje de error que se le mostrará al usuario
 
     /**
      * Constructor parametrizado de la clase. Genera distintos mensajes de error según el códgo de error de
@@ -34,7 +35,8 @@ public class ExcepcionCargaEntrada extends Exception {
      * @param error Código de error del evento que generó la excepción
      */
     public ExcepcionCargaEntrada(COD_ERROR error) {
-        switch (error) {
+        codigoError = error;
+        switch (codigoError) {                                      // Determina el mensaje de error
             case CARGADOR_NO_INICIALIZADO:
                 mensajeError = MSJ_CARGADOR_NO_INICIALIZADO;
                 break;
@@ -66,12 +68,21 @@ public class ExcepcionCargaEntrada extends Exception {
     }
 
     /**
+     * Método accesor del atributo {@link ExcepcionCargaEntrada#codigoError}
+     *
+     * @return Código de error que generó la excepción
+     */
+    public COD_ERROR getCodigoError() {
+        return codigoError;
+    }
+
+    /**
      * Método accesor del atributo {@link ExcepcionCargaEntrada#mensajeError}
      *
      * @return Mensaje de error adecuado al evento que lo ocasionó
      */
     public String getMensajeError() {
-        return mensajeError;
+        return mensajeError + ". (Código de error : " + getCodigoError() + ")";
     }
 
 }
