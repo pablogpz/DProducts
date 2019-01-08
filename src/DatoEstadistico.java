@@ -146,18 +146,25 @@ public class DatoEstadistico {
 
     /**
      * @param obj Objeto con el que se ha de comparar
-     * @return Devuelve verdadero si entre esta instancia y {@code obj} hay coincidencia entre todos los atributos
-     * y pertenecen a la misma clase
+     * @return Devuelve verdadero si entre el objeto base {@link DatoEstadistico#objetoBase} y {@code obj} hay coincidencia
+     * si el objeto a comparar no es un dato estadístico, o si ambos son datos estadísticos y contienen el mismo objeto base.
+     * Facilita la búsqueda de datos estadísticos equivalentes
      */
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) return true;                                   // Comprueba si es la misma instancia
-        if (!(obj instanceof DatoEstadistico)) return false;            // Si pertenecen a la misma clase no procede
+        if (obj == null)
+            return false;
 
-        DatoEstadistico objCasteado = (DatoEstadistico) obj;            // Casteado del objeto
+        DatoEstadistico objCasteado;
+        boolean esMismoObjetoBase = false;
 
-        return getObjetoBase().equals(objCasteado.getObjetoBase()) &&
-                recuperarListaDatos().equals(objCasteado.recuperarListaDatos());
+        try {
+            objCasteado = (DatoEstadistico) obj;
+            esMismoObjetoBase = getObjetoBase().equals(objCasteado.getObjetoBase());
+        } catch (ClassCastException ignored) {
+        }
+
+        return getObjetoBase().equals(obj) || esMismoObjetoBase;
     }
 
     /**

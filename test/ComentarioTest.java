@@ -121,9 +121,9 @@ public class ComentarioTest {
      */
     @Test
     public void testHashCode() {
-        assertTrue(comentario.hashCode() == comentario.hashCode());
-        assertFalse(comentario.hashCode() == new Comentario(cliente, "Test", 5).hashCode());
-        assertFalse(comentario.hashCode() == new Comentario(cliente, "Otro test", 5).hashCode());
+        assertEquals(comentario.hashCode(), comentario.hashCode());
+        assertNotEquals(comentario.hashCode(), new Comentario(cliente, "Test", 5).hashCode());
+        assertNotEquals(comentario.hashCode(), new Comentario(cliente, "Otro test", 5).hashCode());
     }
 
 }

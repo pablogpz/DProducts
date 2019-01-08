@@ -34,6 +34,7 @@ public class DatoEstadisticoTest {
 
     // Fixture de datos estadísticos de prueba
     private static DatoEstadistico datoEstadisticoCliente;
+    private static DatoEstadistico datoEstadisticoMismoCliente;
     private static DatoEstadistico datoEstadisticoDisntinto;
 
     @Before
@@ -42,6 +43,7 @@ public class DatoEstadisticoTest {
         comentario = new Comentario(cliente, "Texto", 4);
 
         datoEstadisticoCliente = new DatoEstadistico(cliente);
+        datoEstadisticoMismoCliente = new DatoEstadistico(cliente);
         datoEstadisticoDisntinto = new DatoEstadistico(comentario);
 
         datoEstadisticoCliente.registrarDato(aliasPedidos, nPedidos);
@@ -124,14 +126,18 @@ public class DatoEstadisticoTest {
     }
 
     /**
-     * Testeo del método {@link DatoEstadistico#equals(Object)}. Comprueba que dos productos de ocio sean iguales
-     * solo si sus atributos son exáctamente iguales
+     * Testeo del método {@link DatoEstadistico#equals(Object)}. Comprueba que dos datos estadisticos sean iguales
+     * solo si tienen el mismo objeto base, y que un dato estadístico y un objeto sean equivalentes si el objeto base
+     * coincide con dicho objeto
      */
     @Test
     public void testEquals() {
-        assertFalse(datoEstadisticoCliente.equals(null));
         assertTrue(datoEstadisticoCliente.equals(datoEstadisticoCliente));
+        assertTrue(datoEstadisticoCliente.equals(cliente));
+        assertTrue(datoEstadisticoCliente.equals(datoEstadisticoMismoCliente));
         assertFalse(datoEstadisticoCliente.equals(datoEstadisticoDisntinto));
+        assertFalse(datoEstadisticoCliente.equals(comentario));
+        assertFalse(datoEstadisticoCliente.equals(null));
     }
 
     /**

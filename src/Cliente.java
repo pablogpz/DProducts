@@ -401,7 +401,7 @@ public abstract class Cliente {
      */
     @Override
     public int hashCode() {
-        int hashCode = 0;
+        int hashCode = super.hashCode();                                    // HashBase
         int primo = 37;                                                     // Operador primo
 
         hashCode += primo * getNombre().hashCode();

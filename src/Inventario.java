@@ -17,15 +17,21 @@ import java.util.*;
 
 public class Inventario {
 
+    // CONSTANTES RELACIONADAS CON LOS DATOS ESTADÍSTICOS
+    private static final String DAT_EST_ALIAS_UNIDADES_VENDIDAS = "udVendidas";
+
     // Cantidad vendida de cada unidad de la coleccion de productos a vender
     private final static int CANTIDAD_VENTA_COLECCION = 1;
+
     private static Inventario instanciaActual = null;                           // Instancia Singleton del inventario
     private Map<Identificador, Cliente> clientes;                               // Colección de clientes usuarios
     private Map<Identificador, Producto> stock;                                 // Colección de productos en el inventario
 
     // Colecciones relacionados con los datos estadísticos de la simulación
 
-    private Set<Producto> productosVendidos;
+    private Set<Producto> productosVendidos;                                    // Productos que se han vendido
+    private List<DatoEstadistico> estadisticasProductos;                        // Estadísticas relacionadas con los productos
+    private List<DatoEstadistico> estadisticasClientes;                         // Estadísticas relacionadas con los clientes
 
     /**
      * Constructor por defecto de la clase. Sigue el patrón de diseño Singleton
@@ -35,6 +41,8 @@ public class Inventario {
         stock = new HashMap<>();
 
         productosVendidos = new HashSet<>();
+        estadisticasProductos = new ArrayList<>();
+        estadisticasClientes = new ArrayList<>();
     }
 
     /**
@@ -163,7 +171,9 @@ public class Inventario {
             return false;                                                       // El producto no está catalogado
         }
 
-        productosVendidos.add(producto);                                        // Lo registra como producto vendido durante la sim.
+        // ESTADISTICAS
+        registrarVentaProducto(producto, cantidad);                             // Registra la venta del producto
+
         return true;                                                            // Venta completada
     }
 
@@ -284,6 +294,65 @@ public class Inventario {
      */
     public Iterator<Producto> recuperarProductosVendidos() {
         return productosVendidos.iterator();
+    }
+
+    /**
+     * Registra los datos estadísticos relativos a la venta de un producto (qué productos se han vendido y
+     * unidades totales vendidas)
+     *
+     * @param producto Producto vendido
+     * @param cantidad Dato sobre las unidades que contiene el pedido
+     */
+    private void registrarVentaProducto(Producto producto, int cantidad) {
+        // Intenta recuperar el dato estadístico equivalente
+        DatoEstadistico datoEstadistico = recuperarDatoEstadisticoProducto(producto);
+
+        if (datoEstadistico != null) {                                          // Comprueba si existía ya o hay que crearlo
+            // Existe. Se actualizan las unidades vendidas
+            datoEstadistico.setValor(DAT_EST_ALIAS_UNIDADES_VENDIDAS,
+                    (int) datoEstadistico.getValor(DAT_EST_ALIAS_UNIDADES_VENDIDAS) + cantidad);
+        } else {
+            // NO existe. Se crea el dato estadístico equivalente y se añade a la colección
+            datoEstadistico = new DatoEstadistico(producto);
+            datoEstadistico.registrarDato(DAT_EST_ALIAS_UNIDADES_VENDIDAS, cantidad);
+            estadisticasProductos.add(datoEstadistico);
+            productosVendidos.add(producto);                                    // Registra el nuevo producto
+        }
+    }
+
+    /**
+     * @return Producto más vendido del inventario
+     */
+    public Producto recuperarProductoMasVendido() {
+        estadisticasProductos.sort(new Comparator<DatoEstadistico>() {          // Ordena descendentemente por ud. totales vendidas
+            @Override
+            public int compare(DatoEstadistico o1, DatoEstadistico o2) {
+                return Integer.compare((int) o2.getValor(DAT_EST_ALIAS_UNIDADES_VENDIDAS),
+                        (int) o1.getValor(DAT_EST_ALIAS_UNIDADES_VENDIDAS));
+            }
+        });
+
+        return (Producto) estadisticasProductos.get(0).getObjetoBase();
+    }
+
+    /**
+     * Halla el dato estadístico equivalente a un producto dado
+     *
+     * @param producto Producto del que buscar sus estadísticas
+     * @return {@code DatoEstadistico} del producto buscado, si no existe devuelve nulo
+     */
+    private DatoEstadistico recuperarDatoEstadisticoProducto(Producto producto) {
+        boolean encontrado = false;                                             // Bandera de búsqueda
+        Iterator<DatoEstadistico> it = estadisticasProductos.iterator();        // Iterador de datos est. de productos
+        DatoEstadistico datoEstadistico = null;                                 // Dato estadístico temporal
+
+        while (it.hasNext() && !encontrado) {                                   // Busca el dato est. equivalente al producto
+            datoEstadistico = it.next();
+            if (datoEstadistico.equals(producto))
+                encontrado = true;
+        }
+
+        return encontrado ? datoEstadistico : null;
     }
 
     /**
