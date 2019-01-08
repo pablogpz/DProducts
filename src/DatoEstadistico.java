@@ -1,3 +1,4 @@
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -9,8 +10,9 @@ import java.util.Set;
  * @author José Ángel Concha Carrasco
  * grupo : Wild True
  * Entrega : EC1
- * Curso : 2? GIIIS (Grupo A)
+ * Curso : 2º GIIIS (Grupo A)
  */
+
 public class DatoEstadistico {
 
     /*
@@ -19,7 +21,7 @@ public class DatoEstadistico {
     private Object objetoBase;
 
     /*
-     * Colección de datos adicionales. Es escalable, heterog?nea y est? indexada por un alias asignado a cada dato adicional
+     * Colección de datos adicionales. Es escalable, heterogénea y está indexada por un alias asignado a cada dato adicional
      */
     private Map<String, Object> datos;
 
@@ -27,10 +29,12 @@ public class DatoEstadistico {
      * Constructor parametrizado de la clase. Inicializa el objeto base y la colección de datos sobre los que se almacenará
      * información adicional
      *
-     * @param objBase Objeto sobre el que se van a recopilar los datos
+     * @param objetoBase Objeto sobre el que se van a recopilar los datos
      */
-    public DatoEstadistico(Object objBase) {
-        // TODO - implement DatoEstadistico.DatoEstadistico
+    public DatoEstadistico(Object objetoBase) {
+        this.objetoBase = objetoBase;
+
+        datos = new HashMap<>();
     }
 
     /**
@@ -42,8 +46,15 @@ public class DatoEstadistico {
      * cualquiera de los parámetros es nulo, Verdadero en otro caso
      */
     public boolean registrarDato(String alias, Object valor) {
-        // TODO - implement DatoEstadistico.registrarDato
-        return false;
+        if (alias == null || valor == null)                         // Comprueba que ningún parámetro sea nulo
+            return false;
+
+        boolean existeDato = aliasEstaRegistrado(alias);
+
+        if (!existeDato)                                            // Comprueba si el alias ya está registrado
+            datos.put(alias, valor);                                // Si no lo está, registra el nuevo dato
+
+        return !existeDato;
     }
 
     /**
@@ -54,8 +65,15 @@ public class DatoEstadistico {
      * el alias es nulo, Verdadero en otro caso
      */
     public boolean eliminarDato(String alias) {
-        // TODO - implement DatoEstadistico.eliminarDato
-        return false;
+        if (alias == null)                                          // Compruena que el alias no sea nulo
+            return false;
+
+        boolean existeDato = aliasEstaRegistrado(alias);
+
+        if (existeDato)                                             // Comprueba si el alias está registrado
+            datos.remove(alias);                                    // Si lo está, elimina el dato asociado
+
+        return existeDato;
     }
 
     /**
@@ -63,13 +81,19 @@ public class DatoEstadistico {
      *
      * @param alias Nombre descriptivo con el que se corresponde el dato
      * @param valor Nuevo valor
-     * @return Booleano indicando si se pudo actualizar el valor del dato indicado. Devuelve Falso si el dato no existía,
-     * los tipos no son compatibles o cualquiera de los parámetros es nulo; Verdadero en otro caso
+     * @return Booleano indicando si se pudo actualizar el valor del dato indicado. Devuelve Falso si el dato no existía
+     * o cualquiera de los parámetros es nulo; Verdadero en otro caso
      */
     public boolean setValor(String alias, Object valor) {
-        // TODO - implement DatoEstadistico.setValor
-        return false;
+        if (alias == null || valor == null)                         // Comprueba que ningún parámetro sea nulo
+            return false;
 
+        boolean existeDato = aliasEstaRegistrado(alias);
+
+        if (existeDato)                                             // Comprueba si el alias está registrado
+            datos.put(alias, valor);                                // Si lo está actualiza el valor del dato asociado
+
+        return existeDato;
     }
 
     /**
@@ -79,8 +103,7 @@ public class DatoEstadistico {
      * @return El dato requerido o nulo si no existe o es nulo
      */
     public Object getValor(String alias) {
-        // TODO - implement DatoEstadistico.getValor
-        return null;
+        return datos.get(alias);
     }
 
     /**
@@ -89,16 +112,22 @@ public class DatoEstadistico {
      * @return Objeto sobre el que se está recopilando información
      */
     public Object getObjetoBase() {
-        // TODO - implement DatoEstadistico.getObjetoBase
-        return null;
+        return objetoBase;
     }
 
     /**
      * @return Set de cadenas con los alias de los datos registrados para el objeto base
      */
     public Set<String> recuperarListaDatos() {
-        // TODO - implement DatoEstadistico.recuperarListaDatos
-        return null;
+        return datos.keySet();
+    }
+
+    /**
+     * @param alias Alias a comprobar
+     * @return Si el alias está asignado a un dato
+     */
+    private boolean aliasEstaRegistrado(String alias) {
+        return datos.containsKey(alias);
     }
 
 }
