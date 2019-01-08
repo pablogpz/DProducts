@@ -130,4 +130,48 @@ public class DatoEstadistico {
         return datos.containsKey(alias);
     }
 
+    /**
+     * @return Cadena formateada de información del objeto base y una lista de datos registrados
+     */
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder("DATO ESTADÍSTICO :\n");
+
+        stringBuilder.append(getObjetoBase().toString());
+        stringBuilder.append("\n\t").append("DATOS REGISTRADOS : ");
+        stringBuilder.append("\n").append(recuperarListaDatos().toString());
+
+        return stringBuilder.toString() + "\n";
+    }
+
+    /**
+     * @param obj Objeto con el que se ha de comparar
+     * @return Devuelve verdadero si entre esta instancia y {@code obj} hay coincidencia entre todos los atributos
+     * y pertenecen a la misma clase
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;                                   // Comprueba si es la misma instancia
+        if (!(obj instanceof DatoEstadistico)) return false;            // Si pertenecen a la misma clase no procede
+
+        DatoEstadistico objCasteado = (DatoEstadistico) obj;            // Casteado del objeto
+
+        return getObjetoBase().equals(objCasteado.getObjetoBase()) &&
+                recuperarListaDatos().equals(objCasteado.recuperarListaDatos());
+    }
+
+    /**
+     * @return Valor hashCode único de instancia. Basado en productos de números primos
+     */
+    @Override
+    public int hashCode() {
+        int hashCode = super.hashCode();                                  // Hash base
+        int primo = 37;                                                   // Operador primo
+
+        hashCode += primo * getObjetoBase().hashCode();
+        hashCode += primo * recuperarListaDatos().hashCode();
+
+        return hashCode;
+    }
+
 }
