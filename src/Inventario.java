@@ -1,9 +1,6 @@
 import Identificadores.Identificador;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Clase que representa a la empresa de compra/venta de productos. Se tiene en consideración
@@ -12,7 +9,7 @@ import java.util.Map;
  * El perfil de la empresa es de venta de componentes de ordenador y periféricos
  *
  * @author : Juan Pablo García Plaza Pérez
- * @author Jose Ángel Concha Carrasco
+ * @author José Ángel Concha Carrasco
  * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
@@ -26,12 +23,18 @@ public class Inventario {
     private Map<Identificador, Cliente> clientes;                               // Colección de clientes usuarios
     private Map<Identificador, Producto> stock;                                 // Colección de productos en el inventario
 
+    // Colecciones relacionados con los datos estadísticos de la simulación
+
+    private Set<Producto> productosVendidos;
+
     /**
      * Constructor por defecto de la clase. Sigue el patrón de diseño Singleton
      */
     private Inventario() {
         clientes = new HashMap<>();
         stock = new HashMap<>();
+
+        productosVendidos = new HashSet<>();
     }
 
     /**
@@ -160,6 +163,7 @@ public class Inventario {
             return false;                                                       // El producto no está catalogado
         }
 
+        productosVendidos.add(producto);                                        // Lo registra como producto vendido durante la sim.
         return true;                                                            // Venta completada
     }
 
@@ -273,6 +277,13 @@ public class Inventario {
                     "\" no está asociado a ningún producto", identificador);
             return null;                                                        // El producto no está catalogado
         }
+    }
+
+    /**
+     * @return Iterador sobre la colección de productos vendidos durante la simulación
+     */
+    public Iterator<Producto> recuperarProductosVendidos() {
+        return productosVendidos.iterator();
     }
 
     /**

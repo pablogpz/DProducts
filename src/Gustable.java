@@ -2,7 +2,7 @@
  * Interfaz para aquellos productos que permitan likes
  *
  * @author : Juan Pablo García Plaza Pérez
- * @author Jose Ángel Concha Carrasco
+ * @author José Ángel Concha Carrasco
  * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)

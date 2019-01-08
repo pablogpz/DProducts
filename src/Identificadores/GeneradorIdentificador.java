@@ -8,7 +8,7 @@ package Identificadores;
  * Por ejemplo, para un identificador de longitud 5, existen 36^5 = 60.466.176 identificadores distintos
  *
  * @author : Juan Pablo García Plaza Pérez
- * @author Jose Ángel Concha Carrasco
+ * @author José Ángel Concha Carrasco
  * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)

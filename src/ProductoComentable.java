@@ -7,7 +7,7 @@ import java.util.List;
  * Permite realizar comentarios ordenados por puntuación sobre el producto y recuperarlos
  *
  * @author : Juan Pablo García Plaza Pérez
- * @author Jose Ángel Concha Carrasco
+ * @author José Ángel Concha Carrasco
  * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)

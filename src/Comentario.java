@@ -3,7 +3,7 @@
  * una breve reseña sobre el producto y una calificiación en el rango [1,5]
  *
  * @author : Juan Pablo García Plaza Pérez
- * @author Jose Ángel Concha Carrasco
+ * @author José Ángel Concha Carrasco
  * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)

@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
  * de precio en orden descendente. Utiliza la subclase ProductoOcio para los tests
  *
  * @author : Juan Pablo García Plaza Pérez
- * @author Jose Ángel Concha Carrasco
+ * @author José Ángel Concha Carrasco
  * grupo : Wild True
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
