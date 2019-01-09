@@ -88,6 +88,13 @@ public abstract class ProductoComentable extends Producto {
     }
 
     /**
+     * @return Número de comentarios que posee este producto
+     */
+    public int recuperarNumComentarios() {
+        return comentarios.size();
+    }
+
+    /**
      * @return Cadena formateada base y con todos los comentarios del producto
      */
     @Override

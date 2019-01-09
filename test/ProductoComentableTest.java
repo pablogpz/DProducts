@@ -1,8 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 /**
  * CLASE DE TESTEO de la clase {@link ProductoComentable}.
@@ -68,6 +67,17 @@ public class ProductoComentableTest {
     }
 
     /**
+     * Testeo del método {@link ProductoComentable#recuperarNumComentarios()}. Comprueba que cualquier producto que sea
+     * comentable pueda devolver el número de comentarios que posee
+     */
+    @Test
+    public void recuperarNumComentarios() {
+        assertEquals(0, productoComentable.recuperarNumComentarios());
+        productoComentable.comentar(comentario);
+        assertEquals(1, productoComentable.recuperarNumComentarios());
+    }
+
+    /**
      * Testeo de la ordenación de comentarios por puntuación. Comprueba que al inserar varios comentarios
      * después se muestren en orden (COMRPOBACIÓN VISUAL. YA FUE COMPROBADO EN LOS COMPARADORES)
      * <p>
@@ -82,5 +92,4 @@ public class ProductoComentableTest {
 
         productoComentable.recuperarComentarios();
     }
-
 }

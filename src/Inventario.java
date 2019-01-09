@@ -332,7 +332,43 @@ public class Inventario {
             }
         });
 
-        return (Producto) estadisticasProductos.get(0).getObjetoBase();
+        return (Producto) estadisticasProductos.get(0).getObjetoBase();         // Devuelve el primer producto (más vendido)
+    }
+
+    /**
+     * @return Producto más comentado del inventario
+     */
+    public Producto recuperarProductoMasComentado() {
+        Iterator<Producto> itStock = stock.values().iterator();                 // Iterador de los productos en stock
+        List<Producto> productos = new ArrayList<>();                           // Lista auxiliar para apoyar la busqueda mediante ordenación
+
+        // Vuelca todos los productos en stock en la lista auxiliar
+        while (itStock.hasNext())
+            productos.add(itStock.next());
+
+        productos.sort(new Comparator<Producto>() {                             // Ordena descendentemente por el número de comentarios
+            @Override
+            public int compare(Producto o1, Producto o2) {
+                if (o1 instanceof ProductoComentable) {
+                    ProductoComentable o1Com = (ProductoComentable) o1;         // El primer producto es comentable
+                    if (o2 instanceof ProductoComentable) {
+                        ProductoComentable o2Com = (ProductoComentable) o2;     // El segundo producto es comentable
+                        // El resultado es la comparación entre el número de sus comentarios
+                        return Integer.compare(o2Com.recuperarNumComentarios(), o1Com.recuperarNumComentarios());
+                    } else {                                                    // Solo es comentable el primer producto
+                        return -1;                                              // Debe ir primero el primer producto
+                    }
+                } else {                                                        // El primer producto no es comentable
+                    if (o2 instanceof ProductoComentable)
+                        // El segundo producto es comentable
+                        return 1;                                               // Debe ir primero el segundo producto
+                    else                                                        // Ningún producto es comentable
+                        return 0;                                               // Da igual su orden
+                }
+            }
+        });
+
+        return productos.get(0);                                                // Devuelve el primer producto (más comentado)
     }
 
     /**
