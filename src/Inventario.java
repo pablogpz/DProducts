@@ -19,6 +19,7 @@ public class Inventario {
 
     // CONSTANTES RELACIONADAS CON LOS DATOS ESTADÍSTICOS
     private static final String DAT_EST_ALIAS_UNIDADES_VENDIDAS = "udVendidas";
+    private static final String DAT_EST_ALIAS_GASTO_TOTAL = "gastoTotal";
 
     // Cantidad vendida de cada unidad de la coleccion de productos a vender
     private final static int CANTIDAD_VENTA_COLECCION = 1;
@@ -145,11 +146,12 @@ public class Inventario {
      * Realiza el pedido de un número cualquiera de unidades de un producto
      *
      * @param cantidad Número de unidades que debe entregar
+     * @param cliente  Cliente que realiza el pedido
      * @param producto Producto del que realizar el pedido
      * @return Booleano indicando si se ha podido enviar el pedido, bien sea por falta de stock o
      * porque el producto no se ha encontrado
      */
-    public boolean venderProducto(Producto producto, int cantidad) {
+    public boolean venderProducto(Producto producto, Cliente cliente, int cantidad) {
         boolean existeProducto = false;                                         // Bandera para indicar si el producto ya existía
 
         try {
@@ -173,6 +175,7 @@ public class Inventario {
 
         // ESTADISTICAS
         registrarVentaProducto(producto, cantidad);                             // Registra la venta del producto
+        registrarGastoCliente(cliente, producto, cantidad);                     // Registra el gasto del cliente
 
         return true;                                                            // Venta completada
     }
@@ -182,10 +185,11 @@ public class Inventario {
      * Si el stock actual no puede cubrir odos los pedidos no se realiza ninguno.
      *
      * @param coleccionProductos Colección de productos a despachar
+     * @param cliente            Cliente que realiza el pedido
      * @return Devuelve verdadero si se pudieron realizar todos los pedidos. Devuelve falso si la colección es nula o vacía,
      * no se puede cubrir algún pedido u ocurrió algún error en la venta de alguno de los productos
      */
-    public boolean venderColeccionProductos(Collection<Producto> coleccionProductos) {
+    public boolean venderColeccionProductos(Collection<Producto> coleccionProductos, Cliente cliente) {
         if (coleccionProductos == null || coleccionProductos.size() == 0) {     // Comprueba que la coleccion no sea nula ni vacía
             mostrarMensaje("La colección de productos a pedir está vacía");
             return false;
@@ -210,7 +214,7 @@ public class Inventario {
         // Intenta realizar la venta de todos los pedidos
         iterator = coleccionProductos.iterator();
         while (iterator.hasNext()) {
-            ocurrioError = venderProducto(iterator.next(), CANTIDAD_VENTA_COLECCION);
+            ocurrioError = venderProducto(iterator.next(), cliente, CANTIDAD_VENTA_COLECCION);
         }
 
         return ocurrioError;
@@ -316,7 +320,36 @@ public class Inventario {
             datoEstadistico = new DatoEstadistico(producto);
             datoEstadistico.registrarDato(DAT_EST_ALIAS_UNIDADES_VENDIDAS, cantidad);
             estadisticasProductos.add(datoEstadistico);
+
             productosVendidos.add(producto);                                    // Registra el nuevo producto
+        }
+    }
+
+    /**
+     * Registra los datos estadísticos relativos al gasto que hace un cliente al realizar un pedido
+     * (qué cliente ha gastado más dinero)
+     *
+     * @param cliente  Cliente que realiza el pedido
+     * @param producto Producto del pedido
+     * @param cantidad Cantidad del producto pedido
+     */
+    private void registrarGastoCliente(Cliente cliente, Producto producto, int cantidad) {
+        // Intenta recuperar el dato estadístico equivalente
+        DatoEstadistico datoEstadistico = recuperarDatoEstadisticoCliente(cliente);
+        float importe = producto.getPrecio() * cantidad;
+
+        if (datoEstadistico != null) {                                          // Comprueba si existía ya o hay que crearlo
+            // Existe. Se actualiza el gasto total
+            if (producto instanceof Descontable)                                // Determina si hay que aplicar descuento
+                importe = ((Descontable) producto).calcularPrecioDescontado() * cantidad;
+
+            datoEstadistico.setValor(DAT_EST_ALIAS_GASTO_TOTAL,
+                    (float) datoEstadistico.getValor(DAT_EST_ALIAS_GASTO_TOTAL) + importe);
+        } else {
+            // NO existe. Se crea el dato estadístico equivalente y se añade a la colección
+            datoEstadistico = new DatoEstadistico(cliente);
+            datoEstadistico.registrarDato(DAT_EST_ALIAS_GASTO_TOTAL, importe);
+            estadisticasClientes.add(datoEstadistico);
         }
     }
 
@@ -372,6 +405,21 @@ public class Inventario {
     }
 
     /**
+     * @return Cliente que ha acumulado más gastos
+     */
+    public Cliente recuperarClienteMasGastos() {
+        estadisticasClientes.sort(new Comparator<DatoEstadistico>() {
+            @Override
+            public int compare(DatoEstadistico o1, DatoEstadistico o2) {
+                return Float.compare((float) o2.getValor(DAT_EST_ALIAS_GASTO_TOTAL),
+                        (float) o1.getValor(DAT_EST_ALIAS_GASTO_TOTAL));
+            }
+        });
+
+        return (Cliente) estadisticasClientes.get(0).getObjetoBase();
+    }
+
+    /**
      * Halla el dato estadístico equivalente a un producto dado
      *
      * @param producto Producto del que buscar sus estadísticas
@@ -385,6 +433,26 @@ public class Inventario {
         while (it.hasNext() && !encontrado) {                                   // Busca el dato est. equivalente al producto
             datoEstadistico = it.next();
             if (datoEstadistico.equals(producto))
+                encontrado = true;
+        }
+
+        return encontrado ? datoEstadistico : null;
+    }
+
+    /**
+     * Halla el dato estadístico equivalente a un cliente dado
+     *
+     * @param cliente Cliente del que buscar sus estadísticas
+     * @return {@code DatoEstadistico} del cliente buscado, si no existe devuelve nulo
+     */
+    private DatoEstadistico recuperarDatoEstadisticoCliente(Cliente cliente) {
+        boolean encontrado = false;                                             // Bandera de búsqueda
+        Iterator<DatoEstadistico> it = estadisticasProductos.iterator();        // Iterador de datos est. de productos
+        DatoEstadistico datoEstadistico = null;                                 // Dato estadístico temporal
+
+        while (it.hasNext() && !encontrado) {                                   // Busca el dato est. equivalente al producto
+            datoEstadistico = it.next();
+            if (datoEstadistico.equals(cliente))
                 encontrado = true;
         }
 

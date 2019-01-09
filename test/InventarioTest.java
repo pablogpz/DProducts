@@ -70,7 +70,7 @@ public class InventarioTest {
     }
 
     /**
-     * Testeo del método {@link Inventario#venderColeccionProductos(Collection)}. Comprueba que se puedan pedir colecciones
+     * Testeo del método {@link Inventario#venderColeccionProductos(Collection, Cliente)}. Comprueba que se puedan pedir colecciones
      * de productos (basadas en la clase {@link Collection}) no nulas y con algún producto añadido que esté solo en el
      * inventario
      */
@@ -78,26 +78,26 @@ public class InventarioTest {
     public void bVenderColeccionProductos() {
         List<Producto> coleccionProductos = new ArrayList<>();
 
-        assertFalse(inventario.venderColeccionProductos(null));
-        assertFalse(inventario.venderColeccionProductos(coleccionProductos));   // No contiene productos
+        assertFalse(inventario.venderColeccionProductos(null, null));
+        assertFalse(inventario.venderColeccionProductos(coleccionProductos, cliente));   // No contiene productos
 
         coleccionProductos.add(producto);
 
-        assertTrue(inventario.venderColeccionProductos(coleccionProductos));    // Hay un producto
+        assertTrue(inventario.venderColeccionProductos(coleccionProductos, cliente));    // Hay un producto
     }
 
     /**
-     * Testeoo del método {@link Inventario#venderProducto(Producto, int)}. Comprueba que solo se despachen
+     * Testeoo del método {@link Inventario#venderProducto(Producto, Cliente, int)}. Comprueba que solo se despachen
      * pedidos de productos (no nulos) en el inventario. Comprueba que se reponga el stock del prduto si es necesario
      */
     @Test
     public void bVenderProducto() {
-        assertTrue(inventario.venderProducto(producto, 5));
+        assertTrue(inventario.venderProducto(producto, cliente, 5));
         assertEquals(25, producto.getCantidad());
-        assertTrue(inventario.venderProducto(producto, 1));
+        assertTrue(inventario.venderProducto(producto, cliente, 1));
         assertEquals(99, producto.getCantidad());
-        assertFalse(inventario.venderProducto(productoNoInventario, 1));
-        assertFalse(inventario.venderProducto(null, 1));
+        assertFalse(inventario.venderProducto(productoNoInventario, cliente, 1));
+        assertFalse(inventario.venderProducto(null, cliente, 1));
     }
 
     /**
