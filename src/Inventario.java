@@ -4,7 +4,8 @@ import java.util.*;
 
 /**
  * Clase que representa a la empresa de compra/venta de productos. Se tiene en consideración
- * la existencia de una única empresa, por lo que se ha implementado siguiendo el patrón de diseño Singleton
+ * la existencia de una única empresa, por lo que se ha implementado siguiendo el patrón de diseño Singleton.
+ * También almacena datos estadísticos sobre clientes y productos del inventario.
  * <p>
  * El perfil de la empresa es de venta de componentes de ordenador y periféricos
  *
@@ -20,6 +21,11 @@ public class Inventario {
     // CONSTANTES RELACIONADAS CON LOS DATOS ESTADÍSTICOS
     private static final String DAT_EST_ALIAS_UNIDADES_VENDIDAS = "udVendidas";
     private static final String DAT_EST_ALIAS_GASTO_TOTAL = "gastoTotal";
+
+    public static final String CLAVE_PRODUCTO_MAS_VENDIDO_PRODUCTO = "prodMasVendidoProd";
+    public static final String CLAVE_PRODUCTO_MAS_VENDIDO_VENTAS = "prodMasVendidoVentas";
+    public static final String CLAVE_CLIENTE_MAS_GASTOS_CLIENTE = "cliMasGastosCli";
+    public static final String CLAVE_CLIENTE_MAS_GASTOS_GASTO = "cliMasGastosGasto";
 
     // Cantidad vendida de cada unidad de la coleccion de productos a vender
     private final static int CANTIDAD_VENTA_COLECCION = 1;
@@ -354,9 +360,9 @@ public class Inventario {
     }
 
     /**
-     * @return Producto más vendido del inventario
+     * @return Mapa con el producto más vendido del inventario y el número de ventas
      */
-    public Producto recuperarProductoMasVendido() {
+    public Map<String, Object> recuperarProductoMasVendido() {
         estadisticasProductos.sort(new Comparator<DatoEstadistico>() {          // Ordena descendentemente por ud. totales vendidas
             @Override
             public int compare(DatoEstadistico o1, DatoEstadistico o2) {
@@ -365,7 +371,14 @@ public class Inventario {
             }
         });
 
-        return (Producto) estadisticasProductos.get(0).getObjetoBase();         // Devuelve el primer producto (más vendido)
+        Map<String, Object> resultados = new HashMap<>();                       // Colección de resultados
+        DatoEstadistico prodMasVendido = estadisticasProductos.get(0);          // Estadísticas del producto más vendido
+
+        // Inserción de resultados
+        resultados.put(CLAVE_PRODUCTO_MAS_VENDIDO_PRODUCTO, prodMasVendido.getObjetoBase());
+        resultados.put(CLAVE_PRODUCTO_MAS_VENDIDO_VENTAS, estadisticasClientes.get(0).getValor(DAT_EST_ALIAS_UNIDADES_VENDIDAS));
+
+        return resultados;
     }
 
     /**
@@ -405,9 +418,9 @@ public class Inventario {
     }
 
     /**
-     * @return Cliente que ha acumulado más gastos
+     * @return Mapa con el cliente que ha acumulado más gastos y sus gastos totales
      */
-    public Cliente recuperarClienteMasGastos() {
+    public Map<String, Object> recuperarClienteMasGastos() {
         estadisticasClientes.sort(new Comparator<DatoEstadistico>() {
             @Override
             public int compare(DatoEstadistico o1, DatoEstadistico o2) {
@@ -416,7 +429,14 @@ public class Inventario {
             }
         });
 
-        return (Cliente) estadisticasClientes.get(0).getObjetoBase();
+        Map<String, Object> resultados = new HashMap<>();                       // Colección de resultados
+        DatoEstadistico clienteMasGastos = estadisticasClientes.get(0);         // Estadísticas del cliente con más gastos
+
+        // Inserción de resultados
+        resultados.put(CLAVE_CLIENTE_MAS_GASTOS_CLIENTE, clienteMasGastos.getObjetoBase());
+        resultados.put(CLAVE_CLIENTE_MAS_GASTOS_GASTO, clienteMasGastos.getValor(DAT_EST_ALIAS_GASTO_TOTAL));
+
+        return resultados;
     }
 
     /**
