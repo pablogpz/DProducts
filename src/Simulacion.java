@@ -1,4 +1,7 @@
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Clase que implementa el proceso de simulación del caso de uso del proyecto. Realiza 10 turnos de pedidos tras la
@@ -14,13 +17,25 @@ import java.io.File;
 public class Simulacion {
 
     private static final String RUTA_FICHERO_ENTRADA = "init.xml";          // Fichero XML de datos de entrada
+    private static final int NUMERO_TURNOS = 10;                            // Número de turnos de la simulación
+
+    private List<Cliente> clientesTurnos;                                   // Colección de clientes empleados en la simulacion
+
+    /**
+     * Constructor por defecto de la clase. Inicializa las estructuras de datos auxiliares
+     */
+    public Simulacion() {
+        clientesTurnos = new ArrayList<>();
+    }
 
     /**
      * PUNTO DE ENTRADA. Método principal del programa. Encargado de manejar el flujo de control del programa.
      */
     public static void main(String[] args) {
+        Simulacion simulacion = new Simulacion();                           // Instancia de la simulación
+
         try {
-            inicializarSimulacion();
+            simulacion.inicializarSimulacion();
         } catch (ExcepcionCargaEntrada excepcionCargaEntrada) {
             System.out.println(excepcionCargaEntrada.getMensajeError());
         }
@@ -32,10 +47,26 @@ public class Simulacion {
      *
      * @throws ExcepcionCargaEntrada Si se produce algún error en la carga de datos
      */
-    public static void inicializarSimulacion() throws ExcepcionCargaEntrada {
+    private void inicializarSimulacion() throws ExcepcionCargaEntrada {
+        // Carga los datos de entrada en el inventario
         CargadorInventario cargadorInventario = new CargadorInventario(new File(RUTA_FICHERO_ENTRADA));
         cargadorInventario.lecturaDatos();
         cargadorInventario.cargarDatos();
+
+        // Recupera todos los clientes cargados y hasta NUM_TURNOS
+        Iterator<Cliente> itClientes = cargadorInventario.getManejadorSAXParser().getIteradorClientesParseados();
+        int clientesCargados = 0;
+        while (itClientes.hasNext() && clientesCargados <= NUMERO_TURNOS) {
+            clientesTurnos.add(itClientes.next());
+            clientesCargados++;
+        }
+
+        // Si no había suficentes clientes, se insertan repetidos hasta NUM_TURNOS
+        if (clientesCargados < NUMERO_TURNOS) {
+            for (; clientesCargados < NUMERO_TURNOS; clientesCargados++) {
+                clientesTurnos.add(clientesTurnos.get(NUMERO_TURNOS - clientesCargados));
+            }
+        }
     }
 
 }
