@@ -342,13 +342,15 @@ public class Inventario {
     private void registrarGastoCliente(Cliente cliente, Producto producto, int cantidad) {
         // Intenta recuperar el dato estadístico equivalente
         DatoEstadistico datoEstadistico = recuperarDatoEstadisticoCliente(cliente);
-        float importe = producto.getPrecio() * cantidad;
+        float importe;
+
+        if (producto instanceof Descontable)                                    // Determina si hay que aplicar descuento
+            importe = ((Descontable) producto).calcularPrecioDescontado() * cantidad;
+        else
+            importe = producto.getPrecio() * cantidad;
 
         if (datoEstadistico != null) {                                          // Comprueba si existía ya o hay que crearlo
             // Existe. Se actualiza el gasto total
-            if (producto instanceof Descontable)                                // Determina si hay que aplicar descuento
-                importe = ((Descontable) producto).calcularPrecioDescontado() * cantidad;
-
             datoEstadistico.setValor(DAT_EST_ALIAS_GASTO_TOTAL,
                     (float) datoEstadistico.getValor(DAT_EST_ALIAS_GASTO_TOTAL) + importe);
         } else {
@@ -376,7 +378,7 @@ public class Inventario {
 
         // Inserción de resultados
         resultados.put(CLAVE_PRODUCTO_MAS_VENDIDO_PRODUCTO, prodMasVendido.getObjetoBase());
-        resultados.put(CLAVE_PRODUCTO_MAS_VENDIDO_VENTAS, estadisticasClientes.get(0).getValor(DAT_EST_ALIAS_UNIDADES_VENDIDAS));
+        resultados.put(CLAVE_PRODUCTO_MAS_VENDIDO_VENTAS, prodMasVendido.getValor(DAT_EST_ALIAS_UNIDADES_VENDIDAS));
 
         return resultados;
     }
@@ -467,10 +469,10 @@ public class Inventario {
      */
     private DatoEstadistico recuperarDatoEstadisticoCliente(Cliente cliente) {
         boolean encontrado = false;                                             // Bandera de búsqueda
-        Iterator<DatoEstadistico> it = estadisticasProductos.iterator();        // Iterador de datos est. de productos
+        Iterator<DatoEstadistico> it = estadisticasClientes.iterator();         // Iterador de datos est. de clientes
         DatoEstadistico datoEstadistico = null;                                 // Dato estadístico temporal
 
-        while (it.hasNext() && !encontrado) {                                   // Busca el dato est. equivalente al producto
+        while (it.hasNext() && !encontrado) {                                   // Busca el dato est. equivalente al cliente
             datoEstadistico = it.next();
             if (datoEstadistico.equals(cliente))
                 encontrado = true;

@@ -5,6 +5,7 @@ import org.junit.runners.MethodSorters;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -30,6 +31,7 @@ public class InventarioTest {
 
     // Fixture de productos de prueba
     private static Producto producto;
+    private static Producto producto1;
     private static Producto productoNoInventario;
 
     // Fixture de clientes de prueba
@@ -40,6 +42,8 @@ public class InventarioTest {
     public static void setUp() {
         inventario = Inventario.recuperarInstancia();
         producto = new ProductoOcio("Nombre", 31, 1, 25, FABRICANTES.ACER,
+                PRIORIDAD_PRODUCTO.MEDIA);
+        producto1 = new ProductoOcio("Otro nombre", 31, 1, 25, FABRICANTES.AMD,
                 PRIORIDAD_PRODUCTO.MEDIA);
         productoNoInventario = new ProductoOcio("Nombre", 31, 1, 25,
                 FABRICANTES.ACER, PRIORIDAD_PRODUCTO.MEDIA);
@@ -79,11 +83,11 @@ public class InventarioTest {
         List<Producto> coleccionProductos = new ArrayList<>();
 
         assertFalse(inventario.venderColeccionProductos(null, null));
-        assertFalse(inventario.venderColeccionProductos(coleccionProductos, cliente));   // No contiene productos
+        assertFalse(inventario.venderColeccionProductos(coleccionProductos, cliente));  // No contiene productos
 
         coleccionProductos.add(producto);
 
-        assertTrue(inventario.venderColeccionProductos(coleccionProductos, cliente));    // Hay un producto
+        assertTrue(inventario.venderColeccionProductos(coleccionProductos, cliente));   // Hay un producto
     }
 
     /**
@@ -95,9 +99,19 @@ public class InventarioTest {
         assertTrue(inventario.venderProducto(producto, cliente, 5));
         assertEquals(25, producto.getCantidad());
         assertTrue(inventario.venderProducto(producto, cliente, 1));
-        assertEquals(99, producto.getCantidad());
+        assertEquals(99, producto.getCantidad());                               // Se ha repuesto el inventario
         assertFalse(inventario.venderProducto(productoNoInventario, cliente, 1));
         assertFalse(inventario.venderProducto(null, cliente, 1));
+    }
+
+    /**
+     * Testeo del método {@link Inventario#recuperarClienteMasGastos()}. Comprueba que se devuelva el cliente que más
+     * gastos ha realizado en pedidos (gasto total de 7.0 más 1.4 de IVA por ventas de productos de ocio)
+     */
+    @Test
+    public void dRecuperarClienteMasGastos() {
+        assertEquals(cliente, inventario.recuperarClienteMasGastos().get(Inventario.CLAVE_CLIENTE_MAS_GASTOS_CLIENTE));
+        assertEquals(8.4, (float) inventario.recuperarClienteMasGastos().get(Inventario.CLAVE_CLIENTE_MAS_GASTOS_GASTO), 0.1);
     }
 
     /**
@@ -109,6 +123,45 @@ public class InventarioTest {
         assertEquals(producto, inventario.recuperarProducto(producto.getIdentificador()));
         assertNotEquals(productoNoInventario, inventario.recuperarProducto(productoNoInventario.getIdentificador()));
         assertNull(inventario.recuperarProducto(null));
+    }
+
+    /**
+     * Testeo del método {@link Inventario#recuperarProductoMasComentado()}. Comprueba que se devuelva el producto con
+     * más comentarios (1 comentario)
+     */
+    @Test
+    public void dRecuperarProductoMasComentado() {
+        inventario.agregarProducto(producto1);
+        ((ProductoComentable) producto1).comentar(new Comentario(cliente, "Texto", 5));
+
+        assertEquals(producto1, inventario.recuperarProductoMasComentado());
+        assertEquals(1, ((ProductoComentable) inventario.recuperarProductoMasComentado()).recuperarNumComentarios());
+    }
+
+    /**
+     * Testeo del método {@link Inventario#recuperarProductoMasVendido()}. Comprueba que se devuelva el producto más
+     * vendido y la cantidad de unicades vendidas en total (7 unidades)
+     */
+    @Test
+    public void dRecuperarProductoMasVendido() {
+        assertEquals(producto, inventario.recuperarProductoMasVendido().get(Inventario.CLAVE_PRODUCTO_MAS_VENDIDO_PRODUCTO));
+        assertEquals(7, inventario.recuperarProductoMasVendido().get(Inventario.CLAVE_PRODUCTO_MAS_VENDIDO_VENTAS));
+    }
+
+    /**
+     * Testeo del método {@link Inventario#recuperarProductosVendidos()}. Comprueba que se registren todos los productos
+     * que han sido pedidos durante una simulación (Se pide 1 producto)
+     */
+    @Test
+    public void dRecuperarProductosVendidos() {
+        List<Producto> productos = new ArrayList<>();
+        Iterator<Producto> itProductos = inventario.recuperarProductosVendidos();
+        while (itProductos.hasNext()) {
+            productos.add(itProductos.next());
+        }
+
+        assertTrue(productos.contains(producto));
+        assertEquals(1, productos.size());
     }
 
     /**
