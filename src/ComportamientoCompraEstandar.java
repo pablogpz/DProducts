@@ -1,3 +1,7 @@
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
+
 public class ComportamientoCompraEstandar implements ComportamientoCompra {
 
     public ComportamientoCompraEstandar() {
@@ -11,14 +15,18 @@ public class ComportamientoCompraEstandar implements ComportamientoCompra {
     }
 
     @Override
-    public float calcularPrecio() {
+    public float calcularPrecio(Cliente cliente) {
         // TODO - implement
         return 0;
     }
 
     @Override
-    public boolean prepararPedido() {
-        // TODO - implement
+    public Set<Producto> prepararPedido(Cliente cliente) {
+        Set<Producto> pedido = new HashSet<>();
+
+        Map<String, Producto> todos = cliente.
+
+
         return false;
     }
 }

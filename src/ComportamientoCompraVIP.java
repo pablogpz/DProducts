@@ -1,3 +1,5 @@
+import java.util.Set;
+
 public class ComportamientoCompraVIP implements ComportamientoCompra {
 
     public ComportamientoCompraVIP() {
@@ -11,13 +13,13 @@ public class ComportamientoCompraVIP implements ComportamientoCompra {
     }
 
     @Override
-    public float calcularPrecio() {
+    public float calcularPrecio(Cliente cliente) {
         // TODO - implement
         return 0;
     }
 
     @Override
-    public boolean prepararPedido() {
+    public Set<Producto> prepararPedido(Cliente cliente) {
         // TODO - implement
         return false;
     }
