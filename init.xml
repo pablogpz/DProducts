@@ -3,22 +3,17 @@
       xsi:noNamespaceSchemaLocation="init.xsd">
     <stock>
         <entertainmentProduct name="Nintendo_Switch" quantity="4" price="300" minimum_stock="2" manufacturer="NINTENDO"
-                              priority="BAJA" category="OCIO"/>
-        <entertainmentProduct name="Xbox_One" quantity="5" price="220" minimum_stock="2" manufacturer="MICROSOFT"
-                              priority="BAJA"
-                              category="OCIO"/>
-        <entertainmentProduct name="Samsung_Galaxy_Tablet" quantity="50" price="180" minimum_stock="8"
-                              manufacturer="SAMSUNG"
-                              priority="MEDIA" category="OCIO"/>
-        <entertainmentProduct name="Wireless_Headphones" quantity="60" price="32" minimum_stock="5"
-                              manufacturer="BEHRINGER"
                               priority="ALTA" category="OCIO"/>
+        <entertainmentProduct name="Xbox_One" quantity="5" price="220" minimum_stock="2" manufacturer="MICROSOFT"
+                              priority="MEDIA" category="OCIO"/>
+        <entertainmentProduct name="Samsung_Galaxy_Tablet" quantity="50" price="180" minimum_stock="8"
+                              manufacturer="SAMSUNG" priority="ALTA" category="OCIO"/>
+        <entertainmentProduct name="Wireless_Headphones" quantity="60" price="32" minimum_stock="5"
+                              manufacturer="BEHRINGER" priority="ALTA" category="OCIO"/>
         <entertainmentProduct name="Kindle" quantity="40" price="80" minimum_stock="10" manufacturer="AMAZON"
-                              priority="BAJA"
-                              category="OCIO"/>
+                              priority="ALTA" category="OCIO"/>
         <entertainmentProduct name="Amazon_Echo" quantity="10" price="100" minimum_stock="3" manufacturer="AMAZON"
-                              priority="ALTA"
-                              category="OCIO"/>
+                              priority="ALTA" category="OCIO"/>
         <houseProduct name="Lamp" quantity="5" price="17" minimum_stock="2" manufacturer="PHILIPS" priority="MEDIA"
                       category="HOGAR" room="SALA_ESTAR"/>
         <houseProduct name="Barbecue" quantity="2" price="80" minimum_stock="1" manufacturer="LG" priority="BAJA"
@@ -26,11 +21,9 @@
         <houseProduct name="Towel" quantity="10" price="9" minimum_stock="5" manufacturer="AMAZON" priority="ALTA"
                       category="HOGAR" room="ASEO"/>
         <houseProduct name="Coffee_Machine" quantity="15" price="55" minimum_stock="10" manufacturer="HUAWEI"
-                      priority="BAJA"
-                      category="HOGAR" room="COCINA"/>
+                      priority="BAJA" category="HOGAR" room="COCINA"/>
         <houseProduct name="Nordic_Filling" quantity="2" price="60" minimum_stock="1" manufacturer="HUAWEI"
-                      priority="BAJA"
-                      category="HOGAR" room="DORMITORIO"/>
+                      priority="BAJA" category="HOGAR" room="DORMITORIO"/>
         <houseProduct name="Table" quantity="5" price="100" minimum_stock="1" manufacturer="DXRACER" priority="MEDIA"
                       category="HOGAR" room="SALA_ESTAR"/>
         <houseProduct name="Curtains" quantity="2" price="40.5" minimum_stock="1" manufacturer="GOOGLE" priority="BAJA"
@@ -38,18 +31,15 @@
         <houseProduct name="Carpet" quantity="3" price="80" minimum_stock="2" manufacturer="GOOGLE" priority="BAJA"
                       category="HOGAR" room="SALA_ESTAR"/>
         <feedingProduct name="Soft_drink" quantity="50" price="1.5" minimum_stock="30" manufacturer="EVGA"
-                        priority="ALTA"
-                        category="ALIMENTACION" expiration="JANUARY"/>
+                        priority="ALTA" category="ALIMENTACION" expiration="JANUARY"/>
         <feedingProduct name="Cookies" quantity="100" price="2" minimum_stock="50" manufacturer="AMAZON"
-                        priority="MEDIA"
-                        category="ALIMENTACION" expiration="FEBRUARY"/>
+                        priority="MEDIA" category="ALIMENTACION" expiration="FEBRUARY"/>
         <feedingProduct name="Rice" quantity="80" price="1.5" minimum_stock="40" manufacturer="AMAZON" priority="ALTA"
                         category="ALIMENTACION" expiration="DECEMBER"/>
         <feedingProduct name="Bread" quantity="50" price="1.2" minimum_stock="25" manufacturer="AMAZON" priority="ALTA"
                         category="ALIMENTACION" expiration="DECEMBER"/>
         <feedingProduct name="Coffee" quantity="150" price="1" minimum_stock="100" manufacturer="AMAZON"
-                        priority="MEDIA"
-                        category="ALIMENTACION" expiration="NOVEMBER"/>
+                        priority="MEDIA" category="ALIMENTACION" expiration="NOVEMBER"/>
         <feedingProduct name="Milk" quantity="100" price="0.6" minimum_stock="50" manufacturer="AMAZON" priority="MEDIA"
                         category="ALIMENTACION" expiration="DECEMBER"/>
     </stock>

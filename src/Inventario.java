@@ -182,9 +182,11 @@ public class Inventario {
 
         if (existeProducto) {                                                   // Comprueba que el producto exista en inventario
             if (producto.entregar(cantidad)) {                                  // Intenta realiza el pedido
-                reponerStock(producto);                                         // Comprueba si es necesario reponer el stock
+                if (producto.enStockMinimo())
+                    reponerStock(producto);                                     // Comprueba si es necesario reponer el stock
             } else {
                 reportarError("ERROR al vender producto. Cantidad errónea o no hay stock suficiente", producto);
+                reponerStock(producto);                                         // Compensa la falta de existencias para cubrir un pedido
                 return false;                                                   // Error en la venta
             }
         } else {
@@ -248,17 +250,15 @@ public class Inventario {
      * @param producto Producto que reabastecer
      */
     private void reponerStock(Producto producto) {
-        if (producto.enStockMinimo()) {
-            switch (producto.getPrioridad()) {
-                case BAJA:
-                    producto.varCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_BAJA);
-                    break;
-                case MEDIA:
-                    producto.varCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_MEDIA);
-                    break;
-                case ALTA:
-                    producto.varCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_ALTA);
-            }
+        switch (producto.getPrioridad()) {
+            case BAJA:
+                producto.varCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_BAJA);
+                break;
+            case MEDIA:
+                producto.varCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_MEDIA);
+                break;
+            case ALTA:
+                producto.varCantidad(Producto.REABASTECIMIENTO_PRIORIDAD_ALTA);
         }
     }
 
@@ -502,20 +502,11 @@ public class Inventario {
      * @param mensaje           Cadena formateada al mostrar al usuario por consola
      * @param objetoRelacionado Objeto relacionado con el mensaje
      */
-    protected void informarUsuario(String mensaje, Object objetoRelacionado) {
+    private void informarUsuario(String mensaje, Object objetoRelacionado) {
         String mensajeProducto = objetoRelacionado == null ? "" : "\nObjeto : \n\t" +
                 objetoRelacionado.toString();
 
-        informarUsuario(mensaje + mensajeProducto);
-    }
-
-    /**
-     * Informa por consola al usuario sobre el resultado de una determinada acción
-     *
-     * @param mensaje Cadena formateada al mostrar al usuario por consola
-     */
-    protected void informarUsuario(String mensaje) {
-        System.out.println(mensaje);
+        mostrarMensaje(mensaje + mensajeProducto);
     }
 
     /**
