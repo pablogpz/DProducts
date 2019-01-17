@@ -3,6 +3,9 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import static org.junit.Assert.*;
 
 /**
@@ -23,6 +26,7 @@ public class ClienteTest {
 
     // Fixture de objetos Cliente de prueba
     private static Cliente cliente;
+    private static Cliente clienteV;
 
     // Instancia Singleton del Inventario
     private static Inventario inventario;
@@ -33,9 +37,13 @@ public class ClienteTest {
     private static Producto productoNoInventario;
     private static Producto productoNoFavorito;
 
+    private static Producto producto0;
+    private static Producto producto00;
+
     @BeforeClass
     public static void setUp() {
         cliente = new ClienteEstandar("Nombre", 18, "Localidad");
+        clienteV = new ClienteVIP("Nombre", 20, "Localidad");
         inventario = Inventario.recuperarInstancia();
         producto = new ProductoOcio("Nombre", 30, 1, 25, FABRICANTES.ACER,
                 PRIORIDAD_PRODUCTO.MEDIA);
@@ -46,9 +54,19 @@ public class ClienteTest {
         productoNoFavorito = new ProductoOcio("Nombre", 30, 1, 25, FABRICANTES.ACER,
                 PRIORIDAD_PRODUCTO.MEDIA);
 
+        producto0 = new ProductoOcio("Nombre", 150, 20, 25, FABRICANTES.ACER,
+                PRIORIDAD_PRODUCTO.MEDIA);
+        producto00 = new ProductoOcio("Nombre", 150, 30, 25, FABRICANTES.ACER,
+                PRIORIDAD_PRODUCTO.MEDIA);
+
+
         inventario.agregarProducto(producto);
         inventario.agregarProducto(producto1);
         inventario.agregarProducto(productoNoFavorito);
+
+        inventario.agregarProducto(producto0);
+        inventario.agregarProducto(producto00);
+
     }
 
     /**
@@ -173,5 +191,102 @@ public class ClienteTest {
     public void aRegistro() {
         System.out.println(cliente.aRegistro());
     }
+
+    /*
+
+    INCORPORACION DE LAS PRUEBAS CORRESPONDIENTES A ComportamientoCompraEstandar y ComportamientoCompraVIP
+
+    */
+
+    /**
+     * Testo del método {@link ComportamientoCompraEstandar#prepararPedido(Cliente)}
+     */
+    @Test
+    public void prepararPedidoEstandar() {
+
+        Set<Producto> pedidoEsperado = new HashSet<>();
+        pedidoEsperado.add(producto00);
+        pedidoEsperado.add(producto0);
+
+        cliente.agregarFavorito(producto0, "favorito1");
+        cliente.agregarFavorito(producto00, "favorito2");
+
+        assertEquals(pedidoEsperado, ((ClienteEstandar) cliente).getComportamientoCompra().prepararPedido(cliente));
+    }
+
+    /**
+     * Testo del método {@link ComportamientoCompraEstandar#calcularPrecio(Set)}
+     */
+    @Test
+    public void calcularPrecioEstandar() {
+
+        cliente.agregarFavorito(producto0, "favorito1");
+        cliente.agregarFavorito(producto00, "favorito2");
+
+        Set<Producto> pedido = (((ClienteEstandar) cliente).getComportamientoCompra().prepararPedido(cliente));
+
+        assertEquals((50 * 20 + 50 * 30) * 1.2f, ((ClienteEstandar) cliente).getComportamientoCompra().calcularPrecio(pedido), 0);
+
+    }
+
+    /**
+     * Testo del método {@link ComportamientoCompraEstandar#realizarPedido(Cliente, Set)}
+     */
+    @Test
+    public void realizarPedidoEstandar() {
+
+        cliente.agregarFavorito(producto0, "favorito1");
+        cliente.agregarFavorito(producto00, "favorito2");
+
+        Set<Producto> pedido = (((ClienteEstandar) cliente).getComportamientoCompra().prepararPedido(cliente));
+
+        assertTrue(((ClienteEstandar) cliente).getComportamientoCompra().realizarPedido(cliente, pedido));
+
+    }
+
+    /**
+     * Testo del método {@link ComportamientoCompraVIP#prepararPedido(Cliente)}
+     */
+    @Test
+    public void prepararPedidoVIP() {
+
+        Set<Producto> pedidoEsperado = new HashSet<>();
+        pedidoEsperado.add(producto00);
+        pedidoEsperado.add(producto0);
+
+        clienteV.agregarFavorito(producto0, "favorito1");
+        clienteV.agregarFavorito(producto00, "favorito2");
+
+        assertEquals(pedidoEsperado, ((ClienteVIP) clienteV).getComportamientoCompra().prepararPedido(clienteV));
+    }
+
+    /**
+     * Testo del método {@link ComportamientoCompraVIP#calcularPrecio(Set)}
+     */
+    @Test
+    public void calcularPrecioVIP() {
+
+        clienteV.agregarFavorito(producto0, "favorito1");
+        clienteV.agregarFavorito(producto00, "favorito2");
+
+        Set<Producto> pedido = (((ClienteVIP) clienteV).getComportamientoCompra().prepararPedido(clienteV));
+
+        assertEquals((20 + 30) * 1.2f, ((ClienteVIP) clienteV).getComportamientoCompra().calcularPrecio(pedido), 0.1);
+    }
+
+    /**
+     * Testo del método {@link ComportamientoCompraVIP#realizarPedido(Cliente, Set)}
+     */
+    @Test
+    public void realizarPedidoVIP() {
+
+        clienteV.agregarFavorito(producto0, "favorito1");
+        clienteV.agregarFavorito(producto00, "favorito2");
+
+        Set<Producto> pedido = (((ClienteVIP) clienteV).getComportamientoCompra().prepararPedido(clienteV));
+
+        assertTrue(((ClienteVIP) clienteV).getComportamientoCompra().realizarPedido(clienteV, pedido));
+    }
+
 
 }
