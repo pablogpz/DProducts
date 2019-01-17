@@ -371,6 +371,20 @@ public abstract class Cliente {
     }
 
     /**
+     * @return Cadena con formato de entrada de registro de cliente
+     */
+    public String aRegistro() {
+        StringBuilder stringBuilder = new StringBuilder("client:");
+
+        stringBuilder.append(" ").append(getIdentificador());
+        stringBuilder.append(" ").append(getNombre());
+        stringBuilder.append(" ").append(getEdad());
+        stringBuilder.append(" ").append(getLocalidad());
+
+        return stringBuilder.toString();
+    }
+
+    /**
      * @return Cadena con el contenido base del cliente formateado (nombre, identificador, edad y localidad)
      */
     @Override

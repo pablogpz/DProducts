@@ -59,11 +59,19 @@ public class ProductoOcio extends ProductoComentable implements Descontable {
 
     /**
      * @return Cadena con el formato de una entrada de registro de producto de ocio. Contiene los datos del producto
-     * base y el descuento asociado
+     * base
      */
     @Override
     public String aRegistro() {
-        StringBuilder stringBuilder = new StringBuilder(super.aRegistro());
+        return super.aRegistro();
+    }
+
+    /**
+     * @return Cadena con el formato de una entrada de registro de producto de alimentación. Contiene los datos
+     * del producto base y el descuento asociado
+     */
+    public String aRegistroDescuento() {
+        StringBuilder stringBuilder = new StringBuilder(aRegistro());
 
         stringBuilder.append(stringBuilder.append(" ").append(getDescuento() * 100).append("%"));
 

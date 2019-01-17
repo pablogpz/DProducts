@@ -118,6 +118,16 @@ public class Comentario {
                 puntuacion >= 1 && puntuacion <= 5;
     }
 
+    public String aRegsitro() {
+        StringBuilder stringBuilder = new StringBuilder("comment:");
+
+        stringBuilder.append(" ").append(getAutor().getNombre());
+        stringBuilder.append(" ").append(getTexto());
+        stringBuilder.append(" ").append(cadenaPuntuacion()).append("\n");
+
+        return stringBuilder.toString();
+    }
+
     /**
      * @return Cadena con el contenido del comentario formateado
      */

@@ -230,9 +230,9 @@ public abstract class Producto {
      * @return Cadena con el formato de una entrada de registro de producto y el contenido base del producto
      */
     public String aRegistro() {
-        StringBuilder stringBuilder = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder("product:");
 
-        stringBuilder.append(getIdentificador());
+        stringBuilder.append(" ").append(getIdentificador());
         stringBuilder.append(" ").append(getIdentificador());
         stringBuilder.append(" ").append(getNombre());
         stringBuilder.append(" ").append(getCantidad());

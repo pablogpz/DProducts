@@ -106,13 +106,25 @@ public class ProductoHogar extends ProductoComentable implements Gustable, Desco
 
     /**
      * @return Cadena con el formato de una entrada de registro de producto de hogar. Contiene los datos del producto
-     * base, la parte de la casa a la que está destinado y el descuento asociado
+     * base y la parte de la casa a la que está destinado
      */
     @Override
     public String aRegistro() {
         StringBuilder stringBuilder = new StringBuilder(super.aRegistro());
 
         stringBuilder.append(" ").append(getParteCasa());
+        stringBuilder.append(stringBuilder.append(" ").append(getDescuento() * 100).append("%"));
+
+        return stringBuilder.toString();
+    }
+
+    /**
+     * @return Cadena con el formato de una entrada de registro de producto de alimentación. Contiene los datos
+     * del producto base, la parte de la casa a la que está destinado y el descuento asociado
+     */
+    public String aRegistroDescuento() {
+        StringBuilder stringBuilder = new StringBuilder(aRegistro());
+
         stringBuilder.append(stringBuilder.append(" ").append(getDescuento() * 100).append("%"));
 
         return stringBuilder.toString();
