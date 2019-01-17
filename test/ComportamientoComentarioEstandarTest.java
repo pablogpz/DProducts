@@ -32,7 +32,8 @@ public class ComportamientoComentarioEstandarTest {
     public void setUp() {
         comentarioEstandar = new ComportamientoComentarioEstandar();
         clienteUno = new ClienteEstandar("Pepe", 57, "Caceres");
-        producto = new ProductoOcio("Auriculares", 140, 29.95f, 70, FABRICANTES.AOC, PRIORIDAD_PRODUCTO.BAJA);
+        producto = new ProductoOcio("Auriculares", 140, 29.95f, 70, FABRICANTES.AOC,
+                PRIORIDAD_PRODUCTO.BAJA);
     }
 
     /**

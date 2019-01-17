@@ -22,16 +22,16 @@ public class ClienteVIPTest {
 
     // Fixture de comportamientos de clientes estandar
     private static ComportamientoCompraVIP compraVIP;
-    private static ComportamientoCompraVIP compraVIP2;
+    private static ComportamientoCompraEstandar compraEstandar;
     private static ComportamientoComentarioVIP comentarioVIP;
-    private static ComportamientoComentarioVIP comentarioVIP2;
+    private static ComportamientoComentarioEstandar comentarioEstandar;
 
     @Before
     public void setUp() {
         compraVIP = new ComportamientoCompraVIP();
-        compraVIP2 = new ComportamientoCompraVIP();
+        compraEstandar = new ComportamientoCompraEstandar();
         comentarioVIP = new ComportamientoComentarioVIP();
-        comentarioVIP2 = new ComportamientoComentarioVIP();
+        comentarioEstandar = new ComportamientoComentarioEstandar();
         clienteUno = new ClienteVIP("Juan", 30, "Caceres");
     }
 
@@ -40,8 +40,7 @@ public class ClienteVIPTest {
      */
     @Test
     public void getComportamientoCompra() {
-        clienteUno.setComportamientoCompra(compraVIP);
-        assertEquals(compraVIP, clienteUno.getComportamientoCompra());
+        assertEquals(compraVIP.getClass(), clienteUno.getComportamientoCompra().getClass());
     }
 
     /**
@@ -49,8 +48,7 @@ public class ClienteVIPTest {
      */
     @Test
     public void getComportamientoComentario() {
-        clienteUno.setComportamientoComentario(comentarioVIP);
-        assertEquals(comentarioVIP, clienteUno.getComportamientoComentario());
+        assertEquals(comentarioVIP.getClass(), clienteUno.getComportamientoComentario().getClass());
     }
 
     /**
@@ -58,8 +56,8 @@ public class ClienteVIPTest {
      */
     @Test
     public void setComportamientoCompra() {
-        clienteUno.setComportamientoCompra(compraVIP2);
-        assertEquals(compraVIP2, clienteUno.getComportamientoCompra());
+        clienteUno.setComportamientoCompra(compraEstandar);
+        assertEquals(compraEstandar, clienteUno.getComportamientoCompra());
     }
 
     /**
@@ -67,8 +65,8 @@ public class ClienteVIPTest {
      */
     @Test
     public void setComportamientoComentario() {
-        clienteUno.setComportamientoComentario(comentarioVIP2);
-        assertEquals(comentarioVIP2, clienteUno.getComportamientoComentario());
+        clienteUno.setComportamientoComentario(comentarioEstandar);
+        assertEquals(comentarioEstandar, clienteUno.getComportamientoComentario());
     }
 
 

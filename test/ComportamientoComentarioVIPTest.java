@@ -31,7 +31,8 @@ public class ComportamientoComentarioVIPTest {
     public void setUp() {
         comentarioVIP = new ComportamientoComentarioVIP();
         clienteUno = new ClienteVIP("Rafa", 62, "Caceres");
-        producto = new ProductoOcio("Auriculares", 140, 29.95f, 70, FABRICANTES.AOC, PRIORIDAD_PRODUCTO.BAJA);
+        producto = new ProductoOcio("Auriculares", 140, 29.95f, 70, FABRICANTES.AOC,
+                PRIORIDAD_PRODUCTO.BAJA);
     }
 
     /**

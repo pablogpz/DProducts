@@ -36,6 +36,7 @@ public class ComportamientoComentarioVIP implements ComportamientoComentario {
 
             // Intenta publicar el comentario, si el producto es comentable
             esValido = ((ProductoComentable) producto).comentar(comentario);
+            System.out.println("Se ha publicado un comentario\n\t" + comentario);
 
             if (esValido) {                                         // Comprueba que se haya podido publicar
                 // Comprueba si el producto además es gustable
@@ -46,7 +47,6 @@ public class ComportamientoComentarioVIP implements ComportamientoComentario {
                 else if (puntuacion >= 4)
                     productoGustable.like();
 
-                System.out.println("Se ha publicado un comentario\n\t" + comentario);
             }
         } catch (IllegalArgumentException e) {
             System.out.println("El comentario está mal formado");
