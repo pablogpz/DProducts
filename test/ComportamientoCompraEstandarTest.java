@@ -1,7 +1,11 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashSet;
 import java.util.Set;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * CLASE DE TESTEO de la clase {@link ComportamientoCompraEstandar}.
@@ -37,6 +41,7 @@ public class ComportamientoCompraEstandarTest {
 
         clienteUno.agregarFavorito(producto1, "auri");
         clienteUno.agregarFavorito(producto2, "cami");
+
     }
 
     /**
@@ -45,6 +50,12 @@ public class ComportamientoCompraEstandarTest {
     @Test
     public void prepararPedido() {
 
+        Set<Producto> pedidoEsperado = new HashSet<>();
+        pedidoEsperado.add(producto1);
+        pedidoEsperado.add(producto2);
+
+
+        assertEquals(pedidoEsperado, clienteUno.getComportamientoCompra().prepararPedido(clienteUno));
     }
 
     /**
@@ -52,7 +63,8 @@ public class ComportamientoCompraEstandarTest {
      */
     @Test
     public void calcularPrecio() {
-
+        Set<Producto> pedido = clienteUno.getComportamientoCompra().prepararPedido(clienteUno);
+        assertEquals(2995, clienteUno.getComportamientoCompra().calcularPrecio(pedido), 0);
     }
 
     /**
@@ -60,7 +72,8 @@ public class ComportamientoCompraEstandarTest {
      */
     @Test
     public void realizarPedido() {
-
+        Set<Producto> pedido = clienteUno.getComportamientoCompra().prepararPedido(clienteUno);
+        assertTrue(clienteUno.getComportamientoCompra().realizarPedido(clienteUno, pedido));
     }
 
 }
