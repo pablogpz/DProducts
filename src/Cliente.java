@@ -329,7 +329,7 @@ public abstract class Cliente {
      * @return Cadena con formato de entrada de registro de cliente
      */
     public String aRegistro() {
-        StringBuilder stringBuilder = new StringBuilder("client:");
+        StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append(" ").append(getIdentificador());
         stringBuilder.append(" ").append(getNombre());

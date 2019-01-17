@@ -16,14 +16,17 @@ public class Simulacion {
 
     private static final String RUTA_FICHERO_ENTRADA = "init.xml";          // Fichero XML de datos de entrada
     private static final int NUMERO_TURNOS = 10;                            // Número de turnos de la simulación
+    private static final String RUTA_REGISTRO = "registro.log";
 
     private List<Cliente> clientesTurnos;                                   // Colección de clientes empleados en la simulacion
+    private Registro registro;                                              // Manejador del fichero de registro
 
     /**
      * Constructor por defecto de la clase. Inicializa las estructuras de datos auxiliares
      */
     public Simulacion() {
         clientesTurnos = new ArrayList<>();
+        registro = new Registro(RUTA_REGISTRO);
     }
 
     /**
@@ -75,10 +78,21 @@ public class Simulacion {
      */
     private static void ejecutarTurnos(Simulacion simulacion) {
         Set<Producto> prodRepuestos;                                    // Productos repuestos en cada turno
-        for (Cliente turno : simulacion.clientesTurnos) {
+        Cliente cliente = null;
+        for (int i = 0; i < simulacion.clientesTurnos.size(); i++) {
             prodRepuestos = new HashSet<>();                            // Vacía los productos previos
-            turno.realizarPedido(prodRepuestos);
+            cliente = simulacion.clientesTurnos.get(i);                 // Cliente actual
+
+            simulacion.registro.inicioTurno(i);                         // Inicio del turno
+            cliente.realizarPedido(prodRepuestos);                      // Ejecuta cada turno
+            simulacion.registro.registrarCliente(cliente);              // Registra cada cliente
+            simulacion.registro.registrarPedido(cliente, prodRepuestos);
         }
+        // Simulación finalizada
+        simulacion.registro.registrarProductosVendidos(cliente.getTienda());
+        simulacion.registro.registrarProductoMasVendido(cliente.getTienda());
+        simulacion.registro.registrarProductoMasComentado(cliente.getTienda());
+        simulacion.registro.registrarClienteMasGastos(cliente.getTienda());
     }
 
 }

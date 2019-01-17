@@ -14,6 +14,8 @@ import java.util.Set;
 
 public class ComportamientoCompraVIP implements ComportamientoCompra {
 
+    public static final int UNIDADES_PEDIDO = 1;               // Unidades a pedir de cada producto
+
     /**
      * Constructor por defecto de la clase
      */

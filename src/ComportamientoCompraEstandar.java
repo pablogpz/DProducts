@@ -18,7 +18,7 @@ import java.util.TreeSet;
 
 public class ComportamientoCompraEstandar implements ComportamientoCompra {
 
-    private static final int UNIDADES_PEDIDO = 50;              // Unidades a pedir de cada producto
+    public static final int UNIDADES_PEDIDO = 50;               // Unidades a pedir de cada producto
     private static final int NUMERO_PRODUCTOS = 2;              // Número de productos a incluir en el pedido
 
     /**
