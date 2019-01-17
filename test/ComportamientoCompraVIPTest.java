@@ -14,21 +14,23 @@ import java.util.Set;
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
  */
+
 public class ComportamientoCompraVIPTest {
 
     // Fixture de clientes estandar de prueba
     private static ClienteVIP clienteUno;
+
     // Fixture de productos de prueba
     private static Producto producto1;
     private static Producto producto2;
+
     // Fixture de comportamientos de clientes estandar
-    private static ComportamientoCompraVIP compraVIP = new ComportamientoCompraVIP();
+    private static ComportamientoCompraVIP compraVIP;
 
     @Before
     public void setUp() {
-
+        compraVIP = new ComportamientoCompraVIP();
         clienteUno = new ClienteVIP("Pepe", 57, "Caceres");
-        clienteUno.setComportamientoCompra(compraVIP);
 
         producto1 = new ProductoOcio("Auriculares", 140, 29.95f, 70, FABRICANTES.AOC, PRIORIDAD_PRODUCTO.BAJA);
         producto2 = new ProductoOcio("Camiseta", 140, 29.95f, 70, FABRICANTES.AOC, PRIORIDAD_PRODUCTO.BAJA);

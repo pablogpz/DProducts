@@ -13,8 +13,8 @@
 
 public class ComportamientoComentarioVIP implements ComportamientoComentario {
 
-    private static final String CUERPO_COMENTARIO = "I really like this product";  // Texto por defecto
-    private static final int PUNTUACION = 4;                                       // Puntuación por defecto
+    public static final String CUERPO_COMENTARIO = "I really like this product";  // Texto por defecto
+    public static final int PUNTUACION = 4;                                       // Puntuación por defecto
 
     /**
      * Constructor por defecto de la clase

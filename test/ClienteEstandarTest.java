@@ -19,14 +19,19 @@ public class ClienteEstandarTest {
 
     // Fixture de clientes estandar de prueba
     private static ClienteEstandar clienteUno;
+
     // Fixture de comportamientos de clientes estandar
-    private static ComportamientoCompraEstandar compraEstandar = new ComportamientoCompraEstandar();
-    private static ComportamientoCompraEstandar compraEstandar2 = new ComportamientoCompraEstandar();
-    private static ComportamientoComentarioEstandar comentarioEstandar = new ComportamientoComentarioEstandar();
-    private static ComportamientoComentarioEstandar comentarioEstandar2 = new ComportamientoComentarioEstandar();
+    private static ComportamientoCompraEstandar compraEstandar;
+    private static ComportamientoCompraEstandar compraEstandar2;
+    private static ComportamientoComentarioEstandar comentarioEstandar;
+    private static ComportamientoComentarioEstandar comentarioEstandar2;
 
     @Before
     public void setUp() {
+        compraEstandar = new ComportamientoCompraEstandar();
+        compraEstandar2 = new ComportamientoCompraEstandar();
+        comentarioEstandar = new ComportamientoComentarioEstandar();
+        comentarioEstandar2 = new ComportamientoComentarioEstandar();
         clienteUno = new ClienteEstandar("Pedro", 34, "Caceres");
     }
 

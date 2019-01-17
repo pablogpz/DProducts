@@ -19,14 +19,19 @@ public class ClienteVIPTest {
 
     // Fixture de clientes estandar de prueba
     private static ClienteVIP clienteUno;
+
     // Fixture de comportamientos de clientes estandar
-    private static ComportamientoCompraVIP compraVIP = new ComportamientoCompraVIP();
-    private static ComportamientoCompraVIP compraVIP2 = new ComportamientoCompraVIP();
-    private static ComportamientoComentarioVIP comentarioVIP = new ComportamientoComentarioVIP();
-    private static ComportamientoComentarioVIP comentarioVIP2 = new ComportamientoComentarioVIP();
+    private static ComportamientoCompraVIP compraVIP;
+    private static ComportamientoCompraVIP compraVIP2;
+    private static ComportamientoComentarioVIP comentarioVIP;
+    private static ComportamientoComentarioVIP comentarioVIP2;
 
     @Before
     public void setUp() {
+        compraVIP = new ComportamientoCompraVIP();
+        compraVIP2 = new ComportamientoCompraVIP();
+        comentarioVIP = new ComportamientoComentarioVIP();
+        comentarioVIP2 = new ComportamientoComentarioVIP();
         clienteUno = new ClienteVIP("Juan", 30, "Caceres");
     }
 

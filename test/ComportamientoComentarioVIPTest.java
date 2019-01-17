@@ -15,19 +15,22 @@ import static org.junit.Assert.assertTrue;
  * Entrega : EC1
  * Curso : 2º GIIIS (Grupo A)
  */
+
 public class ComportamientoComentarioVIPTest {
 
     // Fixture de clientes estandar de prueba
     private static ClienteVIP clienteUno;
+
     // Fixture de productos de prueba
     private static Producto producto;
+
     // Fixture de comportamientos de clientes estandar
-    private static ComportamientoComentarioVIP comentarioVIP = new ComportamientoComentarioVIP();
+    private static ComportamientoComentarioVIP comentarioVIP;
 
     @Before
     public void setUp() {
+        comentarioVIP = new ComportamientoComentarioVIP();
         clienteUno = new ClienteVIP("Rafa", 62, "Caceres");
-        clienteUno.setComportamientoComentario(comentarioVIP);
         producto = new ProductoOcio("Auriculares", 140, 29.95f, 70, FABRICANTES.AOC, PRIORIDAD_PRODUCTO.BAJA);
     }
 
@@ -44,7 +47,7 @@ public class ComportamientoComentarioVIPTest {
      */
     @Test
     public void calcularPuntuacion() {
-        assertEquals(clienteUno.getComportamientoComentario().calcularPuntuacion(producto), 4);
+        assertEquals(ComportamientoComentarioVIP.PUNTUACION, clienteUno.getComportamientoComentario().calcularPuntuacion(producto));
     }
 
     /**
@@ -52,7 +55,7 @@ public class ComportamientoComentarioVIPTest {
      */
     @Test
     public void obtenerTexto() {
-        assertEquals(clienteUno.getComportamientoComentario().obtenerTexto(producto), "I really like this product");
+        assertEquals(clienteUno.getComportamientoComentario().obtenerTexto(producto), ComportamientoComentarioVIP.CUERPO_COMENTARIO);
     }
 
 }
