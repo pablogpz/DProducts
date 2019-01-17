@@ -10,19 +10,18 @@ public class ClienteVIP extends Cliente {
      */
     public ClienteVIP(String nombre, int edad, String localidad) {
         super(nombre, edad, localidad);
-        // TODO - implement ClienteVIP.ClienteVIP
+        comportamientoCompra = new ComportamientoCompraVIP();
+        comportamientoComentario = new ComportamientoComentarioVIP();
     }
 
     @Override
     public boolean realizarPedido() {
-        // TODO - implement
-        return false;
+        return comportamientoCompra.realizarPedido(this, comportamientoCompra.prepararPedido(this));
     }
 
     @Override
     public boolean comentarProducto(String alias) {
-        // TODO - implement
-        return false;
+        return comportamientoComentario.comentar(this.getProductosFavoritos().get(alias), this);
     }
 
 }

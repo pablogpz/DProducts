@@ -8,21 +8,21 @@ public class ClienteEstandar extends Cliente {
      * @param edad
      * @param localidad
      */
+
     public ClienteEstandar(String nombre, int edad, String localidad) {
         super(nombre, edad, localidad);
-        // TODO - implement ClienteEstandar.ClienteEstandar
+        comportamientoCompra = new ComportamientoCompraEstandar();
+        comportamientoComentario = new ComportamientoComentarioEstandar();
     }
 
     @Override
     public boolean realizarPedido() {
-        // TODO - implement
-        return false;
+        return comportamientoCompra.realizarPedido(this, comportamientoCompra.prepararPedido(this));
     }
 
     @Override
     public boolean comentarProducto(String alias) {
-        // TODO - implement
-        return false;
+        return comportamientoComentario.comentar(this.getProductosFavoritos().get(alias), this);
     }
 
 }

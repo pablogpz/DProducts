@@ -1,9 +1,28 @@
+import java.util.Set;
+
 public interface ComportamientoCompra {
 
-    boolean realizarPedido();
+    /**
+     * Realiza el pedido solicitado por el cliente.
+     *
+     * @return
+     */
+    boolean realizarPedido(Cliente cliente, Set<Producto> pedido);
 
-    float calcularPrecio();
+    /**
+     * Devuelve el importe del pedido a realizar, considerando la variacion de descuentos.
+     *
+     * @param cliente El cliente que realiza el pedido
+     * @return Precio del pedido
+     */
+    float calcularPrecio(Cliente cliente, Set<Producto> pedido);
 
-    boolean prepararPedido();
+    /**
+     * Devuelve el conjunto de productos que se seleccionan para el pedido.
+     *
+     * @param cliente El cliente que realiza el pedido
+     * @return El conjunto de productos del pedido
+     */
+    Set<Producto> prepararPedido(Cliente cliente);
 
 }
