@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Clase que implementa el proceso de simulación del caso de uso del proyecto. Realiza 10 turnos de pedidos tras la
- * inicialización del inventario y documenta el proceso mediante el fichero de registro 'registro.log'
+ * inicialización del inventario y documenta el proceso mediante el fichero de registro
  *
  * @author : Juan Pablo García Plaza Pérez
  * @author José Ángel Concha Carrasco
@@ -36,6 +36,7 @@ public class Simulacion {
 
         try {
             simulacion.inicializarSimulacion();
+
         } catch (ExcepcionCargaEntrada excepcionCargaEntrada) {
             System.out.println(excepcionCargaEntrada.getMensajeError());
         }

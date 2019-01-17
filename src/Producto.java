@@ -227,6 +227,22 @@ public abstract class Producto {
     }
 
     /**
+     * @return Cadena con el formato de una entrada de registro de producto y el contenido base del producto
+     */
+    public String aRegistro() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        stringBuilder.append(getIdentificador());
+        stringBuilder.append(" ").append(getIdentificador());
+        stringBuilder.append(" ").append(getNombre());
+        stringBuilder.append(" ").append(getCantidad());
+        stringBuilder.append(" ").append(getStockMinimo());
+        stringBuilder.append(" ").append(getPrecio());
+
+        return stringBuilder.toString();
+    }
+
+    /**
      * @return Cadena formateada de información del producto
      */
     @Override
