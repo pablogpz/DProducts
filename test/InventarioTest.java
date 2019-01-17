@@ -88,6 +88,8 @@ public class InventarioTest {
         coleccionProductos.add(producto);
 
         assertNotNull(inventario.venderColeccionProductos(coleccionProductos, cliente));    // Hay un producto
+        inventario.registrarGastoCliente(cliente, producto.getPrecio() * 1);
+
     }
 
     /**
@@ -97,8 +99,10 @@ public class InventarioTest {
     @Test
     public void bVenderProducto() {
         assertEquals(0, inventario.venderProducto(producto, cliente, 5));
+        inventario.registrarGastoCliente(cliente, producto.getPrecio() * 5);
         assertEquals(25, producto.getCantidad());
         assertEquals(1, inventario.venderProducto(producto, cliente, 1));
+        inventario.registrarGastoCliente(cliente, producto.getPrecio() * 1);
         assertEquals(99, producto.getCantidad());                                   // Se ha repuesto el producto
         assertEquals(-1, inventario.venderProducto(productoNoInventario, cliente, 1));
         assertEquals(-1, inventario.venderProducto(null, cliente, 1));
@@ -106,12 +110,12 @@ public class InventarioTest {
 
     /**
      * Testeo del método {@link Inventario#recuperarClienteMasGastos()}. Comprueba que se devuelva el cliente que más
-     * gastos ha realizado en pedidos (gasto total de 7.0 más 1.4 de IVA por ventas de productos de ocio)
+     * gastos ha realizado en pedidos (gasto total de 7.0 sin contar descuentos)
      */
     @Test
     public void dRecuperarClienteMasGastos() {
         assertEquals(cliente, inventario.recuperarClienteMasGastos().get(Inventario.CLAVE_CLIENTE_MAS_GASTOS_CLIENTE));
-        assertEquals(8.4, (float) inventario.recuperarClienteMasGastos().get(Inventario.CLAVE_CLIENTE_MAS_GASTOS_GASTO), 0.1);
+        assertEquals(7.0, (float) inventario.recuperarClienteMasGastos().get(Inventario.CLAVE_CLIENTE_MAS_GASTOS_GASTO), 0.1);
     }
 
     /**

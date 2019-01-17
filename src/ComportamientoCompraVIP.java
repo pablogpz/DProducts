@@ -25,7 +25,12 @@ public class ComportamientoCompraVIP implements ComportamientoCompra {
      */
     @Override
     public boolean realizarPedido(Cliente cliente, Set<Producto> prodRepuestos) {
-        prodRepuestos = cliente.getTienda().venderColeccionProductos(prepararPedido(cliente), cliente);
+        Set<Producto> pedido = prepararPedido(cliente);         // Pedido
+
+        prodRepuestos = cliente.getTienda().venderColeccionProductos(pedido, cliente);
+        if (prodRepuestos != null)
+            cliente.getTienda().registrarGastoCliente(cliente, calcularPrecio(pedido));
+
         return !(prodRepuestos == null);
     }
 

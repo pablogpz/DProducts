@@ -46,6 +46,10 @@ public class ComportamientoCompraEstandar implements ComportamientoCompra {
                 prodRepuestos.add(producto);
         }
 
+        if (!ocurrioError)                                      // Comprueba que se pudiera despachar el pedido
+            // Registra el gasto del cliente por la compra
+            cliente.getTienda().registrarGastoCliente(cliente, calcularPrecio(pedido));
+
         return !ocurrioError;
     }
 

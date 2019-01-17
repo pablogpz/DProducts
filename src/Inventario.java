@@ -164,9 +164,9 @@ public class Inventario {
     /**
      * Realiza el pedido de un número cualquiera de unidades de un producto
      *
-     * @param cantidad Número de unidades que debe entregar
-     * @param cliente  Cliente que realiza el pedido
      * @param producto Producto del que realizar el pedido
+     * @param cliente  Cliente que realiza el pedido
+     * @param cantidad Número de unidades que debe entregar
      * @return Entero indicando el estado del pedido. -1 significa que el producto no fue encontrado, 1 que hubo que reponer
      * el stock del producto, y 0 que el pedido se despachó sin incidencias
      */
@@ -201,7 +201,6 @@ public class Inventario {
 
         // ESTADISTICAS
         registrarVentaProducto(producto, cantidad);                             // Registra la venta del producto
-        registrarGastoCliente(cliente, producto, cantidad);                     // Registra el gasto del cliente
 
         return estado;                                                          // Venta completada
     }
@@ -359,18 +358,11 @@ public class Inventario {
      * (qué cliente ha gastado más dinero)
      *
      * @param cliente  Cliente que realiza el pedido
-     * @param producto Producto del pedido
-     * @param cantidad Cantidad del producto pedido
+     * @param importe Importe total del gasto a registrar
      */
-    private void registrarGastoCliente(Cliente cliente, Producto producto, int cantidad) {
+    public void registrarGastoCliente(Cliente cliente, float importe) {
         // Intenta recuperar el dato estadístico equivalente
         DatoEstadistico datoEstadistico = recuperarDatoEstadisticoCliente(cliente);
-        float importe;
-
-        if (producto instanceof Descontable)                                    // Determina si hay que aplicar descuento
-            importe = ((Descontable) producto).calcularPrecioDescontado() * cantidad;
-        else
-            importe = producto.getPrecio() * cantidad;
 
         if (datoEstadistico != null) {                                          // Comprueba si existía ya o hay que crearlo
             // Existe. Se actualiza el gasto total
