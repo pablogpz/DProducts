@@ -7,7 +7,7 @@ public interface ComportamientoCompra {
      *
      * @return
      */
-    boolean realizarPedido();
+    boolean realizarPedido(Cliente cliente, Set<Producto> pedido);
 
     /**
      * Devuelve el importe del pedido a realizar, considerando la variacion de descuentos.
@@ -15,7 +15,7 @@ public interface ComportamientoCompra {
      * @param cliente El cliente que realiza el pedido
      * @return Precio del pedido
      */
-    float calcularPrecio(Cliente cliente);
+    float calcularPrecio(Cliente cliente, Set<Producto> pedido);
 
     /**
      * Devuelve el conjunto de productos que se seleccionan para el pedido.
