@@ -119,7 +119,7 @@ public class Registro {
         if (prodRepuestos.size() > 0) {                         // Comprueba si se han repuesto productos
             registrarDato("The order is done and these products need to be replenished\n", "");
             for (Producto repuesto : prodRepuestos)
-                registrarDato(repuesto.aRegistro() + "\n", "");
+                registrarDato(repuesto.aRegistro() + "\n", "product: ");
         } else {
             registrarDato("The order is done\n", "");
         }

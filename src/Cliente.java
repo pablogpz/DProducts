@@ -332,7 +332,7 @@ public abstract class Cliente {
     public String aRegistro() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(" ").append(getIdentificador());
+        stringBuilder.append(getIdentificador());
         stringBuilder.append(" ").append(getNombre());
         stringBuilder.append(" ").append(getEdad());
         stringBuilder.append(" ").append(getLocalidad());

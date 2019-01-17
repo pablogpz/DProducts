@@ -232,7 +232,7 @@ public abstract class Producto {
     public String aRegistro() {
         StringBuilder stringBuilder = new StringBuilder();
 
-        stringBuilder.append(" ").append(getIdentificador());
+        stringBuilder.append(getIdentificador());
         stringBuilder.append(" ").append(getNombre());
         stringBuilder.append(" ").append(getCantidad()).append(" uds.");
         stringBuilder.append(" ").append(getStockMinimo()).append(" uds.");
