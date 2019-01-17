@@ -109,6 +109,7 @@ public class ProductoAlimentacion extends Producto implements Gustable, Desconta
      * @return Cadena con el formato de una entrada de registro de producto de alimentación. Contiene los datos
      * del producto base y la fecha de caducidad
      */
+    @Override
     public String aRegistro() {
         StringBuilder stringBuilder = new StringBuilder(super.aRegistro());
 
