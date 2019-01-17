@@ -95,6 +95,15 @@ public abstract class Cliente {
     }
 
     /**
+     * Método accesor del atributo {@link Cliente#productosFavoritos}
+     *
+     * @return
+     */
+    protected Map<String, Producto> getProductosFavoritos() {
+        return productosFavoritos;
+    }
+
+    /**
      * Método mutador del atributo {@link Cliente#nombre}
      *
      * @param nombre Nuevo nombre del cliente. Debe ser válido
