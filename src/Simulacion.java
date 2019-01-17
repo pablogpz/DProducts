@@ -93,6 +93,19 @@ public class Simulacion {
         simulacion.registro.registrarProductoMasVendido(cliente.getTienda());
         simulacion.registro.registrarProductoMasComentado(cliente.getTienda());
         simulacion.registro.registrarClienteMasGastos(cliente.getTienda());
+
+        if (!escribirRegistro(simulacion))                              // Intenta escribir el fichero de registro
+            System.out.println("Algo fue mal al escribir el fichero de registro...");
+    }
+
+    /**
+     * Intenta crear el fichero de registro con los parámetros con los que se creó la instancia
+     *
+     * @param simulacion Simulación de la que generar el fichero de registro
+     * @return Booleano indicando si se pudo crear el fichero de registro
+     */
+    private static boolean escribirRegistro(Simulacion simulacion) {
+        return simulacion.registro.crearFicheroRegistro();
     }
 
 }

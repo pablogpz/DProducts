@@ -1,3 +1,5 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
@@ -211,6 +213,21 @@ public class Registro {
      */
     private void registrarDato(String dato, String prefijo) {
         getContenido().append(prefijo).append(dato);
+    }
+
+    /**
+     * Crea el archivo de registro en la ubicación indicada
+     *
+     * @return Booleano indicando si se pudo escribir el fichero de registro. Es falso si ocurre algún problema
+     */
+    public boolean crearFicheroRegistro() {
+        try (FileWriter fileWriter = new FileWriter(getRutaRegistro())) {
+            fileWriter.write(getContenido().toString());
+        } catch (IOException e) {                                   // Ocurrió algún error al abrir el archivo
+            return false;
+        }
+
+        return true;                                                // El archivo se escribió correctamente
     }
 
 }
