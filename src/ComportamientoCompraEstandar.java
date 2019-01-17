@@ -12,7 +12,7 @@ import java.util.TreeSet;
  * @author : Juan Pablo García Plaza Pérez
  * @author José Ángel Concha Carrasco
  * grupo : Wild True
- * Entrega : EC1
+ * Entrega : EC2
  * Curso : 2º GIIIS (Grupo A)
  */
 

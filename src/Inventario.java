@@ -12,7 +12,7 @@ import java.util.*;
  * @author : Juan Pablo García Plaza Pérez
  * @author José Ángel Concha Carrasco
  * grupo : Wild True
- * Entrega : EC1
+ * Entrega : EC2
  * Curso : 2º GIIIS (Grupo A)
  */
 
@@ -529,25 +529,6 @@ public class Inventario {
      */
     private void mostrarMensaje(String texto) {
         System.out.println(texto);
-    }
-
-    /**
-     * @return Lista formateada con todos los detalles de cada producto del inventario
-     */
-    @Override
-    public String toString() {
-        // TODO - Revisar todo lo que debe mostrar
-        String decorador = "***************************************************************";
-        StringBuilder stringBuilder = new StringBuilder(decorador);
-
-        stringBuilder.append("INVENTARIO");
-        stringBuilder.append(decorador).append("\n");
-        for (Producto producto : stock.values()) {                              // Almacena los detalles de cada producto
-            stringBuilder.append(producto.toString());
-            stringBuilder.append(decorador).append("\n");
-        }
-
-        return stringBuilder.toString() + "\n";
     }
 
 }

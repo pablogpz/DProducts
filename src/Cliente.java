@@ -15,7 +15,7 @@ import java.util.Map;
  * @author : Juan Pablo García Plaza Pérez
  * @author José Ángel Concha Carrasco
  * grupo : Wild True
- * Entrega : EC1
+ * Entrega : EC2
  * Curso : 2º GIIIS (Grupo A)
  */
 
@@ -153,7 +153,6 @@ public abstract class Cliente {
      * @return Booleano indicando si se ha realizado correctamente la operación.
      */
     public boolean agregarFavorito(Producto producto, String alias) {
-        // TODO - mantener orden de la colección de favoritos
         boolean fueAgregado = false;
 
         // Comprueba si el producto ya estaba agregado a favoritos y no sea el producto "nulo" (válido en mapas)
@@ -211,10 +210,10 @@ public abstract class Cliente {
      * Elimina un producto de la colección de favoritos
      *
      * @param alias Alias que se le puso al producto favorito cuando se agregó a la colección
-     * @return Booleano si se ha podido eliminar el producto o no. Devuelve false si el producto no existe en la colección de favoritos
+     * @return Booleano si se ha podido eliminar el producto o no. Devuelve false si el producto no existe en la colección
+     * de favoritos
      */
     public boolean eliminarFavorito(String alias) {
-        // TODO - Mantener el orden de la colección de favoritos
         if (existeAliasFavorito(alias)) {
             productosFavoritos.remove(alias);
             informarUsuario("El producto con alias \"" + alias +
