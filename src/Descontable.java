@@ -11,6 +11,8 @@ public interface Descontable {
 
     /**
      * Calcula el valor del atributo precio una vez aplicado el descuento correspondiente
+     *
+     * @return Precio aplicado el descuento
      */
     float calcularPrecioDescontado();
 

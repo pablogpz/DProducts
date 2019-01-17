@@ -31,6 +31,8 @@ public class Simulacion {
 
     /**
      * PUNTO DE ENTRADA. Método principal del programa. Encargado de manejar el flujo de control del programa
+     *
+     * @param args Ignorados
      */
     public static void main(String[] args) {
         Simulacion simulacion = new Simulacion();                           // Instancia de la simulación

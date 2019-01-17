@@ -121,6 +121,7 @@ public abstract class Cliente {
      * Método mutador del atributo {@link Cliente#edad}
      *
      * @param edad Nueva edad del cliente. Debe ser válida
+     * @return Booleanoo indicando si se aceptó el cambio. Es falso si se indica una edad inválida
      */
     protected boolean setEdad(int edad) {
         boolean esCorrecto = esCorrecto(getNombre(), edad, getLocalidad());

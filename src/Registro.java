@@ -21,7 +21,9 @@ public class Registro {
     private String rutaRegistro;                                            // Ruta relativa del fichero de registro
 
     /**
-     * Constructor por defecto. Inicializa el contenido del fichero de registro
+     * Constructor parametrizado. Inicializa el contenido del fichero de registro
+     *
+     * @param rutaRegistro Ruta relativa del fichero de registro
      */
     public Registro(String rutaRegistro) {
         contenido = new StringBuilder();
