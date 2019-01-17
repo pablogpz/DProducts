@@ -1,9 +1,22 @@
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
+
+/**
+ * Clase que implementa el comportamiento de compra de los clientes estándar. La compra consiste en realizar el pedido
+ * de todos los productos favoritos. De cada producto se realiza un pedido de 1 unidad
+ *
+ * @author : Juan Pablo García Plaza Pérez
+ * @author José Ángel Concha Carrasco
+ * grupo : Wild True
+ * Entrega : EC1
+ * Curso : 2º GIIIS (Grupo A)
+ */
 
 public class ComportamientoCompraVIP implements ComportamientoCompra {
 
+    /**
+     * Constructor por defecto de la clase
+     */
     public ComportamientoCompraVIP() {
     }
 
@@ -11,17 +24,8 @@ public class ComportamientoCompraVIP implements ComportamientoCompra {
      * {@inheritDoc}
      */
     @Override
-    public boolean realizarPedido(Cliente cliente, Set<Producto> pedido) {
-
-        boolean realizado = true;
-        Iterator<Producto> it = pedido.iterator();
-
-        while (it.hasNext() && realizado) {
-            Producto producto = it.next();
-            realizado = cliente.getTienda().venderColeccionProductos(pedido, cliente);
-        }
-
-        return realizado;
+    public boolean realizarPedido(Cliente cliente) {
+        return cliente.getTienda().venderColeccionProductos(prepararPedido(cliente), cliente);
     }
 
     /**
@@ -29,12 +33,13 @@ public class ComportamientoCompraVIP implements ComportamientoCompra {
      */
     @Override
     public float calcularPrecio(Cliente cliente, Set<Producto> pedido) {
+        float precio = 0;                                       // Acumulador del importe total (1 ud. de cada producto)
 
-        float precio = 0;
-        Iterator<Producto> it = pedido.iterator();
-        while (it.hasNext()) {
-            Producto producto = it.next();
-            precio = precio + ((Descontable) producto).calcularPrecioDescontado();
+        for (Producto producto : pedido) {
+            if (producto instanceof Descontable)                // Comprueba si hay que aplicar descuento
+                precio += ((Descontable) producto).calcularPrecioDescontado();
+            else
+                precio += producto.getPrecio();
         }
 
         return precio;
@@ -45,16 +50,6 @@ public class ComportamientoCompraVIP implements ComportamientoCompra {
      */
     @Override
     public Set<Producto> prepararPedido(Cliente cliente) {
-
-        Set<Producto> todos = new HashSet<>(cliente.getProductosFavoritos().values());
-        Set<Producto> pedido = new HashSet<>();
-
-        Iterator it = todos.iterator();
-        while (it.hasNext()) {
-            Producto producto = (Producto) it.next();
-            pedido.add(producto);
-        }
-
-        return pedido;
+        return new HashSet<>(cliente.getProductosFavoritos());
     }
 }

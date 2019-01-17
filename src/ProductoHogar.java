@@ -149,7 +149,8 @@ public class ProductoHogar extends ProductoComentable implements Gustable, Desco
      */
     public boolean equals(Object obj) {
         if (this == obj) return true;                                       // Comprueba si es la misma instancia
-        if (!(obj instanceof ProductoHogar)) return false;                  // Si pertenecen a la misma clase no procede
+        if (!(obj instanceof ProductoHogar))
+            return false;                  // Si no pertenecen a la misma clase no procede
 
         ProductoHogar objCasteado = (ProductoHogar) obj;                    // Casteado del objeto
 

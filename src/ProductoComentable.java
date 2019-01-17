@@ -126,7 +126,8 @@ public abstract class ProductoComentable extends Producto {
      */
     public boolean equals(Object obj) {
         if (this == obj) return true;                                       // Comprueba si es la misma instancia
-        if (!(obj instanceof ProductoComentable)) return false;             // Si pertenecen a la misma clase no procede
+        if (!(obj instanceof ProductoComentable))
+            return false;             // si no pertenecen a la misma clase no procede
 
         ProductoComentable objCasteado = (ProductoComentable) obj;          // Casteado del objeto
 

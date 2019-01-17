@@ -97,7 +97,8 @@ public class ProductoOcio extends ProductoComentable implements Descontable {
      */
     public boolean equals(Object obj) {
         if (this == obj) return true;                                       // Comprueba si es la misma instancia
-        if (!(obj instanceof ProductoHogar)) return false;                  // Si pertenecen a la misma clase no procede
+        if (!(obj instanceof ProductoOcio))
+            return false;                   // Si no pertenecen a la misma clase no procede
 
         ProductoOcio objCasteado = (ProductoOcio) obj;                      // Casteado del objeto
 

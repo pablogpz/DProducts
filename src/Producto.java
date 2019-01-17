@@ -266,7 +266,7 @@ public abstract class Producto {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;                                   // Comprueba si es la misma instancia
-        if (!(obj instanceof Producto)) return false;                   // Si pertenecen a la misma clase no procede
+        if (!(obj instanceof Producto)) return false;                   // si no pertenecen a la misma clase no procede
 
         Producto objCasteado = (Producto) obj;                          // Casteado del objeto
 

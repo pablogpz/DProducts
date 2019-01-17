@@ -1,6 +1,7 @@
 import Identificadores.GeneradorIdentificador;
 import Identificadores.Identificador;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -95,12 +96,10 @@ public abstract class Cliente {
     }
 
     /**
-     * Método accesor del atributo {@link Cliente#productosFavoritos}
-     *
      * @return Colección de productos favoritos
      */
-    protected Map<String, Producto> getProductosFavoritos() {
-        return productosFavoritos;
+    protected Collection<Producto> getProductosFavoritos() {
+        return productosFavoritos.values();
     }
 
     /**
@@ -407,7 +406,8 @@ public abstract class Cliente {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;                                       // Comprueba si es la misma instancia
-        if (!(obj instanceof Cliente)) return false;                       // Si pertenecen a la misma clase no procede
+        if (!(obj instanceof Cliente))
+            return false;                       // si no pertenecen a la misma clase no procede
 
         Cliente objCasteado = (Cliente) obj;                                // Casteado del objeto
 

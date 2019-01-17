@@ -1,10 +1,17 @@
 /**
- * Interfaz que modela el comportamiento de los comentarios en función del tipo de cliente que lo realiza.
+ * Interfaz que modela el comportamiento de los comentarios en función del tipo de cliente que lo realiza
+ *
+ * @author : Juan Pablo García Plaza Pérez
+ * @author José Ángel Concha Carrasco
+ * grupo : Wild True
+ * Entrega : EC1
+ * Curso : 2º GIIIS (Grupo A)
  */
+
 public interface ComportamientoComentario {
 
     /**
-     * Realiza el comentario de un cliente sobre un determinado producto.
+     * Realiza el comentario de un cliente sobre un determinado producto
      *
      * @param producto Producto sobre el que se comenta
      * @param cliente Cliente que realiza el comentario

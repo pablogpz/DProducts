@@ -1,8 +1,24 @@
+/**
+ * Clase que implementa el comportamiento de comentado de los clientes VIP. La publicación del comentario consiste
+ * en calcular los parámetros de un comentario a partir de unos valores predefinidos. El cuerpo del comentario siempre
+ * será {@link ComportamientoComentarioVIP#CUERPO_COMENTARIO} y la puntuación
+ * {@link ComportamientoComentarioVIP#PUNTUACION}
+ *
+ * @author : Juan Pablo García Plaza Pérez
+ * @author José Ángel Concha Carrasco
+ * grupo : Wild True
+ * Entrega : EC1
+ * Curso : 2º GIIIS (Grupo A)
+ */
+
 public class ComportamientoComentarioVIP implements ComportamientoComentario {
 
-    static final String COMENTARIO_VIP = "I really like this product";
-    static final int PUNTUACION_VIP = 4;
+    private static final String CUERPO_COMENTARIO = "I really like this product";  // Texto por defecto
+    private static final int PUNTUACION = 4;                                       // Puntuación por defecto
 
+    /**
+     * Constructor por defecto de la clase
+     */
     public ComportamientoComentarioVIP() {
     }
 
@@ -11,38 +27,35 @@ public class ComportamientoComentarioVIP implements ComportamientoComentario {
      */
     @Override
     public boolean comentar(Producto producto, Cliente cliente) {
-
-        boolean esValido = false;
-        int puntuacion = calcularPuntuacion(producto);
-
-        Comentario comentario = new Comentario(cliente, obtenerTexto(producto), puntuacion);
+        boolean esValido = false;                                   // Bandera de éxito del proceso de comentado
+        int puntuacion = calcularPuntuacion(producto);              // Puntuación calculada para el comentario
 
         try {
+            // Intenta crear el comentario calculado
+            Comentario comentario = new Comentario(cliente, obtenerTexto(producto), puntuacion);
 
+            // Intenta publicar el comentario, si el producto es comentable
             esValido = ((ProductoComentable) producto).comentar(comentario);
 
-            if (esValido) {
-
+            if (esValido) {                                         // Comprueba que se haya podido publicar
+                // Comprueba si el producto además es gustable
                 Gustable productoGustable = (Gustable) producto;
 
-                if (puntuacion <= 2) {
+                if (puntuacion <= 2)                                // Determina si gustar o no gustar el producto
                     productoGustable.unlike();
-                } else if (puntuacion >= 4) {
+                else if (puntuacion >= 4)
                     productoGustable.like();
-
-                }
             }
-
+        } catch (IllegalArgumentException e) {
+            System.out.println("El comentario está mal formado");
         } catch (ClassCastException e) {
-            if (esValido) {
+            if (esValido)
                 System.out.print("El producto " + producto.getNombre() + " es comentable pero no gustable");
-            } else {
+            else
                 System.out.println("El producto " + producto.getNombre() + " no es comentable");
-            }
         }
 
         return esValido;
-
     }
 
     /**
@@ -50,7 +63,7 @@ public class ComportamientoComentarioVIP implements ComportamientoComentario {
      */
     @Override
     public int calcularPuntuacion(Producto producto) {
-        return PUNTUACION_VIP;
+        return PUNTUACION;
     }
 
     /**
@@ -58,6 +71,6 @@ public class ComportamientoComentarioVIP implements ComportamientoComentario {
      */
     @Override
     public String obtenerTexto(Producto producto) {
-        return COMENTARIO_VIP;
+        return CUERPO_COMENTARIO;
     }
 }
