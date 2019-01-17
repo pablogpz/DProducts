@@ -31,16 +31,10 @@ public class Simulacion {
      */
     public static void main(String[] args) {
         Simulacion simulacion = new Simulacion();                           // Instancia de la simulación
-        Set<Producto> prodRepuestos;                                        // Productos repuestos en cada turno
 
         try {
             simulacion.inicializarSimulacion();
-
-            for (Cliente turno : simulacion.clientesTurnos) {
-                prodRepuestos = new HashSet<>();                            // Vacía los productos previos
-                turno.realizarPedido(prodRepuestos);
-            }
-
+            ejecutarTurnos(simulacion);
         } catch (ExcepcionCargaEntrada excepcionCargaEntrada) {
             System.out.println(excepcionCargaEntrada.getMensajeError());
         }
@@ -71,6 +65,19 @@ public class Simulacion {
             for (; clientesCargados < NUMERO_TURNOS; clientesCargados++) {
                 clientesTurnos.add(clientesTurnos.get(NUMERO_TURNOS - clientesCargados));
             }
+        }
+    }
+
+    /**
+     * Lleva a cabo los turnos definidos por la simulación y generá el fichero de registro asociado
+     *
+     * @param simulacion Simulación que ejecutar
+     */
+    private static void ejecutarTurnos(Simulacion simulacion) {
+        Set<Producto> prodRepuestos;                                    // Productos repuestos en cada turno
+        for (Cliente turno : simulacion.clientesTurnos) {
+            prodRepuestos = new HashSet<>();                            // Vacía los productos previos
+            turno.realizarPedido(prodRepuestos);
         }
     }
 
