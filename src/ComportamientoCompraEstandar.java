@@ -34,14 +34,18 @@ public class ComportamientoCompraEstandar implements ComportamientoCompra {
     public boolean realizarPedido(Cliente cliente) {
         Set<Producto> pedido = prepararPedido(cliente);         // Prepara el pedido de un cliente estándar
         Iterator<Producto> it = pedido.iterator();
-        boolean realizado = true;                               // Bandera de éxito del pedido
+        boolean ocurrioError = false;                           // Bandera de éxito del pedido
 
-        while (it.hasNext() && realizado) {                     // Intenta despachar todos los productos del pedido
+        while (it.hasNext()) {                                  // Intenta despachar todos los productos del pedido
             Producto producto = it.next();
-            realizado = cliente.getTienda().venderProducto(producto, cliente, UNIDADES_PEDIDO);
+            if (!ocurrioError) {                                // Comprueba si ya ocurrió un error
+                ocurrioError = !cliente.getTienda().venderProducto(producto, cliente, UNIDADES_PEDIDO);
+            } else {
+                cliente.getTienda().venderProducto(producto, cliente, UNIDADES_PEDIDO);
+            }
         }
 
-        return realizado;
+        return !ocurrioError;
     }
 
     /**

@@ -232,22 +232,7 @@ public abstract class Cliente {
      *
      * @return Booleano indicando si se pudo hacer el pedido
      */
-    // TODO - mover la implementación
     public abstract boolean realizarPedido();
-
-//        if (existeAliasFavorito(alias)) {                               // Comprueba si existe el producto favorito
-//            Producto producto = recuperarFavorito(alias);
-//            if (getTienda().venderProducto(producto, cantidad)) {       // Intenta despachar el pedido
-//                informarUsuario("Su pedido ha sido procesado. Cantidad : " + cantidad + " ud(s).", producto);
-//            } else {
-//                return false;                                           // No se pudo despachar el pedido
-//            }
-//        } else {
-//            informarUsuario("ERROR al entregar un producto favorito. El alias \"" + alias + "\" no existe");
-//            return false;                                               // No existe el producto favorito
-//        }
-//
-//        return true;                                                    // Pedido despachado
 
     /**
      * Publica un comentario sobre un producto. El producto debe estar entre los productos favoritos y un cliente solo puede
@@ -257,38 +242,7 @@ public abstract class Cliente {
      * @return Booleano indicando si se pudo publicar el comentario. Devuelve falso si el cuerpo está vacío o si la
      * puntuación no es válida
      */
-    // TODO - mover la implementación
     public abstract boolean comentarProducto(String alias);
-
-//        Comentario comentario;
-//
-//        if (existeAliasFavorito(alias)) {                               // Comprueba si existe el producto favorito
-//            Producto producto = recuperarFavorito(alias);               // Recupera la instancia del producto favorito
-//
-//            try {                                                       // Intenta crear el comentario
-//                comentario = new Comentario(this, texto, puntuacion);
-//            } catch (IllegalArgumentException e) {
-//                informarUsuario(e.getMessage());
-//                return false;                                           // El comentario no es válido
-//            }
-//
-//            // Intenta publicar el comentario si el producto es comentable
-//            try {
-//                if (((ProductoComentable) producto).comentar(comentario))
-//                    informarUsuario("Se ha publicado un comentario", producto);
-//                else
-//                    return false;                                      // El comentario no fue publicado
-//            } catch (ClassCastException e) {
-//                informarUsuario("No es posible comentar este producto. Clase (" + producto.getClass() +
-//                        ") No es comentable ");
-//                return false;
-//            }
-//
-//            return true;                                                // El comentario es válido y fue publicado
-//        } else {
-//            informarUsuario("ERROR al comentar un producto favorito. El alias \"" + alias + "\" no existe");
-//            return false;                                               // No existe el producto favorito
-//        }
 
     /**
      * Comprueba si existe un determinado alias en la colección de productos favoritos

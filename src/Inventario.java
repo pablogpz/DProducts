@@ -72,13 +72,18 @@ public class Inventario {
      * Si se le pasa un cliente con valor nulo devuelve falso
      */
     public boolean agregarCliente(Cliente cliente) {
-        if (cliente == null)
+        if (cliente == null)                                                // Comprueba que el cliente no sea nulo
             return false;
 
+        // Bandera que indica si ya estaba dado de alta el cliente
         boolean existeCliente = clientes.containsKey(cliente.getIdentificador());
 
-        if (!existeCliente)
+        if (!existeCliente) {                                               // Comprueba que no esté dado de alta el cliente
             clientes.put(cliente.getIdentificador(), cliente);
+            informarUsuario("El cliente fue dado de alta correctamente", cliente);
+        } else {                                                            // Error si ya estaba dado de alta
+            reportarError("ERROR al dar de alra un cliente. Ya está registrado", cliente);
+        }
 
         return !existeCliente;
     }
@@ -90,13 +95,17 @@ public class Inventario {
      * @return Si se pudo eliminar al cliente. No se pueden eliminar clientes que no estén registrados
      */
     public boolean eliminarCliente(Identificador identificador) {
-        if (identificador == null)
+        if (identificador == null)                                          // Comprueba que el identificador no sea nulo
             return false;
 
-        boolean existeCliente = clientes.containsKey(identificador);
+        boolean existeCliente = clientes.containsKey(identificador);        // Bandera que indica si el cliente ya existía
 
-        if (existeCliente)
+        if (existeCliente) {                                                // Comprueba si el cliente estaba dado de alta
             clientes.remove(identificador);
+            informarUsuario("El cliente fue dado de baja correctamente", identificador);
+        } else {                                                            // Error si no estaba dado de alta
+            reportarError("ERROR al dar de baja un cliente. No está registrado", identificador);
+        }
 
         return existeCliente;
     }
@@ -117,10 +126,12 @@ public class Inventario {
             reportarError(e.getMessage(), producto);
         }
 
-        if (!existeProducto)                                                    // Comprueba que no exista ya el producto
+        if (!existeProducto) {                                                  // Comprueba que no exista ya el producto
             stock.put(producto.getIdentificador(), producto);                   // Agrega el prodcuto al inventario
-        else                                                                    // Error si existía en inventario
+            informarUsuario("El producto fue agregado correctamente", producto);
+        } else {                                                                // Error si existía en inventario
             reportarError("ERROR al agregar el producto. Ya existe en inventario", producto);
+        }
 
         return !existeProducto;
     }
@@ -140,10 +151,12 @@ public class Inventario {
             reportarError(e.getMessage(), producto);
         }
 
-        if (existeProducto)                                                     // Comprueba si el producto está catalogado
+        if (existeProducto) {                                                   // Comprueba si el producto está catalogado
             stock.remove(producto.getIdentificador());                          // Elimina el producto del inventario
-        else                                                                    // Error si no existía en inventario
+            informarUsuario("El producto fue dado de baja correctamente", producto);
+        } else {                                                                // Error si no existía en inventario
             reportarError("ERROR al eliminar producto. No existe en el inventario", producto);
+        }
 
         return existeProducto;
     }
@@ -178,6 +191,8 @@ public class Inventario {
             reportarError("ERROR al vender producto. No existe en el inventario", producto);
             return false;                                                       // El producto no está catalogado
         }
+
+        informarUsuario("Su pedido ha sido procesado. Cantidad : " + cantidad + " ud(s).", producto);
 
         // ESTADISTICAS
         registrarVentaProducto(producto, cantidad);                             // Registra la venta del producto
@@ -479,6 +494,28 @@ public class Inventario {
         }
 
         return encontrado ? datoEstadistico : null;
+    }
+
+    /**
+     * Informa por consola al usuario sobre el resultado de una determinada acción
+     *
+     * @param mensaje           Cadena formateada al mostrar al usuario por consola
+     * @param objetoRelacionado Objeto relacionado con el mensaje
+     */
+    protected void informarUsuario(String mensaje, Object objetoRelacionado) {
+        String mensajeProducto = objetoRelacionado == null ? "" : "\nObjeto : \n\t" +
+                objetoRelacionado.toString();
+
+        informarUsuario(mensaje + mensajeProducto);
+    }
+
+    /**
+     * Informa por consola al usuario sobre el resultado de una determinada acción
+     *
+     * @param mensaje Cadena formateada al mostrar al usuario por consola
+     */
+    protected void informarUsuario(String mensaje) {
+        System.out.println(mensaje);
     }
 
     /**

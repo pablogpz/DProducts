@@ -37,6 +37,10 @@ public class Simulacion {
         try {
             simulacion.inicializarSimulacion();
 
+            for (Cliente turno : simulacion.clientesTurnos) {
+                turno.realizarPedido();
+            }
+
         } catch (ExcepcionCargaEntrada excepcionCargaEntrada) {
             System.out.println(excepcionCargaEntrada.getMensajeError());
         }

@@ -45,6 +45,8 @@ public class ComportamientoComentarioVIP implements ComportamientoComentario {
                     productoGustable.unlike();
                 else if (puntuacion >= 4)
                     productoGustable.like();
+
+                System.out.println("Se ha publicado un comentario\n\t" + comentario);
             }
         } catch (IllegalArgumentException e) {
             System.out.println("El comentario está mal formado");
@@ -52,7 +54,8 @@ public class ComportamientoComentarioVIP implements ComportamientoComentario {
             if (esValido)
                 System.out.print("El producto " + producto.getNombre() + " es comentable pero no gustable");
             else
-                System.out.println("El producto " + producto.getNombre() + " no es comentable");
+                System.out.println("No es posible comentar este producto. Clase (" + producto.getClass() +
+                        ") No es comentable ");
         }
 
         return esValido;
