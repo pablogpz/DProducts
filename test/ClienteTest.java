@@ -12,7 +12,9 @@ import static org.junit.Assert.*;
  * CLASE DE TESTEO de la clase {@link Cliente}.
  * <p>
  * Realiza las pruebas de todos los métodos públicos de la clase para todas
- * sus posibles entradas y estados
+ * sus posibles entradas y estados. Se prueban los comportamiento de compras aquí
+ * por mayor simplicidad a la hora de manejar los pedidos con productos que deben estar
+ * agregados al inventario
  *
  * @author : Juan Pablo García Plaza Pérez
  * @author José Ángel Concha Carrasco
@@ -81,7 +83,6 @@ public class ClienteTest {
         cliente = new ClienteEstandar("Nombre", 0, "Localidad");
         cliente = new ClienteEstandar("Nombre", -1, "Localidad");
         cliente = new ClienteEstandar("Nombre", 18, "");
-
     }
 
     /**
@@ -193,17 +194,14 @@ public class ClienteTest {
     }
 
     /*
-
-    INCORPORACION DE LAS PRUEBAS CORRESPONDIENTES A ComportamientoCompraEstandar y ComportamientoCompraVIP
-
-    */
+     * INCORPORACION DE LAS PRUEBAS CORRESPONDIENTES A ComportamientoCompraEstandar y ComportamientoCompraVIP
+     */
 
     /**
      * Testo del método {@link ComportamientoCompraEstandar#prepararPedido(Cliente)}
      */
     @Test
     public void prepararPedidoEstandar() {
-
         Set<Producto> pedidoEsperado = new HashSet<>();
         pedidoEsperado.add(producto00);
         pedidoEsperado.add(producto0);
@@ -219,14 +217,12 @@ public class ClienteTest {
      */
     @Test
     public void calcularPrecioEstandar() {
-
         cliente.agregarFavorito(producto0, "favorito1");
         cliente.agregarFavorito(producto00, "favorito2");
 
         Set<Producto> pedido = (((ClienteEstandar) cliente).getComportamientoCompra().prepararPedido(cliente));
 
         assertEquals((50 * 20 + 50 * 30) * 1.2f, ((ClienteEstandar) cliente).getComportamientoCompra().calcularPrecio(pedido), 0);
-
     }
 
     /**
@@ -234,14 +230,12 @@ public class ClienteTest {
      */
     @Test
     public void realizarPedidoEstandar() {
-
         cliente.agregarFavorito(producto0, "favorito1");
         cliente.agregarFavorito(producto00, "favorito2");
 
         Set<Producto> pedido = (((ClienteEstandar) cliente).getComportamientoCompra().prepararPedido(cliente));
 
         assertTrue(((ClienteEstandar) cliente).getComportamientoCompra().realizarPedido(cliente, pedido));
-
     }
 
     /**
@@ -249,7 +243,6 @@ public class ClienteTest {
      */
     @Test
     public void prepararPedidoVIP() {
-
         Set<Producto> pedidoEsperado = new HashSet<>();
         pedidoEsperado.add(producto00);
         pedidoEsperado.add(producto0);
@@ -265,7 +258,6 @@ public class ClienteTest {
      */
     @Test
     public void calcularPrecioVIP() {
-
         clienteV.agregarFavorito(producto0, "favorito1");
         clienteV.agregarFavorito(producto00, "favorito2");
 
@@ -279,7 +271,6 @@ public class ClienteTest {
      */
     @Test
     public void realizarPedidoVIP() {
-
         clienteV.agregarFavorito(producto0, "favorito1");
         clienteV.agregarFavorito(producto00, "favorito2");
 
@@ -287,6 +278,5 @@ public class ClienteTest {
 
         assertTrue(((ClienteVIP) clienteV).getComportamientoCompra().realizarPedido(clienteV, pedido));
     }
-
 
 }

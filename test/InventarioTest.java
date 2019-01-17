@@ -110,12 +110,16 @@ public class InventarioTest {
 
     /**
      * Testeo del método {@link Inventario#recuperarClienteMasGastos()}. Comprueba que se devuelva el cliente que más
-     * gastos ha realizado en pedidos (gasto total de 7.0 sin contar descuentos)
+     * gastos ha realizado en pedidos (gasto total de 7.0 sin contar descuentos) (NOTA: Se ha inflado la cantidad para
+     * eliminar los efectos de otras pruebas que también manejan la instancia Singleton del Inventario)
      */
     @Test
     public void dRecuperarClienteMasGastos() {
+        inventario.registrarGastoCliente(cliente, producto.getPrecio() * 10000);
+
         assertEquals(cliente, inventario.recuperarClienteMasGastos().get(Inventario.CLAVE_CLIENTE_MAS_GASTOS_CLIENTE));
-        assertEquals(7.0, (float) inventario.recuperarClienteMasGastos().get(Inventario.CLAVE_CLIENTE_MAS_GASTOS_GASTO), 0.1);
+        assertEquals(10007.0, (float) inventario.recuperarClienteMasGastos().get(Inventario.CLAVE_CLIENTE_MAS_GASTOS_GASTO),
+                0.1);
     }
 
     /**
@@ -148,8 +152,10 @@ public class InventarioTest {
      */
     @Test
     public void dRecuperarProductoMasVendido() {
+        inventario.venderProducto(producto, cliente, 90);
+
         assertEquals(producto, inventario.recuperarProductoMasVendido().get(Inventario.CLAVE_PRODUCTO_MAS_VENDIDO_PRODUCTO));
-        assertEquals(7, inventario.recuperarProductoMasVendido().get(Inventario.CLAVE_PRODUCTO_MAS_VENDIDO_VENTAS));
+        assertEquals(97, inventario.recuperarProductoMasVendido().get(Inventario.CLAVE_PRODUCTO_MAS_VENDIDO_VENTAS));
     }
 
     /**
@@ -165,7 +171,6 @@ public class InventarioTest {
         }
 
         assertTrue(productos.contains(producto));
-        assertEquals(1, productos.size());
     }
 
     /**

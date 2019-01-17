@@ -69,5 +69,4 @@ public class ClienteEstandarTest {
         assertEquals(comentarioVIP, clienteUno.getComportamientoComentario());
     }
 
-
 }

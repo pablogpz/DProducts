@@ -16,7 +16,7 @@ public class Simulacion {
 
     private static final String RUTA_FICHERO_ENTRADA = "init.xml";          // Fichero XML de datos de entrada
     private static final int NUMERO_TURNOS = 10;                            // Número de turnos de la simulación
-    private static final String RUTA_REGISTRO = "registro.log";
+    private static final String RUTA_REGISTRO = "registro.log";             // Ruta relativa del fichero de registro
 
     private List<Cliente> clientesTurnos;                                   // Colección de clientes empleados en la simulacion
     private Registro registro;                                              // Manejador del fichero de registro
