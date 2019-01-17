@@ -72,6 +72,13 @@ public class Comentario {
     }
 
     /**
+     * @return Cadena de texto representando la puntuación del comentario mediante estrellas '*'
+     */
+    public String cadenaPuntuacion() {
+        return "*****".substring(0, getPuntuacion());
+    }
+
+    /**
      * Método mutador del atributo {@link Comentario#texto}
      *
      * @param texto Nuevo texto del comentario. Debe ser correcto
@@ -119,7 +126,7 @@ public class Comentario {
         StringBuilder stringBuilder = new StringBuilder();
 
         stringBuilder.append("Autor : ").append(getAutor().toString()).append("\n");
-        stringBuilder.append("Calificación ").append("*****".substring(0, getPuntuacion())).append("\n");
+        stringBuilder.append("Calificación ").append(cadenaPuntuacion()).append("\n");
         stringBuilder.append("\tReseña :\n").append(getTexto());
 
         return stringBuilder.toString() + "\n";

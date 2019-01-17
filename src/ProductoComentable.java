@@ -95,6 +95,26 @@ public abstract class ProductoComentable extends Producto {
     }
 
     /**
+     * @return Cadena con formato de entrada de registro de producto comentable con todos los comentarios del
+     * producto
+     */
+    public String comentariosARegistro() {
+        StringBuilder stringBuilder = new StringBuilder();
+        Iterator<Comentario> it = comentarios.iterator();
+        Comentario comentario;
+
+        while (it.hasNext()) {
+            comentario = it.next();
+            stringBuilder.append("comment:");
+            stringBuilder.append(" ").append(comentario.getAutor().getNombre());
+            stringBuilder.append(" ").append(comentario.getTexto());
+            stringBuilder.append(" ").append(comentario.cadenaPuntuacion()).append("\n");
+        }
+
+        return stringBuilder.toString();
+    }
+
+    /**
      * @return Cadena formateada base y con todos los comentarios del producto
      */
     @Override
