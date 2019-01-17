@@ -106,6 +106,18 @@ public class ProductoAlimentacion extends Producto implements Gustable, Desconta
     }
 
     /**
+     * @return Cadena con el formato de una entrada de registro de producto de alimentación. Contiene los datos
+     * del producto base y la fecha de caducidad
+     */
+    public String aRegistro() {
+        StringBuilder stringBuilder = new StringBuilder(super.aRegistro());
+
+        stringBuilder.append(stringBuilder.append(" ").append(getMesCaducidad()));
+
+        return stringBuilder.toString();
+    }
+
+    /**
      * @return Cadena con el contenido base del producto, su mes de caducidad, likes y su descuento
      */
     public String toString() {
