@@ -24,15 +24,16 @@ public class ComportamientoCompraVIP implements ComportamientoCompra {
      * {@inheritDoc}
      */
     @Override
-    public boolean realizarPedido(Cliente cliente) {
-        return cliente.getTienda().venderColeccionProductos(prepararPedido(cliente), cliente);
+    public boolean realizarPedido(Cliente cliente, Set<Producto> prodRepuestos) {
+        prodRepuestos = cliente.getTienda().venderColeccionProductos(prepararPedido(cliente), cliente);
+        return !(prodRepuestos == null);
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public float calcularPrecio(Cliente cliente, Set<Producto> pedido) {
+    public float calcularPrecio(Set<Producto> pedido) {
         float precio = 0;                                       // Acumulador del importe total (1 ud. de cada producto)
 
         for (Producto producto : pedido) {

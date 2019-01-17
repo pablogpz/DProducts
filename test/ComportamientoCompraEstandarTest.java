@@ -48,7 +48,7 @@ public class ComportamientoCompraEstandarTest {
     }
 
     /**
-     * Testo del método {@link ComportamientoCompraEstandar#calcularPrecio(Cliente, Set)}
+     * Testo del método {@link ComportamientoCompraEstandar#calcularPrecio(Set)}
      */
     @Test
     public void calcularPrecio() {
@@ -56,7 +56,7 @@ public class ComportamientoCompraEstandarTest {
     }
 
     /**
-     * Testo del método {@link ComportamientoCompraEstandar#realizarPedido(Cliente)}
+     * Testo del método {@link ComportamientoCompraEstandar#realizarPedido(Cliente, Set)}
      */
     @Test
     public void realizarPedido() {

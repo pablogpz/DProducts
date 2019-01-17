@@ -48,7 +48,7 @@ public class ComportamientoCompraVIPTest {
     }
 
     /**
-     * Testo del método {@link ComportamientoCompraVIP#calcularPrecio(Cliente, Set)}
+     * Testo del método {@link ComportamientoCompraVIP#calcularPrecio(Set)}
      */
     @Test
     public void calcularPrecio() {
@@ -56,7 +56,7 @@ public class ComportamientoCompraVIPTest {
     }
 
     /**
-     * Testo del método {@link ComportamientoCompraVIP#realizarPedido(Cliente)}
+     * Testo del método {@link ComportamientoCompraVIP#realizarPedido(Cliente, Set)}
      */
     @Test
     public void realizarPedido() {

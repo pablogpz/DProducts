@@ -82,12 +82,12 @@ public class InventarioTest {
     public void bVenderColeccionProductos() {
         List<Producto> coleccionProductos = new ArrayList<>();
 
-        assertFalse(inventario.venderColeccionProductos(null, null));
-        assertFalse(inventario.venderColeccionProductos(coleccionProductos, cliente));  // No contiene productos
+        assertNull(inventario.venderColeccionProductos(null, null));
+        assertNull(inventario.venderColeccionProductos(coleccionProductos, cliente));       // No contiene productos
 
         coleccionProductos.add(producto);
 
-        assertTrue(inventario.venderColeccionProductos(coleccionProductos, cliente));   // Hay un producto
+        assertNotNull(inventario.venderColeccionProductos(coleccionProductos, cliente));    // Hay un producto
     }
 
     /**
@@ -96,12 +96,12 @@ public class InventarioTest {
      */
     @Test
     public void bVenderProducto() {
-        assertTrue(inventario.venderProducto(producto, cliente, 5));
+        assertEquals(0, inventario.venderProducto(producto, cliente, 5));
         assertEquals(25, producto.getCantidad());
-        assertTrue(inventario.venderProducto(producto, cliente, 1));
-        assertEquals(99, producto.getCantidad());                               // Se ha repuesto el inventario
-        assertFalse(inventario.venderProducto(productoNoInventario, cliente, 1));
-        assertFalse(inventario.venderProducto(null, cliente, 1));
+        assertEquals(1, inventario.venderProducto(producto, cliente, 1));
+        assertEquals(99, producto.getCantidad());                                   // Se ha repuesto el producto
+        assertEquals(-1, inventario.venderProducto(productoNoInventario, cliente, 1));
+        assertEquals(-1, inventario.venderProducto(null, cliente, 1));
     }
 
     /**

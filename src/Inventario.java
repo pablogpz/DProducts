@@ -167,31 +167,34 @@ public class Inventario {
      * @param cantidad Número de unidades que debe entregar
      * @param cliente  Cliente que realiza el pedido
      * @param producto Producto del que realizar el pedido
-     * @return Booleano indicando si se ha podido enviar el pedido, bien sea por falta de stock o
-     * porque el producto no se ha encontrado
+     * @return Entero indicando el estado del pedido. -1 significa que el producto no fue encontrado, 1 que hubo que reponer
+     * el stock del producto, y 0 que el pedido se despachó sin incidencias
      */
-    public boolean venderProducto(Producto producto, Cliente cliente, int cantidad) {
+    public int venderProducto(Producto producto, Cliente cliente, int cantidad) {
         boolean existeProducto = false;                                         // Bandera para indicar si el producto ya existía
+        int estado = 0;
 
         try {
             existeProducto = existeProducto(producto);
         } catch (NullPointerException e) {
             reportarError(e.getMessage(), producto);
-            return false;
+            return -1;
         }
 
         if (existeProducto) {                                                   // Comprueba que el producto exista en inventario
             if (producto.entregar(cantidad)) {                                  // Intenta realiza el pedido
-                if (producto.enStockMinimo())
-                    reponerStock(producto);                                     // Comprueba si es necesario reponer el stock
+                if (producto.enStockMinimo()) {                                 // Comprueba si es necesario reponer el stock
+                    reponerStock(producto);
+                    estado = 1;                                                 // Se repuso el producto
+                }
             } else {
                 reportarError("ERROR al vender producto. Cantidad errónea o no hay stock suficiente", producto);
                 reponerStock(producto);                                         // Compensa la falta de existencias para cubrir un pedido
-                return false;                                                   // Error en la venta
+                return 1;                                                       // Error en la venta
             }
         } else {
             reportarError("ERROR al vender producto. No existe en el inventario", producto);
-            return false;                                                       // El producto no está catalogado
+            return -1;                                                          // El producto no está catalogado
         }
 
         informarUsuario("Su pedido ha sido procesado. Cantidad : " + cantidad + " ud(s).", producto);
@@ -200,7 +203,7 @@ public class Inventario {
         registrarVentaProducto(producto, cantidad);                             // Registra la venta del producto
         registrarGastoCliente(cliente, producto, cantidad);                     // Registra el gasto del cliente
 
-        return true;                                                            // Venta completada
+        return estado;                                                          // Venta completada
     }
 
     /**
@@ -209,17 +212,17 @@ public class Inventario {
      *
      * @param coleccionProductos Colección de productos a despachar
      * @param cliente            Cliente que realiza el pedido
-     * @return Devuelve verdadero si se pudieron realizar todos los pedidos. Devuelve falso si la colección es nula o vacía,
-     * no se puede cubrir algún pedido u ocurrió algún error en la venta de alguno de los productos
+     * @return Devuelve un set de productos repuestos si se pudieron realizar todos los pedidos. Devuelve nulo si la colección
+     * es nula o vacía, no se puede cubrir algún pedido u ocurrió algún error en la venta de alguno de los productos
      */
-    public boolean venderColeccionProductos(Collection<Producto> coleccionProductos, Cliente cliente) {
+    public Set<Producto> venderColeccionProductos(Collection<Producto> coleccionProductos, Cliente cliente) {
         if (coleccionProductos == null || coleccionProductos.size() == 0) {     // Comprueba que la coleccion no sea nula ni vacía
             mostrarMensaje("La colección de productos a pedir está vacía");
-            return false;
+            return null;
         }
 
+        Set<Producto> prodRepuestos = new HashSet<>();
         boolean pedidoCompleto = true;                                          // Indica si se pueden cubrir todos los pedidos
-        boolean ocurrioError = false;                                           // Indica si ocurrió algún error en la venta
 
         // Primer bucle para determinar si se pueden cubrir los pedidos
         Iterator<Producto> iterator = coleccionProductos.iterator();
@@ -228,19 +231,24 @@ public class Inventario {
                 pedidoCompleto = false;
         }
 
-        if (!pedidoCompleto) {                                                    // Si no se pudieron cubrir los pedidos no se realizan
+        if (!pedidoCompleto) {                                                  // Si no se pudieron cubrir los pedidos no se realizan
             reportarError("ERROR al procesar el pedido de todos los productos favoritos. " +
                     "No hay stock de alguno de los productos que desea", coleccionProductos);
-            return false;
+            return null;
         }
 
         // Intenta realizar la venta de todos los pedidos
         iterator = coleccionProductos.iterator();
+        Producto producto;
+        int estado;                                                             // Bandera de estado de cada pedido
         while (iterator.hasNext()) {
-            ocurrioError = venderProducto(iterator.next(), cliente, CANTIDAD_VENTA_COLECCION);
+            producto = iterator.next();
+            estado = venderProducto(producto, cliente, CANTIDAD_VENTA_COLECCION);
+            if (estado == 1)                                                    // Comprueba si el producto fue repuesto
+                prodRepuestos.add(producto);
         }
 
-        return ocurrioError;
+        return prodRepuestos;
     }
 
     /**

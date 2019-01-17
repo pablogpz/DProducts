@@ -1,3 +1,5 @@
+import java.util.Set;
+
 /**
  * Clase que implementa ek subtipo de cliente VIP. Implementa el comportamiento de compra y comentado de este subtipo
  * de clientes. Como sigue el patrón Strategy, se puede cambiar sus comportamientos en tiempo de ejecución mediante los
@@ -69,16 +71,22 @@ public class ClienteVIP extends Cliente {
      * {@inheritDoc}
      */
     @Override
-    public boolean realizarPedido() {
-        return comportamientoCompra.realizarPedido(this);
+    public boolean realizarPedido(Set<Producto> prodRepuestos) {
+        boolean estado = comportamientoCompra.realizarPedido(this, prodRepuestos);
+        Set<Producto> pedido = comportamientoCompra.prepararPedido(this);
+
+        for (Producto producto : pedido)
+            comentarProducto(producto);                         // Comenta cada producto del pedido
+
+        return estado;
     }
 
     /**
      * {@inheritDoc}
      */
     @Override
-    public boolean comentarProducto(String alias) {
-        return comportamientoComentario.comentar(recuperarFavorito(alias), this);
+    public boolean comentarProducto(Producto producto) {
+        return comportamientoComentario.comentar(producto, this);
     }
 
 }

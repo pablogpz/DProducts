@@ -15,17 +15,19 @@ public interface ComportamientoCompra {
     /**
      * Realiza el pedido solicitado por el cliente
      *
-     * @return Booleano indicando el éxito del pedido
+     * @param cliente El cliente que realiza el pedido
+     * @param prodRepuestos Set de productos respuestos
+     * @return Set de productos vendidos o nulo si ocurrió algún error en la venta
      */
-    boolean realizarPedido(Cliente cliente);
+    boolean realizarPedido(Cliente cliente, Set<Producto> prodRepuestos);
 
     /**
      * Devuelve el importe del pedido a realizar, considerando la variacion de descuentos
      *
-     * @param cliente El cliente que realiza el pedido
+     * @param pedido Set de productos pedidos
      * @return Precio del pedido
      */
-    float calcularPrecio(Cliente cliente, Set<Producto> pedido);
+    float calcularPrecio(Set<Producto> pedido);
 
     /**
      * Devuelve el conjunto de productos que se seleccionan para el pedido

@@ -4,6 +4,7 @@ import Identificadores.Identificador;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Clase que modela el comportamiento base de clientes de empresas de compra/venta de productos. Los clientes se
@@ -229,19 +230,21 @@ public abstract class Cliente {
     /**
      * Procesa el pedido de un cliente
      *
-     * @return Booleano indicando si se pudo hacer el pedido
+     * @param prodRepuestos Set de productos repuestos durante la venta
+     * @return Booleano indicando el estado de la venta. Verdadero si el pedido pudo ser despachado y falso si
+     * ocurrió algún error
      */
-    public abstract boolean realizarPedido();
+    public abstract boolean realizarPedido(Set<Producto> prodRepuestos);
 
     /**
      * Publica un comentario sobre un producto. El producto debe estar entre los productos favoritos y un cliente solo puede
      * publicar un comentario sobre un producto
      *
-     * @param alias Alias con el que se guardó el producto en la colección de favoritos
+     * @param producto Producto favorito a comentar
      * @return Booleano indicando si se pudo publicar el comentario. Devuelve falso si el cuerpo está vacío o si la
      * puntuación no es válida
      */
-    public abstract boolean comentarProducto(String alias);
+    public abstract boolean comentarProducto(Producto producto);
 
     /**
      * Comprueba si existe un determinado alias en la colección de productos favoritos

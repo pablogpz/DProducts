@@ -31,18 +31,19 @@ public class ComportamientoCompraEstandar implements ComportamientoCompra {
      * {@inheritDoc}
      */
     @Override
-    public boolean realizarPedido(Cliente cliente) {
+    public boolean realizarPedido(Cliente cliente, Set<Producto> prodRepuestos) {
         Set<Producto> pedido = prepararPedido(cliente);         // Prepara el pedido de un cliente estándar
         Iterator<Producto> it = pedido.iterator();
-        boolean ocurrioError = false;                           // Bandera de éxito del pedido
+        boolean ocurrioError = false;
+        int estado;                                             // Bandera de estado de cada pedido
 
         while (it.hasNext()) {                                  // Intenta despachar todos los productos del pedido
             Producto producto = it.next();
-            if (!ocurrioError) {                                // Comprueba si ya ocurrió un error
-                ocurrioError = !cliente.getTienda().venderProducto(producto, cliente, UNIDADES_PEDIDO);
-            } else {
-                cliente.getTienda().venderProducto(producto, cliente, UNIDADES_PEDIDO);
-            }
+            estado = cliente.getTienda().venderProducto(producto, cliente, UNIDADES_PEDIDO);
+            if (estado == -1 && !ocurrioError)                  // Comprueba si no se pudo despachar el pedido
+                ocurrioError = true;
+            else if (estado == 1)                               // Comprueba si se repuso el producto
+                prodRepuestos.add(producto);
         }
 
         return !ocurrioError;
@@ -52,7 +53,7 @@ public class ComportamientoCompraEstandar implements ComportamientoCompra {
      * {@inheritDoc}
      */
     @Override
-    public float calcularPrecio(Cliente cliente, Set<Producto> pedido) {
+    public float calcularPrecio(Set<Producto> pedido) {
         float precio = 0;                                       // Acumulador del importe total
 
         for (Producto producto : pedido) {

@@ -1,7 +1,5 @@
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 /**
  * Clase que implementa el proceso de simulación del caso de uso del proyecto. Realiza 10 turnos de pedidos tras la
@@ -29,16 +27,18 @@ public class Simulacion {
     }
 
     /**
-     * PUNTO DE ENTRADA. Método principal del programa. Encargado de manejar el flujo de control del programa.
+     * PUNTO DE ENTRADA. Método principal del programa. Encargado de manejar el flujo de control del programa
      */
     public static void main(String[] args) {
         Simulacion simulacion = new Simulacion();                           // Instancia de la simulación
+        Set<Producto> prodRepuestos;                                        // Productos repuestos en cada turno
 
         try {
             simulacion.inicializarSimulacion();
 
             for (Cliente turno : simulacion.clientesTurnos) {
-                turno.realizarPedido();
+                prodRepuestos = new HashSet<>();                            // Vacía los productos previos
+                turno.realizarPedido(prodRepuestos);
             }
 
         } catch (ExcepcionCargaEntrada excepcionCargaEntrada) {
