@@ -78,6 +78,16 @@ public class ProductoComentableTest {
     }
 
     /**
+     * Testeo del método {@link ProductoComentable#comentariosARegistro()}. Comprueba el formato de entrada de registro
+     * generado (COMPROBACIÓN VISUAL)
+     */
+    @Test
+    public void aRegistro() {
+        productoComentable.comentar(comentario);
+        System.out.println(productoComentable.comentariosARegistro());
+    }
+
+    /**
      * Testeo de la ordenación de comentarios por puntuación. Comprueba que al inserar varios comentarios
      * después se muestren en orden (COMRPOBACIÓN VISUAL. YA FUE COMPROBADO EN LOS COMPARADORES)
      * <p>
@@ -92,4 +102,5 @@ public class ProductoComentableTest {
 
         productoComentable.recuperarComentarios();
     }
+
 }

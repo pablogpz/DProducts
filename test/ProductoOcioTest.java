@@ -62,6 +62,24 @@ public class ProductoOcioTest {
     }
 
     /**
+     * Testeo del método {@link ProductoOcio#aRegistro()}. Comprueba el formato de entrada de registro generado
+     * (COMPROBACIÓN VISUAL)
+     */
+    @Test
+    public void aRegistro() {
+        System.out.println(productoOcio.aRegistro());
+    }
+
+    /**
+     * Testeo del método {@link ProductoOcio#aRegistroDescuento()}. Comprueba el formato de entrada de registro
+     * generado (COMPROBACIÓN VISUAL)
+     */
+    @Test
+    public void aRegistroDescuento() {
+        System.out.println(productoOcio.aRegistroDescuento());
+    }
+
+    /**
      * Testeo del método {@link ProductoOcio#toString()}. Comprueba que se formatee bien la cadena que representa a un
      * producto de ocio. (COMPROBACIÓN VISUAL)
      */

@@ -208,4 +208,13 @@ public class ClienteTest {
 //        assertFalse(cliente.comentarProducto(null, "Test", 5));
     }
 
+    /**
+     * Testeo del método {@link Cliente#aRegistro()}. Comprueba el formato de entrada de registro generado
+     * (COMPROBACIÓN VISUAL)
+     */
+    @Test
+    public void aRegistro() {
+        System.out.println(cliente.aRegistro());
+    }
+
 }

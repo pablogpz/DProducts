@@ -113,7 +113,6 @@ public class ProductoHogar extends ProductoComentable implements Gustable, Desco
         StringBuilder stringBuilder = new StringBuilder(super.aRegistro());
 
         stringBuilder.append(" ").append(getParteCasa());
-        stringBuilder.append(stringBuilder.append(" ").append(getDescuento() * 100).append("%"));
 
         return stringBuilder.toString();
     }
@@ -125,7 +124,7 @@ public class ProductoHogar extends ProductoComentable implements Gustable, Desco
     public String aRegistroDescuento() {
         StringBuilder stringBuilder = new StringBuilder(aRegistro());
 
-        stringBuilder.append(stringBuilder.append(" ").append(getDescuento() * 100).append("%"));
+        stringBuilder.append(" ").append(getDescuento() * 100).append("%");
 
         return stringBuilder.toString();
     }

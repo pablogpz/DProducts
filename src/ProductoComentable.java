@@ -102,7 +102,7 @@ public abstract class ProductoComentable extends Producto {
         StringBuilder stringBuilder = new StringBuilder();
 
         for (Comentario comentario : comentarios)
-            stringBuilder.append(comentario.aRegsitro()).append("\n");
+            stringBuilder.append(comentario.aRegistro()).append("\n");
 
         return stringBuilder.toString();
     }

@@ -113,7 +113,7 @@ public class ProductoAlimentacion extends Producto implements Gustable, Desconta
     public String aRegistro() {
         StringBuilder stringBuilder = new StringBuilder(super.aRegistro());
 
-        stringBuilder.append(stringBuilder.append(" ").append(getMesCaducidad()));
+        stringBuilder.append(" ").append(getMesCaducidad());
 
         return stringBuilder.toString();
     }
@@ -125,7 +125,7 @@ public class ProductoAlimentacion extends Producto implements Gustable, Desconta
     public String aRegistroDescuento() {
         StringBuilder stringBuilder = new StringBuilder(aRegistro());
 
-        stringBuilder.append(stringBuilder.append(" ").append(getDescuento() * 100).append("%"));
+        stringBuilder.append(" ").append(getDescuento() * 100).append("%");
 
         return stringBuilder.toString();
     }

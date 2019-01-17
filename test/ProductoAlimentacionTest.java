@@ -112,6 +112,24 @@ public class ProductoAlimentacionTest {
     }
 
     /**
+     * Testeo del método {@link ProductoAlimentacion#aRegistro()}. Comprueba el formato de entrada de registro generado
+     * (COMPROBACIÓN VISUAL)
+     */
+    @Test
+    public void aRegistro() {
+        System.out.println(productoAlimentacion.aRegistro());
+    }
+
+    /**
+     * Testeo del método {@link ProductoAlimentacion#aRegistroDescuento()}. Comprueba el formato de entrada de registro
+     * generado (COMPROBACIÓN VISUAL)
+     */
+    @Test
+    public void aRegistroDescuento() {
+        System.out.println(productoAlimentacion.aRegistroDescuento());
+    }
+
+    /**
      * Testeo del método {@link ProductoAlimentacion#toString()}. Comprueba que se formatee bien la cadena que
      * representa a un producto de alimentación. (COMPROBACIÓN VISUAL)
      */

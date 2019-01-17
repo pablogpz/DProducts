@@ -73,7 +73,7 @@ public class ProductoOcio extends ProductoComentable implements Descontable {
     public String aRegistroDescuento() {
         StringBuilder stringBuilder = new StringBuilder(aRegistro());
 
-        stringBuilder.append(stringBuilder.append(" ").append(getDescuento() * 100).append("%"));
+        stringBuilder.append(" ").append(getDescuento() * 100).append("%");
 
         return stringBuilder.toString();
     }

@@ -118,12 +118,16 @@ public class Comentario {
                 puntuacion >= 1 && puntuacion <= 5;
     }
 
-    public String aRegsitro() {
+    /**
+     * @return Cadena con el formato de una entrada de registro de comentario. Contiene toda la información base
+     * de un comentario
+     */
+    public String aRegistro() {
         StringBuilder stringBuilder = new StringBuilder("comment:");
 
         stringBuilder.append(" ").append(getAutor().getNombre());
         stringBuilder.append(" ").append(getTexto());
-        stringBuilder.append(" ").append(cadenaPuntuacion()).append("\n");
+        stringBuilder.append(" ").append(cadenaPuntuacion());
 
         return stringBuilder.toString();
     }

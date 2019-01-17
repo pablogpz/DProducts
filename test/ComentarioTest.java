@@ -63,6 +63,14 @@ public class ComentarioTest {
     }
 
     /**
+     * Testeo del método {@link Comentario#cadenaPuntuacion()}
+     */
+    @Test
+    public void cadenaPuntuacion() {
+        assertEquals("*****", comentario.cadenaPuntuacion());
+    }
+
+    /**
      * Testeo del método mutador {@link Comentario#setAutor(Cliente)}
      */
     @Test
@@ -93,6 +101,15 @@ public class ComentarioTest {
         assertEquals(nuevaPuntuacion, comentario.getPuntuacion());
         assertFalse(comentario.setPuntuacion(0));
         assertFalse(comentario.setPuntuacion(6));
+    }
+
+    /**
+     * Testeo del método {@link Comentario#aRegistro()}. Comprueba el formato de entrada de registro generado
+     * (COMPROBACIÓN VISUAL)
+     */
+    @Test
+    public void aRegistro() {
+        System.out.println(comentario.aRegistro());
     }
 
     /**

@@ -109,6 +109,24 @@ public class ProductoHogarTest {
     }
 
     /**
+     * Testeo del método {@link ProductoHogar#aRegistro()}. Comprueba el formato de entrada de registro generado
+     * (COMPROBACIÓN VISUAL)
+     */
+    @Test
+    public void aRegistro() {
+        System.out.println(productoHogar.aRegistro());
+    }
+
+    /**
+     * Testeo del método {@link ProductoHogar#aRegistroDescuento()}. Comprueba el formato de entrada de registro
+     * generado (COMPROBACIÓN VISUAL)
+     */
+    @Test
+    public void aRegistroDescuento() {
+        System.out.println(productoHogar.aRegistroDescuento());
+    }
+
+    /**
      * Testeo del método {@link ProductoHogar#toString()}. Comprueba que se formatee bien la cadena que representa a un
      * producto del hogar. (COMPROBACIÓN VISUAL)
      */

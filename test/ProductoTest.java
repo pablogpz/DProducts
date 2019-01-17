@@ -189,4 +189,13 @@ public class ProductoTest {
         assertTrue(producto.haySuficienteStock(25));
     }
 
+    /**
+     * Testeo del método {@link Producto#aRegistro()}. Comprueba el formato de entrada de registro generado
+     * (COMPROBACIÓN VISUAL)
+     */
+    @Test
+    public void aRegistro() {
+        System.out.println(producto.aRegistro());
+    }
+
 }

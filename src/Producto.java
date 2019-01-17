@@ -233,11 +233,10 @@ public abstract class Producto {
         StringBuilder stringBuilder = new StringBuilder("product:");
 
         stringBuilder.append(" ").append(getIdentificador());
-        stringBuilder.append(" ").append(getIdentificador());
         stringBuilder.append(" ").append(getNombre());
-        stringBuilder.append(" ").append(getCantidad());
-        stringBuilder.append(" ").append(getStockMinimo());
-        stringBuilder.append(" ").append(getPrecio());
+        stringBuilder.append(" ").append(getCantidad()).append(" uds.");
+        stringBuilder.append(" ").append(getStockMinimo()).append(" uds.");
+        stringBuilder.append(" ").append(getPrecio()).append("€");
 
         return stringBuilder.toString();
     }

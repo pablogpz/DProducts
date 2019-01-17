@@ -97,7 +97,7 @@ public abstract class Cliente {
     /**
      * Método accesor del atributo {@link Cliente#productosFavoritos}
      *
-     * @return
+     * @return Colección de productos favoritos
      */
     protected Map<String, Producto> getProductosFavoritos() {
         return productosFavoritos;
